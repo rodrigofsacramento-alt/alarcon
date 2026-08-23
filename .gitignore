@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+*/node_modules/
+*/*/node_modules/
+*/*/*/node_modules/
+*/*/*/*/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs & caches
+dist/
+build/
+.next/
+.cache/
+
+# Environment and Secret files
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+!*.env.example
+
+# Backups temporários grandes e históricos de conversas com chaves
+backup-inicial-*/
+*HISTORICO_CONVERSAS_E_PROMPTS*
+copia-do004_codigos_fonte_locais/Estate.AI-main/node_modules/

@@ -1,0 +1,1742 @@
+[
+  {
+    "id": "valores_01",
+    "tool": "VALORES",
+    "number": 1,
+    "theme": "GASTOS DE DINHEIRO",
+    "text": "Quando você tem uma quantia extra de dinheiro, qual é sua reação imediata:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Penso em como isso poderia beneficiar alguém próximo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Considero como isso pode ampliar minhas possibilidades",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Reflito sobre a melhor forma de usá-lo",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Vejo como isso pode me trazer satisfação",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_02",
+    "tool": "VALORES",
+    "number": 2,
+    "theme": "GASTOS DE DINHEIRO",
+    "text": "Quando você planeja seus gastos mensais, qual aspecto mais te preocupa:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ter segurança para situações inesperadas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Maximizar meu conforto e bem-estar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Garantir que tenha para compartilhar se necessário",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Investir em coisas que me destaquem",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_03",
+    "tool": "VALORES",
+    "number": 3,
+    "theme": "GASTOS DE DINHEIRO",
+    "text": "Se você tivesse que escolher entre duas oportunidades de gasto, qual escolheria:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Uma experiência que me enriqueça pessoalmente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Algo que contribua para o bem-estar coletivo",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Um investimento em meu desenvolvimento",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Uma forma de ajudar alguém em necessidade",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_04",
+    "tool": "VALORES",
+    "number": 4,
+    "theme": "GASTOS DE DINHEIRO",
+    "text": "Quando você sente vontade de fazer uma compra, qual pensamento geralmente vem primeiro:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Se isso vai me fazer feliz",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Se isso é realmente necessário",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Se isso reflete quem eu sou",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Se isso afetará meu orçamento para outras coisas",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_05",
+    "tool": "VALORES",
+    "number": 5,
+    "theme": "GASTOS DE DINHEIRO",
+    "text": "Quando você pensa em ter mais dinheiro no futuro, o que mais te motiva:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Poder viver com mais conforto e liberdade",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Poder fazer diferença na vida de outras pessoas",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Poder realizar meus sonhos pessoais",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Poder apoiar causas que acredito",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_06",
+    "tool": "VALORES",
+    "number": 6,
+    "theme": "TEMPO LIVRE",
+    "text": "Quando você tem um fim de semana livre, qual tipo de atividade mais te atrai:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Algo que me relaxe e me divirta",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Algo que beneficie minha comunidade",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Algo que me desenvolva pessoalmente",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Algo que compartilhe com pessoas que amo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_07",
+    "tool": "VALORES",
+    "number": 7,
+    "theme": "TEMPO LIVRE",
+    "text": "Como você prefere descansar após uma semana cansativa:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Fazendo algo que me traga prazer",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Passando tempo com pessoas importantes",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Investindo em algo para mim",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Ajudando alguém ou fazendo algo útil",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_08",
+    "tool": "VALORES",
+    "number": 8,
+    "theme": "TEMPO LIVRE",
+    "text": "Quando você tem tempo livre, qual é sua tendência natural:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Focar em atividades que me enriqueçam",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Considerar o que seria bom para meu círculo",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Buscar novas experiências",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Estar presente para quem precisa",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_09",
+    "tool": "VALORES",
+    "number": 9,
+    "theme": "TEMPO LIVRE",
+    "text": "Se você pudesse escolher como gastar seu tempo livre, qual seria sua escolha:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Algo que me faça sentir realizado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Algo que fortaleça meus relacionamentos",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Algo que me traga satisfação",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Algo que tenha impacto positivo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_10",
+    "tool": "VALORES",
+    "number": 10,
+    "theme": "TEMPO LIVRE",
+    "text": "Quando você reflete sobre como gasta seu tempo livre, qual sentimento predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Satisfação com minhas escolhas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Questionamento se poderia fazer mais",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Contentamento com o equilíbrio",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Reflexão sobre impacto das minhas ações",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_11",
+    "tool": "VALORES",
+    "number": 11,
+    "theme": "ESCOLHA DE AMIGOS",
+    "text": "Quando você escolhe estar próximo de alguém, qual é seu critério principal:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Que essa pessoa me inspire a crescer",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Que essa pessoa compartilhe meus valores",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Que essa pessoa me entenda bem",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Que essa pessoa tenha um bom coração",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_12",
+    "tool": "VALORES",
+    "number": 12,
+    "theme": "ESCOLHA DE AMIGOS",
+    "text": "Em seus relacionamentos próximos, qual aspecto é mais importante:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Crescimento mútuo e desenvolvimento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Autenticidade e honestidade",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Apoio para meus objetivos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Compreensão e empatia",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_13",
+    "tool": "VALORES",
+    "number": 13,
+    "theme": "ESCOLHA DE AMIGOS",
+    "text": "Quando você pensa em seu círculo de amigos, qual característica predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pessoas ambiciosas como eu",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Pessoas com propósito similar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Pessoas que me desafiam",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Pessoas que se importam genuinamente",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_14",
+    "tool": "VALORES",
+    "number": 14,
+    "theme": "ESCOLHA DE AMIGOS",
+    "text": "Como você investe seu tempo em amizades:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Em pessoas que me agregam",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Em pessoas que precisam de apoio",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Em pessoas que compartilham meus interesses",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Em pessoas que compartilham meus princípios",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_15",
+    "tool": "VALORES",
+    "number": 15,
+    "theme": "ESCOLHA DE AMIGOS",
+    "text": "Quando você reflete sobre suas amizades, qual pensamento emerge:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Gratidão pelo apoio que recebo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Satisfação em poder ajudar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Contentamento com as conexões",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Alegria em fazer diferença",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_16",
+    "tool": "VALORES",
+    "number": 16,
+    "theme": "VISÃO DE FUTURO",
+    "text": "Quando você imagina seu futuro ideal, qual visão predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ter alcançado meus objetivos pessoais",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Ter contribuído para um mundo melhor",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Ter realizado meus sonhos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Ter deixado um legado positivo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_17",
+    "tool": "VALORES",
+    "number": 17,
+    "theme": "VISÃO DE FUTURO",
+    "text": "O que mais te motiva ao pensar nos próximos 10 anos:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sucesso e reconhecimento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Impacto e significado",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Realização pessoal",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Bem-estar coletivo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_18",
+    "tool": "VALORES",
+    "number": 18,
+    "theme": "VISÃO DE FUTURO",
+    "text": "Quando você pensa no legado que gostaria de deixar, qual ressoa mais:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Minhas realizações e conquistas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "O impacto positivo nas pessoas",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Meu nome associado ao sucesso",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Meu nome associado à bondade",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_19",
+    "tool": "VALORES",
+    "number": 19,
+    "theme": "VISÃO DE FUTURO",
+    "text": "Quando você imagina envelhecendo, qual cenário te faz mais sentido:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cercado por minhas conquistas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Cercado por pessoas que ajudei",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Satisfeito com meu percurso",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Satisfeito com meu impacto",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_20",
+    "tool": "VALORES",
+    "number": 20,
+    "theme": "VISÃO DE FUTURO",
+    "text": "O que mais te preocupa ao pensar no futuro:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Não alcançar meus objetivos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Não fazer diferença",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Não realizar meu potencial",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Não viver de forma significativa",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_21",
+    "tool": "VALORES",
+    "number": 21,
+    "theme": "TEMAS DE CONVERSAS",
+    "text": "Em conversas, qual tipo de assunto mais te engaja:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Discussões sobre sucesso e ambição",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Discussões sobre justiça e igualdade",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Conversas sobre crescimento pessoal",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Conversas sobre bem-estar coletivo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_22",
+    "tool": "VALORES",
+    "number": 22,
+    "theme": "TEMAS DE CONVERSAS",
+    "text": "Quando você conversa com pessoas, qual tipo de tema predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Meus objetivos e realizações",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Problemas que afetam a sociedade",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Meu desenvolvimento e crescimento",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Causas que me importam",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_23",
+    "tool": "VALORES",
+    "number": 23,
+    "theme": "TEMAS DE CONVERSAS",
+    "text": "Qual tipo de conversa mais te faz perder a noção do tempo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sobre como alcançar sucesso",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Sobre como ajudar outras pessoas",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Sobre meus planos e sonhos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Sobre impacto social",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_24",
+    "tool": "VALORES",
+    "number": 24,
+    "theme": "TEMAS DE CONVERSAS",
+    "text": "Após uma conversa significativa, qual sentimento predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Inspiração para meus objetivos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Esperança em um mundo melhor",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Motivação para crescer",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Motivação para fazer diferença",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_25",
+    "tool": "VALORES",
+    "number": 25,
+    "theme": "TEMAS DE CONVERSAS",
+    "text": "Quando você escolhe tópicos para conversar, qual é sua tendência:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tópicos que me enriqueçam",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Tópicos que nos unam",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Tópicos que me desafiem",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Tópicos que nos façam refletir",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_26",
+    "tool": "VALORES",
+    "number": 26,
+    "theme": "REAÇÃO A NOTÍCIAS",
+    "text": "Quando você vê uma notícia sobre algo significativo, qual é sua reação imediata:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pensar em como isso me afeta",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Pensar em como isso afeta outros",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Analisar as oportunidades",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Considerar as consequências",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_27",
+    "tool": "VALORES",
+    "number": 27,
+    "theme": "REAÇÃO A NOTÍCIAS",
+    "text": "Diante de uma notícia preocupante, qual é seu padrão:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Focar em como me proteger",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Focar em como ajudar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Buscar informações para meu benefício",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Buscar formas de contribuir",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_28",
+    "tool": "VALORES",
+    "number": 28,
+    "theme": "REAÇÃO A NOTÍCIAS",
+    "text": "Qual tipo de notícia mais te faz querer agir:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Notícias sobre oportunidades",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Notícias sobre injustiça",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Notícias sobre sucesso",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Notícias sobre sofrimento",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_29",
+    "tool": "VALORES",
+    "number": 29,
+    "theme": "REAÇÃO A NOTÍCIAS",
+    "text": "Após ler uma notícia importante, qual pensamento surge:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Como isso pode me beneficiar",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Como isso pode ser resolvido",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Quais são as implicações para mim",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Quais são as implicações para todos",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_30",
+    "tool": "VALORES",
+    "number": 30,
+    "theme": "REAÇÃO A NOTÍCIAS",
+    "text": "Quando você se depara com notícias negativas, qual é sua tendência:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Proteger meus interesses",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Pensar em soluções coletivas",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Buscar como isso me afeta",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Buscar como ajudar",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_31",
+    "tool": "VALORES",
+    "number": 31,
+    "theme": "MOTIVAÇÃO DE OBJETIVOS",
+    "text": "Quando você estabelece uma meta pessoal, qual é sua motivação principal:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Alcançar algo significativo para mim",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Contribuir para algo maior",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Provar meu valor",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Fazer diferença",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_32",
+    "tool": "VALORES",
+    "number": 32,
+    "theme": "MOTIVAÇÃO DE OBJETIVOS",
+    "text": "O que mais te inspira a estabelecer novos objetivos:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Meu desejo de crescimento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Necessidades que vejo ao redor",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Meus sonhos pessoais",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Oportunidades de ajudar",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_33",
+    "tool": "VALORES",
+    "number": 33,
+    "theme": "MOTIVAÇÃO DE OBJETIVOS",
+    "text": "Quando você direciona seus esforços, qual é seu foco:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Alcançar meus objetivos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Atender necessidades coletivas",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Realizar meu potencial",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Contribuir para o bem comum",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_34",
+    "tool": "VALORES",
+    "number": 34,
+    "theme": "MOTIVAÇÃO DE OBJETIVOS",
+    "text": "No fundo, o que realmente te motiva:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sucesso pessoal",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Impacto social",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Realização pessoal",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Significado coletivo",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_35",
+    "tool": "VALORES",
+    "number": 35,
+    "theme": "MOTIVAÇÃO DE OBJETIVOS",
+    "text": "Quando você reflete sobre seus objetivos, qual sentimento predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ambição",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Propósito",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Determinação",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Compromisso",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_36",
+    "tool": "VALORES",
+    "number": 36,
+    "theme": "SATISFAÇÃO ATUAL",
+    "text": "Como você se sente com sua vida atual:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Satisfeito com minhas conquistas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Satisfeito com meu impacto",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Contente com meu percurso",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Contente com minhas relações",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_37",
+    "tool": "VALORES",
+    "number": 37,
+    "theme": "SATISFAÇÃO ATUAL",
+    "text": "Qual sentimento melhor descreve seu estado atual:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Realizado com meu progresso",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Realizado com minhas contribuições",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Esperançoso com o futuro",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Esperançoso com as possibilidades",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_38",
+    "tool": "VALORES",
+    "number": 38,
+    "theme": "SATISFAÇÃO ATUAL",
+    "text": "Quando você reflete sobre seu momento atual, qual pensamento emerge:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Estou no caminho certo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Estou fazendo diferença",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Tenho muito a alcançar",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Tenho muito a contribuir",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_39",
+    "tool": "VALORES",
+    "number": 39,
+    "theme": "POSICIONAMENTO EM GRUPO",
+    "text": "Em um grupo onde você tem experiência, qual é seu padrão natural:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tomar iniciativa",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Apoiar o grupo",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Guiar as decisões",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Garantir inclusão",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_40",
+    "tool": "VALORES",
+    "number": 40,
+    "theme": "POSICIONAMENTO EM GRUPO",
+    "text": "Como você tipicamente influencia um grupo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Através de minha visão",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Através de meus valores",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Através de meu conhecimento",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Através de minha empatia",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_41",
+    "tool": "VALORES",
+    "number": 41,
+    "theme": "POSICIONAMENTO EM GRUPO",
+    "text": "Qual é sua maior contribuição em um grupo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Direcionamento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Coesão",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Estratégia",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Harmonia",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_42",
+    "tool": "VALORES",
+    "number": 42,
+    "theme": "POSICIONAMENTO EM GRUPO",
+    "text": "Qual papel você prefere em um grupo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Líder",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Facilitador",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Estrategista",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Mediador",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_43",
+    "tool": "VALORES",
+    "number": 43,
+    "theme": "POSICIONAMENTO EM GRUPO",
+    "text": "Quando você reflete sobre seu papel em grupos, qual sentimento predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Satisfação em liderar",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Satisfação em conectar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Orgulho em minhas contribuições",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Orgulho em fortalecer laços",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_44",
+    "tool": "VALORES",
+    "number": 44,
+    "theme": "LIDA COM SUCESSO",
+    "text": "Quando você consegue algo significativo, qual é sua inclinação natural:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Celebrar meu esforço",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Compartilhar com quem me ajudou",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Reconhecer minha realização",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Reconhecer o apoio recebido",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_45",
+    "tool": "VALORES",
+    "number": 45,
+    "theme": "LIDA COM SUCESSO",
+    "text": "O que o sucesso significa para você:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Realização pessoal",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Impacto positivo",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Reconhecimento",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Contribuição",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_46",
+    "tool": "VALORES",
+    "number": 46,
+    "theme": "LIDA COM SUCESSO",
+    "text": "Após um sucesso, sua tendência é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buscar novos desafios",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consolidar ganhos coletivos",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Elevar meus objetivos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Ampliar meu impacto",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_47",
+    "tool": "VALORES",
+    "number": 47,
+    "theme": "MOTIVAÇÃO DIÁRIA",
+    "text": "O que mais te motiva ao acordar:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Meus objetivos do dia",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Oportunidades de ajudar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Minhas tarefas importantes",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Conexões que vou fazer",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_48",
+    "tool": "VALORES",
+    "number": 48,
+    "theme": "MOTIVAÇÃO DIÁRIA",
+    "text": "O que mais te energiza durante o dia:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Progresso em meus projetos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Momentos de conexão",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Alcançar minhas metas",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Fazer diferença",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_49",
+    "tool": "VALORES",
+    "number": 49,
+    "theme": "MOTIVAÇÃO DIÁRIA",
+    "text": "O que mais te satisfaz em suas atividades diárias:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Reconhecimento do meu trabalho",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Impacto do meu trabalho",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Realização de tarefas",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Valor agregado",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_50",
+    "tool": "VALORES",
+    "number": 50,
+    "theme": "MOTIVAÇÃO DIÁRIA",
+    "text": "Ao final do dia, qual pensamento mais te satisfaz:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Realizei o que planejei",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Fiz diferença",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Avancei em meus objetivos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Contribuí para alguém",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_51",
+    "tool": "VALORES",
+    "number": 51,
+    "theme": "MOTIVAÇÃO DIÁRIA",
+    "text": "Qual é seu padrão motivacional geral:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Busca por realização",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Busca por significado",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Busca por sucesso",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Busca por impacto",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_52",
+    "tool": "VALORES",
+    "number": 52,
+    "theme": "TRABALHO EM EQUIPE",
+    "text": "Em um projeto em equipe, qual é seu padrão preferido:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Que minha contribuição seja reconhecida",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Que o grupo alcance seus objetivos",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Que eu possa destacar minhas habilidades",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Que todos sintam-se valorizados",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_53",
+    "tool": "VALORES",
+    "number": 53,
+    "theme": "TRABALHO EM EQUIPE",
+    "text": "Como você prefere colaborar:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Com foco em resultados",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Com foco em relacionamentos",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Com foco em eficiência",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Com foco em bem-estar",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_54",
+    "tool": "VALORES",
+    "number": 54,
+    "theme": "TRABALHO EM EQUIPE",
+    "text": "Quando um projeto é bem-sucedido, qual é sua preferência:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Que meu trabalho seja reconhecido",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Que todos recebam crédito",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Que minha liderança seja reconhecida",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Que o grupo seja celebrado",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_55",
+    "tool": "VALORES",
+    "number": 55,
+    "theme": "TRABALHO EM EQUIPE",
+    "text": "Diante de conflito em equipe, sua tendência é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Resolver para manter a eficiência",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Resolver para manter a harmonia",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Impor minha visão",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Buscar consenso",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_56",
+    "tool": "VALORES",
+    "number": 56,
+    "theme": "TRABALHO EM EQUIPE",
+    "text": "Quando você reflete sobre trabalhar em equipe, qual sentimento predomina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Satisfação com meus resultados",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Satisfação com nossas relações",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Orgulho em minhas contribuições",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Orgulho em nossa coesão",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_57",
+    "tool": "VALORES",
+    "number": 57,
+    "theme": "DEFINIÇÃO DE SUCESSO",
+    "text": "Quando você pensa em sucesso pessoal, qual elemento é mais importante:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Alcançar meus objetivos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Contribuir para outros",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Ser reconhecido",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Deixar um legado",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_58",
+    "tool": "VALORES",
+    "number": 58,
+    "theme": "DEFINIÇÃO DE SUCESSO",
+    "text": "Como você mede seu sucesso:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Por minhas realizações",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Por meu impacto",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Por meu reconhecimento",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Por minha influência positiva",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_59",
+    "tool": "VALORES",
+    "number": 59,
+    "theme": "DEFINIÇÃO DE SUCESSO",
+    "text": "Qual visão de sucesso mais te motiva:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ser bem-sucedido em meus projetos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Ser bem-sucedido em ajudar",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Ser bem-sucedido em meus objetivos",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Ser bem-sucedido em meu propósito",
+        "construct": "D"
+      }
+    ]
+  },
+  {
+    "id": "valores_60",
+    "tool": "VALORES",
+    "number": 60,
+    "theme": "DEFINIÇÃO DE SUCESSO",
+    "text": "Quando você pensa em sua vida como um todo, qual seria seu maior sucesso:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ter realizado meus sonhos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Ter feito diferença",
+        "construct": "B"
+      },
+      {
+        "id": "C",
+        "text": "Ter alcançado meu potencial",
+        "construct": "C"
+      },
+      {
+        "id": "D",
+        "text": "Ter vivido com significado",
+        "construct": "D"
+      }
+    ]
+  }
+]

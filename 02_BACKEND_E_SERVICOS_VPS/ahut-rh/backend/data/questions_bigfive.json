@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "bigfive_01",
+    "tool": "BIG_FIVE",
+    "number": 1,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Quando algo novo aparece, meu primeiro impulso é experimentar e explorar.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_02",
+    "tool": "BIG_FIVE",
+    "number": 2,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "INVERSE",
+    "text": "Prefiro manter as coisas como estão em vez de tentar algo diferente.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_03",
+    "tool": "BIG_FIVE",
+    "number": 3,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Quando preciso resolver algo, penso em caminhos que nunca tentei antes.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_04",
+    "tool": "BIG_FIVE",
+    "number": 4,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Tenho curiosidade sobre como as coisas funcionam.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_05",
+    "tool": "BIG_FIVE",
+    "number": 5,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "INVERSE",
+    "text": "Prefiro lidar com coisas concretas e práticas em vez de ideias abstratas.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_06",
+    "tool": "BIG_FIVE",
+    "number": 6,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Frequentemente imagino cenários e possibilidades diferentes.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_07",
+    "tool": "BIG_FIVE",
+    "number": 7,
+    "construct": "ABERTURA PARA EXPERIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Fico confortável quando não sei exatamente o que vai acontecer.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_08",
+    "tool": "BIG_FIVE",
+    "number": 8,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "DIRECT",
+    "text": "Antes de fazer algo, penso em todos os passos que vou seguir.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_09",
+    "tool": "BIG_FIVE",
+    "number": 9,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "INVERSE",
+    "text": "Prefiro começar uma tarefa e ajustar conforme vou fazendo.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_10",
+    "tool": "BIG_FIVE",
+    "number": 10,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "DIRECT",
+    "text": "Noto pequenos erros ou detalhes que outros deixam passar.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_11",
+    "tool": "BIG_FIVE",
+    "number": 11,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "INVERSE",
+    "text": "Meu espaço pessoal costuma ficar desorganizado.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_12",
+    "tool": "BIG_FIVE",
+    "number": 12,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "DIRECT",
+    "text": "Termino meus compromissos no prazo ou antes.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_13",
+    "tool": "BIG_FIVE",
+    "number": 13,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "INVERSE",
+    "text": "Deixo tarefas difíceis para depois.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_14",
+    "tool": "BIG_FIVE",
+    "number": 14,
+    "construct": "CONSCIENCIOSIDADE",
+    "scoring": "DIRECT",
+    "text": "Reviso meu trabalho várias vezes antes de entregar.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_15",
+    "tool": "BIG_FIVE",
+    "number": 15,
+    "construct": "EXTROVERSÃO",
+    "scoring": "DIRECT",
+    "text": "Quando chego em um lugar com pessoas desconhecidas, logo começo a conversar.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_16",
+    "tool": "BIG_FIVE",
+    "number": 16,
+    "construct": "EXTROVERSÃO",
+    "scoring": "INVERSE",
+    "text": "Prefiro passar tempo sozinho em vez de com outras pessoas.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_17",
+    "tool": "BIG_FIVE",
+    "number": 17,
+    "construct": "EXTROVERSÃO",
+    "scoring": "DIRECT",
+    "text": "Minha energia aumenta quando estou em grupos de pessoas.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_18",
+    "tool": "BIG_FIVE",
+    "number": 18,
+    "construct": "EXTROVERSÃO",
+    "scoring": "INVERSE",
+    "text": "Sinto timidez quando estou com pessoas que não conheço.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_19",
+    "tool": "BIG_FIVE",
+    "number": 19,
+    "construct": "EXTROVERSÃO",
+    "scoring": "DIRECT",
+    "text": "Compartilho meus sentimentos e emoções com outras pessoas.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_20",
+    "tool": "BIG_FIVE",
+    "number": 20,
+    "construct": "EXTROVERSÃO",
+    "scoring": "INVERSE",
+    "text": "Mantenho meus sentimentos para mim mesmo.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_21",
+    "tool": "BIG_FIVE",
+    "number": 21,
+    "construct": "EXTROVERSÃO",
+    "scoring": "DIRECT",
+    "text": "Tenho muitas amizades e relacionamentos.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_22",
+    "tool": "BIG_FIVE",
+    "number": 22,
+    "construct": "AMABILIDADE",
+    "scoring": "DIRECT",
+    "text": "Quando alguém próximo tem um problema, sinto como se fosse meu.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_23",
+    "tool": "BIG_FIVE",
+    "number": 23,
+    "construct": "AMABILIDADE",
+    "scoring": "INVERSE",
+    "text": "Os problemas das outras pessoas não me afetam muito.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_24",
+    "tool": "BIG_FIVE",
+    "number": 24,
+    "construct": "AMABILIDADE",
+    "scoring": "DIRECT",
+    "text": "Ajudo sem hesitar quando alguém pede.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_25",
+    "tool": "BIG_FIVE",
+    "number": 25,
+    "construct": "AMABILIDADE",
+    "scoring": "INVERSE",
+    "text": "Prefiro guardar meus recursos para mim mesmo.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_26",
+    "tool": "BIG_FIVE",
+    "number": 26,
+    "construct": "AMABILIDADE",
+    "scoring": "DIRECT",
+    "text": "Procuro entender o ponto de vista da outra pessoa quando há discordância.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_27",
+    "tool": "BIG_FIVE",
+    "number": 27,
+    "construct": "AMABILIDADE",
+    "scoring": "INVERSE",
+    "text": "Vejo as outras pessoas como competidores.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_28",
+    "tool": "BIG_FIVE",
+    "number": 28,
+    "construct": "AMABILIDADE",
+    "scoring": "DIRECT",
+    "text": "Confio que a maioria das pessoas é boa.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_29",
+    "tool": "BIG_FIVE",
+    "number": 29,
+    "construct": "NEUROTICISMO",
+    "scoring": "DIRECT",
+    "text": "Quando enfrento uma situação nova, tendo a me sentir calmo e confiante.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_30",
+    "tool": "BIG_FIVE",
+    "number": 30,
+    "construct": "NEUROTICISMO",
+    "scoring": "INVERSE",
+    "text": "Meu humor é estável e previsível.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_31",
+    "tool": "BIG_FIVE",
+    "number": 31,
+    "construct": "NEUROTICISMO",
+    "scoring": "DIRECT",
+    "text": "Tendo a confiar que as coisas darão certo, mesmo sem planejar muito.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_32",
+    "tool": "BIG_FIVE",
+    "number": 32,
+    "construct": "NEUROTICISMO",
+    "scoring": "INVERSE",
+    "text": "Mantenho a calma quando estou sob pressão.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_33",
+    "tool": "BIG_FIVE",
+    "number": 33,
+    "construct": "NEUROTICISMO",
+    "scoring": "DIRECT",
+    "text": "Meu humor é geralmente positivo e otimista.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_34",
+    "tool": "BIG_FIVE",
+    "number": 34,
+    "construct": "NEUROTICISMO",
+    "scoring": "INVERSE",
+    "text": "Recupero-me rapidamente de situações difíceis.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "bigfive_35",
+    "tool": "BIG_FIVE",
+    "number": 35,
+    "construct": "NEUROTICISMO",
+    "scoring": "DIRECT",
+    "text": "Mantenho meu temperamento mesmo quando as coisas não saem como planejado.",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  }
+]

@@ -1,0 +1,1437 @@
+[
+  {
+    "id": "mbti_01",
+    "tool": "MBTI",
+    "number": 1,
+    "text": "Ao planejar o futuro, você prefere:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Criar estratégias complexas e de longo prazo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Lidar com os desafios conforme eles surgem",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_02",
+    "tool": "MBTI",
+    "number": 2,
+    "text": "Quando enfrenta um problema novo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro entender os princípios subjacentes",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo aplicar soluções que já funcionaram antes",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_03",
+    "tool": "MBTI",
+    "number": 3,
+    "text": "Em relação a novas ideias:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo visualizar as implicações futuras rapidamente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro focar no que é tangível e comprovado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_04",
+    "tool": "MBTI",
+    "number": 4,
+    "text": "Quando trabalha com outras pessoas:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo questionar e analisar suas propostas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro aceitar as contribuições sem crítica excessiva",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_05",
+    "tool": "MBTI",
+    "number": 5,
+    "text": "Sua abordagem para decisões importantes é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro analisar todas as variáveis possíveis",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Confio em minha intuição sobre o que funciona",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_06",
+    "tool": "MBTI",
+    "number": 6,
+    "text": "Quando aprende algo novo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo me perder em detalhes técnicos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro uma visão geral rápida",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_07",
+    "tool": "MBTI",
+    "number": 7,
+    "text": "Em conversas, você:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo debater ideias de forma aprofundada",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro conversas leves e descontraídas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_08",
+    "tool": "MBTI",
+    "number": 8,
+    "text": "Sobre sua organização pessoal:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro manter um sistema lógico, mesmo que flexível",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo deixar as coisas mais desorganizadas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_09",
+    "tool": "MBTI",
+    "number": 9,
+    "text": "Quando enfrenta crítica:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo separar a crítica do pessoal facilmente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro evitar confrontos diretos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_10",
+    "tool": "MBTI",
+    "number": 10,
+    "text": "Sua forma de se comunicar é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser preciso e tecnicamente correto",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo ser mais casual e menos formalENTJ \\- O Comandante",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_11",
+    "tool": "MBTI",
+    "number": 11,
+    "text": "Em uma situação sem liderança clara:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo assumir o controle naturalmente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro deixar que alguém mais experiente lidere",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_12",
+    "tool": "MBTI",
+    "number": 12,
+    "text": "Quando trabalha em equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro estabelecer objetivos claros e medir progresso",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo focar mais no bem-estar do grupo",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_13",
+    "tool": "MBTI",
+    "number": 13,
+    "text": "Sobre sua comunicação:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo ser direto, mesmo que isso pareça rude",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ser diplomático e considerado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_14",
+    "tool": "MBTI",
+    "number": 14,
+    "text": "Quando enfrenta um desafio:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro encontrar a solução mais eficiente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo considerar múltiplas perspectivas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_15",
+    "tool": "MBTI",
+    "number": 15,
+    "text": "Sua visão de sucesso é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Alcançar objetivos ambiciosos e mensuráveis",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Manter relacionamentos harmoniosos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_16",
+    "tool": "MBTI",
+    "number": 16,
+    "text": "Quando surge uma nova ideia:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro explorar suas possibilidades imediatamente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo avaliar riscos antes de agir",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_17",
+    "tool": "MBTI",
+    "number": 17,
+    "text": "Em discussões, você:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo defender qualquer lado do argumento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro manter minha posição consistente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_18",
+    "tool": "MBTI",
+    "number": 18,
+    "text": "Sobre rotina e estrutura:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro variedade e novos desafios",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo apreciar previsibilidade",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_19",
+    "tool": "MBTI",
+    "number": 19,
+    "text": "Quando trabalha com dados:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo ver padrões e conexões rapidamente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro seguir análises estabelecidas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_20",
+    "tool": "MBTI",
+    "number": 20,
+    "text": "Sua abordagem para aprendizado é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro questionar e testar conceitos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo aceitar informações de fontes confiáveis",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_21",
+    "tool": "MBTI",
+    "number": 21,
+    "text": "Quando conhece pessoas novas:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo entender seus motivações rapidamente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro observar antes de tirar conclusões",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_22",
+    "tool": "MBTI",
+    "number": 22,
+    "text": "Sobre seus relacionamentos:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro conexões profundas e significativas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo manter múltiplas amizades superficiais",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_23",
+    "tool": "MBTI",
+    "number": 23,
+    "text": "Quando alguém está em dificuldade:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo oferecer suporte emocional",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro oferecer soluções práticas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_24",
+    "tool": "MBTI",
+    "number": 24,
+    "text": "Sua visão de futuro é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro contribuir para um mundo melhor",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo focar em meus objetivos pessoais",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_25",
+    "tool": "MBTI",
+    "number": 25,
+    "text": "Sobre sua comunicação:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo ser empático e compreensivo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ser objetivo e direto",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_26",
+    "tool": "MBTI",
+    "number": 26,
+    "text": "Quando enfrenta uma decisão difícil:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro considerar valores e princípios",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo analisar fatos e lógica",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_27",
+    "tool": "MBTI",
+    "number": 27,
+    "text": "Sobre sua carreira:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo buscar trabalho que seja significativo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro estabilidade e segurança financeira",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_28",
+    "tool": "MBTI",
+    "number": 28,
+    "text": "Quando trabalha em equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo focar no bem-estar coletivo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Procuro resultados mensuráveis",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_29",
+    "tool": "MBTI",
+    "number": 29,
+    "text": "Sua forma de lidar com conflito é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro entender ambos os lados",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo tomar decisões rápidas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_30",
+    "tool": "MBTI",
+    "number": 30,
+    "text": "Sobre reconhecimento:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo preferir que meu trabalho fale por si",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Procuro validação externa",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_31",
+    "tool": "MBTI",
+    "number": 31,
+    "text": "Em situações sociais:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser o centro das atenções",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro observar de forma mais discreta",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_32",
+    "tool": "MBTI",
+    "number": 32,
+    "text": "Quando lidera uma equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro inspirar e motivar as pessoas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo focar em tarefas e objetivos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_33",
+    "tool": "MBTI",
+    "number": 33,
+    "text": "Sobre feedback:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo oferecer crítica construtiva",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro evitar confrontos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_34",
+    "tool": "MBTI",
+    "number": 34,
+    "text": "Sua motivação principal é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro fazer diferença na vida das pessoas",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo buscar reconhecimento pessoal",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_35",
+    "tool": "MBTI",
+    "number": 35,
+    "text": "Quando enfrenta desacordo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo encontrar um ponto comum",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro manter minha posição",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_36",
+    "tool": "MBTI",
+    "number": 36,
+    "text": "Sobre sua energia:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser entusiasmado e animado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro um ritmo mais calmo",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_37",
+    "tool": "MBTI",
+    "number": 37,
+    "text": "Quando aprende algo novo:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro conectar com pessoas que compartilham interesse",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo estudar sozinho de forma disciplinada",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_38",
+    "tool": "MBTI",
+    "number": 38,
+    "text": "Sobre planejamento:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser espontâneo e flexível",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ter um plano detalhado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_39",
+    "tool": "MBTI",
+    "number": 39,
+    "text": "Sua forma de se comunicar é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro expressar emoções e entusiasmo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Costumo ser mais reservado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_40",
+    "tool": "MBTI",
+    "number": 40,
+    "text": "Quando enfrenta rotina:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Consigo buscar variedade e novidade",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro previsibilidade",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_41",
+    "tool": "MBTI",
+    "number": 41,
+    "text": "Sobre sua organização:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo manter tudo em ordem e bem planejado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro flexibilidade e espontaneidade",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_42",
+    "tool": "MBTI",
+    "number": 42,
+    "text": "Quando trabalha em projeto:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro seguir um cronograma rigoroso",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo me adaptar conforme necessário",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_43",
+    "tool": "MBTI",
+    "number": 43,
+    "text": "Sobre responsabilidades:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo cumprir compromissos sem exceção",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ter margem para mudanças",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_44",
+    "tool": "MBTI",
+    "number": 44,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser claro e direto",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais diplomático",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_45",
+    "tool": "MBTI",
+    "number": 45,
+    "text": "Quando enfrenta mudança:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo resistir a alterações não planejadas B) Prefiro abraçar novas possibilidades",
+        "construct": "A"
+      }
+    ]
+  },
+  {
+    "id": "mbti_46",
+    "tool": "MBTI",
+    "number": 46,
+    "text": "Quando alguém precisa de ajuda:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo oferecer suporte sem hesitar",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro focar em meus próprios objetivos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_47",
+    "tool": "MBTI",
+    "number": 47,
+    "text": "Sobre seus relacionamentos:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser leal e dedicado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo manter distância emocional",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_48",
+    "tool": "MBTI",
+    "number": 48,
+    "text": "Sua forma de lidar com conflito é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo evitar confrontação",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro resolver diretamente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_49",
+    "tool": "MBTI",
+    "number": 49,
+    "text": "Quando trabalha em equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro garantir que todos se sintam incluídos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo focar em tarefas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_50",
+    "tool": "MBTI",
+    "number": 50,
+    "text": "Sobre mudança:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser cauteloso com alterações",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro explorar novas possibilidadesESTJ \\- O Executivo",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_51",
+    "tool": "MBTI",
+    "number": 51,
+    "text": "Em uma posição de liderança:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo estabelecer regras e expectativas claras",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ser flexível com as pessoas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_52",
+    "tool": "MBTI",
+    "number": 52,
+    "text": "Sobre eficiência:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro otimizar processos constantemente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo aceitar ineficiência se mantém harmonia",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_53",
+    "tool": "MBTI",
+    "number": 53,
+    "text": "Quando enfrenta problema:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo buscar a solução mais prática",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro considerar múltiplas perspectivas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_54",
+    "tool": "MBTI",
+    "number": 54,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser direto e objetivo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais sensível aos sentimentos",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_55",
+    "tool": "MBTI",
+    "number": 55,
+    "text": "Sobre tradição:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo valorizar métodos comprovados",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro inovar e questionar",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_56",
+    "tool": "MBTI",
+    "number": 56,
+    "text": "Em situações sociais:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo garantir que todos se sintam bem-vindos",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro observar de forma discreta",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_57",
+    "tool": "MBTI",
+    "number": 57,
+    "text": "Sobre harmonia:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro evitar conflitos a todo custo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo lidar com desacordos facilmente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_58",
+    "tool": "MBTI",
+    "number": 58,
+    "text": "Quando trabalha com outros:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo focar no bem-estar do grupo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro resultados mensuráveis",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_59",
+    "tool": "MBTI",
+    "number": 59,
+    "text": "Sua motivação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser útil e apreciado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo buscar reconhecimento pessoal",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_60",
+    "tool": "MBTI",
+    "number": 60,
+    "text": "Sobre mudança:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser cauteloso com alterações",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro explorar novas possibilidades",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_61",
+    "tool": "MBTI",
+    "number": 61,
+    "text": "Quando enfrenta um problema técnico:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo desmontá-lo para entender como funciona",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro seguir instruções",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_62",
+    "tool": "MBTI",
+    "number": 62,
+    "text": "Sobre sua forma de aprender:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro aprender fazendo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo aprender através de teoria",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_63",
+    "tool": "MBTI",
+    "number": 63,
+    "text": "Quando trabalha em equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo trabalhar de forma independente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro colaboração constante",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_64",
+    "tool": "MBTI",
+    "number": 64,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser conciso e objetivo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais expressivo",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_65",
+    "tool": "MBTI",
+    "number": 65,
+    "text": "Sobre planejamento:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser espontâneo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ter um plano detalhado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_66",
+    "tool": "MBTI",
+    "number": 66,
+    "text": "Quando enfrenta uma decisão:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo confiar em meus valores pessoais",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro analisar logicamente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_67",
+    "tool": "MBTI",
+    "number": 67,
+    "text": "Sobre sua forma de viver:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro viver no presente e aproveitar o momento",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo planejar o futuro cuidadosamente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_68",
+    "tool": "MBTI",
+    "number": 68,
+    "text": "Quando trabalha com outros:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser sensível aos sentimentos deles",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro focar em tarefas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_69",
+    "tool": "MBTI",
+    "number": 69,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser autêntico e genuíno",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais formal e profissional",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_70",
+    "tool": "MBTI",
+    "number": 70,
+    "text": "Sobre conflito:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo evitar confrontação",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro resolver diretamente",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_71",
+    "tool": "MBTI",
+    "number": 71,
+    "text": "Quando surge uma oportunidade:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo agir rapidamente",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro analisar antes",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_72",
+    "tool": "MBTI",
+    "number": 72,
+    "text": "Sobre sua energia:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro estar sempre em ação",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo apreciar momentos de calma",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_73",
+    "tool": "MBTI",
+    "number": 73,
+    "text": "Quando trabalha em equipe:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser competitivo",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro colaboração harmoniosa",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_74",
+    "tool": "MBTI",
+    "number": 74,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser direto e descontraído",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais formal",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_75",
+    "tool": "MBTI",
+    "number": 75,
+    "text": "Sobre regras:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo questionar e testar limites",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro seguir normas estabelecidas",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_76",
+    "tool": "MBTI",
+    "number": 76,
+    "text": "Em situações sociais:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser o centro das atenções",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro observar de forma discreta",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_77",
+    "tool": "MBTI",
+    "number": 77,
+    "text": "Sobre sua forma de viver:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro experiências novas e emocionantes",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo apreciar rotina e previsibilidade",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_78",
+    "tool": "MBTI",
+    "number": 78,
+    "text": "Quando trabalha com outros:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo trazer entusiasmo e diversão",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro manter profissionalismo",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_79",
+    "tool": "MBTI",
+    "number": 79,
+    "text": "Sua comunicação é:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Procuro ser expressivo e animado",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Consigo ser mais reservado",
+        "construct": "B"
+      }
+    ]
+  },
+  {
+    "id": "mbti_80",
+    "tool": "MBTI",
+    "number": 80,
+    "text": "Sobre planejamento:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Costumo ser espontâneo e flexível",
+        "construct": "A"
+      },
+      {
+        "id": "B",
+        "text": "Prefiro ter um plano detalhadoNOTA IMPORTANTE",
+        "construct": "B"
+      }
+    ]
+  }
+]

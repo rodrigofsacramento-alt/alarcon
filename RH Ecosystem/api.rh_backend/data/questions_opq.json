@@ -1,0 +1,3842 @@
+[
+  {
+    "id": "opq_001",
+    "tool": "OPQ",
+    "number": 1,
+    "construct": "PERSUASIVO",
+    "scoring": "DIRECT",
+    "text": "Quando você precisa convencer alguém sobre algo importante: Costumo apresentar meu ponto de vista de forma convincente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_002",
+    "tool": "OPQ",
+    "number": 2,
+    "construct": "PERSUASIVO",
+    "scoring": "INVERSE",
+    "text": "Quando há desacordo sobre uma decisão importante: Prefiro ceder para evitar prolongar o conflito. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_003",
+    "tool": "OPQ",
+    "number": 3,
+    "construct": "PERSUASIVO",
+    "scoring": "DIRECT",
+    "text": "Quando você precisa apresentar uma ideia a um grupo: Consigo engajar o público e fazer com que entendam meu ponto. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_004",
+    "tool": "OPQ",
+    "number": 4,
+    "construct": "PERSUASIVO",
+    "scoring": "INVERSE",
+    "text": "Em situações onde você discorda, você: Prefiro deixar que os fatos falem por si mesmos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_005",
+    "tool": "OPQ",
+    "number": 5,
+    "construct": "CONTROLADOR",
+    "scoring": "DIRECT",
+    "text": "Quando está em um grupo sem liderança clara: Costumo assumir a responsabilidade de organizar as atividades. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_006",
+    "tool": "OPQ",
+    "number": 6,
+    "construct": "CONTROLADOR",
+    "scoring": "INVERSE",
+    "text": "Em situações de trabalho em grupo, você: Prefiro seguir as diretrizes de outra pessoa. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_007",
+    "tool": "OPQ",
+    "number": 7,
+    "construct": "CONTROLADOR",
+    "scoring": "DIRECT",
+    "text": "Quando você tem responsabilidade sobre um projeto ou equipe: Costumo ter a autoridade final sobre as decisões importantes. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_008",
+    "tool": "OPQ",
+    "number": 8,
+    "construct": "CONTROLADOR",
+    "scoring": "INVERSE",
+    "text": "Diante de situações onde você seria o único responsável: Prefiro evitar situações com essa responsabilidade. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_009",
+    "tool": "OPQ",
+    "number": 9,
+    "construct": "CONTROLADOR",
+    "scoring": "DIRECT",
+    "text": "Quando você tem uma opinião diferente da maioria: Costumo defender minha posição mesmo que seja impopular. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_010",
+    "tool": "OPQ",
+    "number": 10,
+    "construct": "CONTROLADOR",
+    "scoring": "INVERSE",
+    "text": "Em situações de grupo, você: Prefiro adaptar minhas opiniões para me alinhar com o consenso. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_011",
+    "tool": "OPQ",
+    "number": 11,
+    "construct": "CONTROLADOR",
+    "scoring": "DIRECT",
+    "text": "Sobre sua forma de trabalhar, você: Costumo trabalhar de forma autônoma sem consultar constantemente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_012",
+    "tool": "OPQ",
+    "number": 12,
+    "construct": "CONTROLADOR",
+    "scoring": "INVERSE",
+    "text": "Quando enfrenta uma decisão importante, você: Prefiro buscar validação de colegas ou superiores. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_013",
+    "tool": "OPQ",
+    "number": 13,
+    "construct": "EXTROVERTIDO",
+    "scoring": "DIRECT",
+    "text": "Em ambientes sociais, você: Costumo buscar interagir com várias pessoas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_014",
+    "tool": "OPQ",
+    "number": 14,
+    "construct": "EXTROVERTIDO",
+    "scoring": "INVERSE",
+    "text": "Quando está em um evento com muitas pessoas, você: Prefiro observar de forma mais discreta. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_015",
+    "tool": "OPQ",
+    "number": 15,
+    "construct": "EXTROVERTIDO",
+    "scoring": "DIRECT",
+    "text": "Sua forma de se comunicar é: Costumo ser expressivo e comunicativo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_016",
+    "tool": "OPQ",
+    "number": 16,
+    "construct": "EXTROVERTIDO",
+    "scoring": "INVERSE",
+    "text": "Em conversas de grupo, você: Prefiro falar menos e ouvir mais. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_017",
+    "tool": "OPQ",
+    "number": 17,
+    "construct": "AFILIATIVO",
+    "scoring": "DIRECT",
+    "text": "Quando trabalha com outras pessoas, você: Costumo buscar criar um ambiente de colaboração. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_018",
+    "tool": "OPQ",
+    "number": 18,
+    "construct": "AFILIATIVO",
+    "scoring": "INVERSE",
+    "text": "Em relação aos relacionamentos de trabalho, você:Prefiro manter uma distância profissional. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_019",
+    "tool": "OPQ",
+    "number": 19,
+    "construct": "AFILIATIVO",
+    "scoring": "DIRECT",
+    "text": "Quando alguém próximo tem um problema, você: Costumo oferecer apoio e compreensão. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_020",
+    "tool": "OPQ",
+    "number": 20,
+    "construct": "AFILIATIVO",
+    "scoring": "INVERSE",
+    "text": "Em relação aos problemas pessoais de colegas, você: Prefiro não me envolver. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_021",
+    "tool": "OPQ",
+    "number": 21,
+    "construct": "SOCIALMENTE CONFIANTE",
+    "scoring": "DIRECT",
+    "text": "Em situações sociais novas, você: Costumo me sentir confortável e seguro. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_022",
+    "tool": "OPQ",
+    "number": 22,
+    "construct": "SOCIALMENTE CONFIANTE",
+    "scoring": "INVERSE",
+    "text": "Quando conhece pessoas novas, você: Prefiro sentir-me nervoso ou desconfortável inicialmente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_023",
+    "tool": "OPQ",
+    "number": 23,
+    "construct": "SOCIALMENTE CONFIANTE",
+    "scoring": "DIRECT",
+    "text": "Sua confiança em situações interpessoais é: Costumo ter confiança elevada. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_024",
+    "tool": "OPQ",
+    "number": 24,
+    "construct": "SOCIALMENTE CONFIANTE",
+    "scoring": "INVERSE",
+    "text": "Quando precisa falar em público, você: Prefiro sentir ansiedade ou nervosismo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_025",
+    "tool": "OPQ",
+    "number": 25,
+    "construct": "MODESTO",
+    "scoring": "DIRECT",
+    "text": "Sobre suas habilidades e conquistas, você: Costumo ser discreto na apresentação delas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_026",
+    "tool": "OPQ",
+    "number": 26,
+    "construct": "MODESTO",
+    "scoring": "INVERSE",
+    "text": "Quando faz algo bem-sucedido, você: Prefiro compartilhar e celebrar a conquista. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_027",
+    "tool": "OPQ",
+    "number": 27,
+    "construct": "MODESTO",
+    "scoring": "DIRECT",
+    "text": "Em relação a reconhecimento, você: Costumo preferir que seu trabalho fale por si. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_028",
+    "tool": "OPQ",
+    "number": 28,
+    "construct": "MODESTO",
+    "scoring": "INVERSE",
+    "text": "Quando recebe elogios, você: Prefiro aceitar e apreciar abertamente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_029",
+    "tool": "OPQ",
+    "number": 29,
+    "construct": "DEMOCRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Em situações de grupo, você: Costumo ouvir e considerar todas as perspectivas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_030",
+    "tool": "OPQ",
+    "number": 30,
+    "construct": "DEMOCRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Quando toma decisões, você: Prefiro decidir sozinho. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_031",
+    "tool": "OPQ",
+    "number": 31,
+    "construct": "DEMOCRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Sua abordagem para liderança é: Costumo ser inclusivo e colaborativo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_032",
+    "tool": "OPQ",
+    "number": 32,
+    "construct": "DEMOCRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre delegação, você: Prefiro manter o controle das tarefas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_033",
+    "tool": "OPQ",
+    "number": 33,
+    "construct": "CUIDADOSO",
+    "scoring": "DIRECT",
+    "text": "Quando trabalha com outros, você: Costumo considerar o bem-estar e conforto deles. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_034",
+    "tool": "OPQ",
+    "number": 34,
+    "construct": "CUIDADOSO",
+    "scoring": "INVERSE",
+    "text": "Em relação aos sentimentos das pessoas, você: Prefiro focar mais em tarefas e resultados. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_035",
+    "tool": "OPQ",
+    "number": 35,
+    "construct": "CUIDADOSO",
+    "scoring": "DIRECT",
+    "text": "Sua abordagem é: Costumo ser sensível às necessidades alheias. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_036",
+    "tool": "OPQ",
+    "number": 36,
+    "construct": "CUIDADOSO",
+    "scoring": "INVERSE",
+    "text": "Quando alguém está chateado, você: Prefiro deixar que resolvam sozinhos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_037",
+    "tool": "OPQ",
+    "number": 37,
+    "construct": "ANALÍTICO",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta um problema complexo: Costumo examinar em profundidade antes de tirar conclusões. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_038",
+    "tool": "OPQ",
+    "number": 38,
+    "construct": "ANALÍTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre tomar decisões, você: Prefiro confiar em minha intuição. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_039",
+    "tool": "OPQ",
+    "number": 39,
+    "construct": "ANALÍTICO",
+    "scoring": "DIRECT",
+    "text": "Com números e dados, você: Costumo ser confortável e gostar de trabalhar com eles. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_040",
+    "tool": "OPQ",
+    "number": 40,
+    "construct": "ANALÍTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre informações numéricas complexas, você: Prefiro achar difícil trabalhar com elas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_041",
+    "tool": "OPQ",
+    "number": 41,
+    "construct": "CONCEITUAL",
+    "scoring": "DIRECT",
+    "text": "Quando você pensa sobre problemas, você:Costumo buscar padrões e conexões mais amplas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_042",
+    "tool": "OPQ",
+    "number": 42,
+    "construct": "CONCEITUAL",
+    "scoring": "INVERSE",
+    "text": "Sobre pensar em termos abstratos, você: Prefiro focar em detalhes concretos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_043",
+    "tool": "OPQ",
+    "number": 43,
+    "construct": "CONCEITUAL",
+    "scoring": "DIRECT",
+    "text": "Sua forma de pensar é: Costumo ser teórico e estratégico. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_044",
+    "tool": "OPQ",
+    "number": 44,
+    "construct": "CONCEITUAL",
+    "scoring": "INVERSE",
+    "text": "Quando pensa sobre o futuro, você: Prefiro focar no presente imediato. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_045",
+    "tool": "OPQ",
+    "number": 45,
+    "construct": "INOVADOR",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta um desafio, você: Costumo procurar soluções criativas e novas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_046",
+    "tool": "OPQ",
+    "number": 46,
+    "construct": "INOVADOR",
+    "scoring": "INVERSE",
+    "text": "Sobre mudar processos estabelecidos, você: Prefiro manter as coisas como estão. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_047",
+    "tool": "OPQ",
+    "number": 47,
+    "construct": "INOVADOR",
+    "scoring": "DIRECT",
+    "text": "Sua abordagem para inovação é: Costumo estar sempre buscando melhorias. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_048",
+    "tool": "OPQ",
+    "number": 48,
+    "construct": "INOVADOR",
+    "scoring": "INVERSE",
+    "text": "Quando surge uma ideia nova, você: Prefiro ser cético e questionar sua viabilidade. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_049",
+    "tool": "OPQ",
+    "number": 49,
+    "construct": "ORIENTADO A DETALHES",
+    "scoring": "DIRECT",
+    "text": "Quando você trabalha em um projeto, você: Costumo prestar atenção aos pequenos detalhes. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_050",
+    "tool": "OPQ",
+    "number": 50,
+    "construct": "ORIENTADO A DETALHES",
+    "scoring": "INVERSE",
+    "text": "Sobre erros pequenos, você: Prefiro não me preocupar com eles. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_051",
+    "tool": "OPQ",
+    "number": 51,
+    "construct": "ORIENTADO A DETALHES",
+    "scoring": "DIRECT",
+    "text": "Sua atenção a detalhes é: Costumo ser meticuloso e preciso. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_052",
+    "tool": "OPQ",
+    "number": 52,
+    "construct": "ORIENTADO A DETALHES",
+    "scoring": "INVERSE",
+    "text": "Quando revisa seu trabalho, você: Prefiro fazer uma revisão rápida. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_053",
+    "tool": "OPQ",
+    "number": 53,
+    "construct": "ORIENTADO A ESTRUTURA",
+    "scoring": "DIRECT",
+    "text": "Quando você trabalha, você: Costumo preferir ter um plano claro e estruturado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_054",
+    "tool": "OPQ",
+    "number": 54,
+    "construct": "ORIENTADO A ESTRUTURA",
+    "scoring": "INVERSE",
+    "text": "Sobre seguir procedimentos estabelecidos, você: Prefiro ter flexibilidade para improvisar. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_055",
+    "tool": "OPQ",
+    "number": 55,
+    "construct": "ORIENTADO A ESTRUTURA",
+    "scoring": "DIRECT",
+    "text": "Sua preferência por organização é: Costumo gostar de ordem e clareza. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_056",
+    "tool": "OPQ",
+    "number": 56,
+    "construct": "ORIENTADO A ESTRUTURA",
+    "scoring": "INVERSE",
+    "text": "Quando as coisas mudam, você: Prefiro me adaptar rapidamente sem planejamento. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_057",
+    "tool": "OPQ",
+    "number": 57,
+    "construct": "ORIENTADO A APRENDIZADO",
+    "scoring": "DIRECT",
+    "text": "Quando você enfrenta algo novo, você: Costumo estar interessado em aprender. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_058",
+    "tool": "OPQ",
+    "number": 58,
+    "construct": "ORIENTADO A APRENDIZADO",
+    "scoring": "INVERSE",
+    "text": "Sobre desenvolvimento profissional, você: Prefiro manter meus conhecimentos atuais. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_059",
+    "tool": "OPQ",
+    "number": 59,
+    "construct": "ORIENTADO A APRENDIZADO",
+    "scoring": "DIRECT",
+    "text": "Sua curiosidade intelectual é: Costumo ser sempre curioso e investigativo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_060",
+    "tool": "OPQ",
+    "number": 60,
+    "construct": "ORIENTADO A APRENDIZADO",
+    "scoring": "INVERSE",
+    "text": "Quando enfrenta desafios de aprendizado, você:Prefiro evitar situações complexas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_061",
+    "tool": "OPQ",
+    "number": 61,
+    "construct": "PRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Sua abordagem para resolver problemas é: Costumo focar em soluções práticas e viáveis. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_062",
+    "tool": "OPQ",
+    "number": 62,
+    "construct": "PRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre teorias complexas, você: Prefiro aprofundar-me em conceitos abstratos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_063",
+    "tool": "OPQ",
+    "number": 63,
+    "construct": "PRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Quando você trabalha, você: Costumo ser realista sobre o que é possível. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_064",
+    "tool": "OPQ",
+    "number": 64,
+    "construct": "PRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre implementação de ideias, você: Prefiro deixar para outros executarem. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_065",
+    "tool": "OPQ",
+    "number": 65,
+    "construct": "PRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Quando há mudanças no ambiente, você: Costumo estar pronto para se adaptar. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_066",
+    "tool": "OPQ",
+    "number": 66,
+    "construct": "PRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Sobre mudanças organizacionais, você: Prefiro resistir e manter o status quo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_067",
+    "tool": "OPQ",
+    "number": 67,
+    "construct": "PRÁTICO",
+    "scoring": "DIRECT",
+    "text": "Sua flexibilidade é: Costumo ser adaptável a novas situações. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_068",
+    "tool": "OPQ",
+    "number": 68,
+    "construct": "PRÁTICO",
+    "scoring": "INVERSE",
+    "text": "Quando enfrenta incerteza, você: Prefiro esperar até ter clareza total. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_069",
+    "tool": "OPQ",
+    "number": 69,
+    "construct": "ORIENTADO A EFICIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Quando você trabalha, você: Costumo focar em maximizar a produtividade. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_070",
+    "tool": "OPQ",
+    "number": 70,
+    "construct": "ORIENTADO A EFICIÊNCIA",
+    "scoring": "INVERSE",
+    "text": "Sobre desperdício de tempo, você: Prefiro não me preocupar com eficiência. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_071",
+    "tool": "OPQ",
+    "number": 71,
+    "construct": "ORIENTADO A EFICIÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Sua abordagem para tarefas é: Costumo ser organizado e eficiente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_072",
+    "tool": "OPQ",
+    "number": 72,
+    "construct": "ORIENTADO A EFICIÊNCIA",
+    "scoring": "INVERSE",
+    "text": "Quando há processos ineficientes, você: Prefiro deixar como estão. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\] ÁREA 3: SENTIMENTOS E EMOÇÕES (12 CONSTRUTOS)",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_073",
+    "tool": "OPQ",
+    "number": 73,
+    "construct": "RESILIENTE",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta dificuldades, você: Costumo recuperar-me rapidamente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_074",
+    "tool": "OPQ",
+    "number": 74,
+    "construct": "RESILIENTE",
+    "scoring": "INVERSE",
+    "text": "Sobre lidar com fracassos, você: Prefiro ficar desanimado por muito tempo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_075",
+    "tool": "OPQ",
+    "number": 75,
+    "construct": "RESILIENTE",
+    "scoring": "DIRECT",
+    "text": "Sua capacidade de lidar com estresse é: Costumo ser resiliente e forte. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_076",
+    "tool": "OPQ",
+    "number": 76,
+    "construct": "RESILIENTE",
+    "scoring": "INVERSE",
+    "text": "Quando enfrenta adversidades, você: Prefiro sentir-me derrotado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_077",
+    "tool": "OPQ",
+    "number": 77,
+    "construct": "CONFIANTE",
+    "scoring": "DIRECT",
+    "text": "Sua confiança em suas habilidades é: Costumo ter confiança em mim mesmo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_078",
+    "tool": "OPQ",
+    "number": 78,
+    "construct": "CONFIANTE",
+    "scoring": "INVERSE",
+    "text": "Sobre suas capacidades, você: Prefiro duvidar de mim mesmo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_079",
+    "tool": "OPQ",
+    "number": 79,
+    "construct": "CONFIANTE",
+    "scoring": "DIRECT",
+    "text": "Quando você enfrenta desafios, você: Costumo acreditar que consigo superá-los. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_080",
+    "tool": "OPQ",
+    "number": 80,
+    "construct": "CONFIANTE",
+    "scoring": "INVERSE",
+    "text": "Sobre suas chances de sucesso, você: Prefiro ser pessimista. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_081",
+    "tool": "OPQ",
+    "number": 81,
+    "construct": "OTIMISTA",
+    "scoring": "DIRECT",
+    "text": "Sua visão sobre o futuro é: Costumo ser otimista e esperançoso. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_082",
+    "tool": "OPQ",
+    "number": 82,
+    "construct": "OTIMISTA",
+    "scoring": "INVERSE",
+    "text": "Sobre perspectivas futuras, você: Prefiro ser pessimista. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_083",
+    "tool": "OPQ",
+    "number": 83,
+    "construct": "OTIMISTA",
+    "scoring": "DIRECT",
+    "text": "Quando pensa em oportunidades, você: Costumo ver o lado positivo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_084",
+    "tool": "OPQ",
+    "number": 84,
+    "construct": "OTIMISTA",
+    "scoring": "INVERSE",
+    "text": "Sobre novos projetos, você: Prefiro focar nos riscos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_085",
+    "tool": "OPQ",
+    "number": 85,
+    "construct": "CONTROLADO EMOCIONALMENTE",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta situações estressantes, você: Costumo manter a calma e o controle. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_086",
+    "tool": "OPQ",
+    "number": 86,
+    "construct": "CONTROLADO EMOCIONALMENTE",
+    "scoring": "INVERSE",
+    "text": "Sobre expressar emoções, você: Prefiro deixar que as emoções me controlem. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_087",
+    "tool": "OPQ",
+    "number": 87,
+    "construct": "CONTROLADO EMOCIONALMENTE",
+    "scoring": "DIRECT",
+    "text": "Sua estabilidade emocional é: Costumo ser equilibrado e controlado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_088",
+    "tool": "OPQ",
+    "number": 88,
+    "construct": "CONTROLADO EMOCIONALMENTE",
+    "scoring": "INVERSE",
+    "text": "Quando está frustrado, você:Prefiro deixar a frustração tomar conta. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_089",
+    "tool": "OPQ",
+    "number": 89,
+    "construct": "MOTIVADO",
+    "scoring": "DIRECT",
+    "text": "Seu nível de motivação é: Costumo estar sempre motivado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_090",
+    "tool": "OPQ",
+    "number": 90,
+    "construct": "MOTIVADO",
+    "scoring": "INVERSE",
+    "text": "Sobre buscar objetivos, você: Prefiro ser passivo. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_091",
+    "tool": "OPQ",
+    "number": 91,
+    "construct": "MOTIVADO",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta tarefas difíceis, você: Costumo estar motivado a completá-las. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_092",
+    "tool": "OPQ",
+    "number": 92,
+    "construct": "MOTIVADO",
+    "scoring": "INVERSE",
+    "text": "Sobre persistência, você: Prefiro desistir facilmente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_093",
+    "tool": "OPQ",
+    "number": 93,
+    "construct": "MOTIVADO",
+    "scoring": "DIRECT",
+    "text": "Sua atitude em relação à competição é: Costumo ser competitivo e gostar de vencer. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_094",
+    "tool": "OPQ",
+    "number": 94,
+    "construct": "MOTIVADO",
+    "scoring": "INVERSE",
+    "text": "Sobre competir com outros, você: Prefiro colaborar em vez de competir. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_095",
+    "tool": "OPQ",
+    "number": 95,
+    "construct": "MOTIVADO",
+    "scoring": "DIRECT",
+    "text": "Quando há desafios competitivos, você: Costumo estar energizado e focado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_096",
+    "tool": "OPQ",
+    "number": 96,
+    "construct": "MOTIVADO",
+    "scoring": "INVERSE",
+    "text": "Sobre ganhar, você: Prefiro não me importar com resultados. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_097",
+    "tool": "OPQ",
+    "number": 97,
+    "construct": "AMBICIOSO",
+    "scoring": "DIRECT",
+    "text": "Seus objetivos de carreira são: Costumo ter ambições elevadas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_098",
+    "tool": "OPQ",
+    "number": 98,
+    "construct": "AMBICIOSO",
+    "scoring": "INVERSE",
+    "text": "Sobre progresso profissional, você: Prefiro ficar na mesma posição. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_099",
+    "tool": "OPQ",
+    "number": 99,
+    "construct": "AMBICIOSO",
+    "scoring": "DIRECT",
+    "text": "Sua motivação para crescimento é: Costumo estar sempre buscando crescimento. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_100",
+    "tool": "OPQ",
+    "number": 100,
+    "construct": "AMBICIOSO",
+    "scoring": "INVERSE",
+    "text": "Quando há oportunidades de avanço, você: Prefiro não aproveitar. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_101",
+    "tool": "OPQ",
+    "number": 101,
+    "construct": "ORIENTADO A RECONHECIMENTO",
+    "scoring": "DIRECT",
+    "text": "Você valoriza reconhecimento pelo seu trabalho: Costumo valorizar muito. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_102",
+    "tool": "OPQ",
+    "number": 102,
+    "construct": "ORIENTADO A RECONHECIMENTO",
+    "scoring": "INVERSE",
+    "text": "Sobre elogios, você:Prefiro não receber atenção. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_103",
+    "tool": "OPQ",
+    "number": 103,
+    "construct": "ORIENTADO A RECONHECIMENTO",
+    "scoring": "DIRECT",
+    "text": "Quando seu trabalho é reconhecido, você: Costumo me sentir motivado e satisfeito. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_104",
+    "tool": "OPQ",
+    "number": 104,
+    "construct": "ORIENTADO A RECONHECIMENTO",
+    "scoring": "INVERSE",
+    "text": "Sobre visibilidade, você: Prefiro passar despercebido. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_105",
+    "tool": "OPQ",
+    "number": 105,
+    "construct": "ORIENTADO A SEGURANÇA",
+    "scoring": "DIRECT",
+    "text": "Sua necessidade de segurança é: Costumo valorizar estabilidade. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_106",
+    "tool": "OPQ",
+    "number": 106,
+    "construct": "ORIENTADO A SEGURANÇA",
+    "scoring": "INVERSE",
+    "text": "Sobre riscos profissionais, você: Prefiro assumir riscos altos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_107",
+    "tool": "OPQ",
+    "number": 107,
+    "construct": "ORIENTADO A SEGURANÇA",
+    "scoring": "DIRECT",
+    "text": "Quando pensa em seu futuro, você: Costumo buscar segurança e previsibilidade. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_108",
+    "tool": "OPQ",
+    "number": 108,
+    "construct": "ORIENTADO A SEGURANÇA",
+    "scoring": "INVERSE",
+    "text": "Sobre mudanças radicais, você: Prefiro estar sempre em transição. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_109",
+    "tool": "OPQ",
+    "number": 109,
+    "construct": "ORIENTADO A EQUILÍBRIO",
+    "scoring": "DIRECT",
+    "text": "Seu equilíbrio entre trabalho e vida é: Costumo valorizar equilíbrio. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_110",
+    "tool": "OPQ",
+    "number": 110,
+    "construct": "ORIENTADO A EQUILÍBRIO",
+    "scoring": "INVERSE",
+    "text": "Sobre dedicação ao trabalho, você: Prefiro trabalhar o máximo possível. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_111",
+    "tool": "OPQ",
+    "number": 111,
+    "construct": "ORIENTADO A EQUILÍBRIO",
+    "scoring": "DIRECT",
+    "text": "Quando pensa em qualidade de vida, você: Costumo priorizar bem-estar pessoal. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_112",
+    "tool": "OPQ",
+    "number": 112,
+    "construct": "ORIENTADO A EQUILÍBRIO",
+    "scoring": "INVERSE",
+    "text": "Sobre tempo livre, você: Prefiro não ter tempo para descanso. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_113",
+    "tool": "OPQ",
+    "number": 113,
+    "construct": "ORIENTADO A RELACIONAMENTOS",
+    "scoring": "DIRECT",
+    "text": "Seus relacionamentos são importantes para você: Costumo valorizar muito. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_114",
+    "tool": "OPQ",
+    "number": 114,
+    "construct": "ORIENTADO A RELACIONAMENTOS",
+    "scoring": "INVERSE",
+    "text": "Sobre conexões pessoais, você: Prefiro manter distância. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_115",
+    "tool": "OPQ",
+    "number": 115,
+    "construct": "ORIENTADO A RELACIONAMENTOS",
+    "scoring": "DIRECT",
+    "text": "Quando trabalha com pessoas, você: Costumo buscar criar vínculos significativos. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_116",
+    "tool": "OPQ",
+    "number": 116,
+    "construct": "ORIENTADO A RELACIONAMENTOS",
+    "scoring": "INVERSE",
+    "text": "Sobre relacionamentos de trabalho, você: Prefiro manter tudo profissional e distante. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_117",
+    "tool": "OPQ",
+    "number": 117,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "DIRECT",
+    "text": "Você busca trabalho com propósito: Costumo valorizar significado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_118",
+    "tool": "OPQ",
+    "number": 118,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "INVERSE",
+    "text": "Sobre impacto social, você: Prefiro não me preocupar com isso. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_119",
+    "tool": "OPQ",
+    "number": 119,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "DIRECT",
+    "text": "Quando pensa em sua carreira, você: Costumo buscar fazer diferença. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_120",
+    "tool": "OPQ",
+    "number": 120,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "INVERSE",
+    "text": "Sobre contribuição social, você: Prefiro focar apenas em ganhos pessoais. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_121",
+    "tool": "OPQ",
+    "number": 121,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "DIRECT",
+    "text": "Você valoriza autonomia no trabalho: Costumo valorizar muito. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_122",
+    "tool": "OPQ",
+    "number": 122,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "INVERSE",
+    "text": "Sobre supervisão, você: Prefiro ser constantemente supervisionado. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_123",
+    "tool": "OPQ",
+    "number": 123,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "DIRECT",
+    "text": "Quando trabalha, você: Costumo preferir ter liberdade de ação. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_124",
+    "tool": "OPQ",
+    "number": 124,
+    "construct": "ORIENTADO A PROPÓSITO",
+    "scoring": "INVERSE",
+    "text": "Sobre seguir instruções, você: Prefiro não ter escolhas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_125",
+    "tool": "OPQ",
+    "number": 125,
+    "construct": "ORIENTADO A DESENVOLVIMENTO",
+    "scoring": "DIRECT",
+    "text": "Você busca desenvolvimento contínuo: Costumo estar sempre em busca de crescimento. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_126",
+    "tool": "OPQ",
+    "number": 126,
+    "construct": "ORIENTADO A DESENVOLVIMENTO",
+    "scoring": "INVERSE",
+    "text": "Sobre aprender novas habilidades, você: Prefiro manter minhas habilidades atuais. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_127",
+    "tool": "OPQ",
+    "number": 127,
+    "construct": "ORIENTADO A DESENVOLVIMENTO",
+    "scoring": "DIRECT",
+    "text": "Quando há oportunidades de desenvolvimento, você: Costumo aproveitar plenamente. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\]",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "opq_128",
+    "tool": "OPQ",
+    "number": 128,
+    "construct": "ORIENTADO A DESENVOLVIMENTO",
+    "scoring": "INVERSE",
+    "text": "Sobre desafios de aprendizado, você: Prefiro evitar situações complexas. \\[0\\] Discordo Totalmente | \\[1\\] Discordo Parcialmente | \\[2\\] Concordo Parcialmente | \\[3\\] Este documento contém TODAS as 128 perguntas do OPQ com os 32 construtos completos. Cada construto possui 4 perguntas (2 diretas e 2 inversas) para detectar respondentes desonestos. Todas as respostas foram reformuladas usando linguagem profissional e direta. Nenhuma opção parece \"melhor\" para ser contratado ou mais desejável. Áreas Cobertas: • Área 1: Relacionamentos com Pessoas (9 construtos) • Área 2: Pensamento e Análise (11 construtos) • Área 3: Sentimentos e Emoções (12 construtos)",
+    "options": [
+      {
+        "id": "0",
+        "text": "Discordo Totalmente",
+        "value": 0
+      },
+      {
+        "id": "1",
+        "text": "Discordo Parcialmente",
+        "value": 1
+      },
+      {
+        "id": "2",
+        "text": "Concordo Parcialmente",
+        "value": 2
+      },
+      {
+        "id": "3",
+        "text": "Concordo Totalmente",
+        "value": 3
+      }
+    ]
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ancoras_p1a",
+    "tool": "ANCORAS",
+    "number": 1,
+    "construct": "TÉCNICA/FUNCIONAL",
+    "scoring": "DIRECT",
+    "text": "Quando você pensa em um dia de trabalho satisfatório, você tende a se sentir mais realizado quando: •\t\\[A\\] Resolveu um problema complexo usando seus conhecimentos específicos •\t\\[B\\] Colaborou com diferentes pessoas em várias atividades",
+    "options": []
+  },
+  {
+    "id": "ancoras_p1b",
+    "tool": "ANCORAS",
+    "number": 2,
+    "construct": "TÉCNICA/FUNCIONAL",
+    "scoring": "INVERSE",
+    "text": "Ao refletir sobre suas experiências passadas, você percebe que: •\t\\[A\\] Prefere estar envolvido em múltiplos projetos simultaneamente •\t\\[B\\] Gosta de aprofundar-se em uma área específica por longos períodos",
+    "options": []
+  },
+  {
+    "id": "ancoras_p2a",
+    "tool": "ANCORAS",
+    "number": 3,
+    "construct": "GERENCIAL",
+    "scoring": "DIRECT",
+    "text": "Em situações onde você tem influência sobre outros, você tende a: •\t\\[A\\] Assumir responsabilidade pelos resultados do grupo •\t\\[B\\] Deixar que cada um trabalhe de forma independente",
+    "options": []
+  },
+  {
+    "id": "ancoras_p2b",
+    "tool": "ANCORAS",
+    "number": 4,
+    "construct": "GERENCIAL",
+    "scoring": "INVERSE",
+    "text": "Quando observa líderes ao seu redor, você frequentemente pensa: •\t\\[A\\] Que seria mais fácil não ter que gerenciar pessoas •\t\\[B\\] Que gostaria de estar em posição similar",
+    "options": []
+  },
+  {
+    "id": "ancoras_p3a",
+    "tool": "ANCORAS",
+    "number": 5,
+    "construct": "AUTONOMIA/INDEPENDÊNCIA",
+    "scoring": "DIRECT",
+    "text": "Quando você tem que seguir procedimentos ou diretrizes muito rígidas, você: •\t\\[A\\] Sente-se restringido e busca formas de ter mais flexibilidade •\t\\[B\\] Sente-se seguro com diretrizes claras",
+    "options": []
+  },
+  {
+    "id": "ancoras_p3b",
+    "tool": "ANCORAS",
+    "number": 6,
+    "construct": "AUTONOMIA/INDEPENDÊNCIA",
+    "scoring": "INVERSE",
+    "text": "Ao pensar em diferentes ambientes de trabalho, você se vê mais confortável: •\t\\[A\\] Com muita estrutura e processos bem definidos •\t\\[B\\] Com liberdade para definir como trabalhar",
+    "options": []
+  },
+  {
+    "id": "ancoras_p4a",
+    "tool": "ANCORAS",
+    "number": 7,
+    "construct": "SEGURANÇA/ESTABILIDADE",
+    "scoring": "DIRECT",
+    "text": "Quando enfrenta mudanças no seu trabalho ou vida, sua reação típica é: •\t\\[A\\] Preocupação com como isso pode afetar sua estabilidade •\t\\[B\\] Curiosidade sobre novas possibilidades",
+    "options": []
+  },
+  {
+    "id": "ancoras_p4b",
+    "tool": "ANCORAS",
+    "number": 8,
+    "construct": "SEGURANÇA/ESTABILIDADE",
+    "scoring": "INVERSE",
+    "text": "Observando suas escolhas passadas, você nota que: •\t\\[A\\] Busca frequentemente novas experiências e desafios •\t\\[B\\] Prefere manter-se em situações estáveis e conhecidas",
+    "options": []
+  },
+  {
+    "id": "ancoras_p5a",
+    "tool": "ANCORAS",
+    "number": 9,
+    "construct": "CRIATIVIDADE/EMPREENDEDORISMO",
+    "scoring": "DIRECT",
+    "text": "Quando você tem a oportunidade de fazer algo de forma diferente, você: •\t\\[A\\] Sente entusiasmo em explorar novas abordagens •\t\\[B\\] Prefere usar métodos já comprovados",
+    "options": []
+  },
+  {
+    "id": "ancoras_p5b",
+    "tool": "ANCORAS",
+    "number": 10,
+    "construct": "CRIATIVIDADE/EMPREENDEDORISMO",
+    "scoring": "INVERSE",
+    "text": "Ao refletir sobre seus projetos, você percebe que: •\t\\[A\\] Gosta de repetir processos que funcionam bem •\t\\[B\\] Fica entediado se não pode inovar",
+    "options": []
+  },
+  {
+    "id": "ancoras_p6a",
+    "tool": "ANCORAS",
+    "number": 11,
+    "construct": "SERVIÇO/DEDICAÇÃO A CAUSA",
+    "scoring": "DIRECT",
+    "text": "Quando você avalia uma oportunidade, você considera: •\t\\[A\\] Se ela alinha com seus valores e pode gerar impacto •\t\\[B\\] Se oferece benefícios e segurança financeira",
+    "options": []
+  },
+  {
+    "id": "ancoras_p6b",
+    "tool": "ANCORAS",
+    "number": 12,
+    "construct": "SERVIÇO/DEDICAÇÃO A CAUSA",
+    "scoring": "INVERSE",
+    "text": "Quando toma decisões importantes, sua prioridade principal é: •\t\\[A\\] O que é melhor para você e sua família •\t\\[B\\] Como isso pode ajudar ou beneficiar outros",
+    "options": []
+  },
+  {
+    "id": "ancoras_p7a",
+    "tool": "ANCORAS",
+    "number": 13,
+    "construct": "DESAFIO/COMPETIÇÃO",
+    "scoring": "DIRECT",
+    "text": "Quando você se depara com um problema difícil, você: •\t\\[A\\] Sente-se energizado e motivado a resolvê-lo •\t\\[B\\] Prefere evitar ou delegar para alguém mais experiente",
+    "options": []
+  },
+  {
+    "id": "ancoras_p7b",
+    "tool": "ANCORAS",
+    "number": 14,
+    "construct": "DESAFIO/COMPETIÇÃO",
+    "scoring": "INVERSE",
+    "text": "Observando suas escolhas, você nota que: •\t\\[A\\] Busca situações confortáveis e previsíveis •\t\\[B\\] Procura constantemente novos desafios",
+    "options": []
+  },
+  {
+    "id": "ancoras_p8a",
+    "tool": "ANCORAS",
+    "number": 15,
+    "construct": "EQUILÍBRIO VIDA-TRABALHO",
+    "scoring": "DIRECT",
+    "text": "Quando você precisa escolher entre uma oportunidade profissional e tempo com família/amigos, você: •\t\\[A\\] Considera cuidadosamente o impacto em sua vida pessoal •\t\\[B\\] Prioriza a oportunidade profissional",
+    "options": []
+  },
+  {
+    "id": "ancoras_p8b",
+    "tool": "ANCORAS",
+    "number": 16,
+    "construct": "EQUILÍBRIO VIDA-TRABALHO",
+    "scoring": "INVERSE",
+    "text": "Refletindo sobre suas decisões passadas, você percebe que: •\t\\[A\\] Frequentemente sacrifica tempo pessoal por oportunidades profissionais •\t\\[B\\] Protege seu tempo pessoal mesmo que isso limite oportunidades",
+    "options": []
+  }
+]

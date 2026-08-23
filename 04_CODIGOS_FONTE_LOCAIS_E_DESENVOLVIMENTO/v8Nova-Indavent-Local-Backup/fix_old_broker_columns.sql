@@ -1,0 +1,16 @@
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS tenant_id uuid REFERENCES public.tenants(id) ON DELETE CASCADE;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS whatsapp_session_id uuid REFERENCES public.whatsapp_sessions(id) ON DELETE CASCADE;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS conversation_id uuid REFERENCES public.conversations(id) ON DELETE SET NULL;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS remote_jid text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS from_me boolean DEFAULT false;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS message_type text NOT NULL DEFAULT 'text';
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS media_url text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS media_mime_type text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS media_file_name text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS media_size integer;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS whatsapp_message_id text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS source_event_type text;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS sent_at timestamptz;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS delivered_at timestamptz;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS read_at timestamptz;
+ALTER TABLE public.whatsapp_messages ADD COLUMN IF NOT EXISTS updated_at timestamptz DEFAULT now();
