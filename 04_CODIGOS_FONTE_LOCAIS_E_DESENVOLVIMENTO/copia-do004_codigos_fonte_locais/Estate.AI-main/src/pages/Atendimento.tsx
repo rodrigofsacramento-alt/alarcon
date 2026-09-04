@@ -93,7 +93,26 @@ interface Conversation {
   client?: Client;
   whatsapp_contact?: Array<{ is_group?: boolean; remote_jid?: string; phone_number?: string }>;
   whatsapp_contacts?: Array<{ is_group?: boolean; remote_jid?: string; phone_number?: string }>;
+  stage?: string | null;
 }
+
+// ── FUNIL ÚNICO QUBITS — 12 ESTÁGIOS EXATOS ──────────────────
+// Fonte única: conversations.stage espelha leads.stage (NUNCA divergem).
+// "Qualificado" (pos.3) = GATILHO de injeção do cartão de Lead (gatilho no banco).
+const ESTAGIOS_FUNIL = [
+  'Contato Cadastrado',                 // 1
+  'Primeiro Atendimento / Qualificação',// 2
+  'Qualificado',                        // 3 ⭐ GATILHO
+  'Follow Up',                          // 4
+  'Buscar Imóveis',                     // 5
+  'Agendamento Visita/Reunião',         // 6
+  'Visita/Reunião Agendada',            // 7
+  'Match Pronto',                       // 8
+  'Apresentar Imóveis',                 // 9
+  'Imóvel Escolhido',                   // 10
+  'Proposta Solicitada',                // 11
+  'Vendido',                            // 12
+];
 
 export default function Atendimento() {
   const navigate = useNavigate();
@@ -329,6 +348,28 @@ export default function Atendimento() {
     }
   };
 
+  // ── FUNIL QUBITS: atualizar estágio da conversa (fonte única) ──
+  // conversations.stage → espelho sincronizado automaticamente p/ leads.stage
+  // via gatilho trg_lead_qualificado (cria o lead em "Qualificado").
+  const handleStageChange = async (nextStage: string) => {
+    if (!activeChatId) return;
+    const current = activeChat?.stage || 'Contato Cadastrado';
+    if (nextStage === current) return;
+    try {
+      const { error } = await supabase
+        .from('conversations')
+        .update({ stage: nextStage, updated_at: new Date().toISOString() })
+        .eq('id', activeChatId);
+      if (error) throw error;
+      // Espelho local imediato
+      setConversations((prev) =>
+        prev.map((c) => (c.id === activeChatId ? { ...c, stage: nextStage } : c))
+      );
+    } catch (err) {
+      console.error('Erro ao atualizar estágio:', err);
+    }
+  };
+
   const isWhatsappConnected = whatsappSession?.status === 'connected';
 
   return (
@@ -529,6 +570,22 @@ export default function Atendimento() {
 
               {/* Ações do Header */}
               <div className="flex items-center gap-2">
+                {/* FUNIL QUBITS: Dropdown de Estágio (fonte única conversations.stage) */}
+                {!isGroupActiveChat && activeChatId && (
+                  <select
+                    value={activeChat?.stage || 'Contato Cadastrado'}
+                    onChange={(e) => handleStageChange(e.target.value)}
+                    title="Estágio do funil de qualificação"
+                    className="px-2.5 py-1.5 text-xs font-semibold rounded-xl border flex items-center gap-2 transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700 cursor-pointer outline-none max-w-[170px]"
+                  >
+                    {ESTAGIOS_FUNIL.map((s) => (
+                      <option key={s} value={s} className="bg-slate-900 text-slate-200">
+                        {s === 'Qualificado' ? '⭐ ' + s : s}
+                      </option>
+                    ))}
+                  </select>
+                )}
+
                 <button 
                   onClick={() => toggleAiMutation.mutate({ enabled: activeChat.ai_enabled === false })}
                   className={`text-xs font-medium px-3 py-1.5 rounded-xl border flex items-center gap-2 transition-all ${

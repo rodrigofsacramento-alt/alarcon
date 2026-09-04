@@ -1,4 +1,12 @@
-# 📊 Painel de Controle Consolidado do Squad IA
+## 🛑 PONTUAÇÃO PENALIZADA — 04/09 — INDICADOR DE ESTÁGIO NUNCA DEPLOYADO (falha de review+validação+deploy)
+**Falha:** Missões 1 e 2 (indicador de estágio na lista + seletor no chat) foram **implementadas na FASE 2 (commit `46f6421`)** mas **NUNCA foram deployadas** — o bundle do DEV (`index-DBFmZRCv.js`) só subiu em 04/09 após correção do Comandante. Por isso **não havia NENHUMA identificação de estágio na tela**.
+**Responsáveis (penalidade):**
+- **ATOM (frontend review):** ❌ não revisou a entrega → **-5 pts**
+- **Jarvis (orquestrador):** ❌ não validou resultado REAL na tela, só código/build → **-5 pts**
+- **Agente de deploy:** ❌ deixou o bundle parado no repo, não subiu → **-5 pts**
+**Lição (já agora regra):** DEPLOY NUNCA fica pendente após commit de entrega — validar sempre na tela real do DEV, não apenas tsc/build.
+
+## 📊 Painel de Controle Consolidado do Squad IA
 
 **Última Atualização:** 03/09/2026 (Ciclo 5 — Zombie dupla-montagem + push código + Funil de Performance)  
 **Ambiente Ativo:** Produção (`ahut-ecosystem.apexfyhub.com.br`) | Repo: `rodrigofsacramento-alt-...-remodel` (branch `remodel`, docroot `/ahut/`)  
