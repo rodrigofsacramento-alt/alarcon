@@ -16,14 +16,14 @@ const hostingerConfig = {
   host: '82.25.73.206',
   port: 65002,
   username: 'u817195350',
-  password: 'SENHA_DEPLOY_REDIGIDA'
+  password: 'SENHA_REDIGIDA_HERMES'
 };
 
 const vpsConfig = {
   host: '2.24.95.98',
   port: 22,
   username: 'root',
-  password: 'SENHA_DEPLOY_REDIGIDA'
+  password: 'SENHA_REDIGIDA_HERMES'
 };
 
 const hostingerTargets = [

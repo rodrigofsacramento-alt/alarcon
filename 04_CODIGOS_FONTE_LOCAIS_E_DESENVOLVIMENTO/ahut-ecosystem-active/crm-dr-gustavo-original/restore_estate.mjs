@@ -10,7 +10,7 @@ const config = {
   host: '82.25.73.206',
   port: 65002,
   username: 'u817195350',
-  password: 'SENHA_DEPLOY_REDIGIDA'
+  password: 'SENHA_REDIGIDA_HERMES'
 };
 
 const zipPath = path.resolve(__dirname, '../../ahut-ecosystem-working.zip');

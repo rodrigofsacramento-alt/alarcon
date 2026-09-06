@@ -5,7 +5,7 @@
 # Se nada pendente recente, sai vazio (silencioso).
 /opt/data/ssh-venv/bin/python3 - << 'PYEOF'
 import paramiko, urllib.parse, re, urllib.request, json, datetime, hashlib
-pwd = urllib.parse.unquote('SENHA_DEPLOY_REDIGIDA')
+pwd = urllib.parse.unquote('SENHA_REDIGIDA_HERMES')
 try:
     cli = paramiko.SSHClient(); cli.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     cli.connect('2.24.95.98', username='root', password=pwd, timeout=12)

@@ -8,7 +8,7 @@ Resolve o destinatario REAL do cliente (whatsapp_contacts.remote_jid / numero) e
 cria whatsapp_message no formato correto [Audio] nome.ogg\n<URL> (URL em linha separada
 para virar PTT, nao texto). Se <destino> for informado, direciona para ele.
 """
-pwd = urllib.parse.unquote('SENHA_DEPLOY_REDIGIDA')
+pwd = urllib.parse.unquote('SENHA_REDIGIDA_HERMES')
 
 def main():
     if len(sys.argv) < 4:

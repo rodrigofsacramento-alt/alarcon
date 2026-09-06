@@ -59,7 +59,7 @@ https://dev-ahut-ecosystem.apexfyhub.com.br/
 Servidor: 82.25.73.206
 Porta: 65002
 Usuário: u817195350
-Senha: SENHA_DEPLOY_REDIGIDA
+Senha: SENHA_REDIGIDA_HERMES
 Pasta: /home/u817195350/domains/apexfyhub.com.br/public_html/dev/
 ```
 
@@ -110,7 +110,7 @@ Os arquivos compilados vão para a pasta `dist/`.
 # Servidor: 82.25.73.206
 # Porta: 65002
 # Usuário: u817195350
-# Senha: SENHA_DEPLOY_REDIGIDA
+# Senha: SENHA_REDIGIDA_HERMES
 # Pasta de destino: /home/u817195350/domains/apexfyhub.com.br/public_html/dev/
 
 # Arquivos para enviar:

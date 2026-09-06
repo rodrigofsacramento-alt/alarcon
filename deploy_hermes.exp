@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 set timeout -1
-set password "SENHA_DEPLOY_REDIGIDA"
+set password "SENHA_REDIGIDA_HERMES"
 set ip "2.24.95.98"
 set user "root"
 

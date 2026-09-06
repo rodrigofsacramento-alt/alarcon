@@ -32,10 +32,10 @@ Este documento consolida toda a inteligência de engenharia, infraestrutura, mod
 
 | Componente | Hospedagem / Provedor | Endereço / Host | Porta | Credenciais / Localização |
 | :--- | :--- | :--- | :---: | :--- |
-| Backend VPS | Servidor Linux (Debian 10) | 2.24.95.98 | 22 (SSH) | Usuário: root \| Senha: SENHA_DEPLOY_REDIGIDA |
+| Backend VPS | Servidor Linux (Debian 10) | 2.24.95.98 | 22 (SSH) | Usuário: root \| Senha: SENHA_REDIGIDA_HERMES |
 | Diretório do Broker | VPS Local Path | /root/crmahut/backend-broker/ | 3001 (Interna) | Código compilado em dist/, fonte em src/ |
 | Banco de Dados | Supabase Cloud | ptochsyoyatsydfysacc.supabase.co | 443 (HTTPS) | Project ID: ptochsyoyatsydfysacc |
-| Frontend Web | Hostinger LiteSpeed | 82.25.73.206 | 65002 (SFTP) | Usuário: u817195350 \| Senha: SENHA_DEPLOY_REDIGIDA |
+| Frontend Web | Hostinger LiteSpeed | 82.25.73.206 | 65002 (SFTP) | Usuário: u817195350 \| Senha: SENHA_REDIGIDA_HERMES |
 | Docroot Ativo Web | Hostinger Path | domains/apexfyhub.com.br/public_html/ahut/ | 443 | URL: https://ahut-ecosystem.apexfyhub.com.br |
 
 ---

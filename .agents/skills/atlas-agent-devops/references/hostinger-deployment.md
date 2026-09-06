@@ -20,5 +20,5 @@ SEMPRE verificar no hPanel → Subdomínios qual o diretório antes de deploy. O
 - Alternativa: `purge.php` com `header("X-LiteSpeed-Purge: *")`
 
 ## Acesso
-- SSH/SFTP: `82.25.73.206:65002` | user: `u817195350` | pass: `SENHA_DEPLOY_REDIGIDA`
+- SSH/SFTP: `82.25.73.206:65002` | user: `u817195350` | pass: `SENHA_REDIGIDA_HERMES`
 - hPanel: comandante Rodrigo Sacramento controla

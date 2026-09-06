@@ -10,7 +10,7 @@ const config = {
   host: '2.24.95.98',
   port: 22,
   username: 'root',
-  password: 'SENHA_DEPLOY_REDIGIDA'
+  password: 'SENHA_REDIGIDA_HERMES'
 };
 
 const zipPath = path.resolve(__dirname, '../../ahut-ecosystem-dist.zip');

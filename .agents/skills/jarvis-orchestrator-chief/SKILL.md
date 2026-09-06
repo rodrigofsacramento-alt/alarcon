@@ -339,8 +339,8 @@ Após qualquer hotfix em produção (urgente):
 |---|---|---|---|
 | 1 | VPS nginx: `/var/www/html/` | `2.24.95.98` root | SFTP/SCP via VPS |
 | 2 | VPS crm: `/var/www/crm-imobiliaria/` | `2.24.95.98` root | SFTP/SCP via VPS |
-| 3 | Hostinger subdomínio: `ahut-ecosystem.apexfyhub.com.br` → `~/domains/ahut-ecosystem.../public_html/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_DEPLOY_REDIGIDA) |
-| 4 | Hostinger ahut/: `apexfyhub.com.br/ahut/` → `~/domains/apexfyhub.com.br/public_html/ahut/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_DEPLOY_REDIGIDA) |
+| 3 | Hostinger subdomínio: `ahut-ecosystem.apexfyhub.com.br` → `~/domains/ahut-ecosystem.../public_html/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_REDIGIDA_HERMES) |
+| 4 | Hostinger ahut/: `apexfyhub.com.br/ahut/` → `~/domains/apexfyhub.com.br/public_html/ahut/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_REDIGIDA_HERMES) |
 
 ### 🔄 RESTORE DE PRODUÇÃO (aprendido 27/08)
 Fluxo para restaurar versão anterior:
