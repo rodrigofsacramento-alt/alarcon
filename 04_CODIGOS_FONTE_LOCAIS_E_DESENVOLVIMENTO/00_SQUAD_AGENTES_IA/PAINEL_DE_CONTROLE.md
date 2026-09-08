@@ -1,3 +1,17 @@
+## ✅ 08/09 — ANTIGRAVITY FASE 3-C: REIDRATAÇÃO JSX CORRIGIDA E COMMITADA (remodel)
+**Entrega:** os 210 arquivos `.ts/.tsx` reidratados (e.jsx→JSX declarativo) agora **parseiam 210/210** com parser real TypeScript 5.9.3 (0 fail sintático).
+- **Commit:** `43b3ddf` na branch `remodel` do `ahut-ecosystem-remodel-copy` (HEAD anterior `285f483`).
+- **Alvo:** `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` — components 96, pages 80, hooks 24, lib 6, comissoes 4, contexts 2, ui/types/store 1 cada.
+- **Correções-chave (causas-raiz de descompilação):**
+  1. `lib/ai-prompts.ts` — backticks/`${` escapados (`\``, `\${`) de descompilação → template literals literais.
+  2. `pages/index-C9-68P_N.tsx` — **JWT anon real de 208 chars** embutido no bundle → redigido `[REDACTED: SUPABASE_ANON_JWT]` (commit refeito via amend, secret NÃO ficou no histórico).
+  3. `pages/Atendimento-live-v14.tsx` (l.857/860/1039) — `>` cru em texto JSX (`Menu > Aparelhos > Conectar`) → `&gt;`.
+  4. `tsconfig.json` — removido `baseUrl` (obsoleto no TS 7) + alias `@/*`→`src/*`.
+- **Sanitização final:** 0 `sk-`, 0 `service_role`, 0 `eyJhbG[50+]`, 0 AWS/ghp/private keys no commit.
+- **Achado crítico (auditoria Fase 3 original):** o `report` anterior afirmava "tsc 0 erros" via `--listFiles`, mas o `.bin/tsc` **não existia** no checkout → `0` era máscara (2 parse_fail reais escondidos). Prova real agora usa parser instalado.
+- **Evidência rerodável:** `00_ANTIGRAVITY_FASE3_CORRECCION/check/parse_test.js` + relatório `ANTIGRAVITY_FASE3_CORRECCION_VERIFICADA.md`.
+- **Pendente:** build → dist → valida link em `teste-ahut` → ativar. Árvore vive em `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` (no repo), ainda não copiada para a pasta de prod/RE.
+
 ## 🛑 PONTUAÇÃO PENALIZADA — 04/09 — INDICADOR DE ESTÁGIO NUNCA DEPLOYADO (falha de review+validação+deploy)
 **Falha:** Missões 1 e 2 (indicador de estágio na lista + seletor no chat) foram **implementadas na FASE 2 (commit `46f6421`)** mas **NUNCA foram deployadas** — o bundle do DEV (`index-DBFmZRCv.js`) só subiu em 04/09 após correção do Comandante. Por isso **não havia NENHUMA identificação de estágio na tela**.
 **Responsáveis (penalidade):**
