@@ -31,3 +31,5 @@ md5sum /tmp/legacy_re/src/<alvo>.tsx  # bate com o vivo? (produção ≠ git)
 
 ## 📌 REGRA 3 — Persistência
 Toda decisão nova → registrar em `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md` (seção 7) + PAINEL (kanban). Documentação atual é impossível de digerir, mas é obrigatório manter o **índice** apontando para onde está o detalhe.
+## ?? REGRA 3 � PROTOCOLO WRITE-LAST (Registro de Mem�ria Obrigat�rio)
+Toda task conclu�da DEVEM obrigatoriamente registrar a entrada correspondente em \CHANGELOG_APEXFY.md\ com data, m�dulo, arquivos, agente e status, e comitar junto com as altera��es.
