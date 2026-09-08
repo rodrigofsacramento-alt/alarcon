@@ -216,3 +216,14 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 * 🟢 **Ambiente Local de Testes:** Liberado em `http://localhost:5174/tecnologia`.
 - [x] Task 5 - Removido o botão de Configurar WhatsApp (QR Code) para o usuário Jota no painel de Atendimento (Atendimento-live-v10.js) em produção.
 - [x] TASK INCORPORAR ATUALIZAÇÕES EXECUTADAS: Rastreadas as demandas no DOCUMENTO_UNIFICADO_DEMANDAS.md e inseridas no frontend de Tecnologia.
+
+---
+
+## ✅ 09/09 — INSUMOS PARA O JHON WICK (briefing + verificação compatibilidade broker)
+**Entrega:** 2 docs criados e commitados no repo do Jhon Wick (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`), commit `8112cdd` (push ✅):
+- **`00_ANTIGRAVITY_FASE3_CORRECCION/BRIEFING_PARA_JHON_WICK.md`** — atualiza o Jhon Wick sobre: Lei de Atuação EDIÇÃO/REFERÊNCIA, calibração (646a8ad→5756cc8), padronização 11 agentes (91b27c9/c548299), deploy teste-ahut (ab87aed), pendências (SSL prod expirado, 121 vs 210 destinos, ~90% cobertura).
+- **`00_ANTIGRAVITY_FASE3_CORRECCION/VERIFICACAO_COMPATIBILIDADE_BROKER.md`** — guia completo p/ ele verificar se as pastas `02_BACKEND_E_SERVICOS_VPS/ahut-whatsapp-broker` + `02.2_BACKEND_BROKER_TESTE` estão alinhadas com o broker **VIVO**; inclui **manifest MD5** do `src/` (session-manager.ts = `9eb2e374`) e **instruções de acesso VPS** (`ssh root@2.24.95.98`, `md5sum`/`pm2`) **e Hostinger** (SFTP `82.25.73.206:65002` / hPanel file manager).
+- **Sanitizado:** nenhuma senha real nos docs (só referência de instrução a host/user/IP); verificação pré-commit ✅.
+- **⚠️ Achado de segurança:** ~18 scripts de deploy do repo antigo têm o **credencial do Hostinger em texto claro** (ex.: `deploy-true.mjs`, `deploy-hostinger.ps1`). **Pendente sanitização (purge).**
+
+**Comandante:** a decisão sobre **deploy do build novo Teste → PROD** e o **SSL prod expirado** seguem aguardando sua aprovação/ação. O Jhon Wick tem agora os insumos p/ validar o broker vivo antes de qualquer edição.
