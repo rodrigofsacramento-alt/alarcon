@@ -40,16 +40,16 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 > Essas pastas são lixo de backup/cópia antiga. Se você editar nelas, seu código NUNCA irá para o cliente e você estará desperdiçando tempo.
 
 ### 🟢 PASTAS OFICIAIS DE DESENVOLVIMENTO (ONDE VOCÊ DEVE EDITAR):
-1. **Frontend Dev:**
-   `/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP`
-2. **Frontend TSX Nativo:**
-   `/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx`
-3. **Backend WhatsApp Broker Dev:**
-   `/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/ahut-whatsapp-broker`
+1. **Frontend de EDIÇÃO (Jhon Wick - buildable):**
+   `/tmp/legacy_re/src/`  (repo `rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, ~170 arquivos, Vite)
+2. **Frontend de REFERÊNCIA ("Pedra de Roseta" - leitura, NÃO editar):**
+   `/opt/data/ahut-ecosystem-remodel-copy/00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (código reidratado; tipagem Supabase real/names originais)
+3. **Backend WhatsApp Broker (VPS):**
+   `/root/crmahut/backend-broker` (produção — somente leitura/diagnóstico, NUNCA rodar local)
 
-### 🟡 PASTAS DE DISTRIBUIÇÃO (ESPELHOS DE PRODUÇÃO - SÓ APÓS APROVAÇÃO):
-1. **Frontend Prod Mirror:** `/Users/christianeracanelli/Desktop/Ahut Ecosystem/01_FRONTEND_PRODUCAO_HOSTINGER`
-2. **Backend Prod Mirror:** `/Users/christianeracanelli/Desktop/Ahut Ecosystem/02_BACKEND_E_SERVICOS_VPS/ahut-whatsapp-broker`
+### 🟡 DESTINO DE DEPLOY (SÓ APÓS APROVAÇÃO):
+- **TESTE (homologação):** `teste-ahut-ecosystem.apexfyhub.com.br` → `~/domains/apexfyhub.com.br/public_html/teste/` (subir `dist/` do build do Jhon Wick)
+- **PRODUÇÃO (cliente real):** `ahut-ecosystem.apexfyhub.com.br` → `~/domains/apexfyhub.com.br/public_html/ahut/` (🔴 NUNCA sem aprovação explícita)
 
 ### 🔴 PASTAS TERMINANTEMENTE PROIBIDAS:
 * 🚫 `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/copia-do004_codigos_fonte_locais` (PROIBIDO!)
@@ -59,7 +59,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 
 ## 🔒 3. BLOQUEIO ABSOLUTO DE DEPLOY SEM APROVAÇÃO MANUAL
 
-1. **Desenvolva apenas nas pastas de desenvolvimento (`ahut-ecosystem-active`).**
+1. **Desenvolva apenas no `src/` de EDIÇÃO do Jhon Wick (`/tmp/legacy_re/src`).** Consulte `check/src/` como referência — nunca edite lá.
 2. **Suba o servidor local em porta isolada** (ex: `http://localhost:5174`).
 3. **Apresente o resultado** ao usuário para validação manual.
 4. **AGUARDE a confirmação expressa do usuário ("Pode subir / Aprovado").**
@@ -71,7 +71,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 
 - **Banco de Dados Oficial:** Supabase `ptochsyoyatsydfysacc`
   - URL: `https://ptochsyoyatsydfysacc.supabase.co`
-  - Postgres: `db.ptochsyoyatsydfysacc.supabase.co:5432` | User: `postgres` | Pass: `Dir@124!@$!@$`
+  - Postgres: `db.ptochsyoyatsydfysacc.supabase.co:5432` | User: `postgres` | Pass: [REDACTED — consultar `keys_ahut.py` ch600]
 - **Frontend Hostinger SFTP:** `82.25.73.206:65002` | User: `u817195350` | Pass: `SENHA_REDIGIDA_HERMES`
   - Destinos: `domains/ahut-ecosystem.apexfyhub.com.br/public_html`, `public_html/ahut-ecosystem`
 - **Backend VPS (SSH):** `2.24.95.98:22` | User: `root` | Pass: `SENHA_REDIGIDA_HERMES` | App: `/var/www/html`
@@ -177,7 +177,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
   2. VPS crm: `/var/www/crm-imobiliaria/`
   3. Hostinger subdomínio: `/home/u817195350/domains/ahut-ecosystem.apexfyhub.com.br/public_html/`
   4. Hostinger ahut/: `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-- **Dev:** `https://dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- **Teste:** `https://teste-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - **SEMPRE deployar nos 4 destinos.** O domínio `ahut-ecosystem.apexfyhub.com.br` aponta para Hostinger (LiteSpeed), não para o VPS
 - **Cache LiteSpeed:** purge via `purge.php` com `header("X-LiteSpeed-Purge: *")` ou hPanel → Avançado → Cache → Limpar Tudo
 

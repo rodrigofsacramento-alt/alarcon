@@ -7,7 +7,7 @@
 
 ## 🟢 Pastas Ativas de Desenvolvimento:
 1. `ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP`
-2. `ahut-ecosystem-active/codigo_engenharia_reversa_tsx`
+2. `/tmp/legacy_re/src` (Jhon Wick — EDIÇÃO); REFERÊNCIA = `00_ANTIGRAVITY_FASE3_CORRECCION/check/src`
 3. `ahut-ecosystem-active/ahut-whatsapp-broker`
 
 ## 🔴 Pastas Terminantemente Proibidas:

@@ -20,18 +20,26 @@ Sua missão é:
 
 ### App de Produção do Cliente (SOMENTE LEITURA - NUNCA ALTERAR)
 ```
-/Users/christianeracanelli/Desktop/Ahut Ecosystem/01_FRONTEND_PRODUCAO_HOSTINGER/
-/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP/
+https://ahut-ecosystem.apexfyhub.com.br/   → produção (cliente real)
+assets/  (JS minificado)  → fonte de verdade (bundle de produção)
 ```
-- URL de produção ativa: https://estate.ahut.com.br (ou similar — confirmar via arquivos)
+- URL de produção ativa: `https://ahut-ecosystem.apexfyhub.com.br/`
 - Código minificado `.js` em `assets/` — esta é a fonte de verdade
 
-### App de Desenvolvimento (ONDE VOCÊ IMPLEMENTA)
+### Diretório de REFERÊNCIA (Pedra de Roseta — leitura)
 ```
-/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/
+/opt/data/ahut-ecosystem-remodel-copy/00_ANTIGRAVITY_FASE3_CORRECCION/check/src/
 ```
-- Roda em: `http://localhost:5175`
-- Repositório Git: `rodrigofsacramento-alt/rodrigofsacramento-alt-ahut-ecosystem-remodel`
+- Código reidratado (JSX declarativo) — usar como MAPA de como roda em produção (tipos Supabase, nomes de RPCs/tabelas/pages). NUNCA editar aqui (`tsc` não compila).
+
+### App de Desenvolvimento (ONDE VOCÊ IMPLEMENTA — EDIÇÃO)
+```
+/tmp/legacy_re/  → clone do repo Jhon Wick (REPOSITORIOENGENHARIAREVERSACODIGOFONTE, branch main)
+/tmp/legacy_re/src/  → código-fonte de edição (170 arquivos, buildable Vite)
+```
+- Roda em: `http://localhost:5173/`
+- Repositório Git: `rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE`
+- Lei de Atuação: **editar só em `src/`** do Jhon Wick; **referenciar** `check/src/`; deploy em `teste-ahut`.
 
 ### Supabase Produtivo (ptochsyoyatsydfysacc)
 - **Projeto:** `ptochsyoyatsydfysacc` (Ambiente produtivo do cliente)
@@ -48,11 +56,11 @@ Sua missão é:
 
 **ATLAS** executa:
 ```bash
-# 1. Lista todos os arquivos JS do build de produção
-find "/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP/assets" -name "*.js" | sort
+# 1. Lista todos os arquivos JS do build (assets de produção ou dist do Jhon Wick)
+find /tmp/legacy_re/dist/assets -name "*.js" | sort
 
-# 2. Lista as páginas já implementadas no código reverso
-find "/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/src" -name "*.tsx" | sort
+# 2. Lista as páginas no código de EDIÇÃO (repo Jhon Wick - src/)
+find /tmp/legacy_re/src/pages -name "*.tsx" | sort
 ```
 
 **ADA** navega via browser no app de produção e extrai:
@@ -142,7 +150,7 @@ Se a feature envolver WhatsApp/mensagens:
 ### FASE G — COMMIT E NEXT ITERATION
 
 ```bash
-cd "/Users/christianeracanelli/Desktop/Ahut Ecosystem"
+cd /tmp/legacy_re   # repo Jhon Wick (EDIÇÃO)
 git add -A
 git commit -m "EngReversa [Ciclo N]: [nome da feature implementada]"
 git push origin main

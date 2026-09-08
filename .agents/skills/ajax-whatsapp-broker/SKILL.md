@@ -174,7 +174,7 @@ WHERE wc.conversation_id = c.id
 ### Deploy Produção — Docroot Correto
 - **CRM ativo:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/` (acessível via `https://apexfyhub.com.br/ahut/`)
 - **Subdomínio:** `https://ahut-ecosystem.apexfyhub.com.br/` também serve o mesmo app
-- **DEV:** `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- **TESTE:** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - **Hostinger SFTP:** `82.25.73.206:65002`, user `u817195350`
 - **Cache LiteSpeed:** purge via `purge.php` no docroot — mas se deploy está na pasta errada, cache não resolve
 - **Regra de ouro:** verificar SEMPRE o docroot real antes de deployar. Erro de pasta custa tempo e frustra o Comandante.

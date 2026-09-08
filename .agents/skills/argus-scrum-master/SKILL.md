@@ -33,17 +33,17 @@ Enquanto o **Jarvis** orquestra o ecossistema macro e o **Atom** (Tech Lead) pro
 ### Engenharia Reversa — Fluxo Real
 1. Jarvis puxa bundle `.js` da produção via SFTP (`/home/.../public_html/ahut/assets/`)
 2. Jarvis analisa padrões (regex, contextos, variáveis) no JS minificado
-3. ADA/ATOM reconstroem em TSX no `codigo_engenharia_reversa_tsx/src/`
+3. ADA/ATOM editam na **fonte de EDIÇÃO** — `src/` do Jhon Wick (`/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main); consultam `check/src/` (Pedra de Roseta) como referência
 4. `npm run build` valida o TSX
-5. Deploy no dev (`dev-ahut-ecosystem.apexfyhub.com.br`)
-6. Commit no `ahut-ecosystem-remodel`
+5. Deploy no teste (`teste-ahut-ecosystem.apexfyhub.com.br`)
+6. Commit no Jhon Wick (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`)
 
 ### Repositórios e Commits
 - **PRODUÇÃO** → commit em `ahut-ecosystem-active`
-- **DEV** (eng reversa) → commit em `ahut-ecosystem-remodel`
+- **TESTE / EDIÇÃO** (eng reversa) → edição/build em **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main)
 - **NÃO inverter** — cada repositório tem seu propósito
 
 ### Document Root Real
 - `ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-- `dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
+- `teste-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - Sempre verificar no hPanel → Subdomínios antes de fazer deploy

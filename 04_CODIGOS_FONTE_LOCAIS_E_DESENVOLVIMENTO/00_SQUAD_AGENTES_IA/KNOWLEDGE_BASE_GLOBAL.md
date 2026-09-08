@@ -29,7 +29,7 @@
 |---|---|---|
 | `/opt/data/ahut-ecosystem` | `remodel` | repo principal (documento de trabalho) |
 | `/opt/data/backup-broker-vivo` | `backup-broker-ar-0409` | backup broker vivo (audio-recovery.ts) |
-| `/opt/data/prod-light-funil` | `prod-light-funil` | funil claro + lazy (build futuro PROD) |
+| `/tmp/legacy_re` | `main` (Jhon Wick `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) | ⭐ **EDIÇÃO** — `src/` para novas features/build/deploy |
 
 ### Branches (remotes/origin: main, remodel) + locais: `backup-estado-ar-0409`, `backup-broker-ar-0409`, `prod-light-funil`, `main`, `remodel`
 
@@ -44,8 +44,9 @@ Root: `/opt/data/ahut-ecosystem`
 - `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/`
   - `00_SQUAD_AGENTES_IA/` — ⭐ **cérebro do squad** (docs, kanban, prompts)
     - `PAINEL_DE_CONTROLE.md` (kanban/histórico), `KNOWLEDGE_BASE.md` (aprendizados), `MANUAL_MASTER_RUNBOOK.md` (arquitetura/backend), `PROMPT_ENGENHARIA_REVERSA_CONTINUA.md`, `ORGANOGRAMA_SQUAD_QUBITS.md`, perfil de cada agente (`01_ATOM_DEVELOPER/`, `02_AVA_TRIAGEM_IA/`, `04_ARIA_MONITOR_LEADS/`, `05_ATLAS_DEVOPS_IA/`)
-  - `ahut-ecosystem-active/` — ⭐ **fonte TSX ativo p/ build + PROD**
-    - `codigo_engenharia_reversa_tsx/` — **P3 oficial** (clear+funil+lazy); `dist/` (compilado), `docs/`, `supabase/migration_saneamento_leads_funil.sql`
+  - `ahut-ecosystem-active/` — fonte TSX antiga (superada 08/09 — usar Jhon Wick)
+    - **EDIÇÃO:** `src/` do repo **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, clone `/tmp/legacy_re`, ~170 arq, Vite buildable)
+    - **REFERÊNCIA (Pedra de Roseta):** `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` — tipagem Supabase real, nomes RPC/tabelas/pages. Consultar, NÃO editar.
     - `ahut-whatsapp-broker/`, `prod_snapshot_2408/`, `crm-dr-gustavo-original/`, `wpp-drgustavorocha-original/`
   - `crm-dr-gustavo/` — frontend-clone do módulo (Tecnologia.tsx e outras conforme o caso)
   - `copia-do004_...` / `v8Nova-Indavent-Local-Backup/` — back-ups legados
@@ -54,7 +55,7 @@ Root: `/opt/data/ahut-ecosystem`
 - `ahut-hermes-os/`, `ahut-telegram-orchestrator/` — componentes de orquestração/telegram
 - `scratch/`, `test-results/` — rascunhos/resultados de teste
 
-**PITFALL estrutural (amnésia recorrente):** o `codigo_engenharia_reversa_tsx` tem **`src/` duplicado como `src/src/`** (árvore fantasma). O build Vite usa **`src/`** (não `src/src/`). Editar SEMPRE o `src/` usado pelo build.
+**PITFALL estrutural (amnésia recorrente):** alguns clones têm `src/` duplicado como `src/src/` (árvore fantasma). O build Vite usa **`src/`** (não `src/src/`). No Jhon Wick, editar SEMPRE o `src/` de topo usado pelo build.
 
 ---
 
@@ -70,12 +71,12 @@ Root: `/opt/data/ahut-ecosystem`
 
 > ⚠️ **PITFALL 03/09:** subdomínio `ahut-ecosystem.apexfyhub.com.br` aponta para a pasta **`/ahut/`** do domínio principal (NÃO pasta de mesmo nome). NUNCA subir para pastas legado/fantasma.
 
-### 🟢 DEV (1 destino)
+### 🟢 TESTE/HOMOLOGAÇÃO (1 destino — substitui o antigo DEV `public_html/dev/`)
 | Destino | Host:Porta | Caminho |
 |---|---|---|
-| `dev-ahut-ecosystem.apexfyhub.com.br` | 82.25.73.206:65002 | `~/domains/apexfyhub.com.br/public_html/dev/` |
+| `teste-ahut-ecosystem.apexfyhub.com.br` | 82.25.73.206:65002 | `~/domains/apexfyhub.com.br/public_html/teste/` |
 
-> Assets na **raiz** (`/assets/...`), não `/dev/assets/`. Cache bypass com nomes únicos `app-{uuid}.js`. DEV é **bundle único**; PROD é **code-split**.
+> Assets na **raiz** (`/assets/...`), não `/teste/assets/`. Cache bypass com nomes únicos `app-{uuid}.js`.
 
 ### 🟢 Supabase
 | Ambiente | Project Ref | URL |
@@ -83,7 +84,7 @@ Root: `/opt/data/ahut-ecosystem`
 | **PROD** (dados reais) | `ptochsyoyatsydfysacc` | `https://ptochsyoyatsydfysacc.supabase.co` |
 | **DEV** (isolado) | `xmsulduzvufdzkfktovk` | `https://xmsulduzvufdzkfktovk.supabase.co` |
 
-**Credenciais DB DEV:** `postgres` / `Dir@124!@$!@$` @ `db.xmsulduzvufdzkfktovk.supabase.co:6543/postgres` (password contém `@` e `$` → usar `psycopg2`/`pg8000`, nunca URL-join). **Credenciais do frontend** (anon/service_role) em `04.../00_SQUAD_AGENTES_IA/PROMPT_ENGENHARIA_REVERSA_CONTINUA.md` + skill `supabase-dev-credentials.md`.
+**Credenciais DB DEV:** [REDACTED] — arquivo restrito `keys_ahut.py` (chmod 600). **Credenciais do frontend** (anon/service_role) consultar somente em arquivo restrito; nunca colar em docs/chat.
 
 ### 🧭 MAPA COMPLETO DE DESTINOS POR COMPONENTE (PROD × DEV)
 
@@ -91,8 +92,8 @@ Root: `/opt/data/ahut-ecosystem`
 |---|---|---|---|---|
 | **Broker WhatsApp** (roda o WhatsApp) | **PROD** | VPS `/root/crmahut/backend-broker` (PM2 `whatsapp-broker`, script `dist/index.js`) | **PROD** `ptochsyoyatsydfysacc` | branch PROD do repo broker |
 | **Broker WhatsApp** | **DEV** | `/root/crmahut/backend-broker-dev` (PM2 `rodrigo.whatsapp-broker-dev`) | **DEV** `xmsulduzvufdzkfktovk` | branch DEV |
-| **Frontend** | **PROD** | Hostinger `~/domains/apexfyhub.com.br/public_html/ahut/` (+ VPS `/var/www/html/`, `/var/www/crm-imobiliaria/`) | — | `ahut-ecosystem-active` |
-| **Frontend** | **DEV** | Hostinger `~/domains/apexfyhub.com.br/public_html/dev/` | — | `ahut-ecosystem-remodel` |
+| **Frontend** | **PROD** | Hostinger `~/domains/apexfyhub.com.br/public_html/ahut/` (+ VPS `/var/www/html/`, `/var/www/crm-imobiliaria/`) | — | build vindo do **src/ Jhon Wick** (após aprovação humana) |
+| **Frontend** | **TESTE** | Hostinger `~/domains/apexfyhub.com.br/public_html/teste/` | — | **src/ Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, `/tmp/legacy_re`) |
 | **Backend** (API/analise) | **PROD** | VPS `/var/www/api.rh` (`analise-backend`) | PROD | — |
 | **Banco** | PROD/DEV | Supabase (ver tabela acima) | `ptochsyoyatsydfysacc` / `xmsulduzvufdzkfktovk` | via migrations/sql |
 
@@ -108,7 +109,7 @@ Root: `/opt/data/ahut-ecosystem`
 - **Fonte única:** `conversations.stage` (= `leads.stage`, nunca diverge). Estágio é dado único.
 - Regras: `leads_stage_check` (check), `conversations.stage` (default Contato Cadastrado), `conversations.lead_id` (FK), `leads.conversation_id` (FK), `leads.id+responsible_id`.
 - Gatilhos: `trg_lead_qualificado` (lead nasce em `leads` só no estágio **Qualificado** — nome+telefone+conversation_id); `trg_sync_conv_stage` (espelho transacional leads↔convers).
-- **Detalhe completo:** `codigo_engenharia_reversa_tsx/docs/PLANO_MELHORIAS_QUBITS.md` + skill `ahut-crm-data-model` (references/stage-funil-migration.md).
+- **Detalhe completo:** skill `ahut-crm-data-model` (references/stage-funil-migration.md) + `check/src/` (REFERÊNCIA, Jhon Wick).
 - **Saneamento JÁ APLICADO no PROD** (9.313 leads → `A Selecionar`; backup `_backup_leads_stage_2026`) — **NÃO repetir**.
 
 ### Atendimento / Chat / WhatsApp
@@ -178,7 +179,7 @@ Root: `/opt/data/ahut-ecosystem`
   - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões.
   - Skills versionadas em `.agents/skills/` (16 arquivos) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
-- **Fluxo deploy:** URGENTE = direto PROD→valida→commit active→eng reversa remodel. NORMAL = DEV Supabase→teste→PROD. P3 (`codigo_engenharia_reversa_tsx`) = fonte ativa; ESQUECER P2. Compilar P3→P1. PROD lê `dist/` da P3.
+- **Fluxo deploy (CANÔNICO 08/09):** URGENTE = direto PROD→valida→commit. NORMAL = edição `src/` **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) → build → deploy **teste-ahut** (`public_html/teste/`) → aprovação humana → PROD (`/ahut/`). **REFERÊNCIA (não editar):** `check/src/` (Pedra de Roseta). ESQUECER `prod-light-funil`/`codigo_engenharia_reversa_tsx` como fonte.
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.
 - **CI/anti-cache:** `build_anticache.mjs`, nomes únicos `app-{uuid}`, purge `curl .../purge.php`.

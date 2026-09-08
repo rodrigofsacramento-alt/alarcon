@@ -42,8 +42,8 @@ Não espere o comandante dizer "/executar" — ele já disse uma vez que quer o 
 
 ### 📁 Deploy: Document Root Real (aprendido 26/08)
 **REGRA CRÍTICA:** NUNCA confie no caminho do subdomínio como document root.
-- Exemplo: `dev-ahut-ecosystem.apexfyhub.com.br` NÃO aponta para o subdomínio próprio
-- O docroot REAL é um subdiretório do domínio principal: `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- Exemplo: `teste-ahut-ecosystem.apexfyhub.com.br` NÃO aponta para o subdomínio próprio
+- O docroot REAL é um subdiretório do domínio principal: `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - Produção (`ahut-ecosystem`) segue o mesmo padrão: `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
 - **SEMPRE** verificar no hPanel ou via SFTP qual o document root real antes de fazer deploy
 - Se o HTML servido for diferente do HTML no disco, o docroot está errado — move o deploy
@@ -51,7 +51,7 @@ Não espere o comandante dizer "/executar" — ele já disse uma vez que quer o 
 ## Controle de Versão e Repositórios GitHub
 ### REGRA ATUALIZADA (25/08/2026)
 - **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
+- **TESTE/EDIÇÃO** (`teste-ahut-ecosystem.apexfyhub.com.br`) → edição/build no **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main); consultar `check/src/` como referência
 - **NUNCA inverter** os repositórios. Cada um tem seu propósito.
 
 ### Repositório `ahut-ecosystem-active`
@@ -288,12 +288,12 @@ O Comandante pode disparar o fluxo de orquestração completo com o comando `/ex
 
 ### Regra de Repositórios (NÃO INVERTER)
 - **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
+- **TESTE/EDIÇÃO** (`teste-ahut-ecosystem.apexfyhub.com.br`) → edição/build no **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main); consultar `check/src/` como referência
 - Se comittei no repositório errado, corrigir imediatamente com revert + commit no repo correto
 
 ### Document Root Real
 - `ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-- `dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
+- `teste-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - Sempre verificar no hPanel → Subdomínios antes de fazer deploy
 
 ### Cache LiteSpeed Hostinger
@@ -321,17 +321,17 @@ Quando o Comandante disser que é **URGENTE**:
 - Testes no DEV usam banco separado, dados de teste
 - Schema clonado da produção em 27/08: 68 tabelas, 179 funções, 55 triggers
 
-### 🟢 Destino de Deploy DEV (único, diferente da produção)
-Diferente da produção que tem **4 destinos**, o DEV tem **apenas 1**:
+### 🟢 Destino de Deploy TESTE (homologação — diferente da produção)
+Diferente da produção que tem **4 destinos**, o TESTE tem **apenas 1** (fonte de EDIÇÃO = `src/` do Jhon Wick):
 | # | Destino | Servidor | Caminho |
 |---|---|---|---|
-| 1 | `dev-ahut-ecosystem.apexfyhub.com.br` | Hostinger `82.25.73.206:65002` u817195350 | `~/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/` |
+| 1 | `teste-ahut-ecosystem.apexfyhub.com.br` | Hostinger `82.25.73.206:65002` u817195350 | `~/domains/apexfyhub.com.br/public_html/teste/` |
 
 ### 🔄 Engenharia Reversa Contínua
 Após qualquer hotfix em produção (urgente):
 1. ✅ Commit no `ahut-ecosystem-active`
-2. ✅ Implementar no TSX do `ahut-ecosystem-remodel`
-3. ✅ Commit no remodel
+2. ✅ Implementar no `src/` do **Jhon Wick** (`/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main)
+3. ✅ Commit no Jhon Wick + subir em teste-ahut
 4. ✅ Assim o sistema DEV se equaliza com o PRODUTIVO rapidamente
 **REGRA CRÍTICA:** O frontend de produção é servido em **4 destinos simultâneos**. Um deploy só está completo quando TODOS os 4 estão atualizados:
 

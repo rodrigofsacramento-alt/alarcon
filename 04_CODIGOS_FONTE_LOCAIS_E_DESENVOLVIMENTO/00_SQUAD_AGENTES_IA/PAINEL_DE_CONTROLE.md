@@ -100,7 +100,7 @@
 - ✅ **RLS Policies incluídas** no clone (110 policies de produção).
 
 ## 🔧 INFRA — Conexão com o clone na VPS
-- `postgresql://postgres:Dir@124!@$!@$@2.24.95.98:5432/clone_prod`
+- `postgresql://postgres:[REDACTED]@2.24.95.98:5432/clone_prod`
 - Acesso completo para testes livres — 0 risco ao cliente.
 - _Falta: extensions pg_cron, pg_graphql, pg_net, supabase_vault, vector (instalar se app usar)_
 

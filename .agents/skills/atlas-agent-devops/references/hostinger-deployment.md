@@ -5,7 +5,8 @@
 | Domínio | Document Root Real | Observação |
 |---|---|---|
 | `ahut-ecosystem.apexfyhub.com.br` | `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/` | **NÃO** é `/domains/ahut-ecosystem...` nem `/public_html/ahut-ecosystem/` |
-| `dev-ahut-ecosystem.apexfyhub.com.br` | `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/` | Pasta clean |
+| `dev-ahut-ecosystem.apexfyhub.com.br` | `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/` | Pasta clean (legado) |
+| `teste-ahut-ecosystem.apexfyhub.com.br` | `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/` | **Document root atual do ambiente TESTE (08/09 — deploy usa esta)** |
 | `drgustavorocha.apexfyhub.com.br` | `/home/u817195350/domains/apexfyhub.com.br/public_html/drgustavorocha/` | |
 | `jarvis-ahut-ecosystem.apexfyhub.com.br` | `/home/u817195350/domains/apexfyhub.com.br/public_html/` | Raiz do apexfyhub |
 

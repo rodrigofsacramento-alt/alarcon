@@ -17,7 +17,7 @@ Vigiar continuamente a saúde e a estabilidade da integração do WhatsApp (util
 Projeto:          ptochsyoyatsydfysacc
 URL REST:         https://ptochsyoyatsydfysacc.supabase.co
 Connection String: postgresql://postgres:[YOUR-PASSWORD]@db.ptochsyoyatsydfysacc.supabase.co:6543/postgres
-Senha DB:         Dir@124!@$!@$
+Senha DB:         [REDACTED] (arquivo restrito `keys_ahut.py` ch600)
 ```
 
 **Como conectar via Node.js:**
@@ -362,7 +362,7 @@ const { data } = await supabase
 
 ```
 Broker WPP:     .../ahut-ecosystem-active/ahut-whatsapp-broker/
-CRM Frontend:   .../ahut-ecosystem-active/codigo_engenharia_reversa_tsx/
+CRM Frontend (EDIÇÃO):   /tmp/legacy_re/src (Jhon Wick); REFERÊNCIA=00_ANTIGRAVITY_FASE3_CORRECCION/check/src
 Agentes IA:     .../00_SQUAD_AGENTES_IA/
 Painel:         .../00_SQUAD_AGENTES_IA/PAINEL_DE_CONTROLE.md
 Pipeline:       .../00_SQUAD_AGENTES_IA/03_ORQUESTRADOR_CHIEF/PIPELINE_STATUS.md

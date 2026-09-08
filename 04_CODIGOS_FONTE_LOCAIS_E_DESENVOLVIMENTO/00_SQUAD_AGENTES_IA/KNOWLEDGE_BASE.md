@@ -35,7 +35,7 @@ Este arquivo é a memória de longo prazo de todos os agentes (Atom, Ada, Aura, 
 
 ### 5. Caminhos REAIS do ambiente (diferente do Mac do manual)
 - **Fonte de verdade (congelada, somente leitura):** `/opt/data/ahut-ecosystem-active`
-- **Código reverso TSX (implementar aqui):** `/opt/data/ahut-ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx`
+- **Código reverso TSX (implementar aqui — EDIÇÃO):** `/tmp/legacy_re/src` (repo Jhon Wick `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`); REFERÊNCIA = `00_ANTIGRAVITY_FASE3_CORRECCION/check/src`.
 - **Repo de trabalho (commit/push):** `/opt/data/ahut-ecosystem` (= remote `ahut-ecosystem-remodel`)
 - **Supabase dev do protótipo:** `ldfcqxeehgaftxsgxkag.supabase.co` (projeto de TESTE, NÃO é o produtivo). Banco produtivo real: `ptochsyoyatsydfysacc`.
 - **Dev server:** porta 5173 (não 5174). `tsc --noEmit` e `npm run build` PASSAM (build ~6s, 2807 modules). Bundle ~1.3MB (acima de 500KB — pendente code-split).

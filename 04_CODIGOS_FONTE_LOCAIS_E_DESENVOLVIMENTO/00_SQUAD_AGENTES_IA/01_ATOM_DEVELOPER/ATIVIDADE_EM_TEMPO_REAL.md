@@ -11,7 +11,7 @@
 ## 📜 Log Recente da Última Execução
 ```
 [ATOM WORKER] Iniciando rotina em segundo plano...
-[ATOM WORKER] Pasta ativa: ahut-ecosystem-active/codigo_engenharia_reversa_tsx
+[ATOM WORKER] Pasta ativa (EDIÇÃO): /tmp/legacy_re/src (Jhon Wick); REFERÊNCIA=check/src
 [ATOM WORKER] Tecnologia.tsx alinhado 100% ao CRM Imobiliário!
 [ATOM WORKER] Executando build do frontend...
 ✓ 2835 modules transformed.

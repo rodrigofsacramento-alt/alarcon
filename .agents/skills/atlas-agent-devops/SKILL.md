@@ -6,39 +6,39 @@ description: Atlas, o Especialista em Monitoramento de Infraestrutura e Diagnós
 # 🚀 DEPLOY DO AMBIENTE DEV — SUBDOMÍNIO Hostinger
 
 ## Contexto e fluxo
-O ambiente de **validação dev** é servido no subdomínio `dev-ahut-ecosystem.apexfyhub.com.br` na **Hostinger** (SSH/SFTP: `82.25.73.206`, porta `65002`, usuário `u817195350`, senha nos scripts `deploy_*.mjs` / `.env`). Fluxo padrão do squad: **publicar o build na pasta dev → comandante valida no subdomínio → após aprovação, commit no repositório `ahut-ecosystem-remodel`**.
+O ambiente de **validação teste** é servido no subdomínio `teste-ahut-ecosystem.apexfyhub.com.br` na **Hostinger** (SSH/SFTP: `82.25.73.206`, porta `65002`, usuário `u817195350`, senha nos scripts `deploy_*.mjs` / `.env`). Fluxo padrão do squad: **editar no `src/` do Jhon Wick (`/tmp/legacy_re`) → build → publicar o dist na pasta teste → comandante valida no subdomínio → após aprovação, deploy em produção**.
 
 ## 🔴 REGRA DE OURO (NUNCA VIOLAR)
 - **Document root REAL da produção AHUT:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut` (verificar no hPanel Subdomínios antes de qualquer deploy)
-- **Document root do DEV:** `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
-- **PASTA DEV (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- **Document root do TESTE:** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
+- **PASTA TESTE (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - NUNCA confiar no caminho óbvio `domains/ahut-ecosystem...` — SEMPRE verificar o document root no hPanel antes de subir.
 - Deploy em produção requer AUTORIZAÇÃO EXPLÍCITA do comandante Rodrigo Sacramento.
 
 ## 📂 Estrutura correta (Hostinger)
-- **PASTA DEV (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- **PASTA TESTE (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/` (subdomínio `teste-ahut-ecosystem.apexfyhub.com.br`)
 - **PRODUÇÃO (NÃO TOCAR):** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
 
 ## 🔧 Como subir o app na pasta dev (via SSH/SFTP, paramiko)
-1. **Gerar o build** no projeto reverso:
+1. **Gerar o build** no repo de EDIÇÃO (Jhon Wick):
    ```bash
-   cd /opt/data/ahut-ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx
+   cd /tmp/legacy_re   # repo Jhon Wick (REPOSITORIOENGENHARIAREVERSACODIGOFONTE, main)
    npm run build    # gera dist/
    ```
 2. **Conectar** via paramiko (`/opt/data/ssh-venv/bin/python3`) à Hostinger (host `82.25.73.206`, porta `65002`, usuário `u817195350`).
-3. **Subir o conteúdo de `dist/`** para `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`:
+3. **Subir o conteúdo de `dist/`** para `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`:
    - Criar a pasta se não existir (`mkdir -p`); usar SFTP (`cli.open_sftp()`).
    - Estrutura no destino: `index.html` + `assets/index-*.js` + `assets/index-*.css`.
 4. **Verificar pós-upload**: `ls -la <DEV>/assets` confirma o JS/CSS novo; `cat <DEV>/index.html` deve referenciar nosso `assets/index-<hash>.js`.
-5. **Testar acesso**: `curl -sk https://dev-ahut-ecosystem.apexfyhub.com.br/` deve retornar o nosso app (não "Página padrão" da Hostinger).
+5. **Testar acesso**: `curl -sk https://teste-ahut-ecosystem.apexfyhub.com.br/` deve retornar o nosso app (não "Página padrão" da Hostinger).
 
 ## 📦 REGRA DE REPOSITÓRIOS (NUNCA INVERTER)
 - **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
+- **TESTE** (`teste-ahut-ecosystem.apexfyhub.com.br`) → edição/build em **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main)
 - NUNCA inverter. Cada repositório tem seu propósito.
 
 ## ⚠️ Ajuste pendente no painel Hostinger (validar antes de confiar no subdomínio)
-- O subdomínio `dev-ahut-ecosystem` deve ter o **Documento raiz / Diretório** apontando para `/home/u817195350/domains/apexfyhub.com.br/public_html/dev`. Se ainda apontar para a raiz (página padrão do cliente), pedir ao comandante para ajustar no painel Subdomínios.
+- O subdomínio `teste-ahut-ecosystem` deve ter o **Documento raiz / Diretório** apontando para `/home/u817195350/domains/apexfyhub.com.br/public_html/teste`. Se ainda apontar para a raiz (página padrão do cliente), pedir ao comandante para ajustar no painel Subdomínios.
 
 ---
 
@@ -91,7 +91,7 @@ js[js.index(old):js.index(old)+len(old)] = new
 
 # 🌐 HOSTINGER — CACHE E DOCUMENT ROOT
 - **Document root real da produção AHUT:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut`
-- **Document root do dev:** `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html`
+- **Document root do teste:** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste`
 - **ATENÇÃO: 4 destinos de deploy obrigatórios:**
   1. VPS nginx: `/var/www/html/`
   2. VPS crm: `/var/www/crm-imobiliaria/`
