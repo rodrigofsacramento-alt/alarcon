@@ -363,9 +363,9 @@ const { data } = await supabase
 ```
 Broker WPP:     .../ahut-ecosystem-active/ahut-whatsapp-broker/
 CRM Frontend (EDIÇÃO):   /tmp/legacy_re/src (Jhon Wick); REFERÊNCIA=00_ANTIGRAVITY_FASE3_CORRECCION/check/src
-Agentes IA:     .../00_SQUAD_AGENTES_IA/
-Painel:         .../00_SQUAD_AGENTES_IA/PAINEL_DE_CONTROLE.md
-Pipeline:       .../00_SQUAD_AGENTES_IA/03_ORQUESTRADOR_CHIEF/PIPELINE_STATUS.md
+Agentes IA:     .../.agents/docs/
+Painel:         .../.agents/docs/PAINEL_DE_CONTROLE.md
+Pipeline:       .../.agents/docs/03_ORQUESTRADOR_CHIEF/PIPELINE_STATUS.md
 ```
 
 ---

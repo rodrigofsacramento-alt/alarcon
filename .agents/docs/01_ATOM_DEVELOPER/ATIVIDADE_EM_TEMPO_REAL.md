@@ -4,7 +4,7 @@
 * **Última Ação:** Compilação do Kanban Imobiliário e adequação 100% de departamentos e termos.
 * **Tempo do Último Build:** `✓ 2835 módulos transformados em 22.31s`
 * **Ambiente de Testes:** `http://localhost:5174/tecnologia`
-* **Screenshot de Validação:** Atualizado em [`ULTIMO_TESTE_LOCAL.png`](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/01_ATOM_DEVELOPER/ULTIMO_TESTE_LOCAL.png)
+* **Screenshot de Validação:** Atualizado em [`ULTIMO_TESTE_LOCAL.png`](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/.agents/docs/01_ATOM_DEVELOPER/ULTIMO_TESTE_LOCAL.png)
 
 ---
 

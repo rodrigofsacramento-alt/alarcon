@@ -158,7 +158,7 @@ CHRIS RACANELLI
 
 ## REFERÊNCIA DE CONTEXTO (ENTIDADES EMPRESARIAIS)
 - **Apexfy** → **A empresa de Chris** (CEO, em sociedade com **Rodrigo**). Faz **desde gestão até construção de sistemas integrados** (consultoria de processos + cultura de alta performance + tecnologia/sistemas). Domínio: apexfyhub.com.br (subdomain de dev do ecossistema: dev-ahut-ecosystem.apexfyhub.com.br).
-- **A Hut / Ahut** → **Empresa CLIENTE** da Apexfy — contratante dos serviços de Chris como Business Advisor e gestora de negócios. **Não pertence à equipe Apexfy.** Ecossistema imobiliário + WhatsApp/CRM (dev server porta 5173, repo ahut-ecosystem-remodel). Detalhes do squad e painel em `00_SQUAD_AGENTES_IA/PAINEL_DE_CONTROLE.md`.
+- **A Hut / Ahut** → **Empresa CLIENTE** da Apexfy — contratante dos serviços de Chris como Business Advisor e gestora de negócios. **Não pertence à equipe Apexfy.** Ecossistema imobiliário + WhatsApp/CRM (dev server porta 5173, repo ahut-ecosystem-remodel). Detalhes do squad e painel em `.agents/docs/PAINEL_DE_CONTROLE.md`.
 - **Curso de Neurovendas Imobiliárias**: página `/treinamentos`.
 - **Instagram profissional:** @achris.racanelli.
 

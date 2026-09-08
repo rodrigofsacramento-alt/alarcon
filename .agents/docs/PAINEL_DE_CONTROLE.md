@@ -183,7 +183,7 @@
 | **TASK-004** | Restrição de Acesso à Conexão WhatsApp | Engrenagem e QR Code restritos exclusivamente a Admins (v8 deployado) | ✅ CONCLUÍDO | Hostinger SFTP OK |
 | **TASK-003** | Resolução Lead Maria Ferreira & Blindagens | ✅ CONCLUÍDO | Queries PostgREST corrigidas, processo zumbi eliminado |
 | **TASK-002** | Criação da Agente AVA (Intake/Triagem) | ✅ CONCLUÍDO | Skill & Estrutura Ativa em `.agents/skills/ava-agent-intake` |
-| **TASK-001** | Organização do Agente ATOM no App | ✅ CONCLUÍDO | Centralização das pastas em `00_SQUAD_AGENTES_IA` |
+| **TASK-001** | Organização do Agente ATOM no App | ✅ CONCLUÍDO | Centralização das pastas em `.agents/docs` |
 | **HUB-ATLZ-1** | - [Atom, Ada, Jarvis, Aura] Engenharia Reversa - Página Configurações (Concluído)
 - [Aura] Automação de QA Visual com Cypress/Playwright no frontend reverso (Concluído e Validado na Sprint 2) Corretor construído em React + Vite. |
 | **HUB-ATLZ-2** | Atualização de Sistema | ✅ CONCLUÍDO | Filtro de pesquisa case-insensitive implementado na tela de leads. |
@@ -206,7 +206,7 @@
 
 O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 
-![Último Teste Local](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/01_ATOM_DEVELOPER/ULTIMO_TESTE_LOCAL.png)
+![Último Teste Local](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/.agents/docs/01_ATOM_DEVELOPER/ULTIMO_TESTE_LOCAL.png)
 
 ---
 
@@ -259,6 +259,6 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 - `antigravity_1_1/` — Motor CLI de Engenharia Reversa AST (cli.mjs, lib/{bundler,rosetta,ast-pipeline,jsx-converter,sanitize}.js)
 - `src_recovered_1_1/` — Código reidratado validado (Zero erros TS2307)
 - `DOCUMENTACAO_PROJETO_ANTIGRAVITY.md` — manual consolidado
-- Relatórios auditoria/paridade em `00_SQUAD_AGENTES_IA/paridade/` + `00_ANTIGRAVITY_FASE3_CORRECCION/RELATORIO_COMPATIBILIDADE_BROKER.md` (**100% paridade MD5 do backend broker** ✅)
+- Relatórios auditoria/paridade em `.agents/docs/paridade/` + `00_ANTIGRAVITY_FASE3_CORRECCION/RELATORIO_COMPATIBILIDADE_BROKER.md` (**100% paridade MD5 do backend broker** ✅)
 
 **Significado:** a verificação de compatibilidade do broker retornou **paridade MD5 100%** entre as pastas do repo (`02_BACKEND...` / `02.2_BACKEND_BROKER_TESTE`) e o broker — ou seja, **as pastas estão alinhadas e seguras para edição**. Demandas broker-ativas reconciliadas. Próximo passo (Comandante decide): retomar deploy do build Teste → PROD.

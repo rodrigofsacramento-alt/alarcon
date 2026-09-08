@@ -42,7 +42,7 @@ Root: `/opt/data/ahut-ecosystem`
 - `02_BACKEND_E_SERVICOS_VPS/` — broker WhatsApp + serviços VPS (fonte + dist)
   - **Broker WhatsApp PROD = `/root/crmahut/backend-broker`** (PM2 `whatsapp-broker`, Supabase PROD). DEV = `/root/crmahut/backend-broker-dev`. ⚠️ `wpp-drgustavorocha/` é broker de OUTRO projeto (Gustavo) — NÃO é o do produto.
 - `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/`
-  - `00_SQUAD_AGENTES_IA/` — ⭐ **cérebro do squad** (docs, kanban, prompts)
+  - `.agents/docs/` — ⭐ **cérebro do squad** (docs, kanban, prompts)
     - `PAINEL_DE_CONTROLE.md` (kanban/histórico), `KNOWLEDGE_BASE.md` (aprendizados), `MANUAL_MASTER_RUNBOOK.md` (arquitetura/backend), `PROMPT_ENGENHARIA_REVERSA_CONTINUA.md`, `ORGANOGRAMA_SQUAD_QUBITS.md`, perfil de cada agente (`01_ATOM_DEVELOPER/`, `02_AVA_TRIAGEM_IA/`, `04_ARIA_MONITOR_LEADS/`, `05_ATLAS_DEVOPS_IA/`)
   - `ahut-ecosystem-active/` — fonte TSX antiga (superada 08/09 — usar Jhon Wick)
     - **EDIÇÃO:** `src/` do repo **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, clone `/tmp/legacy_re`, ~170 arq, Vite buildable)

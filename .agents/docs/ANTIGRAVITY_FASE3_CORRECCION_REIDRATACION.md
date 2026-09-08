@@ -92,4 +92,4 @@ module.exports = {
 ## 📌 REFERENCIAS
 - Bundle fuente: `1.1_FRONTEND_PROD_TESTE/dist/assets/Atendimento-live-v14.js` (md5 `9133ffc7`, 169.508 B).
 - Rosetta legado: `REPOSITORIOENGENHARIAREVERSACODIGOFONTE/src/` (28 pages, ~90 components, 24 hooks).
-- SOP: `00_SQUAD_AGENTES_IA/SOP_ANTIGRAVITY_ENGENHARIA_REVERSA_AST.md` (Sección 5 = sanitización + provenance).
+- SOP: `.agents/docs/SOP_ANTIGRAVITY_ENGENHARIA_REVERSA_AST.md` (Sección 5 = sanitización + provenance).

@@ -4,8 +4,8 @@
 
 ## ⚠️ REGRA 0 — Sempre abrir o cérebro antes de agir
 Em **qualquer tarefa** neste repo, a **PRIMEIRA etapa** é ler:
-1. `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/KNOWLEDGE_BASE_GLOBAL.md` — mapa de repos/pastas/schema/UI/env + checklist de sessão.
-2. `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/PAINEL_DE_CONTROLE.md` — kanban/histórico TASK-NNN (o que já foi feito).
+1. `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md` — mapa de repos/pastas/schema/UI/env + checklist de sessão.
+2. `.agents/docs/PAINEL_DE_CONTROLE.md` — kanban/histórico TASK-NNN (o que já foi feito).
 
 Proibido agir "às cegas" por memória. Se a task tem domínio específico, carregar também a skill correspondente (`ahut-crm-deploy-runbook`, `ahut-crm-data-model`, `ahut-crm-backend-architecture`, `ada-frontend-ui`, etc.).
 
@@ -30,4 +30,4 @@ md5sum /tmp/legacy_re/src/<alvo>.tsx  # bate com o vivo? (produção ≠ git)
 - **PROD ≠ DEV:** bundle único (DEV) NUNCA sobe no PROD (code-split). Nunca subir tema dark no PROD.
 
 ## 📌 REGRA 3 — Persistência
-Toda decisão nova → registrar em `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/KNOWLEDGE_BASE_GLOBAL.md` (seção 7) + PAINEL (kanban). Documentação atual é impossível de digerir, mas é obrigatório manter o **índice** apontando para onde está o detalhe.
+Toda decisão nova → registrar em `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md` (seção 7) + PAINEL (kanban). Documentação atual é impossível de digerir, mas é obrigatório manter o **índice** apontando para onde está o detalhe.

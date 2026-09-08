@@ -7,7 +7,7 @@
   - ⛔ NUNCA editar/comitar neste repositório (está congelado por backup).
 - **Código reverso TSX (onde IMPLEMENTAR):** `/opt/data/ahut-ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx`
 - **Repositório de trabalho (fazer commit/push AQUI):** `/opt/data/ahut-ecosystem` (remote = `ahut-ecosystem-remodel`)
-- **Squad manual + kanban:** `/opt/data/ahut-ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/`
+- **Squad manual + kanban:** `/opt/data/ahut-ecosystem/.agents/docs/`
   - `PROMPT_ENGENHARIA_REVERSA_CONTINUA.md` (processo/missão)
   - `PAINEL_DE_CONTROLE.md` (kanban, log a atualizar)
   - `KNOWLEDGE_BASE.md` (memória técnica — SEMPRE ler antes de codar)
