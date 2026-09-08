@@ -6,9 +6,8 @@
 ---
 
 ## 🟢 Pastas Ativas de Desenvolvimento:
-1. `ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP`
-2. `/tmp/legacy_re/src` (Jhon Wick — EDIÇÃO); REFERÊNCIA = `00_ANTIGRAVITY_FASE3_CORRECCION/check/src`
-3. `ahut-ecosystem-active/ahut-whatsapp-broker`
+1. `/tmp/legacy_re/src` (Jhon Wick — EDIÇÃO, onde editar); REFERÊNCIA = `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` (leitura, NÃO editar)
+2. `/root/crmahut/backend-broker` (WhatsApp Broker VPS — somente leitura/diagnóstico, NUNCA rodar local)
 
 ## 🔴 Pastas Terminantemente Proibidas:
 * 🚫 `copia-do004_codigos_fonte_locais`
