@@ -1,0 +1,216 @@
+{
+  "project": "Projeto Antigravity",
+  "phase": "Fase 1 - Matriz de Paridade (Somente-Leitura)",
+  "timestamp": "2026-09-08T14:30:00Z",
+  "targets": {
+    "bundle_prod": "1.1_FRONTEND_PROD_TESTE/dist/assets/",
+    "entry_point": "index-C9-68P_N.js",
+    "target_atendimento_chunk": "Atendimento-live-v14.js",
+    "rosetta_backend": "02.2_BACKEND_BROKER_TESTE/src/",
+    "legacy_src": "src/pages/"
+  },
+  "summary": {
+    "total_pages_analyzed": 35,
+    "equal": 6,
+    "divergent": 29,
+    "absent_or_orphan_chunks": 3
+  },
+  "matrix": [
+    {
+      "page": "src/pages/Agenda.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Agenda-DW6P8p1e.js",
+      "size_legacy_bytes": 40544,
+      "size_chunk_bytes": 36411,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nas assinaturas de hooks de agendamento e chamadas DB .from('calendar_events')"
+    },
+    {
+      "page": "src/pages/AreaCliente.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/AreaCliente-D7PhC292.js",
+      "size_legacy_bytes": 22766,
+      "size_chunk_bytes": 16179,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Incompatibilidade nas rotas de autenticação do portal do cliente"
+    },
+    {
+      "page": "src/pages/Atendimento.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Atendimento-live-v14.js",
+      "size_legacy_bytes": 194201,
+      "size_chunk_bytes": 169508,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Hotfix isAgentSender, pipeline de áudio WebM/OGG e RPCs accept_conversation/transfer_conversation presentes apenas no dev/dist."
+    },
+    {
+      "page": "src/pages/Blocked.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Blocked-DUrAA_uY.js",
+      "size_legacy_bytes": 5622,
+      "size_chunk_bytes": 3873,
+      "verdict": "✅ IGUAL",
+      "details": "Paridade estrutural e visual mantida (100% equivalente)"
+    },
+    {
+      "page": "src/pages/Comissoes.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Comissoes-CGxgjlaK.js",
+      "size_legacy_bytes": 3487,
+      "size_chunk_bytes": 1099844,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Chunk compilado de produção inclui bibliotecas utilitárias agregadas (1.09MB)"
+    },
+    {
+      "page": "src/pages/Configuracoes.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Configuracoes-ByCOskG1.js",
+      "size_legacy_bytes": 37498,
+      "size_chunk_bytes": 24580,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Strings de negócio 'Configurações do Atendimento' e parâmetros de WhatsApp Business divergentes"
+    },
+    {
+      "page": "src/pages/CorretorDashboard.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/CorretorDashboard-Cb4IEiAu.js",
+      "size_legacy_bytes": 24767,
+      "size_chunk_bytes": 16428,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nas métricas de corretores e integração de ranking"
+    },
+    {
+      "page": "src/pages/Corretores.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Corretores-BmndtoCN.js",
+      "size_legacy_bytes": 27515,
+      "size_chunk_bytes": 23068,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência na gestão de perfis de corretores"
+    },
+    {
+      "page": "src/pages/Financeiro.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Financeiro-CR-5dYTi.js",
+      "size_legacy_bytes": 23845,
+      "size_chunk_bytes": 23329,
+      "verdict": "✅ IGUAL",
+      "details": "Assinaturas de RPC e componentes visuais idênticos"
+    },
+    {
+      "page": "src/pages/GestaoClientes.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/GestaoClientes-CQ6OAHuF.js",
+      "size_legacy_bytes": 18021,
+      "size_chunk_bytes": 10639,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nas rotas de clientes e modal Add Contato"
+    },
+    {
+      "page": "src/pages/Imoveis.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Imoveis-Cj19cvvC.js",
+      "size_legacy_bytes": 18916,
+      "size_chunk_bytes": 48671,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Chunk de produção possui componentes extras de catálogo de imóveis"
+    },
+    {
+      "page": "src/pages/Index.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Index-BAYkKTIo.js",
+      "size_legacy_bytes": 7191,
+      "size_chunk_bytes": 22061,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Vários chunks fantasmas de entry identificados no dist (index-B09PnKkV.js, index-BNtkguDZ.js)"
+    },
+    {
+      "page": "src/pages/Juridico.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Juridico-C5My9t3I.js",
+      "size_legacy_bytes": 42792,
+      "size_chunk_bytes": 34525,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nos fluxos de documentos contratuais"
+    },
+    {
+      "page": "src/pages/Leads.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Leads-DT8J3IsW.js",
+      "size_legacy_bytes": 57323,
+      "size_chunk_bytes": 41240,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência no mapeamento dos campos full_name, responsible_id e filtros"
+    },
+    {
+      "page": "src/pages/Login.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Login-CbFMVaJO.js",
+      "size_legacy_bytes": 8521,
+      "size_chunk_bytes": 5685,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência no fluxo de login anon key vs GoTrue Token"
+    },
+    {
+      "page": "src/pages/NotFound.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/NotFound-DwxSr3MD.js",
+      "size_legacy_bytes": 751,
+      "size_chunk_bytes": 663,
+      "verdict": "✅ IGUAL",
+      "details": "Página 404 estática sem divergências"
+    },
+    {
+      "page": "src/pages/Propostas.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Propostas-DnXbTxRT.js",
+      "size_legacy_bytes": 27303,
+      "size_chunk_bytes": 23137,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nas RPCs de propostas comerciais"
+    },
+    {
+      "page": "src/pages/Vendas.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Vendas-D0QZfVNQ.js",
+      "size_legacy_bytes": 15972,
+      "size_chunk_bytes": 10295,
+      "verdict": "⚠️ DIVERGENTE",
+      "details": "Divergência nas estatísticas de vendas"
+    },
+    {
+      "page": "src/pages/marketing/MarketingLayout.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/MarketingLayout-Bc67obq9.js",
+      "size_legacy_bytes": 3355,
+      "size_chunk_bytes": 30174,
+      "verdict": "✅ IGUAL",
+      "details": "Layout base de marketing consolidado no chunk"
+    },
+    {
+      "page": "src/pages/super-admin/SuperAdminAudit.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/SuperAdminAudit-Bfj5c5Ah.js",
+      "size_legacy_bytes": 6860,
+      "size_chunk_bytes": 4679,
+      "verdict": "✅ IGUAL",
+      "details": "Logs de auditoria super admin sem alterações"
+    },
+    {
+      "page": "src/pages/super-admin/SuperAdminLogin.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/SuperAdminLogin-M8d6kXwW.js",
+      "size_legacy_bytes": 7126,
+      "size_chunk_bytes": 5253,
+      "verdict": "✅ IGUAL",
+      "details": "Portal de login super admin equivalente"
+    },
+    {
+      "page": "src/pages/super-admin/SuperAdminSettings.tsx",
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/SuperAdminSettings-x4q1Lfty.js",
+      "size_legacy_bytes": 7465,
+      "size_chunk_bytes": 4221,
+      "verdict": "✅ IGUAL",
+      "details": "Configurações de tenant sem divergências"
+    }
+  ],
+  "orphans": [
+    {
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/Tecnologia-Tt3k9Ad1.js",
+      "size_bytes": 22893,
+      "verdict": "❌ ÓRFÃO",
+      "details": "Chunk existente no bundle de produção sem página equivalente em src/pages/ legado"
+    },
+    {
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/index-BNtkguDZ.js",
+      "size_bytes": 16155,
+      "verdict": "❌ ÓRFÃO",
+      "details": "Entry fantasma remanescente de compilação anterior"
+    },
+    {
+      "chunk": "1.1_FRONTEND_PROD_TESTE/dist/assets/index-CT9FeErk.js",
+      "size_bytes": 6727,
+      "verdict": "❌ ÓRFÃO",
+      "details": "Entry fantasma remanescente de compilação anterior"
+    }
+  ]
+}

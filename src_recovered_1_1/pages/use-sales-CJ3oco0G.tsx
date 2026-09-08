@@ -1,0 +1,87 @@
+/*== ANTIGRAVITY RECOVERED v2.1 — origem: 1.1/assets/use-sales-CJ3oco0G.js | AST | sanitizado | Fase 3 ==*/
+import { a as u, u as o, b as n } from "@/components/query";
+import { s as a } from "@/components/index-C9";
+function y() {
+  return u({
+    queryKey: ["sales"],
+    queryFn: async () => {
+      const {
+        data: e,
+        error: r
+      } = await a.from("sales_records").select(`
+          *,
+          property:properties!sales_records_property_id_fkey(*),
+          proposal:proposals!sales_records_proposal_id_fkey(*),
+          agent:profiles!sales_records_agent_id_fkey(*)
+        `).order("contract_signed_at", {
+        ascending: !1
+      });
+      if (r) throw r;
+      return e;
+    }
+  });
+}
+function c() {
+  const e = o();
+  return n({
+    mutationFn: async r => {
+      const {
+        data: t,
+        error: s
+      } = await a.from("sales_records").insert(r).select().single();
+      if (s) throw s;
+      return t;
+    },
+    onSuccess: () => {
+      e.invalidateQueries({
+        queryKey: ["sales"]
+      }), e.invalidateQueries({
+        queryKey: ["proposals"]
+      }), e.invalidateQueries({
+        queryKey: ["properties"]
+      }), e.invalidateQueries({
+        queryKey: ["dashboard-stats"]
+      }), e.invalidateQueries({
+        queryKey: ["commissions"]
+      });
+    }
+  });
+}
+function p() {
+  const e = o();
+  return n({
+    mutationFn: async ({
+      id: r,
+      property_id: t
+    }) => {
+      const {
+        error: s
+      } = await a.from("sales_records").delete().eq("id", r);
+      if (s) throw s;
+      const {
+        error: i
+      } = await a.from("properties").update({
+        status: "available",
+        updated_at: new Date().toISOString()
+      }).eq("id", t);
+      if (i) throw i;
+      return {
+        id: r
+      };
+    },
+    onSuccess: () => {
+      e.invalidateQueries({
+        queryKey: ["sales"]
+      }), e.invalidateQueries({
+        queryKey: ["proposals"]
+      }), e.invalidateQueries({
+        queryKey: ["properties"]
+      }), e.invalidateQueries({
+        queryKey: ["dashboard-stats"]
+      }), e.invalidateQueries({
+        queryKey: ["commissions"]
+      });
+    }
+  });
+}
+export { c as a, p as b, y as u };

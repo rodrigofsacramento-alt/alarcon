@@ -1,0 +1,25 @@
+{
+  "phase": "Fase 3 - Correção de Ruta e Reidratação JSX Real",
+  "timestamp": "2026-09-08T15:10:00Z",
+  "provenance_banner": "/*== ANTIGRAVITY RECOVERED v2.1 — origem: 1.1/assets/... | AST | sanitizado | Fase 3 ==*/",
+  "sanitizations": [
+    {
+      "file": "src_recovered_1_1/pages/supabase-hVowsSCQ.tsx",
+      "line": 42,
+      "pattern": "eyJ...",
+      "redacted_value": "[REDACTED: SECRET_JWT]"
+    },
+    {
+      "file": "src_recovered_1_1/pages/Login-CbFMVaJO.tsx",
+      "line": 18,
+      "pattern": "sb_publishable...",
+      "redacted_value": "[REDACTED: SECRET_KEY]"
+    }
+  ],
+  "criteria_verification": {
+    "zero_e_jsx": true,
+    "tsc_no_emit_exit": 0,
+    "theme_light_enforced": true,
+    "imports_repointed": true
+  }
+}
