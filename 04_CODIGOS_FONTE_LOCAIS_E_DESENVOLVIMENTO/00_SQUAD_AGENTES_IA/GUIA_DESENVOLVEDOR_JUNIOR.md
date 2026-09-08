@@ -1,81 +1,63 @@
-# 🧑‍💻 GUIA DO DESENVOLVEDOR JÚNIOR — AMBIENTE ANTIGRAVITY
+# 🧑‍💻 GUIA DO DESENVOLVEDOR JÚNIOR — AMBIENTE ANTIGRAVITY / Jhon Wick
+
+> **Atualizado 08/09 — Lei de Atuação EDIÇÃO/REFERÊNCIA canônica.**
+> **Diretório de EDIÇÃO = `src/` do repo Jhon Wick (branch main).**
+> **Diretório de REFERÊNCIA = `check/src/` (Pedra de Roseta) — só consulta, nunca editar.**
 
 ## ⚠️ REGRA ABSOLUTA: NUNCA MEXA NA PRODUÇÃO
 
-**Você só tem acesso ao ambiente DEV (ANTIGRAVITY).**
+**Você só tem acesso ao ambiente DEV (ANTIGRAVITY / teste-ahut).**
 **Qualquer alteração no sistema produtivo do cliente resultará em danos reais a leads, conversas e dados de clientes.**
 
 ```
 🔥 PRODUÇÃO (cliente real) → BLOQUEADO para você
-🧪 DEV / ANTIGRAVITY     → SEU AMBIENTE DE TRABALHO
+🧪 TESTE / ANTIGRAVITY    → SEU AMBIENTE DE TRABALHO
 ```
 
 ---
 
 ## 📦 REPOSITÓRIOS
 
-### DEV (seu ambiente) — `rodrigofsacramento-alt-ahut-ecosystem-remodel`
+### ✅ EDIÇÃO (seu ambiente) — `REPOSITORIOENGENHARIAREVERSACODIGOFONTE` (Jhon Wick)
 ```
-https://github.com/rodrigofsacramento-alt/rodrigofsacramento-alt-ahut-ecosystem-remodel.git
+https://github.com/rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE.git
 ```
-**Branch:** `main` — tudo que você commitar vai para o ambiente de teste.
+- **Branch:** `main` — tudo que você editar no `src/` e commitar vai para o ambiente de **teste** (homologação).
+- **Local em:** `/tmp/legacy_re`
+- **Mais conhecido como:** "Jhon Wick" (nome de referência do Comandante).
 
-### 🔴 PRODUÇÃO (NÃO TOCAR) — `ahut-ecosystem-active`
+### 🔴 PRODUÇÃO (NÃO TOCAR) — dados reais
 ```
-https://github.com/rodrigofsacramento-alt/ahut-ecosystem-active.git
+https://ahut-ecosystem.apexfyhub.com.br/   → produção (cliente real)
+https://teste-ahut-ecosystem.apexfyhub.com.br/  → teste/homologação (seu alvo de deploy)
 ```
-**⚠️ NUNCA clone, modifique, ou faça deploy deste repositório.**
-**⚠️ NUNCA use as credenciais do Supabase de produção.**
-**⚠️ NUNCA use o broker da VPS do cliente (2.24.95.98).**
+- **Supabase PROD:** `ptochsyoyatsydfysacc.supabase.co` — 🔴 NUNCA usar no DEV
+- **VPS cliente:** `2.24.95.98` — 🔴 NUNCA acessar
+- **Broker:** `/root/crmahut/backend-broker` — 🔴 NUNCA rodar local
 
 ---
 
-## 🧪 AMBIENTE ANTIGRAVITY — DADOS DE ACESSO
+## 🗺️ MAPA DE PASTAS (a diferença que importa)
 
-### Supabase DEV (banco de testes)
-| Item | Valor |
-|---|---|
-| **URL** | `https://xmsulduzvufdzkfktovk.supabase.co` |
-| **Anon Key** | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0` |
-| **Service Role** | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.EhchaQ1GsUrwG1QyJih68EEa8ArxD439ocHup7LwNOg` |
-| **DB Connection** | `postgresql://postgres:Dir%40124!%40%24!%40%24@db.xmsulduzvufdzkfktovk.supabase.co:6543/postgres` |
-
-### Usuários de Teste (criados no Supabase DEV)
-| Nome | Email | Senha | Cargo |
-|---|---|---|---|
-| Vilda Imóveis | `vilda@vildaimoveis.com` | `Vilda@2026!Fort` | admin |
-| Chris Racanelli | `chris@vildaimoveis.com` | `Chris@2026!Fort` | admin |
-| Rodrigo Sacramento | `sacramento@vildaimoveis.com` | `Sac@2026!Fort` | admin |
-| Igor Supervisor | `igor@vildaimoveis.com` | `Igor@2026!Fort` | manager |
-| Emilio Financeiro | `emilio@vildaimoveis.com` | `Emilio@2026!Fort` | agent |
-
-### Frontend DEV
-```
-https://dev-ahut-ecosystem.apexfyhub.com.br/
-```
-
-### Deploy DEV (Hostinger)
-```
-Servidor: 82.25.73.206
-Porta: 65002
-Usuário: u817195350
-Senha: SENHA_REDIGIDA_HERMES
-Pasta: /home/u817195350/domains/apexfyhub.com.br/public_html/dev/
-```
+| Pasta | Papel | Editar? |
+|---|---|---|
+| **`src/`** do Jhon Wick (`/tmp/legacy_re/src/`) | **EDIÇÃO** — código-fonte real buildable | ✅ **SIM — é aqui** |
+| **`check/src/`** (`00_ANTIGRAVITY_FASE3_CORRECCION/check/src/`) | **REFERÊNCIA** — "Pedra de Roseta" (tipos Supabase, nomes reais) | ❌ **NÃO — só consultar** |
+| `codigo_engenharia_reversa_tsx/` (antiga) | Fluxo ANTIGO — dev/ | 🔴 **ABANDONADO, não usar** |
 
 ---
 
 ## 🚀 FLUXO DE TRABALHO PASSO A PASSO
 
-### 1. CLONAR O REPOSITÓRIO DEV
+### 1. CLONAR O REPOSITÓRIO DE EDIÇÃO (Jhon Wick)
 ```bash
-git clone https://github.com/rodrigofsacramento-alt/rodrigofsacramento-alt-ahut-ecosystem-remodel.git
-cd rodrigofsacramento-alt-ahut-ecosystem-remodel
+git clone https://github.com/rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE.git
+cd REPOSITORIOENGENHARIAREVERSACODIGOFONTE   # local: /tmp/legacy_re
 ```
 
-### 2. NAVEGAR ATÉ O CÓDIGO FONTE
+### 2. ENTRAR NO CÓDIGO FONTE
 ```bash
-cd "04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx"
+cd src
 ```
 
 ### 3. INSTALAR DEPENDÊNCIAS
@@ -84,41 +66,44 @@ npm install
 ```
 
 ### 4. FAZER ALTERAÇÕES NO CÓDIGO
-Edite os arquivos em `src/`:
-- `src/pages/` — Páginas do sistema (Atendimento, Notificacoes, Login, etc.)
-- `src/components/` — Componentes reutilizáveis (Dashboard, Layout, Cards, etc.)
-- `src/hooks/` — Hooks personalizados
+Edite os arquivos em `src/` (Jhon Wick):
+- `src/pages/` — Páginas do sistema (Atendimento, Leads, Login, Vendas, etc.)
+- `src/components/` — Componentes reutilizáveis (layout, dashboard, corretores, etc.)
+- `src/hooks/` — Hooks de dados/estado
 - `src/contexts/` — Contextos React (i18n, etc.)
 - `src/lib/` — Utilitários e configurações (supabase.ts, utils.ts)
-- `src/index.css` — Estilos globais e tokens de design
+- `src/store/` — Estado global (zustand)
+- `src/types/` — Tipagens (incl. Supabase)
+- `index.css` / assets — Estilos e tokens de design
+
+> 💡 **Dúvida sobre como algo roda em produção?** Consulte `check/src/` (referência/Pedra de Roseta) para ver a tipagem real do Supabase e os nomes originais. **Nunca edite lá.**
 
 ### 5. TESTAR LOCALMENTE
 ```bash
 npm run dev
+# Sobe em http://localhost:5173/
 ```
-Isso sobe um servidor local em `http://localhost:5173/`
 
-### 6. BUILDAR PARA PRODUÇÃO
+### 6. BUILDAR
 ```bash
 npm run build
+# Saída em dist/
 ```
-Os arquivos compilados vão para a pasta `dist/`.
 
-### 7. FAZER DEPLOY NO AMBIENTE DEV
+### 7. FAZER DEPLOY NO AMBIENTE TESTE (teste-ahut)
 ```bash
-# Via SFTP (use FileZilla ou scp)
-# Servidor: 82.25.73.206
-# Porta: 65002
+# Via SFTP (veja o runbook de deploy — não é manual)
+# Servidor: 82.25.73.206 | Porta: 65002
 # Usuário: u817195350
-# Senha: SENHA_REDIGIDA_HERMES
-# Pasta de destino: /home/u817195350/domains/apexfyhub.com.br/public_html/dev/
-
+# Pasta de destino: ~/domains/apexfyhub.com.br/public_html/teste/
+#
 # Arquivos para enviar:
 # - dist/index.html
 # - dist/assets/ (todos os arquivos)
 ```
+**URL após deploy:** `https://teste-ahut-ecosystem.apexfyhub.com.br/`
 
-### 8. COMMITAR NO GITHUB
+### 8. COMMITAR NO GITHUB (Jhon Wick)
 ```bash
 git add .
 git commit -m "📝 descrição clara do que foi feito"
@@ -129,107 +114,71 @@ git push origin main
 
 ## 🛑 O QUE NUNCA FAZER (LISTA DE PROIBIÇÕES)
 
-### 🔴 PROIBIDO — PRODUÇÃO
+### 🔴 PROIBIDO — PRODUÇÃO / FLUXO ANTIGO
 | Ação | Consequência |
 |---|---|
-| Usar Supabase `ptochsyoyatsydfysacc` | ALTERA dados reais de clientes |
-| Acessar VPS `2.24.95.98` | DERRUBA o WhatsApp do cliente |
-| Deploy em `ahut-ecosystem.apexfyhub.com.br` | QUEBRA o sistema em produção |
-| Git push no repo `ahut-ecosystem-active` | ALTERA o código de produção |
-| Usar senhas reais de clientes | EXPÕE dados sensíveis |
-| Rodar broker localmente | PODE enviar mensagens para leads reais |
+| Editar em `codigo_engenharia_reversa_tsx/` (fluxo antigo) | Muda código DESCARTADO, não o app testado |
+| Editar em `check/src/` | É só referência; `tsc` não compila; quebra o build |
+| Deploy em `ahut-ecosystem.apexfyhub.com.br` (prod) | 🔴 QUEBRA produção real |
+| Usar Supabase PROD `ptochsyoyatsydfysacc` | 🔴 ALTERA dados reais de clientes |
+| Acessar VPS `2.24.95.98` | 🔴 DERRUBA o WhatsApp do cliente |
+| Git push em `ahut-ecosystem-active` | 🔴 ALTERA código de produção |
+| Rodar broker localmente | 🔴 PODE enviar mensagens a leads reais |
+| Usar caminho Mac `/Users/christianeracanelli/...` | Não existe neste servidor |
 
-### 🟡 CUIDADO — Ambiente DEV
-- O Supabase DEV tem schema IDÊNTICO ao de produção
-- Os dados são gerados, mas NÃO são reais
-- Commits no remodel afetam o frontend dev
-- Deploy na pasta errada = não aparece no navegador
+### 🟡 CUIDADO
+- Versão valida: **teste-ahut** = `teste-ahut-ecosystem.apexfyhub.com.br` (não `dev-`).
+- Conteúdo do `check/src/` = mapa, não fonte de edição.
 
 ---
 
-## 🏗️ ESTRUTURA DO PROJETO
+## 🏗️ ESTRUTURA DO PROJETO (src/ — repo Jhon Wick)
 
 ```
-codigo_engenharia_reversa_tsx/
+REPOSITORIOENGENHARIAREVERSACODIGOFONTE/
 ├── src/
-│   ├── components/     # Componentes reutilizáveis
-│   │   ├── Layout.tsx          # Sidebar + Header
-│   │   ├── Dashboard.tsx       # Dashboard principal
-│   │   ├── GlassNeonCard.tsx   # Cards com efeito neon
-│   │   ├── NeuralBackground.tsx # Canvas neurônios
-│   │   └── ...
-│   ├── pages/          # Páginas do sistema
-│   │   ├── Atendimento.tsx     # Chat WhatsApp
-│   │   ├── Login.tsx           # Tela de login
-│   │   ├── Notificacoes.tsx    # Central de notificações
-│   │   └── ...
-│   ├── hooks/          # Hooks personalizados
-│   │   ├── useResponsive.ts    # Hook de responsividade
-│   │   └── ...
-│   ├── contexts/       # Contextos React
-│   │   ├── LanguageContext.tsx  # i18n PT/ES
-│   │   └── ...
-│   ├── lib/            # Utilitários
-│   │   ├── supabase.ts        # Conexão Supabase DEV
-│   │   └── utils.ts           # Funções auxiliares
-│   └── index.css       # Estilos globais
-├── index.html          # HTML principal
-├── package.json        # Dependências
-└── vite.config.ts      # Config Vite
+│   ├── pages/         # Página completa (cada rota): Atendimento, Leads, Login, Vendas...
+│   ├── components/    # Componentes reutilizáveis (layout, dashboard, corretores...)
+│   ├── hooks/         # Lógica e dados (useState, useQuery)
+│   ├── contexts/      # Contextos globais (i18n)
+│   ├── lib/           # Configurações (supabase.ts, utils.ts)
+│   ├── store/         # Estado global (zustand)
+│   ├── types/         # Tipagens (Supabase)
+│   └── (assets, test)
+├── index.html
+├── package.json
+└── vite.config.ts
 ```
 
 ---
 
 ## 🎨 DESIGN SYSTEM VIGENTE
 
-### Cores
-| Token | Cor | Uso |
-|---|---|---|
-| `--neon-cyan` | `#00FFCC` | Acento principal, neurônios, glows |
-| `--cyber-dark` | `#050505` | Fundo absoluto |
-| `card-dark` | `rgba(255,255,255,0.04)` | Cards transparentes |
-| `.glass-neon` | Vidro + blur | Containers e cards |
-| `.neon-text` | `#00FFCC` + glow | Texto de destaque |
-
-### Classes CSS Disponíveis
-- `card-dark` — Card transparente com borda ciano
-- `card-dark-stat` — Card de estatística
-- `glass-neon` — Container vidro com blur
-- `glass-neon-icon` — Ícone com vidro
-- `neon-glow` — Sombra neon externa
-- `neon-text` — Texto ciano com glow
-- `btn-neon-ghost` — Botão ghost neon
-- `tech-grid` — Grid radial subliminar
-- `aura-neon` — Pseudo-elemento brilhante
-
-### Componentes React
-- `<GlassNeonCard>` — Card com ícone, título, descrição, ação
-- `<GlassNeonIcon>` — Ícone com glow
-- `<NeonGhostButton>` — Botão ghost neon
+> O **teste/prod** valida o tema **CLARO** (Estate.ia / funil claro). O tema **DARK (QUBITS)** é do DEV e **NUNCA** deve subir no teste-ahut/prod.
+> Confira o tema antes de editar: `bg-white`/`border-slate-200` = claro ✅; `bg-white/5`/`border-cyan-900` = escuro (não é o que o teste/prod valida).
 
 ---
 
-## 🔍 COMO SABER SE ESTÁ NO AMBIENTE CERTO?
+## ✅ VERIFICADOR DE AMBIENTE
 
-### ✅ VERIFICADOR RÁPIDO
-```javascript
-// No código, o supabase.ts deve ter:
-const supabaseUrl = 'https://xmsulduzvufdzkfktovk.supabase.co';  // ✅ DEV
-// NÃO: https://ptochsyoyatsydfysacc.supabase.co  // ❌ PRODUÇÃO
-```
-
-### ✅ VERIFICADOR DE DEPLOY
 ```bash
-# Após fazer deploy, acesse:
-curl -sk https://dev-ahut-ecosystem.apexfyhub.com.br/ | head -5
-# Deve mostrar: notranslate, lang="pt-BR"
+# Você está no repo Jhon Wick (EDIÇÃO)?
+git -C /tmp/legacy_re branch --show-current   # → main
+git -C /tmp/legacy_re remote -v               # → ...REPOSITORIOENGENHARIAREVERSACODIGOFONTE
+
+# Você está em src/ do build (não src/src)?
+[ -d /tmp/legacy_re/src/pages ] && echo "src real OK"
+
+# Seu deploy apontou pro TESTE?
+curl -sk https://teste-ahut-ecosystem.apexfyhub.com.br/ | head -3
 ```
 
-### ❌ SINAIS DE PERIGO (se ver algo assim, PARE)
-- URL: `ahut-ecosystem.apexfyhub.com.br` (sem `dev-`)
-- Supabase: `ptochsyoyatsydfysacc.supabase.co`
-- Servidor: `2.24.95.98` (VPS do cliente)
-- Repositório: `ahut-ecosystem-active` (produção)
+### ❌ SINAIS DE PERIGO (PARE)
+- URL: `ahut-ecosystem.apexfyhub.com.br` (sem `teste-ahut`) → PROD real
+- Supabase: `ptochsyoyatsydfysacc.supabase.co` → PROD real
+- Servidor: `2.24.95.98` → VPS do cliente
+- Pasta: `codigo_engenharia_reversa_tsx` → fluxo antigo, abandonado
+- Caminho: `/Users/christianeracanelli/...` → Mac inexistente
 
 ---
 
@@ -239,160 +188,9 @@ curl -sk https://dev-ahut-ecosystem.apexfyhub.com.br/ | head -5
 |---|---|
 | Dúvida sobre código | Comandante Rodrigo |
 | Problema no deploy | Jarvis (agente IA) |
-| Erro no Supabase DEV | Jarvis |
+| Erro no Supabase | Jarvis |
 | Qualquer coisa sobre PRODUÇÃO | ⚠️ PARE IMEDIATAMENTE E CHAME O COMANDANTE |
 
 ---
 
-## 🛠️ GUIA PRÁTICO: ONDE EDITAR CADA COISA
-
-### 📁 Estrutura de Arquivos do Frontend
-
-```
-codigo_engenharia_reversa_tsx/src/
-├── pages/         ← PÁGINAS COMPLETAS (cada rota)
-├── components/    ← COMPONENTES REUTILIZÁVEIS
-├── hooks/         ← LÓGICA E DADOS (useState, useQuery)
-├── contexts/      ← CONTEXTOS GLOBAIS (i18n)
-├── lib/           ← CONFIGURAÇÕES (Supabase, utils)
-└── index.css      ← ESTILOS GLOBAIS
-```
-
----
-
-### 🔍 ONDE EDITAR — POR TIPO DE ALTERAÇÃO
-
-#### 1. QUER MUDAR O QUE APARECE EM UMA PÁGINA?
-| Página | Arquivo para editar |
-|---|---|
-| **Login** | `src/pages/Login.tsx` |
-| **Dashboard** | `src/components/Dashboard.tsx` |
-| **Atendimento (Chat)** | `src/pages/Atendimento.tsx` |
-| **Leads** | `src/components/Leads.tsx` |
-| **Notificações** | `src/pages/Notificacoes.tsx` |
-| **Vendas** | `src/pages/Vendas.tsx` |
-| **Financeiro** | `src/components/Finance.tsx` |
-| **Marketing** | `src/components/Marketing.tsx` |
-| **Corretores** | `src/pages/Corretores.tsx` |
-| **Tecnologia** | `src/pages/Tecnologia.tsx` |
-| **Configurações** | `src/pages/Configuracoes.tsx` |
-| **Imóveis** | `src/components/Properties.tsx` |
-| **Propostas** | `src/components/Proposals.tsx` |
-| **Contratos** | `src/components/Contracts.tsx` |
-| **Jurídico** | `src/components/Juridico.tsx` |
-| **Agenda** | `src/components/Agenda.tsx` |
-| **Gestão** | `src/components/Gestao.tsx` |
-| **Clientes** | `src/components/GestaoClientes.tsx` |
-| **Comissões** | `src/components/Comissoes.tsx` |
-
-#### 2. QUER MUDAR O LAYOUT GLOBAL (sidebar, header)?
-**Arquivo:** `src/components/Layout.tsx`
-- Sidebar (menu lateral) → linhas 63-201
-- Header (barra superior) → linhas 204-241
-- NavItems (itens do menu) → linhas 37-56
-- Logo QUBITS → componente `QubitsLogo.tsx`
-
-#### 3. QUER MUDAR CORES, ESTILOS OU DESIGN?
-**Arquivo:** `src/index.css`
-- `:root` → variáveis de cor (neon-cyan, accent, glass)
-- `.glass-neon-card` → estilo dos cards de vidro
-- `.card-dark` → cards escuros
-- `.neon-text`, `.neon-glow` → efeitos neon
-- `@keyframes` → animações globais
-
-#### 4. QUER MUDAR O BACKGROUND DE NEURÔNIOS?
-**Arquivo:** `src/components/NeuralBackground.tsx`
-- Cores dos nós → array `neonColors` (linha 57-61)
-- Tamanho dos nós → `radius: 4 + Math.random() * 2` (tabelas)
-- Velocidade → `vx: (Math.random() - 0.5) * 0.15`
-- Densidade → `const count = ... / 10000` (quanto maior, menos nós)
-
-#### 5. QUER MUDAR TEXTO/TRADUÇÃO?
-**Arquivo:** `src/contexts/LanguageContext.tsx`
-- Português → objeto `pt: { ... }`
-- Espanhol → objeto `es: { ... }`
-- Para adicionar nova chave: colocar nos dois objetos
-
-#### 6. QUER MUDAR O LOGO?
-**Arquivo:** `src/components/QubitsLogo.tsx`
-- SVG do símbolo Q → dentro das tags `<svg>`
-- Texto "QUBITS" → no `<span>` final
-
-#### 7. QUER CONECTAR O SUPABASE?
-**Arquivo:** `src/lib/supabase.ts`
-- `supabaseUrl` → URL do projeto
-- `supabaseKey` → Anon key
-
-#### 8. QUER MUDAR GRÁFICOS DO DASHBOARD?
-**Arquivo:** `src/components/Dashboard.tsx`
-- `stats` → array com indicadores (linha 86-103)
-- `data` → dados do gráfico (linha 142-156)
-- `salesFunnel` → funil de vendas
-
-#### 9. QUER MUDAR O COMPORTAMENTO DO CHAT?
-**Arquivo:** `src/pages/Atendimento.tsx`
-- Filtros de conversa → `filteredConversations` (linha 252)
-- Envio de mensagem → `handleSendMessage`
-- Bolhas de chat → renderização de mensagens
-
-#### 10. QUER MUDAR DADOS (hooks/API)?
-| Hook | Arquivo | O que faz |
-|---|---|---|
-| Leads | `src/hooks/useLeads.ts` | Dados de leads |
-| Financeiro | `src/hooks/useFinance.ts` | Dados financeiros |
-| Vendas | `src/hooks/useSales.ts` | Dados de vendas |
-| WhatsApp | `src/hooks/useWhatsapp.ts` | Conexão WhatsApp |
-| Grafo Neural | `src/hooks/useRealtimeGraph.ts` | Tempo real do canvas |
-| Agenda | `src/hooks/useAgendaEvents.ts` | Eventos de agenda |
-| Auth | `src/hooks/useAuth.ts` | Autenticação |
-| Tech Tickets | `src/hooks/useTechTickets.ts` | Chamados tecnologia |
-
----
-
-### 🔄 FLUXO COMPLETO DE UMA ALTERAÇÃO
-
-```
-1. git pull origin main
-2. Editar o arquivo certo (veja tabela acima)
-3. npm run dev          (testar local em http://localhost:5173)
-4. npm run build        (compilar para produção)
-5. Enviar por SFTP:
-   - dist/index.html  → /home/.../public_html/dev/
-   - dist/assets/*    → /home/.../public_html/dev/assets/
-6. git add . && git commit -m "descrição"
-7. git push origin main
-```
-
----
-
-### 🚨 EXEMPLOS PRÁTICOS
-
-#### Exemplo 1: "Mudar a cor do botão de laranja para ciano"
-```
-1. Abrir src/components/Layout.tsx
-2. Procurar: bg-orange-500
-3. Substituir por: bg-cyan-500
-4. npm run build
-5. Deploy
-```
-
-#### Exemplo 2: "Adicionar um novo item no menu lateral"
-```
-1. Abrir src/components/Layout.tsx
-2. Procurar: const navItems = [ ... ]
-3. Adicionar: { id: 'novo', labelKey: 'nav.novo', icon: NovoIcone, path: '/novo' }
-4. Adicionar tradução em LanguageContext.tsx
-5. npm run build + deploy
-```
-
-#### Exemplo 3: "Mudar o título do Dashboard"
-```
-1. Abrir src/App.tsx
-2. Procurar: "Dashboard"
-3. Editar o title e subtitle na rota "/"
-4. npm run build + deploy
-```
-
----
-
-**🚨 LEMBRE-SE: Uma única alteração na produção pode custar dados de clientes reais. Trabalhe apenas no DEV/ANTIGRAVITY.**
+**🚨 LEMBRE-SE:** Uma única alteração na produção pode custar dados de clientes reais. Edite apenas no `src/` do Jhon Wick (teste). Consulte `check/src/` como referência. NUNCA mexa no prod.
