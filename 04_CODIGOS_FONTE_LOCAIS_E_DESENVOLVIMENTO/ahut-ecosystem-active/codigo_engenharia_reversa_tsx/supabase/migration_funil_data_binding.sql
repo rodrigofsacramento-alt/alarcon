@@ -80,7 +80,9 @@ BEGIN
   -- Apenas quando transiciona PARA 'Qualificado'
   IF NEW.stage = 'Qualificado' THEN
     -- Buscar dados do cliente (profiles vinculado via client_id)
-    SELECT p.name, p.phone
+    -- NOTA: profiles usa coluna `full_name` (nome real). O bug 'p.name' (coluna inexistente)
+    --       quebrava a injeção do lead. Corrigido para full_name (05/09, nível estrutura).
+    SELECT p.full_name, p.phone
       INTO v_client_name, v_client_phone
       FROM public.profiles p
      WHERE p.id = NEW.client_id;

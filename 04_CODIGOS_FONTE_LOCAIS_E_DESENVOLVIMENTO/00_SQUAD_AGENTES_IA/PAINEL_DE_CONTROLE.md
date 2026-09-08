@@ -4,7 +4,17 @@
 - **ATOM (frontend review):** ❌ não revisou a entrega → **-5 pts**
 - **Jarvis (orquestrador):** ❌ não validou resultado REAL na tela, só código/build → **-5 pts**
 - **Agente de deploy:** ❌ deixou o bundle parado no repo, não subiu → **-5 pts**
-**Lição (já agora regra):** DEPLOY NUNCA fica pendente após commit de entrega — validar sempre na tela real do DEV, não apenas tsc/build.
+**Lição:** DEPLOY NUNCA fica pendente após commit — validar na tela real do DEV. FIX SEQUENCIA: sidebar fecha (hidden xl→block) + Origem dinâmica (L.source) + Estágio Atual + Histórico (c.subject) + Notas (L.notes) + Ver Cartão do Lead → A("/leads",{state:{selectedLeadId:c.lead_id}}) abrindo lead específico. Bundle completo `387dcb44` no /teste/ (Task1 login validado HTTP 200 no subdomínio); prod `/ahut/`+`/ahut-ecosystem/` ainda `12421532` aguardando validação.
+
+## ✅ 06/09 — SELETOR DE ESTÁGIO DENTRO DA ENGRENAGEM ⚙️ (HEADER ATENDIMENTO) — DEPLOYADO EM PROD
+**Entrega:** seletor de 12 estágios do funil DENTRO do modal "Configurações do Atendimento" que a engrenagem ⚙️ (ao lado do 👤) abre no header do chat central.
+**Posição no modal:** Status do Ticket → **Estágio do Atendimento** → Corretor Responsável.
+**Bundle:** `Atendimento-live-v14.js` md5 `9133ffc7` (169.508 B) — deployado em `/ahut/`, `/ahut-ecosystem/` e `/teste/` (mesmo docroot). Backups `.bak_seletor_prod` (original `9c57d6bf`) preservados p/ rollback.
+**Persistência:** grava em `leads.stage` via `c.lead_id` (usa `B` global + `c` em escopo — sem tela branca).
+**Iteração (3 telas brancas superadas):**
+- v14: inseriu no ⋮ MoreVertical (lugar errado — a ⚙️ abre modal separado `Re(!0)`).
+- v15: array de `option`s SEM vírgula → SyntaxError runtime → tela branca (`node --check` não pega ESM).
+- **v16 final:** seletor no modal da ⚙️ + vírgulas entre `option`s + validação parse **ESM real** (`.mjs`). Confirmado pelo usuário: "Deu certo o botão de seleção dentro da engrenagem". ✅
 
 ## 📊 Painel de Controle Consolidado do Squad IA
 

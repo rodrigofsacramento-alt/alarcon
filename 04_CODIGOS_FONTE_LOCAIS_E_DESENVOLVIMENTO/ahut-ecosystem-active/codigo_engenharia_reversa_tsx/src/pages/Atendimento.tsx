@@ -43,7 +43,8 @@ import {
   Target,
   Award,
   Smartphone,
-  ArrowLeft
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
@@ -165,10 +166,10 @@ const ESTAGIOS_FUNIL = [
   'Qualificado',                  // 3 ⭐ GATILHO
   'Follow Up',                    // 4
   'Buscar Imóveis',               // 5
-  'Agendamento Visita/Reunião',   // 6
-  'Visita/Reunião Agendada',      // 7
+  'Agendamento visita/reunião',   // 6
+  'Visita / Reunião Agendada',     // 7
   'Match Pronto',                 // 8
-  'Apresentar Imóveis',           // 9
+  'Apresentar Imóveis Selecionados', // 9
   'Imóvel Escolhido',             // 10
   'Proposta Solicitada',          // 11
   'Vendido',                      // 12
@@ -240,6 +241,9 @@ export default function Atendimento() {
 
   // ── NOTAS ──
   const [showNotes, setShowNotes] = useState(false);
+
+  // ── INFORMAÇÕES DO CONTATO (MISSÃO 4) ──
+  const [showContactInfo, setShowContactInfo] = useState(false);
   const [leadNotes, setLeadNotes] = useState('');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -1016,6 +1020,17 @@ export default function Atendimento() {
                   <button className="p-2 text-slate-300 hover:bg-white/5 rounded-full transition-colors" onClick={() => setShowNotes(!showNotes)}>
                     <Info className="w-5 h-5" />
                   </button>
+                  <button
+                    className={cn('p-2 rounded-full transition-colors', showContactInfo ? 'bg-orange-500/20 text-orange-400' : 'text-slate-300 hover:bg-white/5')}
+                    onClick={() => {
+                      setShowContactInfo(!showContactInfo);
+                      setShowNotes(false);
+                      setShowParticipants(false);
+                    }}
+                    title="Informações do contato"
+                  >
+                    <User className="w-5 h-5" />
+                  </button>
                   <button className="p-2 text-slate-300 hover:bg-white/5 rounded-full transition-colors">
                     <MoreVertical className="w-5 h-5" />
                   </button>
@@ -1416,6 +1431,51 @@ export default function Atendimento() {
             <button className="w-full py-2 bg-[#0a0a0a] text-white text-sm font-bold rounded-xl hover:bg-white/10 transition-colors">
               Salvar Notas
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── 3c. SIDEBAR DIREITA: INFORMAÇÕES DO CONTATO (MISSÃO 4) ── */}
+      {activeChat && showContactInfo && (
+        <div className={cn(
+          "border-l border-cyan-900/30 bg-white/5 flex flex-col shrink-0",
+          isMobile ? "absolute right-0 top-0 bottom-0 w-[85%] max-w-xs z-30 shadow-2xl overflow-y-auto" : "w-72"
+        )}>
+          <div className="p-4 border-b border-white/5 flex items-center justify-between">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <User className="w-4 h-4 text-orange-500" /> Informações do Contato
+            </h3>
+            <button onClick={() => setShowContactInfo(false)} className="text-slate-400 hover:text-slate-300">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Nome</p>
+              <p className="text-sm font-semibold text-white">{activeChat.client?.full_name || activeChat.client?.name || '—'}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Telefone</p>
+              <p className="text-sm text-slate-300">{activeChat.client?.phone || '—'}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Estágio atual do funil</p>
+              <p className="text-sm font-semibold text-white">{activeChat.stage || '—'}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Última interação</p>
+              <p className="text-sm text-slate-300">
+                {activeChat.last_message_at ? new Date(activeChat.last_message_at).toLocaleString('pt-BR') : '—'}
+              </p>
+            </div>
+            {activeChat.lead_id && (
+              <button
+                onClick={() => navigate(`/leads?lead=${activeChat.lead_id}`)}
+                className="w-full py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+              >
+                Ver Cartão do Lead <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
       )}

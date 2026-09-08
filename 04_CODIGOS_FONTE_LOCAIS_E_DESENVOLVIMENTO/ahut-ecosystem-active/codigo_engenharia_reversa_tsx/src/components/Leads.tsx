@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Search,
   Plus,
@@ -24,7 +25,7 @@ import { useLeads, useCreateLead, useUpdateLead, Lead } from '../hooks/useLeads'
 import { useAuth } from '../hooks/useAuth';
 
 // FUNIL ÚNICO QUBITS — 12 ESTÁGIOS EXATOS (fonte única)
-const ESTAGIOS = ['Contato Cadastrado', 'Primeiro Atendimento / Qualificação', 'Qualificado', 'Follow Up', 'Buscar Imóveis', 'Agendamento Visita/Reunião', 'Visita/Reunião Agendada', 'Match Pronto', 'Apresentar Imóveis', 'Imóvel Escolhido', 'Proposta Solicitada', 'Vendido'];
+const ESTAGIOS = ['Contato Cadastrado', 'Primeiro Atendimento / Qualificação', 'Qualificado', 'Follow Up', 'Buscar Imóveis', 'Agendamento visita/reunião', 'Visita / Reunião Agendada', 'Match Pronto', 'Apresentar Imóveis Selecionados', 'Imóvel Escolhido', 'Proposta Solicitada', 'Vendido'];
 
 function getInitials(name?: string) {
   if (!name) return '?';
@@ -33,10 +34,16 @@ function getInitials(name?: string) {
 
 export default function Leads() {
   const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const leadParam = searchParams.get('lead');
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('Todos');
   const [groupFilter, setGroupFilter] = useState('Todos');
+
+  // ── DESTAQUE POR URL (?lead=<uuid>) ──
+  const [highlightedLead, setHighlightedLead] = useState<string | null>(null);
+  const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { data: leads = [], isLoading } = useLeads({ search: searchTerm || undefined });
   const createLead = useCreateLead();
@@ -55,6 +62,27 @@ export default function Leads() {
 
   const ativos = leads.filter((l) => l.stage !== 'Vendido').length;
   const convertidos = leads.filter((l) => l.stage === 'Vendido').length;
+
+  // Localizou lead na URL ?lead=<uuid> → destaca e rola até a linha
+  useEffect(() => {
+    if (leadParam && leads.some((l) => l.id === leadParam)) {
+      setHighlightedLead(leadParam);
+    }
+  }, [leadParam, leads]);
+
+  // Rola até a linha destacada e limpa o destaque após ~3s
+  useEffect(() => {
+    if (!highlightedLead) return;
+    const row = document.getElementById(`lead-row-${highlightedLead}`);
+    if (row) {
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    highlightTimer.current = setTimeout(() => setHighlightedLead(null), 3000);
+    return () => {
+      if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    };
+  }, [highlightedLead]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +147,7 @@ export default function Leads() {
           {/* KPIs */}
           <div className="flex items-center gap-3 ml-auto">
             <span className="text-xs font-bold text-slate-300 bg-white/5 border border-cyan-900/30 rounded-lg px-3 py-1.5">Ativos no funil: <span className="text-cyan-400">{ativos}</span></span>
-            <span className="text-xs font-bold text-slate-300 bg-white/5 border border-cyan-900/30 rounded-lg px-3 py-1.5">Convertidos: <span className="text-emerald-600">{convertidos}</span></span>
+            <span className="text-xs font-bold text-slate-300 bg-white/5 border border-cyan-900/30 rounded-lg px-3 py-1.5">Vendidos: <span className="text-emerald-600">{convertidos}</span></span>
           </div>
         </div>
 
@@ -147,7 +175,14 @@ export default function Leads() {
               <tr><td colSpan={5} className="p-8 text-center text-sm text-slate-400">Nenhum lead encontrado.</td></tr>
             )}
             {!isLoading && filteredLeads.map((lead) => (
-              <tr key={lead.id} className="hover:bg-white/5 transition-colors group">
+              <tr
+                key={lead.id}
+                id={`lead-row-${lead.id}`}
+                className={cn(
+                  'hover:bg-white/5 transition-colors group',
+                  lead.id === highlightedLead && 'bg-orange-500/10 ring-2 ring-orange-400'
+                )}
+              >
                 <td className="p-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 font-bold text-xs">
