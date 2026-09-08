@@ -1,27 +1,38 @@
-# 🤖 Squad de Agentes IA — Ecossistema Ahut / ApeXfy
+# 🧠 SQUAD AGENTES IA — Índice de Perfis
 
-Bem-vindo à central de orquestração e monitoramento visual do **Squad Ágil de Inteligência Artificial**.
+**Fonte da verdade do organograma:** `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/docs/audio-failsafe/ORGANOGRAMA_SQUAD_QUBITS.md`
 
----
-
-## 🧭 Atalhos Rápidos dos Agentes
-
-| Agente | Função | Diretrizes (SKILL) |
-| :--- | :--- | :--- |
-| 👑 **JARVIS** | Orquestrador & Governança (Chief) | [Ver Diretrizes](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/03_ORQUESTRADOR_CHIEF/DIRETRIZES.md) |
-| 🛠️ **ATOM** | Engenheiro Backend & DevOps | [Atividade ao Vivo](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/01_ATOM_DEVELOPER/ATIVIDADE_EM_TEMPO_REAL.md) |
-| 👩‍💼 **AVA** | Triagem & Intake | [Chamados](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/02_AVA_TRIAGEM_IA/CHAMADOS_TRIADOS_PARA_ATOM.md) |
-| 👁️ **ARIA** | Monitoramento de Leads | [Diretrizes](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/04_ARIA_MONITOR_LEADS/DIRETRIZES.md) |
-| 🌐 **ATLAS** | Infraestrutura & Integrações (Supabase/WP) | [Diretrizes](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/00_SQUAD_AGENTES_IA/05_ATLAS_DEVOPS_IA/DIRETRIZES.md) |
-| 🎨 **ADA** | Frontend, UI/UX (React/Tailwind) | [Ver SKILL](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/.agents/skills/ada-frontend-ui/SKILL.md) |
-| 🕵️ **AURA** | QA & Tester (Qualidade de Código) | [Ver SKILL](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/.agents/skills/aura-qa-tester/SKILL.md) |
-| 📊 **APOLLO** | Data Analyst, BI & KPIs | [Ver SKILL](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/.agents/skills/apollo-data-bi/SKILL.md) |
-| 🛡️ **AEGIS** | Cibersegurança & SecOps | [Ver SKILL](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/.agents/skills/aegis-secops/SKILL.md) |
-| 👁️‍🗨️ **ARGUS** | Scrum Master & Inspetor de Fluxo | [Ver SKILL](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/.agents/skills/argus-scrum-master/SKILL.md) |
+**Regra:** a **skill** (`.agents/skills/<nome>`) é a fonte da regra de operação de cada agente; a **pasta** abaixo é o perfil/fluxo humano-legível. Todo agente tem BOTH.
 
 ---
 
-## 🏢 Nicho e Diretrizes do Ecossistema
-* **Produto:** CRM Imobiliário de Alto Padrão (Estate.ia / Ahut Ecosystem).
-* **Foco:** Corretores, VGV, Lotes, Lançamentos, Comissões, Captação, WhatsApp Broker.
-* **Servidor Local Ativo:** `http://localhost:5174/tecnologia`
+## 📂 Índice de Pastas × Agente
+
+| Pasta | Agente | Papel | Skill |
+|---|---|---|---|
+| `01_ATOM_DEVELOPER/` | 🛠️ ATOM | Engenheiro Sênior Full-Stack (Tech Lead) | `atom-agent-developer` |
+| `02_AVA_TRIAGEM_IA/` | 🎙️ AVA | Triagem & Especificação Técnica | `ava-agent-intake` |
+| `03_ORQUESTRADOR_CHIEF/` | 🧠 JARVIS | Orquestrador Chefe & CEO | `jarvis-orchestrator-chief` |
+| `04_ARIA_MONITOR_LEADS/` | 📈 ARIA | Monitor de Leads | `aria-monitor-leads` |
+| `05_ATLAS_DEVOPS_IA/` | 🚀 ATLAS | DevOps & Infraestrutura | `atlas-agent-devops` |
+| `06_ADA_FRONTEND_UI/` | 🎨 ADA | Front-End / UI-UX | `ada-frontend-ui` |
+| `07_ARGUS_SCRUM_MASTER/` | 👁️ ARGUS | Scrum Master & Processo | `argus-scrum-master` |
+| `08_AURA_QA_TESTES/` | 🔍 AURA | QA & Testes | `aura-qa-tester` ⚠️ |
+| `09_AEGIS_SECOPS/` | 🛡️ AEGIS | Security Ops | `aegis-secops` |
+| `10_APOLLO_DATA_BI/` | 📊 APOLLO | Data & BI | `apollo-data-bi` |
+| `11_AJAX_WHATSAPP_BROKER/` | 📱 AJAX | WhatsApp Business Specialist | `ajax-whatsapp-broker` |
+
+⚠️ **AURA:** pasta de perfil criada, mas a skill `aura-qa-tester` está **vazia** no repo (não há SKILL.md) — ver item de pendência abaixo.
+
+---
+
+## 🧠 Hierarquia Oficial (resumo do organograma)
+- **JARVIS** (CEO/Orquestrador) orquestra tudo; recebe demandas do Comandante, escala, revisa, aprova/recusa.
+  - **ATOM** (Tech Lead) — valida tecnicamente → **ADA** (Front-End), **ATLAS** (DevOps), **AURA** (QA), **AEGIS** (SecOps).
+  - **ARGUS** (Scrum Master, sob o ATOM) → **AVA** (Triagem), **APOLLO** (BI), **ARIA** (Leads).
+- **AJAX** (especialista WhatsApp, reporta ao ATOM).
+
+## ✅ Pendências resolvidas nesta padronização
+- [x] **AURA:** pasta de perfil criada (`08_AURA_QA_TESTES/`) e skill `aura-qa-tester/SKILL.md` **restaurada ao HEAD** (faltava no disco — conhecimento de QA recuperado)
+- [x] **Pastas de perfil** criadas para os 6 agentes que só tinham skill (ADA, ARGUS, AURA, AEGIS, APOLLO, AJAX)
+- [ ] Manter pastas e skills **sempre sincronizadas** (novo agente → criar BOTH)
