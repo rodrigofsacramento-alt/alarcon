@@ -227,3 +227,38 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 - **⚠️ Achado de segurança:** ~18 scripts de deploy do repo antigo têm o **credencial do Hostinger em texto claro** (ex.: `deploy-true.mjs`, `deploy-hostinger.ps1`). **Pendente sanitização (purge).**
 
 **Comandante:** a decisão sobre **deploy do build novo Teste → PROD** e o **SSL prod expirado** seguem aguardando sua aprovação/ação. O Jhon Wick tem agora os insumos p/ validar o broker vivo antes de qualquer edição.
+
+---
+
+## 🔵 PENDÊNCIA ABERTA — AGENTE RAG SEMÂNTICO (demanda a alinhar)
+
+**Status:** ⏳ AGUARDANDO ALINHAMENTO COM O COMANDANTE (registro 09/09)
+
+**O que é:** o `tutor_rag_ahut.py` é **Camada B** (injeção determinística por tags/module). Falta a **Camada C — RAG semântico de verdade** (embeddings + vector store + retrieval por significado).
+
+**Já temos:**
+- Base de conhecimento: **63 docs** em `/opt/data/hut_docs_texts/` (Pops, contratos, estratégia de vendas, diagnósticos, PMBOK, etc.) ≈ 804 KB.
+- Tutor determinístico: `/opt/data/scripts/tutor_rag_ahut.py` (filtra por módulo/tags — **não semântico**).
+- Schema de vector store documentado na skill `deterministic-knowledge-injection` (pgvector, `rag_documents`/`rag_chunks`/`match_rag`, HNSW).
+- Venv local **sem** sentence-transformers/chromadb/pgvector ainda (instalar p/ embedder).
+
+**Próximos passos planejados (quando alinhar):**
+1. Ingestão determinística: varre os 63 docs → trata duplicatas (`_02:25`×`_02:29`) → MD5 → chunk (~500 tok, overlap) → embed → upsert idempotente.
+2. Embedder: `sentence-transformers` + `all-MiniLM-L6-v2` (384 dims, offline, gratuito) no venv.
+3. **Vector store — DECISÃO ABERTA:** (a) Local Chroma, (b) Supabase DEV pgvector (preciso da credencial DEV), (c) Supabase PROD com tabela `rag_*` isolada — **desaconselhado**, (d) só script agora.
+4. Retrieval no tutor: embed da task → `match_rag(embedding, module)` → injeta top-N chunks antes do prompt.
+5. Validação real: pergunta "fluxo de caixa" deve trazer POP_FIN, não contrato.
+
+**Bloqueador:** decisão do Comandante sobre o store (ver os 3) + credencial DEV se for o caso.
+
+---
+
+## ✅ 09/09 — RETORNO DO JHON WICK: MIGRAÇÃO E CENTRALIZAÇÃO NO remodel-copy
+
+**Relato recebido (via Comandante):** migração centralizada no `remodel-copy` (branch `remodel`) concluída com:
+- `antigravity_1_1/` — Motor CLI de Engenharia Reversa AST (cli.mjs, lib/{bundler,rosetta,ast-pipeline,jsx-converter,sanitize}.js)
+- `src_recovered_1_1/` — Código reidratado validado (Zero erros TS2307)
+- `DOCUMENTACAO_PROJETO_ANTIGRAVITY.md` — manual consolidado
+- Relatórios auditoria/paridade em `00_SQUAD_AGENTES_IA/paridade/` + `00_ANTIGRAVITY_FASE3_CORRECCION/RELATORIO_COMPATIBILIDADE_BROKER.md` (**100% paridade MD5 do backend broker** ✅)
+
+**Significado:** a verificação de compatibilidade do broker retornou **paridade MD5 100%** entre as pastas do repo (`02_BACKEND...` / `02.2_BACKEND_BROKER_TESTE`) e o broker — ou seja, **as pastas estão alinhadas e seguras para edição**. Demandas broker-ativas reconciliadas. Próximo passo (Comandante decide): retomar deploy do build Teste → PROD.
