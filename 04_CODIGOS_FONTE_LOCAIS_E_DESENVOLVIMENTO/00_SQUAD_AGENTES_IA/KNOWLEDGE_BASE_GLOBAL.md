@@ -152,6 +152,10 @@ Root: `/opt/data/ahut-ecosystem`
 ---
 
 ## 🤝 7. DECISÕES & PROTOCOLOS APROVADOS (squad)
+- **LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (canônica, 08/09):**
+  - **Diretório de EDIÇÃO** (novas features + deploys): `src/` do **Jhon Wick** (repo `rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arquivos, buildable Vite). É aqui que se fazem as edições reais, gera-se o re-build e sobe-se para `teste-ahut`.
+  - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (210 arquivos reidratados). Usar **apenas como mapa** — consultar como as coisas rodam em produção, tipagem real do Supabase, nomes originais. **NÃO editar/compilar daqui; tsc não compila** (reidratado `e.jsx`).
+  - **Fluxo:** editar `src/` (Jhon Wick/main) → re-build → deploy `dist/` em teste-ahut → validar → (prod segue regra de aprovação humana).
 - **ORGANOGRAMA (estrutura oficial):** `ORGANOGRAMA_SQUAD_QUBITS.md`. Hierarquia:
 
   ```

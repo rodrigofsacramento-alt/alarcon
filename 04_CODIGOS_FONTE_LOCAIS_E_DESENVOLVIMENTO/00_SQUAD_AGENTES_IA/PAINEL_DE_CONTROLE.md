@@ -1,3 +1,8 @@
+# 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
+**Diretório de EDIÇÃO** (novas features + deploys): `src/` do **Jhon Wick** (repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arq, buildable). É aqui que se fazem as **edições reais**, gera-se o **re-build** e sobe-se para **teste-ahut**.
+**Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (210 arq reidratados). **Só como mapa** — conferir como roda em produção, tipagem Supabase real, nomes originais. **NÃO editar/compilar daqui**.
+**Fluxo estrito:** editar `src/` (Jhon Wick/main) → re-build → deploy dist em teste-ahut → validar → prod (aprovação humana).
+
 ## ✅ 08/09 — ANTIGRAVITY FASE 3-C: REIDRATAÇÃO JSX CORRIGIDA E COMMITADA (remodel)
 **Entrega:** os 210 arquivos `.ts/.tsx` reidratados (e.jsx→JSX declarativo) agora **parseiam 210/210** com parser real TypeScript 5.9.3 (0 fail sintático).
 - **Commit:** `43b3ddf` na branch `remodel` do `ahut-ecosystem-remodel-copy` (HEAD anterior `285f483`).
