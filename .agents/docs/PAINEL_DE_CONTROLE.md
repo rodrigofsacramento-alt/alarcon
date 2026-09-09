@@ -1,4 +1,16 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
+
+## ✅ 09/09 — HOTFIX CADASTRO DE IMÓVEL: colunas `amount`/`currency`/`maps_link` NÃO existiam na base PROD
+**Bug reportado por Rodrigo:** ao clicar "Confirmar Cadastro" com tudo preenchido, erro `could not find the 'amount' column in 'properties' in the schema cache`.
+**Causa-raiz (provada, não assumida):** o build M1 (09/09) insere `amount`,`currency`,`maps_link`, mas o M2 registrado no changelog 13:30 **nunca foi aplicado de fato** na base `ptochsyoyatsydfysacc` — a tabela real só tinha `price`/`price_type`(default 'sale'). Pipeline divergente.
+**Fix aplicado PROD (com backup):**
+- `ALTER TABLE properties ADD amount numeric, currency text DEFAULT 'USD', maps_link text`
+- CHECK `currency IN (BRL,USD,GS)`
+- CHECK `price_type` recualificado → `(sale,rent,FINAL,MONTHLY,DOWN_PAYMENT)`
+- Backup: `backups_properties/properties_20260909_145051.json` + .schema + .constraints
+- Validação: INSERT teste completo (MONTHLY+GS+maps_link) OK → cleanup → 15 reais intactos
+**Lição:** após qualquer ALTER, rodar `_schema_properties.py` para PROVAR colunas na base real antes de fechar a task (não confiar só no changelog).
+
 **Diretório de EDIÇÃO** (novas features + deploys): `src/` do **Jhon Wick** (repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arq, buildable). É aqui que se fazem as **edições reais**, gera-se o **re-build** e sobe-se para **teste-ahut**.
 **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (210 arq reidratados). **Só como mapa** — conferir como roda em produção, tipagem Supabase real, nomes originais. **NÃO editar/compilar daqui**.
 **Fluxo estrito:** editar `src/` (Jhon Wick/main) → re-build → deploy dist em teste-ahut → validar → prod (aprovação humana).
