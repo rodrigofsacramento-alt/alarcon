@@ -1,7 +1,7 @@
 # 🧠 PLANO DE IMPLEMENTAÇÃO — AGENTE RAG SEMÂNTICO (Camada C)
 
 **Data:** 09/set/2026 · **Autor:** Jarvis (Orquestrador) · **Executor previsto:** Jhon Wick (com supervisão Jarvis/Rodrigo)
-**Status:** ⏳ PENDENTE DE ALINHAMENTO — decisão do vector store em aberto (bloqueador)
+**Status:** 🔴 CANCELADO / REVERTIDO PELO COMANDANTE — O Roadmap RAG não foi aprovado. Mantida estritamente a Camada B determinística.
 **Repo:** `remodel-copy` (branch `remodel`)
 
 ---
@@ -141,4 +141,4 @@ Task do agente ──► TUTOR (Camada B + C)
 ---
 
 ## 7. HISTÓRICO DE DECISÃO / BLOQUEIO
-- **09/set:** Pendência aberta no PAINEL. Comandante consultado sobre o store (local/DEV/PROD) — **sem resposta ainda** (timeout 60min). Documento de plano criado para instruir o Jhon Wick. **Bloqueado no Passo 3 até decisão.**
+- **09/set:** 🔴 **REVERTIDO / CANCELADO:** Comandante recusou a proposta do RAG. Nenhuma alteração de banco vetorial ou ingestão será executada. O sistema opera 100% na Camada B determinística.

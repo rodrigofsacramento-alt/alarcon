@@ -230,7 +230,7 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 
 ---
 
-## 🔵 PENDÊNCIA ABERTA — AGENTE RAG SEMÂNTICO (demanda a alinhar)
+## 🔴 PENDÊNCIA CANCELADA/REVERTIDA — AGENTE RAG SEMÂNTICO (Recusado pelo Comandante)
 
 **Status:** ⏳ AGUARDANDO ALINHAMENTO COM O COMANDANTE (registro 09/09)
 
