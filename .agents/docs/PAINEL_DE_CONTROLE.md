@@ -251,6 +251,8 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 
 **Bloqueador:** decisão do Comandante sobre o store (ver os 3) + credencial DEV se for o caso.
 
+> 📄 **Plano completo de implementação:** `PLANO_AGENTE_RAG_IMPLEMENTACAO.md` (mesma pasta .agents/docs) — localização, onde parou, passos a passo e instrução ao Jhon Wick.
+
 ---
 
 ## ✅ 09/09 — RETORNO DO JHON WICK: MIGRAÇÃO E CENTRALIZAÇÃO NO remodel-copy
