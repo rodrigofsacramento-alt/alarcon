@@ -36,3 +36,16 @@ sequenceDiagram
 **Participantes:** ORQUESTRADOR, AVA e ATOM.
 **Decisão:** O problema crítico que estava fragmentando conversas devido à criação manual de contatos duplicados foi diagnosticado. 
 A AVA formatou a solicitação técnica e o ATOM estruturou a demanda em um Ticket Principal (Resolução Contatos Duplicados) com **10 Subtickets/Pré-requisitos**, movidos para a fila "A Executar". O Orquestrador validou a clareza deste formato (Ticket + Subtickets), monitorando a entrega em tempo real.
+
+
+---
+
+## 🔵 Status das Demandas e Roadmap de Arquitetura
+
+1. **Unificação das Skills dos Agentes:** 🟢 CONCLUÍDO (Todas as 11 skills integradas em .agents/docs/0X_<AGENTE>/SKILL.md).
+2. **Plano Agente RAG Semântico (Camada C):** ⏳ PENDENTE DE ALINHAMENTO (PLANO_AGENTE_RAG_IMPLEMENTACAO.md).
+   - Passos 1-2 (Ambiente sentence-transformers + Ingestão/Deduplicação MD5) prontos para execução imediata.
+   - Passo 3 (Vector Store): Arquitetura híbrida via pgvector nativo no Supabase.
+3. **Governança de Banco de Dados Supabase (IaC):** 🟢 AUDITADO (supabase_architecture_and_vector_audit.md).
+   - Implementação do Supabase CLI para versionamento DDL em supabase/migrations/ e geração automática de tipos TypeScript via 
+pm run types:gen.

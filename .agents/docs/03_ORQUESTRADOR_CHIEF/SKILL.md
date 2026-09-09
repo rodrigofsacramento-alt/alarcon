@@ -379,3 +379,21 @@ Ao comparar bundles (produção vs dev), verificar:
   - textarea + auto-resize + whitespace-pre-wrap
 - **Chunks faltantes vs bundle único Vite**: produção usa chunk system (rolável), dev usa Vite single-bundle
 - **Pipeline áudio no broker**: verificar `convertBufferToWhatsAppAudio`, `return sendResult`, `convId` no `dist/session-manager.js`
+
+## 🏛️ PROTOCOLOS DE GOVERNANÇA GLOBAL (09/SET/2026)
+
+### 1. Protocolo READ-FIRST (Regra 0)
+Antes de iniciar qualquer ação, o Jarvis e todos os agentes devem consultar obrigatoriamente:
+- .agents/docs/KNOWLEDGE_BASE_GLOBAL.md (Base de conhecimento global)
+- .agents/docs/PAINEL_DE_CONTROLE.md (Kanban e status de tarefas)
+- .agents/docs/<0X_AGENTE>/SKILL.md (Skill nativa unificada na pasta do agente)
+
+### 2. Protocolo WRITE-LAST (Registro no Diário de Bordo)
+Após a conclusão de qualquer tarefa ou entrega de código/documentação:
+- É OBRIGATÓRIO registrar uma entrada no arquivo CHANGELOG_APEXFY.md na raiz do repositório com Data/Hora, Módulo, Arquivos Modificados, Agente Responsável e Descrição detalhada.
+- Comitar e enviar o push no branch 
+emodel do repositório 
+emodel-copy.
+
+### 3. Estrutura Unificada de Agentes (.agents/docs/)
+Todas as skills foram integradas em suas respectivas pastas numeradas de agente em .agents/docs/0X_<AGENTE>/SKILL.md. A pasta duplicada .agents/skills/ foi totalmente removida.
