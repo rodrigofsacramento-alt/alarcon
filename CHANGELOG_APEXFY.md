@@ -27,6 +27,7 @@
 | **08/09/2026 19:40** | **Descompilação AST (Fase 2)** | `antigravity_1_1/`, `src_recovered_1_1/pages/` | `@orchestrator` (Jhon Wick) | 🟢 Validado (1.1) | Ativação do motor Babel AST (@babel/parser, @babel/traverse, @babel/generator). Cópia direta dos 6 módulos iguais e descompilação dos 29 divergentes. |
 | **08/09/2026 17:30** | **Diagnóstico de Paridade (Fase 1)** | `paridade_report.md`, `paridade_report.json` | `@orchestrator` (Jhon Wick) | 🟢 Validado (1.1) | Análise somente-leitura efetuada em 35 módulos. Identificados 6 iguais, 29 divergentes e 3 chunks órfãos (`Tecnologia-Tt3k9Ad1.js`, etc.). |
 | **08/09/2026 16:50** | **CLI Engine Setup** | `antigravity_1_1/cli.mjs`, `lib/bundler.js`, `lib/rosetta.js`, `lib/sanitize.js` | `@orchestrator` (Jhon Wick) | 🟢 Validado (1.1) | Criado o scaffolding do CLI de engenharia reversa AST Antigravity v2.1. |
+| **09/09/2026 01:09** | **Governança Post-Migração** | `AGENTS.md`, `.agents/skills/jarvis-orchestrator-chief/SKILL.md`, `CHANGELOG_APEXFY.md` | `@orchestrator` (Jarvis) | 🟢 Validado (1.1) | Centralização confirmada en `remodel-copy`: EDIÇÃO=`00_ANTIGRAVITY_FASE3_CORRECCION/src`, TESTE=`1.1_FRONTEND_PROD_TESTE`, PROD cliente=`01_FRONTEND_PRODUCAO_HOSTINGER`. Repo `ahut-ecosystem-remodel` DESCARTADO. Vínculo changelog↔chamados↔página Tecnologia registrado como roadmap pendente. |
 
 ---
 
@@ -34,3 +35,18 @@
 
 1. **Protocolo READ-FIRST:** Jarvis e todos os agentes do Squad consultam este arquivo obrigatoriamente no início de qualquer nova task.
 2. **Protocolo WRITE-LAST:** Nenhuma task é finalizada sem registrar a linha correspondente nesta tabela e commitar as alterações no Git.
+3. **Vinculo changelog ↔ chamados ↔ página Tecnologia (FUTURO):** cada linha do changelog deverá poder ser rastreada ao chamado de suporte correspondente (número/ticket) e refletida na página `/tecnologia` do frontend. **[PENDENTE — roadmap, não aplicado ainda]**
+
+---
+
+## 🏗️ ESTRUCTURA POST-MIGRAÇÃO (diretriz do Comandante, 09/09/2026)
+
+| Etapa | Destino REAL | Repo | Deploy |
+|---|---|---|---|
+| **EDIÇÃO** | `src_recovered_1_1/` (código fonte ativo) ⚠️ duplicata `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` em consolidação | `remodel-copy` (branch `remodel`) | — |
+| **TESTE** (homologação) | `1.1_FRONTEND_PROD_TESTE` (bundle) | `remodel-copy` → commit | hosting `teste-ahut-ecosystem.apexfyhub.com.br` |
+| **PROD cliente** (só quando validado) | `01_FRONTEND_PRODUCAO_HOSTINGER` | `remodel-copy` → commit | hosting `ahut-ecosystem.apexfyhub.com.br` |
+| **PRODUÇÃO URGENTE** | `ahut-ecosystem-active` | repo próprio | deploy direto |
+
+> ⚠️ **REGRA CENTRAL (09/09):** o repo `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` está **DESCARTADO para sempre**. Centralizar TODO no `remodel-copy`. Nunca vincular a esse repo antigo.
+> ⚠️ `.agents/skills` está sendo reorganizado por Jhon Wick no antigravity (por confirmar).

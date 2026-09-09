@@ -58,9 +58,10 @@ Não espere o comandante dizer "/executar" — ele já disse uma vez que quer o 
 - Contém: snapshots de produção, bundles JS, backups, hotfixes aplicados
 - Commits: `2a82fa7` (backup inicial), `e2aec18` (snapshot 24/08), `fdc44e0` (hotfix textarea), `5ad7764` (registro hotfix)
 
-### Repositório `ahut-ecosystem-remodel`
-- Contém: código TSX de engenharia reversa, componentes, páginas, hooks
-- Commits: `6c2d924` (Ctrl+Space), `046541c` (Command+Space), `f37f438` (eng reversa)
+### Repositório `remodel-copy` (repo CENTRAL — NUNCA vincular a `rodrigofsacramento-alt-ahut-ecosystem-remodel`)
+- Contém: código TSX de engenharia reversa — **EDIÇÃO ativa = `src_recovered_1_1/`** (`remodel-copy`), bundle TESTE (`1.1_FRONTEND_PROD_TESTE`) e bundle PROD cliente (`01_FRONTEND_PRODUCAO_HOSTINGER`). [⚠️ `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` é DUPLICATA em consolidação — consulte AGENTS.md]
+- **REGRA CRÍTICA:** o repo `rodrigofsacramento-alt-ahut-ecosystem-remodel` está DESCARTADO para sempre. Toda edição/commit/deploy passa por `remodel-copy` (branch `remodel`).
+- Commits legado (referência histórica): `6c2d924` (Ctrl+Space), `046541c` (Command+Space), `f37f438` (eng reversa)
 
 ---
 
@@ -129,7 +130,8 @@ O ecossistema opera em 3 camadas de orquestração:
         ▼
     [7] Deploy + Commit
         │    • Produção → ahut-ecosystem-active
-        │    • Dev → ahut-ecosystem-remodel
+        │    • Teste → 1.1_FRONTEND_PROD_TESTE (remodel-copy); edição/eng reversa em remodel-copy 00_ANTIGRAVITY/src
+        │    • PROD cliente (validado) → 01_FRONTEND_PRODUCAO_HOSTINGER (remodel-copy)
         │
         ▼
     [8] Ticket no Kanban Tecnologia
@@ -306,8 +308,8 @@ Quando o Comandante disser que é **URGENTE**:
 1. **Fazer alteração direto na PRODUÇÃO** (bundle JS via Hostinger SFTP ou broker VPS)
 2. **Testar a alteração** — pode ser testado no **Supabase DEV** (banco separado, `xmsulduzvufdzkfktovk`) OU no **Supabase PRODUÇÃO** (`ptochsyoyatsydfysacc`) dependendo da urgência e do escopo. O Comandante vai especificar qual banco usar.
 3. **Após validar que funcionou** → Commit no `ahut-ecosystem-active` (repositório de produção) com `git add -A && git commit -m "🐛..."`
-4. **Imediatamente após commit** → Fazer **engenharia reversa** do que foi alterado, implementando no código fonte TSX do `ahut-ecosystem-remodel`
-5. **Commit no remodel** com a engenharia reversa completa
+4. **Imediatamente após commit** → Fazer **engenharia reversa** do que foi alterado, implementando no código fonte de EDIÇÃO do **`remodel-copy`**: `src_recovered_1_1/` (NUNCA no repo `ahut-ecosystem-remodel`, descartado).
+5. **Commit no `remodel-copy`** (branch `remodel`) com a engenharia reversa completa. Para subir a TESTE: build → `1.1_FRONTEND_PROD_TESTE` → commit + deploy hosting `teste-ahut-ecosystem.apexfyhub.com.br`. **Se validado → PROD cliente:** `01_FRONTEND_PRODUCAO_HOSTINGER` → commit + deploy hosting `ahut-ecosystem.apexfyhub.com.br`.
 
 **Importante:** O Comandante vai DETALHAR que é urgente. Quando ele falar "urgente", é direto na produção. Quando ele não falar, é no dev primeiro.
 

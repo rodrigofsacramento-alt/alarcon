@@ -10,7 +10,10 @@ Em **qualquer tarefa** neste repo, a **PRIMEIRA etapa** é ler:
 Proibido agir "às cegas" por memória. Se a task tem domínio específico, carregar também a skill correspondente (`ahut-crm-deploy-runbook`, `ahut-crm-data-model`, `ahut-crm-backend-architecture`, `ada-frontend-ui`, etc.).
 
 ## 📌 LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (canônica — diretriz do Comandante)
-- **Diretório de EDIÇÃO** (novas features, correções, deploys): **`src/` do repo Jhon Wick** = `rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main` (montado em `/tmp/legacy_re`, ~170 arquivos, buildable Vite). É AQUI que se editam arquivos reais → `npm run build` → deploy `dist/` em `teste-ahut`.
+- **Diretório de EDIÇÃO** (novas features, correções, deploys): **`remodel-copy`** (repo CENTRAL, ramo `remodel`). Fonte de código ativa = **`src_recovered_1_1/`** (não a Scala). [⚠️ Há DUPLICATA: `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` difere em 180/210 arquivos — CONS...[truncated]
+- **Destino TESTE** (homologação): bundle → `1.1_FRONTEND_PROD_TESTE` → commit git + deploy hosting `teste-ahut-ecosystem.apexfyhub.com.br`.
+- **Destino PROD cliente** (só quando validado): `01_FRONTEND_PRODUCAO_HOSTINGER` → commit git + deploy hosting `ahut-ecosystem.apexfyhub.com.br`.
+- **REGRA CENTRAL:** o repo `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` está DESCARTADO para sempre. Centralizar TODO no `remodel-copy`.
 - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (~210 arquivos reidratados). Uso **só como mapa**: conferir como roda em produção, tipagem real do Supabase, nomes reais de RPCs/tabelas/pages. **NUNCA editar daqui** (reidratado `e.jsx`, `tsc` não compila).
 - **PROIBIDO** voltar ao fluxo antigo (`codigo_engenharia_reversa_tsx` de ahut-ecosystem como fonte de edição; deploy `dev/`; caminhos Mac `/Users/christianeracanelli/...`).
 
@@ -31,5 +34,5 @@ md5sum /tmp/legacy_re/src/<alvo>.tsx  # bate com o vivo? (produção ≠ git)
 
 ## 📌 REGRA 3 — Persistência
 Toda decisão nova → registrar em `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md` (seção 7) + PAINEL (kanban). Documentação atual é impossível de digerir, mas é obrigatório manter o **índice** apontando para onde está o detalhe.
-## ?? REGRA 3 � PROTOCOLO WRITE-LAST (Registro de Mem�ria Obrigat�rio)
-Toda task conclu�da DEVEM obrigatoriamente registrar a entrada correspondente em \CHANGELOG_APEXFY.md\ com data, m�dulo, arquivos, agente e status, e comitar junto com as altera��es.
+## ?? REGRA 3 � PROTOCOLO WRITE-LAST (Registro de Mem�ria Obrigat�rio)
+Toda task conclu�da DEVEM obrigatoriamente registrar a entrada correspondente em \CHANGELOG_APEXFY.md\ com data, m�dulo, arquivos, agente e status, e comitar junto com as altera��es.
