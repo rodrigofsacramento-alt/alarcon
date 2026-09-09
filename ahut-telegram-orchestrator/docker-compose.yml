@@ -9,4 +9,4 @@ services:
       - .env
     volumes:
       - .:/app
-    # Mapear volumes da pasta .agents/skills se necessário no futuro
+    # Mapear volumes da pasta .agents/docs se necessário no futuro

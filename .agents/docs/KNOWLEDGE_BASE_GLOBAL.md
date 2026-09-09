@@ -177,7 +177,7 @@ Root: `/opt/data/ahut-ecosystem`
   - **ATOM** (técnico) e **ARGUS** (processo) são os 2 generais → reportam a JARVIS.
   - **AJAX** é perpendicular (especialista WhatsApp/broker/mídia), reporta a JARVIS.
   - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões.
-  - Skills versionadas em `.agents/skills/` (16 arquivos) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
+  - Skills versionadas em `.agents/docs/` (16 arquivos) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
 - **Fluxo deploy (CANÔNICO 08/09):** URGENTE = direto PROD→valida→commit. NORMAL = edição `src/` **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) → build → deploy **teste-ahut** (`public_html/teste/`) → aprovação humana → PROD (`/ahut/`). **REFERÊNCIA (não editar):** `check/src/` (Pedra de Roseta). ESQUECER `prod-light-funil`/`codigo_engenharia_reversa_tsx` como fonte.
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.

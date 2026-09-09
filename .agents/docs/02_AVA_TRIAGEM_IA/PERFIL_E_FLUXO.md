@@ -1,7 +1,7 @@
 # 👩‍💼 Perfil e Fluxo de Triagem — Agente AVA
 
 * **Identidade:** Especialista em Triagem, Entrevista Empática e Especificação Técnica de Chamados (Intake Specialist).
-* **Skill Oficial:** [`ava-agent-intake`](../../.agents/skills/ava-agent-intake/SKILL.md)
+* **Skill Oficial:** [`ava-agent-intake`](./SKILL.md)
 
 ---
 

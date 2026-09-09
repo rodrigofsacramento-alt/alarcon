@@ -182,7 +182,7 @@
 | **TASK-005** | Carregamento das Últimas 800 Mensagens nos Grupos | Ajuste da consulta do histórico para `created_at desc limit 800` + reverse (exibição em tempo real de mensagens de grupos densos) | ✅ CONCLUÍDO | Deployado na Hostinger |
 | **TASK-004** | Restrição de Acesso à Conexão WhatsApp | Engrenagem e QR Code restritos exclusivamente a Admins (v8 deployado) | ✅ CONCLUÍDO | Hostinger SFTP OK |
 | **TASK-003** | Resolução Lead Maria Ferreira & Blindagens | ✅ CONCLUÍDO | Queries PostgREST corrigidas, processo zumbi eliminado |
-| **TASK-002** | Criação da Agente AVA (Intake/Triagem) | ✅ CONCLUÍDO | Skill & Estrutura Ativa em `.agents/skills/ava-agent-intake` |
+| **TASK-002** | Criação da Agente AVA (Intake/Triagem) | ✅ CONCLUÍDO | Skill & Estrutura Ativa em `.agents/docs/02_AVA_TRIAGEM_IA` |
 | **TASK-001** | Organização do Agente ATOM no App | ✅ CONCLUÍDO | Centralização das pastas em `.agents/docs` |
 | **HUB-ATLZ-1** | - [Atom, Ada, Jarvis, Aura] Engenharia Reversa - Página Configurações (Concluído)
 - [Aura] Automação de QA Visual com Cypress/Playwright no frontend reverso (Concluído e Validado na Sprint 2) Corretor construído em React + Vite. |

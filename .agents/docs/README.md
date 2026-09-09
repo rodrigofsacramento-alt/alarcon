@@ -2,7 +2,7 @@
 
 **Fonte da verdade do organograma:** `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/docs/audio-failsafe/ORGANOGRAMA_SQUAD_QUBITS.md`
 
-**Regra:** a **skill** (`.agents/skills/<nome>`) é a fonte da regra de operação de cada agente; a **pasta** abaixo é o perfil/fluxo humano-legível. Todo agente tem BOTH.
+**Regra:** a **skill** (`.agents/docs/<nome>`) é a fonte da regra de operação de cada agente; a **pasta** abaixo é o perfil/fluxo humano-legível. Todo agente tem BOTH.
 
 ---
 
