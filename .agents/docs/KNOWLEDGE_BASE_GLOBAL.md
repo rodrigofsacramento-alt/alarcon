@@ -29,7 +29,8 @@
 |---|---|---|
 | `/opt/data/ahut-ecosystem` | `remodel` | repo principal (documento de trabalho) |
 | `/opt/data/backup-broker-vivo` | `backup-broker-ar-0409` | backup broker vivo (audio-recovery.ts) |
-| `/tmp/legacy_re` | `main` (Jhon Wick `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) | ⭐ **EDIÇÃO** — `src/` para novas features/build/deploy |
+| `/opt/data/ahut-ecosystem-remodel-copy` | `remodel` | ⭐ **REPO CENTRAL & ÚNICO BUILDABLE (desde 11/09/2026)** — `src/` (171 arq) + `package.json` + `vite.config`; `npm run build` gera o app independente. TODA edição nova é feita AQUI. Commit/push p/ `rodrigofsacramento-alt/remodel-copy.git`. |
+| `/tmp/legacy_re` | `main` (Jhon Wick `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) | 🔒 **SOMENTE LEITURA/REFERÊNCIA desde 11/09** — serviu de origem p/ consolidar o build no remodel-copy. NÃO editar aqui (área /tmp volátil). |
 
 ### Branches (remotes/origin: main, remodel) + locais: `backup-estado-ar-0409`, `backup-broker-ar-0409`, `prod-light-funil`, `main`, `remodel`
 
@@ -179,7 +180,7 @@ Root: `/opt/data/ahut-ecosystem`
   - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões.
   - Skills versionadas em `.agents/docs/` (16 arquivos) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
-- **Fluxo deploy (CANÔNICO 08/09):** URGENTE = direto PROD→valida→commit. NORMAL = edição `src/` **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`) → build → deploy **teste-ahut** (`public_html/teste/`) → aprovação humana → PROD (`/ahut/`). **REFERÊNCIA (não editar):** `check/src/` (Pedra de Roseta). ESQUECER `prod-light-funil`/`codigo_engenharia_reversa_tsx` como fonte.
+- **Fluxo deploy (CANÔNICO 11/09/2026 — CENTRALIZADO):** URGENTE = direto PROD→valida→commit. NORMAL = edição `src/` **REMODEL-COPY** (`/opt/data/ahut-ecosystem-remodel-copy`, repo único buildable, remote `rodrigofsacramento-alt/remodel-copy.git`) → `npm run build` → deploy **teste-ahut** (`public_html/teste/`, script `_deploy_teste_remodel.py`) → aprovação humana → PROD (`/ahut/`). **`/tmp/legacy_re` = SOMENTE LEITURA (não editar; área /tmp volátil).** REFERÊNCIA reidratada: `src_recovered_1_1/` (não editar).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.
 - **CI/anti-cache:** `build_anticache.mjs`, nomes únicos `app-{uuid}`, purge `curl .../purge.php`.
