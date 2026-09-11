@@ -26,8 +26,11 @@ export interface PropertyFormData {
   status: string;
   price: string;
   price_type: string;
+  currency: string;
+  amount: string;
   address: string;
   location: string;
+  maps_link: string;
   description: string;
   bedrooms: string;
   bathrooms: string;
@@ -52,9 +55,12 @@ const initialFormData: PropertyFormData = {
   type: "residential",
   status: "available",
   price: "",
-  price_type: "sale",
+  price_type: "FINAL",
+  currency: "USD",
+  amount: "",
   address: "",
   location: "",
+  maps_link: "",
   description: "",
   bedrooms: "",
   bathrooms: "",
@@ -74,13 +80,26 @@ export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePro
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Mantiene `amount` (número puro) sincronizado con `price` (con máscara)
+  const handlePriceChange = (raw: string) => {
+    const digits = raw.replace(/[^\d]/g, "");
+    setFormData((prev) => ({ ...prev, price: digits, amount: digits }));
+  };
+
+  // Máscara de formato: agrupa miles con punto según la moneda
+  const formatThousands = (digits: string): string => {
+    const d = digits.replace(/[^\d]/g, "");
+    if (!d) return "";
+    return d.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   const handleSubmit = () => {
     onConfirm(formData);
     setFormData(initialFormData);
     onOpenChange(false);
   };
 
-  const isValid = formData.title.trim() && formData.price.trim();
+  const isValid = formData.title.trim() && formData.amount.trim();
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -165,28 +184,56 @@ export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePro
               <span>Preço e Localização</span>
             </div>
             <div className="bg-muted/30 rounded-xl p-4 space-y-4 border border-border/50">
+              {/* Etapa 1 — Seletor de Moeda (single-select) */}
+              <div className="space-y-2">
+                <Label>Moeda *</Label>
+                <Select value={formData.currency} onValueChange={(v) => handleChange("currency", v)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="USD">USD — Dólar</SelectItem>
+                    <SelectItem value="GS">GS — Guarani</SelectItem>
+                    <SelectItem value="BRL">BRL — Real</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Etapa 2 — Seletor de Modalidade de Preço */}
+              <div className="space-y-2">
+                <Label htmlFor="price_type">Modalidade de Preço *</Label>
+                <Select value={formData.price_type} onValueChange={(v) => handleChange("price_type", v)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="FINAL">Valor Final</SelectItem>
+                    <SelectItem value="MONTHLY">A partir de (mensual)</SelectItem>
+                    <SelectItem value="DOWN_PAYMENT">Entrada de</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Etapa 3 — Input Numérico con máscara automática */}
+              <div className="space-y-2">
+                <Label htmlFor="price">Valor *</Label>
+                <Input
+                  id="price"
+                  inputMode="numeric"
+                  placeholder="0"
+                  value={formatThousands(formData.price)}
+                  onChange={(e) => handlePriceChange(e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground">
+                  {formData.price_type === "FINAL"
+                    ? `Valor Final ${formatThousands(formData.amount)} ${formData.currency}`
+                    : formData.price_type === "MONTHLY"
+                      ? `A partir de ${formatThousands(formData.amount)} ${formData.currency} mensais`
+                      : `Entrada de ${formatThousands(formData.amount)} ${formData.currency}`}
+                </p>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="price">Preço *</Label>
-                  <Input
-                    id="price"
-                    placeholder="Ex: 1850000"
-                    value={formData.price}
-                    onChange={(e) => handleChange("price", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="price_type">Tipo de Preço</Label>
-                  <Select value={formData.price_type} onValueChange={(v) => handleChange("price_type", v)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sale">Venda</SelectItem>
-                      <SelectItem value="rent">Aluguel</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
                 <div className="space-y-2 md:col-span-2">
                   <Label htmlFor="address">Endereço Completo</Label>
                   <Input
@@ -203,6 +250,15 @@ export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePro
                     placeholder="Ex: Jardins - São Paulo"
                     value={formData.location}
                     onChange={(e) => handleChange("location", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <Label htmlFor="maps_link">Link Google Maps (ubicación del imóvil)</Label>
+                  <Input
+                    id="maps_link"
+                    placeholder="Ex: https://maps.app.goo.gl/xxxxxxxx"
+                    value={formData.maps_link}
+                    onChange={(e) => handleChange("maps_link", e.target.value)}
                   />
                 </div>
               </div>

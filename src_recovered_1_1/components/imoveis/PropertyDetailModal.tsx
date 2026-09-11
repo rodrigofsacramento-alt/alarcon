@@ -23,6 +23,17 @@ const formatPrice = (price: number, type?: string | null): string => {
   return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
 };
 
+const formatPricingValue = (amount: number|null, currency?: string | null, priceType?: string | null): string => {
+  const moeda = currency || 'USD';
+  const val = (amount ?? 0).toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+  switch (priceType) {
+    case 'MONTHLY': return `A partir de ${val} ${moeda} mensais`;
+    case 'DOWN_PAYMENT': return `Entrada de ${val} ${moeda}`;
+    case 'FINAL':
+    default: return `Valor Final ${val} ${moeda}`;
+  }
+};
+
 const defaultImages: Record<string, string> = {
   residential: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=500&fit=crop",
   commercial: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=500&fit=crop",
@@ -73,7 +84,10 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
       title: property.title,
       description: property.description || "",
       price: String(property.price),
-      price_type: property.price_type || "sale",
+      price_type: property.price_type || "FINAL",
+      currency: property.currency || "USD",
+      amount: property.amount != null ? String(property.amount) : String(property.price ?? ""),
+      maps_link: property.maps_link || "",
       status: property.status,
       type: property.type,
       address: property.address || "",
@@ -98,7 +112,10 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
         title: editForm.title,
         description: editForm.description || null,
         price: parseFloat(editForm.price) || property.price,
-        price_type: editForm.price_type || null,
+        price_type: (editForm.price_type || "FINAL").toUpperCase(),
+        currency: editForm.currency || "USD",
+        amount: editForm.amount ? parseFloat(String(editForm.amount).replace(/\./g,"").replace(",",".")) || parseFloat(editForm.price) || property.price : parseFloat(editForm.price) || property.price,
+        maps_link: editForm.maps_link || null,
         status: editForm.status,
         type: editForm.type,
         address: editForm.address || null,
@@ -155,9 +172,9 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
     }
   };
 
-  const mapsUrl = property.address
+  const mapsUrl = property.maps_link || (property.address
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(property.address)}`
-    : null;
+    : "");
 
   // ─── EDIT MODE ───
   if (isEditing) {
@@ -210,8 +227,9 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
                 <Select value={editForm.price_type} onValueChange={(v) => setEditForm(f => ({ ...f, price_type: v }))}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="sale">Venda</SelectItem>
-                    <SelectItem value="rent">Aluguel</SelectItem>
+                    <SelectItem value="FINAL">Valor Final</SelectItem>
+                    <SelectItem value="MONTHLY">A partir de (mensais)</SelectItem>
+                    <SelectItem value="DOWN_PAYMENT">Entrada de</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -228,6 +246,10 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
             <div className="space-y-2">
               <Label>Bairro / Região</Label>
               <Input value={editForm.location} onChange={(e) => setEditForm(f => ({ ...f, location: e.target.value }))} />
+            </div>
+            <div className="space-y-2">
+              <Label>Link Google Maps</Label>
+              <Input value={editForm.maps_link || ""} onChange={(e) => setEditForm(f => ({ ...f, maps_link: e.target.value }))} placeholder="https://maps.app.goo.gl/..." />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -348,10 +370,7 @@ export function PropertyDetailModal({ property, open, onOpenChange }: PropertyDe
           )}
           <div className="absolute bottom-4 left-4">
             <p className="text-2xl font-bold text-white drop-shadow-lg">
-              {formatPrice(property.price)}
-              {property.price_type === "rent" && (
-                <span className="text-base font-normal">/mês</span>
-              )}
+              {formatPricingValue(property.amount ?? property.price, property.currency, property.price_type)}
             </p>
           </div>
         </div>

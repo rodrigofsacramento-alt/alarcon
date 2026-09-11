@@ -647,12 +647,14 @@ export type Database = {
         Row: {
           address: string | null
           agent_id: string | null
+          amount: number | null
           area: string | null
           bathrooms: number | null
           bedrooms: number | null
           code: string
           created_at: string | null
           created_by: string | null
+          currency: 'USD' | 'GS' | 'BRL'
           description: string | null
           id: string
           image_url: string | null
@@ -660,11 +662,12 @@ export type Database = {
           is_favorite: boolean | null
           leads_id: string | null
           location: string
+          maps_link: string | null
           owner_name: string | null
           owner_phone: string | null
           parking: number | null
           price: number
-          price_type: string | null
+          price_type: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
           rooms: number | null
           status: string
           tenant_id: string | null
@@ -675,12 +678,14 @@ export type Database = {
         Insert: {
           address?: string | null
           agent_id?: string | null
+          amount?: number | null
           area?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           code: string
           created_at?: string | null
           created_by?: string | null
+          currency?: 'USD' | 'GS' | 'BRL'
           description?: string | null
           id?: string
           image_url?: string | null
@@ -688,11 +693,12 @@ export type Database = {
           is_favorite?: boolean | null
           leads_id?: string | null
           location: string
+          maps_link?: string | null
           owner_name?: string | null
           owner_phone?: string | null
           parking?: number | null
           price: number
-          price_type?: string | null
+          price_type?: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
           rooms?: number | null
           status?: string
           tenant_id?: string | null
@@ -703,12 +709,14 @@ export type Database = {
         Update: {
           address?: string | null
           agent_id?: string | null
+          amount?: number | null
           area?: string | null
           bathrooms?: number | null
           bedrooms?: number | null
           code?: string
           created_at?: string | null
           created_by?: string | null
+          currency?: 'USD' | 'GS' | 'BRL'
           description?: string | null
           id?: string
           image_url?: string | null
@@ -716,11 +724,12 @@ export type Database = {
           is_favorite?: boolean | null
           leads_id?: string | null
           location?: string
+          maps_link?: string | null
           owner_name?: string | null
           owner_phone?: string | null
           parking?: number | null
           price?: number
-          price_type?: string | null
+          price_type?: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
           rooms?: number | null
           status?: string
           tenant_id?: string | null
