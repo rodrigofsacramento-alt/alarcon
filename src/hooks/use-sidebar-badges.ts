@@ -22,6 +22,7 @@ export function useSidebarBadges() {
       let leadsQuery = supabase
         .from('leads')
         .select('id, stage, sla_status', { count: 'exact', head: true })
+        .eq('is_active', true)
         .not('stage', 'in', '(Convertido,Perdido)');
       let proposalsQuery = supabase
         .from('proposals')
@@ -34,6 +35,7 @@ export function useSidebarBadges() {
       let slaQuery = supabase
         .from('leads')
         .select('id, stage, sla_status, sla_deadline, created_at, updated_at, responsible_id')
+        .eq('is_active', true)
         .not('stage', 'in', '(Convertido,Perdido)');
       let juridicoQuery = supabase
         .from('proposals')

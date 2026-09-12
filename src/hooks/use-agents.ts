@@ -33,7 +33,8 @@ export function useAgents() {
       // Fetch lead counts per responsible
       const { data: leadCounts } = await supabase
         .from('leads')
-        .select('responsible_id');
+        .select('responsible_id')
+        .eq('is_active', true);
 
       // Fetch visit counts per agent
       const { data: visitCounts } = await supabase

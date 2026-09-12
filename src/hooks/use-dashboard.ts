@@ -99,7 +99,7 @@ export function useDashboardStats() {
     queryKey: ['dashboard-stats'],
     queryFn: async () => {
       const [leadsRes, propertiesRes, proposalsRes, visitsRes, nextActionsRes] = await Promise.all([
-        supabase.from('leads').select('id, name, stage, sla_status, sla_deadline, score, created_at, updated_at, responsible:profiles!leads_responsible_id_fkey(full_name)'),
+        supabase.from('leads').select('id, name, stage, sla_status, sla_deadline, score, created_at, updated_at, responsible:profiles!leads_responsible_id_fkey(full_name)').eq('is_active', true),
         supabase.from('properties').select('id, status, price, created_at'),
         supabase.from('proposals').select('id, status, value, created_at'),
         supabase.from('visits').select('id, status, scheduled_at'),
@@ -230,7 +230,7 @@ export function useAgentStats() {
       const agentStats = await Promise.all(
         (agents || []).map(async (agent) => {
           const [leadsRes, proposalsRes] = await Promise.all([
-            supabase.from('leads').select('id').eq('responsible_id', agent.id),
+            supabase.from('leads').select('id').eq('responsible_id', agent.id).eq('is_active', true),
             supabase.from('proposals').select('id, value, status').eq('agent_id', agent.id),
           ]);
 

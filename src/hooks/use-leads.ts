@@ -44,6 +44,7 @@ export function useLeads(filters?: {
       let query = supabase
         .from('leads')
         .select('*, responsible:profiles!leads_responsible_id_fkey(*)')
+        .eq('is_active', true)
         .order('last_interaction', { ascending: false, nullsFirst: false })
         .order('updated_at', { ascending: false, nullsFirst: false })
         .order('created_at', { ascending: false });
@@ -192,7 +193,8 @@ export function useLeadStats() {
     queryFn: async () => {
       const { data: leads, error } = await supabase
         .from('leads')
-        .select('stage, sla_status, score');
+        .select('stage, sla_status, score')
+        .eq('is_active', true);
       if (error) throw error;
 
       const total = leads.length;
