@@ -126,52 +126,131 @@ export type Database = {
         Row: {
           agent_id: string | null
           amount: number
-          category: string
+          bank_id: string | null
+          card_id: string | null
+          category_id: string | null
+          client_id: string | null
           created_at: string | null
-          date: string
+          date: string | null
           description: string | null
+          due_date: string | null
           id: string
+          is_realized: boolean | null
+          name: string
+          paid_date: string | null
           reference_id: string | null
           reference_type: string | null
-          tenant_id: string | null
+          source: string | null
+          tenant_id: string
           type: string
+          updated_at: string | null
         }
         Insert: {
           agent_id?: string | null
           amount: number
-          category: string
+          bank_id?: string | null
+          card_id?: string | null
+          category_id?: string | null
+          client_id?: string | null
           created_at?: string | null
-          date?: string
+          date?: string | null
           description?: string | null
+          due_date?: string | null
           id?: string
+          is_realized?: boolean | null
+          name?: string
+          paid_date?: string | null
           reference_id?: string | null
           reference_type?: string | null
-          tenant_id?: string | null
+          source?: string | null
+          tenant_id?: string
           type: string
+          updated_at?: string | null
         }
         Update: {
           agent_id?: string | null
           amount?: number
-          category?: string
+          bank_id?: string | null
+          card_id?: string | null
+          category_id?: string | null
+          client_id?: string | null
           created_at?: string | null
-          date?: string
+          date?: string | null
           description?: string | null
+          due_date?: string | null
           id?: string
+          is_realized?: boolean | null
+          name?: string
+          paid_date?: string | null
           reference_id?: string | null
           reference_type?: string | null
-          tenant_id?: string | null
+          source?: string | null
+          tenant_id?: string
           type?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "financial_transactions_agent_id_fkey"
-            columns: ["agent_id"]
+            foreignKeyName: "financial_transactions_bank_id_fkey"
+            columns: ["bank_id"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "financial_banks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_transactions_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "financial_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_transactions_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "financial_categories"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "financial_transactions_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      financial_categories: {
+        Row: {
+          category: string
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          ordem: number | null
+          tenant_id: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          ordem?: number | null
+          tenant_id?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          ordem?: number | null
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "financial_categories_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"

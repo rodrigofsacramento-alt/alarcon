@@ -2,13 +2,33 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/lib/supabase';
 import type { Tables, TablesInsert } from '@/types/database';
 
-export type FinancialTransaction = Tables<'financial_transactions'> & {
-  agent?: Tables<'profiles'> | null;
+export type FinancialCategory = Tables<'financial_categories'>;
+
+export type FinancialTransaction = Omit<Tables<'financial_transactions'>, 'category'> & {
+  category?: FinancialCategory | null;
 };
+
+// Fetch real categories (RLS já filtra por tenant get_my_tenant_id())
+export function useFinancialCategories() {
+  return useQuery({
+    queryKey: ['financial_categories'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('financial_categories')
+        .select('id, name, category, ordem, is_active')
+        .order('ordem', { ascending: true });
+      if (error) throw error;
+      return (data || []) as FinancialCategory[];
+    },
+  });
+}
+
+const CATEGORY_SELECT =
+  'category:financial_categories!financial_transactions_category_id_fkey(id, name, category)';
 
 export function useFinancialTransactions(filters?: {
   type?: string;
-  category?: string;
+  categoryId?: string;
   dateFrom?: string;
   dateTo?: string;
 }) {
@@ -17,14 +37,14 @@ export function useFinancialTransactions(filters?: {
     queryFn: async () => {
       let query = supabase
         .from('financial_transactions')
-        .select('*, agent:profiles!financial_transactions_agent_id_fkey(id, full_name, role)')
+        .select(`*, ${CATEGORY_SELECT}`)
         .order('date', { ascending: false });
 
       if (filters?.type) {
         query = query.eq('type', filters.type);
       }
-      if (filters?.category) {
-        query = query.eq('category', filters.category);
+      if (filters?.categoryId) {
+        query = query.eq('category_id', filters.categoryId);
       }
       if (filters?.dateFrom) {
         query = query.gte('date', filters.dateFrom);
@@ -35,7 +55,7 @@ export function useFinancialTransactions(filters?: {
 
       const { data, error } = await query;
       if (error) throw error;
-      return data as FinancialTransaction[];
+      return (data || []) as FinancialTransaction[];
     },
   });
 }
@@ -82,7 +102,7 @@ export function useFinancialStats(period: 'month' | 'quarter' | 'year' = 'month'
       // Current period
       const { data: current, error: e1 } = await supabase
         .from('financial_transactions')
-        .select('*, agent:profiles!financial_transactions_agent_id_fkey(id, full_name, role)')
+        .select(`*, ${CATEGORY_SELECT}`)
         .gte('date', dateFrom)
         .order('date', { ascending: false });
       if (e1) throw e1;
@@ -117,14 +137,15 @@ export function useFinancialStats(period: 'month' | 'quarter' | 'year' = 'month'
 
       txs.forEach(tx => {
         const amt = Number(tx.amount) || 0;
+        const catName = tx.category?.name ?? (tx.category_id || 'sem-categoria');
         if (tx.type === 'income') {
           totalIncome += amt;
-          incomeByCategory[tx.category] = (incomeByCategory[tx.category] || 0) + amt;
+          incomeByCategory[catName] = (incomeByCategory[catName] || 0) + amt;
         } else {
           totalExpense += amt;
-          expenseByCategory[tx.category] = (expenseByCategory[tx.category] || 0) + amt;
-          if (tx.category === 'commission') totalCommissions += amt;
-          if (tx.category === 'operational') totalOperational += amt;
+          expenseByCategory[catName] = (expenseByCategory[catName] || 0) + amt;
+          if (tx.category?.category === 'Custo Variável') totalCommissions += amt;
+          if (tx.category?.category === 'Custo Fixo') totalOperational += amt;
         }
       });
 

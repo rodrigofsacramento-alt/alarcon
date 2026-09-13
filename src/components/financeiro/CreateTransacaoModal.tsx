@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DollarSign, FileText, Calendar, Tag } from "lucide-react";
+import { useFinancialCategories } from "@/hooks/use-financial";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,7 +22,7 @@ import {
 export interface TransacaoFormData {
   description: string;
   type: "income" | "expense";
-  category: string;
+  categoryId: string;
   value: string;
   date: string;
   status: string;
@@ -37,7 +38,7 @@ interface CreateTransacaoModalProps {
 const initialFormData: TransacaoFormData = {
   description: "",
   type: "income",
-  category: "venda",
+  categoryId: "",
   value: "",
   date: new Date().toISOString().split("T")[0],
   status: "completed",
@@ -46,6 +47,7 @@ const initialFormData: TransacaoFormData = {
 
 export function CreateTransacaoModal({ open, onOpenChange, onConfirm }: CreateTransacaoModalProps) {
   const [formData, setFormData] = useState<TransacaoFormData>(initialFormData);
+  const { data: categories, isLoading: loadingCategories } = useFinancialCategories();
 
   useEffect(() => {
     if (!open) {
@@ -155,19 +157,30 @@ export function CreateTransacaoModal({ open, onOpenChange, onConfirm }: CreateTr
                 </div>
                 <div className="space-y-2">
                   <Label>Categoria</Label>
-                  <Select value={formData.category} onValueChange={(v) => handleChange("category", v)}>
+                  <Select value={formData.categoryId} onValueChange={(v) => handleChange("categoryId", v)}>
                     <SelectTrigger>
-                      <SelectValue />
+                      {loadingCategories ? (
+                        <span className="text-muted-foreground">Cargando categorías...</span>
+                      ) : (
+                        <SelectValue />
+                      )}
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="venda">Venda</SelectItem>
-                      <SelectItem value="aluguel">Aluguel</SelectItem>
-                      <SelectItem value="comissao">Comissão</SelectItem>
-                      <SelectItem value="consultoria">Consultoria</SelectItem>
-                      <SelectItem value="despesa_operacional">Despesa Operacional</SelectItem>
-                      <SelectItem value="marketing">Marketing</SelectItem>
-                      <SelectItem value="imposto">Imposto</SelectItem>
-                      <SelectItem value="outro">Outro</SelectItem>
+                      {loadingCategories ? (
+                        <SelectItem value="" disabled>
+                          Cargando...
+                        </SelectItem>
+                      ) : (
+                        (categories || [])
+                          .filter((cat) =>
+                            (cat.category === "Entrada") === (formData.type === "income")
+                          )
+                          .map((cat) => (
+                            <SelectItem key={cat.id} value={cat.id}>
+                              {cat.name}
+                            </SelectItem>
+                          ))
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -193,15 +206,14 @@ export function CreateTransacaoModal({ open, onOpenChange, onConfirm }: CreateTr
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Status</Label>
+                  <Label>Estado</Label>
                   <Select value={formData.status} onValueChange={(v) => handleChange("status", v)}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="completed">Concluída</SelectItem>
-                      <SelectItem value="processing">Em Processamento</SelectItem>
-                      <SelectItem value="pending">Pendente</SelectItem>
+                      <SelectItem value="pending">Pendiente</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

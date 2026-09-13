@@ -40,17 +40,6 @@ import {
   Cell,
 } from "recharts";
 
-const CATEGORY_LABELS: Record<string, string> = {
-  sale: 'Vendas',
-  rental: 'Locações',
-  consulting: 'Consultoria',
-  commission: 'Comissões',
-  operational: 'Operacional',
-  marketing: 'Marketing',
-  tax: 'Impostos',
-  other: 'Outros',
-};
-
 const PIE_COLORS = ['#d96909', '#223152', '#9ca3af', '#16a34a', '#dc2626'];
 
 const tabs = [
@@ -90,12 +79,15 @@ export default function Financeiro() {
     createTransactionMutation.mutate(
       {
         type: data.type,
-        category: data.category,
-        description: data.description || null,
+        category_id: data.categoryId || null,
+        name: data.description,
+        description: data.notes || null,
         amount,
-        date: data.date,
+        date: data.date || null,
         agent_id: user?.id || null,
-        reference_type: 'other',
+        reference_type: 'manual',
+        source: 'manual',
+        is_realized: data.status === 'completed',
       },
       {
         onSuccess: () => {
@@ -127,7 +119,7 @@ export default function Financeiro() {
   const incomeCategories = stats?.incomeByCategory || {};
   const totalIncomeForPie = Object.values(incomeCategories).reduce((s, v) => s + v, 0) || 1;
   const revenueOriginData = Object.entries(incomeCategories).map(([cat, val], i) => ({
-    name: CATEGORY_LABELS[cat] || cat,
+    name: cat,
     value: Math.round((val / totalIncomeForPie) * 100),
     amount: val,
     color: PIE_COLORS[i % PIE_COLORS.length],
@@ -413,10 +405,10 @@ export default function Financeiro() {
                                 </div>
                               </td>
                               <td className="py-3 text-sm text-muted-foreground whitespace-nowrap">
-                                {new Date(tx.date + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
+                                {tx.date ? new Date(tx.date + 'T00:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) : '—'}
                               </td>
                               <td className="py-3">
-                                <Badge variant="outline" className="text-xs">{CATEGORY_LABELS[tx.category] || tx.category}</Badge>
+                                <Badge variant="outline" className="text-xs">{tx.category?.name || 'Sin categoria'}</Badge>
                               </td>
                               <td className={cn("py-3 text-right font-medium whitespace-nowrap", tx.type === "income" ? "text-success" : "text-foreground")}>
                                 {tx.type === 'income' ? '+' : '-'} {formatBRL(Number(tx.amount))}
@@ -446,7 +438,7 @@ export default function Financeiro() {
                           return (
                             <div key={cat}>
                               <div className="flex items-center justify-between mb-1">
-                                <span className="text-sm font-medium text-foreground">{CATEGORY_LABELS[cat] || cat}</span>
+                                <span className="text-sm font-medium text-foreground">{cat}</span>
                                 <div className="flex items-center gap-2">
                                   <span className="text-sm text-muted-foreground">{pct.toFixed(0)}%</span>
                                   <span className="text-sm font-semibold text-foreground">{formatBRL(val)}</span>
