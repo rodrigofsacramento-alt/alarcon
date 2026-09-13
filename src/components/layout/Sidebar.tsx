@@ -174,6 +174,7 @@ export function Sidebar({ activeModule, onModuleChange, collapsed, onCollapsedCh
     { id: "dashboard", icon: <LayoutDashboard className="h-5 w-5" />, label: "Dashboard", badge: undefined as number | undefined, path: "/", roles: ['admin', 'manager'] as string[] },
     { id: "leads", icon: <Target className="h-5 w-5" />, label: "Leads", badge: getVisibleBadge('leads'), path: "/leads", roles: ['admin', 'manager'] as string[] },
     { id: "atendimento", icon: <MessageSquare className="h-5 w-5" />, label: "Atendimento", badge: getVisibleBadge('atendimento'), path: "/atendimento", roles: ['admin', 'manager', 'agent'] as string[] },
+    { id: "routing-log", icon: <FileText className="h-5 w-5" />, label: "Log de Direcionamentos", badge: undefined as number | undefined, path: "/routing-log", roles: ['admin', 'manager'] as string[] },
     { id: "agenda", icon: <Calendar className="h-5 w-5" />, label: "Agenda & Visitas", badge: getVisibleBadge('agenda'), path: "/agenda", roles: ['admin', 'manager', 'agent'] as string[] },
     { id: "imoveis", icon: <Building2 className="h-5 w-5" />, label: "Imóveis", badge: undefined as number | undefined, path: "/imoveis", roles: ['admin', 'manager', 'agent'] as string[] },
     { id: "propostas", icon: <ClipboardList className="h-5 w-5" />, label: "Propostas", badge: getVisibleBadge('propostas'), path: "/propostas", roles: ['admin', 'manager', 'agent'] as string[] },

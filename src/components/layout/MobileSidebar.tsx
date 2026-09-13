@@ -19,6 +19,7 @@ import {
   FileCheck,
   Briefcase,
   Megaphone,
+  FileText,
 } from "lucide-react";
 
 interface MobileSidebarProps {
@@ -32,6 +33,7 @@ const allNavItems = [
   { id: "dashboard", icon: LayoutDashboard, label: "Dashboard", path: "/", roles: ['admin', 'manager'] as string[] },
   { id: "leads", icon: Target, label: "Leads", path: "/leads", roles: ['admin', 'manager'] as string[] },
   { id: "atendimento", icon: MessageSquare, label: "Atendimento", path: "/atendimento", roles: ['admin', 'manager', 'agent'] as string[] },
+  { id: "routing-log", icon: FileText, label: "Log de Direcionamentos", path: "/routing-log", roles: ['admin', 'manager'] as string[] },
   { id: "agenda", icon: Calendar, label: "Agenda & Visitas", path: "/agenda", roles: ['admin', 'manager', 'agent'] as string[] },
   { id: "imoveis", icon: Building2, label: "Imóveis", path: "/imoveis", roles: ['admin', 'manager', 'agent'] as string[] },
   { id: "propostas", icon: ClipboardList, label: "Propostas", path: "/propostas", roles: ['admin', 'manager', 'agent'] as string[] },
