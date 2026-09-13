@@ -94,8 +94,28 @@ Fusionar las funcionalidades del módulo financiero del parceiro en **nuestro fr
 
 ---
 
-## 9. Pendientes de decision (Rodrigo)
+## 9. Pendientes de decision (Rodrigo) — **RESUELTO 12/09**
 
-- [ ] ¿Reforzar RLS financiera (cerrar `ALL`) en esta iteración o después?
-- [ ] ¿`Financeiro.tsx` reemplaza o convive con `SuperAdminFinancial.tsx`?
-- [ ] ¿El `mes_a_receber` se escribe desde Properties (por corretor por mes) o se genera por trigger al cerrar venta?
+- [x] **RLS financiera:** CERRADA en esta iteración (fecho policy `ALL` de `financial_transactions`, reemplazo por policies autenticadas con patrón tenant). _Decisión Rodrigo: SIM 12/09._
+- [x] **`Financeiro.tsx` reemplaza a `SuperAdminFinancial.tsx`** en el front (fusión del parceiro sobre `Financeiro.tsx` destronca el de superadmin). _Decisión Rodrigo: SUBSTITUYE 12/09._
+- [x] **`mes_a_receber` se genera por TRIGGER** al fechar venta (no se escribe a mano desde Properties). Diseñar trigger sobre el cierre de venta. _Decisión Rodrigo: TRIGGER 12/09._
+
+---
+## 10. Implementación (tras decisiones 12/09)
+
+### 10.3 Trigger de cierre de venta — **IMPLEMENTADO y probado 12/09**
+- **Diseño:** `trg_generar_financiero_venta` → `AFTER UPDATE OF stage ON sales_records`, dispara SOLO cuando `stage='Vendido' AND OLD IS DISTINCT FROM 'Vendido'` (idempotente; NO al INSERT — corrige la inconsistencia previa de propiedades `sold` con ventas no cerradas).
+- **Genera transaccionalmente:**
+  - `income` cobranza al cliente: `amount=sale_value`, `name='Venta <prop> - <buyer>'`, `reference_type='sales_record'`, `source='trigger_venta'`.
+  - `expense` comisión SOLO si la propiedad define comisión: `valor_fixo`→`comissao_valor_total`; `porcentagem`→`sale_value*pct/100`; dividida en N cuotas según `mes_a_receber` (JSONB array). Sin config → NO genera gasto (no inventa montos).
+- **Prueba real (rollback):** propiedad `ae8d93ca` (porcentagem, pct=NULL) → generó 1 income 20000.00, 0 comisión. ✅
+- **Verificado por lectura de vuelta** + backup `audit_trigger_venta/before_20260913_002351/`.
+
+### 10.1 RLS — **APLICADO y verificado 12/09**
+- Dropeada `all_all_financial_transactions` (ALL, public). Reemplazada por 4 policies authenticated tenant-scoped (`tenant_id = get_my_tenant_id()`, patrón visits) + `financial_transactions_service_all` (service_role).
+- Backup: `audit_rls_financiero/before_20260913_000254/`. Verificado: 0 policies public abiertas.
+
+### 10.2 Front — **pendiente (decisión Rodrigo: SUBSTITUYE 12/09)**
+- Fusionar funcionalidades del parceiro sobre `Financeiro.tsx` (KPI, Comisiones/Repasos, VGV/Recharts, Exportar) + `use-financial.ts`.
+- **`Financeiro.tsx` SUBSTITUYE a `SuperAdminFinancial.tsx`** (distroncarlo del fluxo).
+- Corregir bloqueante: filtro `category` texto → `category_id` (JOIN `financial_categories`).
