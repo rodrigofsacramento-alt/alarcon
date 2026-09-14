@@ -369,7 +369,8 @@ export function useUpdateConversationSettings() {
         .from('conversations')
         .update({
           status,
-          agent_id: agentId,
+          // Nunca enviar '' como uuid: converte string vazia -> null
+          agent_id: agentId ? agentId : null,
         })
         .eq('id', conversationId)
         .select()

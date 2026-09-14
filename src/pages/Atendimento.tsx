@@ -30,7 +30,9 @@ import {
   Send,
   Image,
   Camera,
+  Video,
   Paperclip,
+  RefreshCcw,
   Calendar,
   FileText,
   FolderOpen,
@@ -604,6 +606,7 @@ function AtendimentoContent() {
 
   // Camera, Geolocation & Contact Sharing States
   const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [cameraFacing, setCameraFacing] = useState<"user" | "environment">("user");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactShareName, setContactShareName] = useState("");
   const [contactSharePhone, setContactSharePhone] = useState("");
@@ -622,6 +625,13 @@ function AtendimentoContent() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<BlobPart[]>([]);
   const recordingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Camera Video Recording States
+  const [isCameraRecording, setIsCameraRecording] = useState(false);
+  const [cameraRecordingTime, setCameraRecordingTime] = useState(0);
+  const cameraRecorderRef = useRef<MediaRecorder | null>(null);
+  const cameraChunksRef = useRef<BlobPart[]>([]);
+  const cameraTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Message quick actions states
   const [replyingTo, setReplyingTo] = useState<Message | null>(null);
@@ -1303,20 +1313,41 @@ function AtendimentoContent() {
   };
 
   // Camera capture controls
-  const handleTriggerCamera = async () => {
-    setIsCameraOpen(true);
+  const openCamera = async (facing: "user" | "environment") => {
     try {
-      setTimeout(async () => {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-        cameraStreamRef.current = stream;
-        if (cameraVideoRef.current) {
-          cameraVideoRef.current.srcObject = stream;
-        }
-      }, 300);
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing }, audio: true });
+      // Detener stream anterior si existe (evitar fuga de recursos al alternar cámara)
+      if (cameraStreamRef.current) {
+        cameraStreamRef.current.getTracks().forEach(track => track.stop());
+      }
+      cameraStreamRef.current = stream;
+      if (cameraVideoRef.current) {
+        cameraVideoRef.current.srcObject = stream;
+      }
     } catch (err) {
       toast({ title: "Erro ao acessar câmera", description: (err as Error).message || "Verifique as permissões de acesso à câmera.", variant: "destructive" });
-      setIsCameraOpen(false);
+      if (isCameraOpen) {
+        setIsCameraOpen(false);
+        setCameraFacing("user");
+      }
+      throw err;
     }
+  };
+
+  const handleTriggerCamera = async () => {
+    setCameraFacing("user");
+    setIsCameraOpen(true);
+    setTimeout(() => {
+      openCamera("user").catch(() => {});
+    }, 300);
+  };
+
+  // Alternar entre cámara frontal (user, selfie) e trasera (environment, o que ve o dispositivo)
+  const toggleCameraFacing = () => {
+    if (isCameraRecording) return;
+    const next = cameraFacing === "user" ? "environment" : "user";
+    setCameraFacing(next);
+    openCamera(next).catch(() => {});
   };
 
   const handleCapturePhoto = () => {
@@ -1329,10 +1360,15 @@ function AtendimentoContent() {
     
     const ctx = canvas.getContext('2d');
     if (ctx) {
-      // Draw reversed for normal mirror capture
-      ctx.translate(canvas.width, 0);
-      ctx.scale(-1, 1);
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      if (cameraFacing === "user") {
+        // Selfie: el preview ya mostraba espejado; deshacer el espejo para guardar la foto normal
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      } else {
+        // Cámara trasera (environment): capturar tal cual, sin espejo
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      }
       
       canvas.toBlob((blob) => {
         if (blob) {
@@ -1345,11 +1381,68 @@ function AtendimentoContent() {
   };
 
   const handleCloseCamera = () => {
+    if (isCameraRecording) cancelCameraVideoRecording();
     if (cameraStreamRef.current) {
       cameraStreamRef.current.getTracks().forEach(track => track.stop());
       cameraStreamRef.current = null;
     }
     setIsCameraOpen(false);
+  };
+
+  // Camera video recording (mismo patrón que audio: MediaRecorder sobre stream de cámara)
+  const startCameraVideoRecording = () => {
+    if (!cameraStreamRef.current || isCameraRecording) return;
+    try {
+      const recorder = new MediaRecorder(cameraStreamRef.current);
+      cameraRecorderRef.current = recorder;
+      cameraChunksRef.current = [];
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          cameraChunksRef.current.push(event.data);
+        }
+      };
+      recorder.start(200);
+      setIsCameraRecording(true);
+      setCameraRecordingTime(0);
+      if (cameraTimerRef.current) clearInterval(cameraTimerRef.current);
+      cameraTimerRef.current = setInterval(() => {
+        setCameraRecordingTime((prev) => prev + 1);
+      }, 1000);
+    } catch (err) {
+      toast({ title: "Erro ao iniciar vídeo", description: (err as Error).message || "Não foi possível grabar vídeo.", variant: "destructive" });
+    }
+  };
+
+  const stopAndSendCameraVideo = () => {
+    if (!cameraRecorderRef.current || !isCameraRecording) return;
+    cameraRecorderRef.current.onstop = async () => {
+      const videoBlob = new Blob(cameraChunksRef.current);
+      setIsCameraRecording(false);
+      if (cameraTimerRef.current) clearInterval(cameraTimerRef.current);
+      setIsCameraOpen(false);
+      cameraStreamRef.current?.getTracks().forEach(track => track.stop());
+      cameraStreamRef.current = null;
+      if (videoBlob.size === 0) {
+        toast({ title: "Erro ao enviar vídeo", description: "A gravação está vazia.", variant: "destructive" });
+        return;
+      }
+      // Extensão .mp4 para que o broker/Evolution use FFMPEG y convierta al formato WhatsApp
+      const file = new File([videoBlob], `camera_video_${Date.now()}.mp4`, { type: 'video/mp4' });
+      await uploadAndSendFile(file);
+    };
+    cameraRecorderRef.current.stop();
+  };
+
+  const cancelCameraVideoRecording = () => {
+    if (cameraRecorderRef.current && isCameraRecording) {
+      cameraRecorderRef.current.onstop = null;
+      cameraRecorderRef.current.stop();
+      cameraRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+    }
+    if (cameraTimerRef.current) clearInterval(cameraTimerRef.current);
+    setIsCameraRecording(false);
+    setCameraRecordingTime(0);
+    cameraChunksRef.current = [];
   };
 
   // Audio Recording functions
@@ -2187,7 +2280,11 @@ function AtendimentoContent() {
                           </div>
                           {(() => {
                             const stage = getFunnelStageLabel(conv.lead?.stage ?? conv.stage ?? null);
-                            const responsible = conv.lead?.responsible?.full_name?.trim();
+                            // Atendente real da conversa é conv.agent (conversations.agent_id).
+                            // Antes lia apenas lead.responsible, mostrando 'Sem atendente' em 1.854
+                            // conversas que tinham agent atribuído mas lead sem responsible_id.
+                            const responsible =
+                              conv.agent?.full_name?.trim() || conv.lead?.responsible?.full_name?.trim();
                             return (
                               <p className="text-xs text-muted-foreground truncate mt-0.5">
                                 {responsible ? `${stage} • ${responsible}` : `${stage} • Sem atendente`}
@@ -3909,13 +4006,28 @@ function AtendimentoContent() {
               </Button>
             </div>
             
+            <div className="flex items-center justify-center gap-2 pb-1">
+              <Button
+                variant={cameraFacing === "user" ? "secondary" : "outline"}
+                size="sm"
+                onClick={toggleCameraFacing}
+                disabled={isCameraRecording}
+                className="gap-1.5 text-xs"
+                title={cameraFacing === "user" ? "Cambiar a cámara traseira" : "Cambiar a cámara frontal"}
+              >
+                <RefreshCcw className="h-3.5 w-3.5" />
+                {cameraFacing === "user" ? "Frontal" : "Traseira"}
+              </Button>
+              <span className="text-[11px] text-muted-foreground">Alternar câmara</span>
+            </div>
+            
             <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black border border-border shadow-inner">
               <video 
                 ref={cameraVideoRef} 
                 autoPlay 
                 playsInline 
                 muted 
-                className="w-full h-full object-cover scale-x-[-1]" 
+                className={`w-full h-full object-cover ${cameraFacing === "user" ? "scale-x-[-1]" : ""}`} 
               />
               <div className="absolute top-2 right-2 px-2 py-1 rounded bg-black/60 backdrop-blur text-[10px] text-white font-medium flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> LIVE
@@ -3923,19 +4035,46 @@ function AtendimentoContent() {
             </div>
             
             <div className="flex items-center justify-center gap-3 pt-2">
-              <Button 
-                variant="outline" 
-                onClick={handleCloseCamera}
-                className="flex-1 rounded-xl"
-              >
-                Cancelar
-              </Button>
-              <Button 
-                onClick={handleCapturePhoto}
-                className="flex-1 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-medium gap-2 shadow-lg"
-              >
-                <Camera className="h-4 w-4" /> Capturar Foto
-              </Button>
+              {isCameraRecording ? (
+                <>
+                  <Button
+                    variant="outline"
+                    onClick={cancelCameraVideoRecording}
+                    className="flex-1 rounded-xl"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    onClick={stopAndSendCameraVideo}
+                    className="flex-1 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium gap-2 shadow-lg"
+                  >
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-200 animate-pulse" />
+                    Enviar ({formatRecordingTime(cameraRecordingTime)})
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    onClick={handleCloseCamera}
+                    className="flex-1 rounded-xl"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    onClick={handleCapturePhoto}
+                    className="flex-1 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-medium gap-2 shadow-lg"
+                  >
+                    <Camera className="h-4 w-4" /> Capturar Foto
+                  </Button>
+                  <Button
+                    onClick={startCameraVideoRecording}
+                    className="flex-1 rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium gap-2 shadow-lg"
+                  >
+                    <Video className="h-4 w-4" /> Grabar Vídeo
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
