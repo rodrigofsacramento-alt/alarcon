@@ -28,6 +28,7 @@ import {
   ChevronRight,
   LogOut,
   Megaphone,
+  Network,
 } from "lucide-react";
 
 interface NavItemProps {
@@ -183,6 +184,7 @@ export function Sidebar({ activeModule, onModuleChange, collapsed, onCollapsedCh
     { id: "financeiro", icon: <DollarSign className="h-5 w-5" />, label: "Financeiro", badge: undefined as number | undefined, path: "/financeiro", roles: ['admin', 'manager'] as string[] },
     { id: "marketing", icon: <Megaphone className="h-5 w-5" />, label: "Marketing", badge: undefined as number | undefined, path: "/marketing", roles: ['admin', 'manager'] as string[] },
     { id: "corretores", icon: <UserCheck className="h-5 w-5" />, label: "Corretores", badge: undefined as number | undefined, path: "/corretores", roles: ['admin', 'manager'] as string[] },
+    { id: "rh", icon: <Network className="h-5 w-5" />, label: "RH", badge: undefined as number | undefined, path: "/rh", roles: ['admin', 'manager'] as string[] },
     { id: "clientes", icon: <Smartphone className="h-5 w-5" />, label: "Clientes", badge: undefined as number | undefined, path: "/clientes", roles: ['admin', 'manager'] as string[] },
   ];
 
