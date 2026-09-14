@@ -545,10 +545,10 @@ function AtendimentoContent() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"meus" | "equipe" | "grupos" | "nao-lidas" | "arquivadas">(() => {
+  const [activeTab, setActiveTab] = useState<"meus" | "equipe" | "grupos" | "nao-lidas" | "nao-direcionados" | "arquivadas">(() => {
     try {
       const saved = localStorage.getItem("atendimento_active_tab");
-      return saved === "meus" || saved === "equipe" || saved === "grupos" || saved === "nao-lidas" || saved === "arquivadas" ? saved : "meus";
+      return saved === "meus" || saved === "equipe" || saved === "grupos" || saved === "nao-lidas" || saved === "nao-direcionados" || saved === "arquivadas" ? saved : "meus";
     } catch {
       return "meus";
     }
@@ -665,6 +665,11 @@ function AtendimentoContent() {
 
   const { user, profile, isPhoneRestricted } = useAuth();
   const isAgent = profile?.role === 'agent';
+  // Definition de "tiene dueño / direcionado": conversations.agent_id es el campo
+  // operativo; también se valida agent (join) y lead.responsible (join). No hay
+  // responsible_id en conversations ni whatsapp_contacts — ver owner-field-orphan-filter.
+  const isDirecionado = (conv: Conversation) =>
+    Boolean(conv.agent_id || conv.agent?.id || conv.lead?.responsible?.id);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const createLeadMutation = useCreateLead();
   const createVisitMutation = useCreateVisit();
@@ -1107,8 +1112,12 @@ function AtendimentoContent() {
         if (isAgent) return false;
         return c.status !== 'pending' && !isGroup;
       case 'nao-lidas':
-        // "Não lidas": tudo pending OU com unread_count > 0, excluindo grupos
-        return (c.status === 'pending' || (c.unread_count || 0) > 0) && !isGroup;
+        // "Não lidas": solo contatos CON dueño (direcionados) y con mensajes sin leer; no más órfanos
+        return isDirecionado(c) && (c.unread_count || 0) > 0 && !isGroup;
+      case 'nao-direcionados':
+        // "Não Direcionados": contatos SIN dueño (órfanos), solo admin/manager; no incluye grupos
+        if (isAgent) return false;
+        return !isDirecionado(c) && !isGroup;
       case 'arquivadas':
         return c.status === 'closed' && !isGroup;
       default:
@@ -1116,11 +1125,12 @@ function AtendimentoContent() {
     }
   });
 
-  // Auto-select first conversation based on filters
+  // Auto-open conversation ONLY on deep link (Lead / Dashboard balão). En acceso
+  // estándar (menú) selectedConvId se queda null -> se muestra la LISTA en mobile.
   useEffect(() => {
     if (!selectedConvId && conversations.length > 0) {
       const state = location.state as any;
-      
+
       // If we came from the Dashboard icon with lead info, open the New Message modal
       if (state?.leadToMessage && !isCreateOpen && !hasAutoOpenedModalRef.current) {
         hasAutoOpenedModalRef.current = true;
@@ -1128,13 +1138,15 @@ function AtendimentoContent() {
         return; // Don't auto-select a conversation so the modal stays in focus
       }
 
+      // Deep link real: el balón del Lead navega con ?search=<tel/email> (Leads.tsx openAtendimentoForLead).
+      // Solo en este caso resolvemos y abrimos la 1ª coincidencia; nunca conversations[0] en acceso libre,
+      // para no fuerzar un chat al entrar por el menú mobile.
       if (searchQuery) {
         if (filteredConversations.length > 0) {
           setSelectedConvId(filteredConversations[0].id);
         }
-      } else {
-        setSelectedConvId(conversations[0].id);
       }
+      // else: acceso estándar -> permanecer en lista (selectedConvId = null)
     }
   }, [conversations, filteredConversations, selectedConvId, searchQuery, location.state, isCreateOpen]);
 
@@ -2033,7 +2045,7 @@ function AtendimentoContent() {
                   />
                 </div>
                 {/* Tabs com contadores estilo AtendeChat */}
-                <div className={cn("grid gap-1", isAgent ? "grid-cols-[1fr_1fr_1.2fr_38px]" : "grid-cols-[1fr_1fr_1fr_1.2fr_38px]")}>
+                <div className={cn("grid gap-1", isAgent ? "grid-cols-[1fr_1fr_1.2fr_38px]" : "grid-cols-[1fr_1fr_1fr_1fr_1.2fr_38px]")}>
                   <Button
                     variant={activeTab === "meus" ? "cta" : "ghost"}
                     size="sm"
@@ -2095,18 +2107,42 @@ function AtendimentoContent() {
                     <Zap className="h-3 w-3 shrink-0" />
                     Não lidas
                     {(() => {
-                      const n = conversations.filter((c) => 
-                        c.status !== 'deleted' && 
-                        c.subject !== '[deleted]' && 
-                        (c.client as any)?.is_group !== true && 
-                        !(c.whatsapp_contact && c.whatsapp_contact[0]?.is_group === true) && 
-                        (c.status === 'pending' || (c.unread_count || 0) > 0)
+                      const n = conversations.filter((c) =>
+                        c.status !== 'deleted' &&
+                        c.subject !== '[deleted]' &&
+                        (c.client as any)?.is_group !== true &&
+                        !(c.whatsapp_contact && c.whatsapp_contact[0]?.is_group === true) &&
+                        Boolean(c.agent_id || c.agent?.id || c.lead?.responsible?.id) &&
+                        (c.unread_count || 0) > 0
                       ).length;
                       return n > 0 ? (
                         <span className="ml-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">{n}</span>
                       ) : null;
                     })()}
                   </Button>
+                  {!isAgent && (
+                    <Button
+                      variant={activeTab === "nao-direcionados" ? "cta" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveTab("nao-direcionados")}
+                      className="min-w-0 text-xs relative px-2 gap-1"
+                    >
+                      <UserPlus className="h-3 w-3 shrink-0" />
+                      Não direc.
+                      {(() => {
+                        const n = conversations.filter((c) =>
+                          c.status !== 'deleted' &&
+                          c.subject !== '[deleted]' &&
+                          (c.client as any)?.is_group !== true &&
+                          !(c.whatsapp_contact && c.whatsapp_contact[0]?.is_group === true) &&
+                          !(c.agent_id || c.agent?.id || c.lead?.responsible?.id)
+                        ).length;
+                        return n > 0 ? (
+                          <span className="ml-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-amber-500 px-1 text-[9px] font-bold text-white">{n}</span>
+                        ) : null;
+                      })()}
+                    </Button>
+                  )}
                   <Button
                     variant={activeTab === "arquivadas" ? "cta" : "ghost"}
                     size="sm"
@@ -2292,8 +2328,8 @@ function AtendimentoContent() {
                             );
                           })()}
 
-                          {/* Ações rápidas para conversas pendentes (não lidas / sem agente) */}
-                          {conv.status === 'pending' && (
+                          {/* Ações rápidas para conversas ÓRFANAS (sem dono) — centralizadas en "Não Direcionados" */}
+                          {!isDirecionado(conv) && (
                             <div className="flex gap-1 mt-2 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                               <Button
                                 size="sm"
@@ -2513,7 +2549,11 @@ function AtendimentoContent() {
                         variant="ghost"
                         size="icon"
                         className="lg:hidden shrink-0 -ml-2 mr-1"
-                        onClick={() => setSelectedConvId(null)}
+                        onClick={() => {
+                          setSelectedConvId(null); // state clear: vuelve a la lista
+                          setSearchQuery("");       // limpia deep link para no re-succionar el chat
+                          setSearchParams({}, { replace: true });
+                        }}
                       >
                         <ArrowLeft className="h-5 w-5" />
                       </Button>

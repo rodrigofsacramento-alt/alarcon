@@ -63,6 +63,7 @@ const Index = () => {
               onOpenChange={setMobileMenuOpen}
             />
           }
+          onMobileMenuClick={() => setMobileMenuOpen(true)}
         />
 
         <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
