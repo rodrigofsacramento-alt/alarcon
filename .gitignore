@@ -27,3 +27,6 @@ build/
 backup-inicial-*/
 *HISTORICO_CONVERSAS_E_PROMPTS*
 copia-do004_codigos_fonte_locais/Estate.AI-main/node_modules/
+
+# Hermes internal workspace
+.hermes/

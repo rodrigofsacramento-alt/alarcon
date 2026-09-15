@@ -18,8 +18,9 @@ import {
   ClipboardList,
   FileCheck,
   Briefcase,
-  Megaphone,
-  FileText,
+    Megaphone,
+    FileText,
+    Monitor,
 } from "lucide-react";
 
 interface MobileSidebarProps {
@@ -42,7 +43,8 @@ const allNavItems = [
   { id: "financeiro", icon: DollarSign, label: "Financeiro", path: "/financeiro", roles: ['admin', 'manager'] as string[] },
   { id: "marketing", icon: Megaphone, label: "Marketing", path: "/marketing", roles: ['admin', 'manager'] as string[] },
   { id: "corretores", icon: UserCheck, label: "Corretores", path: "/corretores", roles: ['admin', 'manager'] as string[] },
-  { id: "clientes", icon: Smartphone, label: "Clientes", path: "/clientes", roles: ['admin', 'manager'] as string[] },
+    { id: "tecnologia", icon: Monitor, label: "Tecnologia", path: "/tecnologia", roles: ['admin', 'manager', 'agent'] as string[] },
+    { id: "clientes", icon: Smartphone, label: "Clientes", path: "/clientes", roles: ['admin', 'manager'] as string[] },
 ];
 
 export function MobileSidebar({ activeModule, onModuleChange, open, onOpenChange }: MobileSidebarProps) {
@@ -68,7 +70,7 @@ export function MobileSidebar({ activeModule, onModuleChange, open, onOpenChange
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="left" className="w-72 p-0 bg-sidebar border-sidebar-border">
         <div className="flex items-center h-16 px-4 border-b border-sidebar-border">
-          <img src={logoEstate} alt="Estate.ia" className="h-10 object-contain" />
+          <img src={logoEstate} alt="Estate.AI" className="h-10 object-contain" />
         </div>
 
         <nav className="flex-1 overflow-y-auto custom-scrollbar px-3 py-4 space-y-1">

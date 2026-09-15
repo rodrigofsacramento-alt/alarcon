@@ -82,7 +82,7 @@ export default function CorretorDashboard() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
               <Building2 className="h-6 w-6" />
-              <span className="font-bold text-lg">Estate.ia</span>
+              <span className="font-bold text-lg">Estate.AI</span>
               <span className="text-sm opacity-75 hidden sm:inline">| Painel do Corretor</span>
             </div>
             <div className="flex items-center gap-2">

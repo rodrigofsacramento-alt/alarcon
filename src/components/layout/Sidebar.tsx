@@ -29,6 +29,7 @@ import {
   LogOut,
   Megaphone,
   Network,
+  Monitor,
 } from "lucide-react";
 
 interface NavItemProps {
@@ -185,6 +186,7 @@ export function Sidebar({ activeModule, onModuleChange, collapsed, onCollapsedCh
     { id: "marketing", icon: <Megaphone className="h-5 w-5" />, label: "Marketing", badge: undefined as number | undefined, path: "/marketing", roles: ['admin', 'manager'] as string[] },
     { id: "corretores", icon: <UserCheck className="h-5 w-5" />, label: "Corretores", badge: undefined as number | undefined, path: "/corretores", roles: ['admin', 'manager'] as string[] },
     { id: "rh", icon: <Network className="h-5 w-5" />, label: "RH", badge: undefined as number | undefined, path: "/rh", roles: ['admin', 'manager'] as string[] },
+    { id: "tecnologia", icon: <Monitor className="h-5 w-5" />, label: "Tecnologia", badge: undefined as number | undefined, path: "/tecnologia", roles: ['admin', 'manager', 'agent'] as string[] },
     { id: "clientes", icon: <Smartphone className="h-5 w-5" />, label: "Clientes", badge: undefined as number | undefined, path: "/clientes", roles: ['admin', 'manager'] as string[] },
   ];
 
@@ -216,7 +218,7 @@ export function Sidebar({ activeModule, onModuleChange, collapsed, onCollapsedCh
       )}>
         <img
           src={logoEstate}
-          alt="Estate.ia"
+          alt="Estate.AI"
           className={cn(
             "h-14 w-[132px] object-contain object-left transition-all",
             collapsed && "h-10 w-10 object-center"

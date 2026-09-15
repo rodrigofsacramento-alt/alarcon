@@ -20,75 +20,75 @@ import {
   ShieldQuestion,
 } from "lucide-react";
 
-// ─── Papéis definidos no PMBOK - Agencia Hut ───
+// ─── Papéis definidos no Modelo de Operação Ahut ───
 const ROLES = [
   {
     id: "jota",
     nome: "Jota",
     cargo: "Proprietário",
-    pmo: "Sponsor (Patrocinador) e Gestor de Portfólio",
+    pmo: "Patrocinador do Negócio e Diretor de Portfólio",
     foco: "Comercial, Network e Direção de Negócios",
-    grupos: "Iniciação, Monitoramento & Controle (nível estratégico)",
+    grupos: "Geração de Leads, Acompanhamento no CRM (nível estratégico)",
     icon: Briefcase,
     cor: "bg-primary/10 text-primary",
     resumo:
-      "Aprova o Termo de Abertura (Project Charter), valida orçamentos e viabilidade financeira, e gerencia stakeholders estratégicos. Prospecta contas Enterprise, mas passa a execução para a operação. Revisa fluxo de caixa com Chloe e aprova limites de desconto.",
+      "Aprova a abertura de propostas e contratos, valida orçamentos e viabilidade financeira, e gerencia os clientes-chave. Prospecta contas Enterprise, mas repassa a execução para a operação. Revisa o fluxo de caixa com Chloe e aprova limites de desconto.",
   },
   {
     id: "chris",
     nome: "Chris Racanelli",
     cargo: "Business Advisor & CRO",
-    pmo: "Estrategista Chefe, Arquiteta de Soluções e Gestora de Mudanças",
+    pmo: "Estrategista Chefe, Arquiteta de Soluções e Gestora de Crescimento",
     foco: "Estruturação, Neuropsicologia Corporativa, Escalabilidade e Otimização",
-    grupos: "Planejamento, Execução, Monitoramento & Controle",
+    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: TrendingUp,
     cor: "bg-accent/10 text-accent",
     resumo:
-      "Define escopo e cria a WBS, desenha a arquitetura das soluções, treina a equipe com neuropsicologia corporativa e conduz controle integrado de mudanças. Analisa conversão (CRO) com ciclo PDCA e faz auditorias de qualidade por amostragem.",
+      "Define o escopo do serviço e estrutura o plano de trabalho, desenha a arquitetura das soluções, treina a equipe com neuropsicologia corporativa e conduz o controle de mudanças de escopo. Analisa a conversão (CRO) em ciclos de melhoria contínua e faz auditorias de qualidade por amostragem.",
   },
   {
     id: "chloe",
     nome: "Chloe",
     cargo: "Financeiro",
-    pmo: "Gestora de Custos, Aquisições e Gestora Financeira",
+    pmo: "Gestora Financeira, de Custos e de Aquisições",
     foco: "Saúde financeira, controle de custos, Imigraciones e Compliance",
-    grupos: "Planejamento, Execução, Monitoramento & Controle",
+    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: Landmark,
     cor: "bg-success/10 text-success",
     resumo:
-      "Estima e controla custos, precifica serviços e garante margem. Faz dashboard de DRE, revisa fluxo de caixa com Jota, padroniza checklist de Imigraciones e gerencia contratos com fornecedores.",
+      "Estima e controla custos, precifica serviços e garante margem. Faz o dashboard de DRE, revisa o fluxo de caixa com Jota, padroniza o checklist de Imigraciones e gerencia contratos com fornecedores.",
   },
   {
     id: "luciana",
     nome: "Luciana",
     cargo: "Administração",
-    pmo: "PMO Administrativo, Gestora da Informação e Compliance Documental",
+    pmo: "Gestora Administrativa, da Informação e de Compliance Documental",
     foco: "Documentação, organização de processos administrativos, encerramento e arquivo",
-    grupos: "Planejamento, Execução, Monitoramento & Controle, Encerramento",
+    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM, Fechamento & Pós-venda",
     icon: FileText,
     cor: "bg-warning/10 text-warning",
     resumo:
-      "Arquiva projetos, organiza documentação e garante conformidade documental. Mantém estrutura de pastas padronizada por cliente, controla assinaturas (DocuSign) e registra lições aprendidas.",
+      "Arquiva projetos, organiza a documentação e garante a conformidade documental. Mantém a estrutura de pastas padronizada por cliente, controla assinaturas (DocuSign) e registra lições aprendidas.",
   },
   {
     id: "igor",
     nome: "Igor",
     cargo: "Gerente de Vendas",
-    pmo: "Gestor de Requisitos, Aquisição de Clientes e Líder de Equipe",
+    pmo: "Gestor de Necessidades, Aquisição de Clientes e Líder da Equipe Comercial",
     foco: "Liderar a força de vendas, garantir o pipeline e fechar negócios",
-    grupos: "Iniciação, Execução",
+    grupos: "Geração de Leads, Atendimento & Venda",
     icon: Users,
     cor: "bg-primary/10 text-primary",
     resumo:
-      "Coleta requisitos (SPIN Selling), lidera a equipe de vendas (5 profissionais) com Daily de 15 min, controla o funil no CRM e acompanha conversão, ticket médio e ciclo de vendas.",
+      "Levanta necessidades (SPIN Selling), lidera a equipe de vendas (5 profissionais) com Daily de 15 min, controla o funil no CRM e acompanha conversão, ticket médio e ciclo de vendas.",
   },
   {
     id: "vendas",
     nome: "Equipe de Vendas (5)",
     cargo: "Vendedores",
-    pmo: "Executores da Fase de Iniciação Comercial",
+    pmo: "Executores do Fluxo de Geração e Atendimento Comercial",
     foco: "Prospecção, qualificação, apresentação e fechamento",
-    grupos: "Iniciação",
+    grupos: "Geração de Leads, Atendimento & Venda",
     icon: UserRound,
     cor: "bg-muted text-foreground",
     resumo:
@@ -98,83 +98,83 @@ const ROLES = [
     id: "sebastian",
     nome: "Sebastian",
     cargo: "Gerente Operacional",
-    pmo: "Gerente de Execução (Delivery Manager) e Gestor de Recursos",
+    pmo: "Gerente de Operação, Entrega e Recursos",
     foco: "Fazer a entrega acontecer no prazo e com os recursos certos",
-    grupos: "Planejamento, Execução, Monitoramento & Controle",
+    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: Wrench,
     cor: "bg-accent/10 text-accent",
     resumo:
-      "Planeja e estima recursos, direciona a execução e coordena o cronograma. Usa WBS da Chris, quadros Kanban e reajusta o plano proativamente em caso de atrasos.",
+      "Planeja e estima recursos, direciona a execução e coordena o cronograma. Usa o plano de trabalho da Chris, quadros Kanban e reajusta o plano proativamente em caso de atrasos.",
   },
   {
     id: "rodrigo",
     nome: "Rodrigo",
     cargo: "Sistemas e Marketing Digital",
-    pmo: "Gestor de Comunicações Externas, Gestor de Conhecimento e Gestor de Tecnologia",
+    pmo: "Gestor de Comunicação, Conhecimento e Tecnologia",
     foco: "Geração de leads, infraestrutura tecnológica e automação",
-    grupos: "Planejamento, Execução, Monitoramento & Controle",
+    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: MonitorSmartphone,
     cor: "bg-success/10 text-success",
     resumo:
-      "Planeja campanhas (pago e orgânico), analisa CAC, administra o CRM e o sistema de gestão de projetos, mantém integrações e automações e faz backups regulares.",
+      "Planeja campanhas (pago e orgânico), analisa CAC, administra o CRM e o sistema de gestão, mantém integrações e automações e faz backups regulares.",
   },
 ];
 
 // ─── Papéis faltantes (a preencher/treinar) ───
 const GAPS = [
   {
-    papel: "A. Gerente de Projetos (PMO / Project Manager)",
-    processos: "Develop Schedule, Control Schedule, Monitor and Control Project Work, Manage Project Knowledge, Close Project, Lessons Learned",
-    alocacao: "Temporário: Sebastian (suporte estrutura e treinamento de Chris)",
+    papel: "A. Coordenador de Fluxo Operacional",
+    processos: "Controlar cronograma e prazos, acompanhar o trabalho no CRM, organizar o conhecimento e encerrar com lições aprendidas",
+    alocacao: "Temporário: Sebastian (suporte de estrutura e treinamento de Chris)",
     icon: GitBranch,
   },
   {
-    papel: "B. Analista de Qualidade (QA / Quality Assurance)",
-    processos: "Plan Quality Management, Manage Quality, Control Quality",
+    papel: "B. Analista de Qualidade (QA / Garantia de Qualidade)",
+    processos: "Padronizar checklists, acompanhar a qualidade das entregas e controlar a conformidade",
     alocacao: "Temporário: Luciana (checklists) e Chris (auditoria estratégica)",
     icon: ClipboardCheck,
   },
   {
     papel: "C. Analista de Riscos",
-    processos: "Plan Risk Management, Identify Risks, Perform Qualitative Risk Analysis, Plan Risk Responses, Monitor Risks",
+    processos: "Identificar riscos comerciais e financeiros, avaliar impacto, definir respostas e monitorar",
     alocacao: "Temporário: Chris (visão estratégica) + Chloe (riscos financeiros)",
     icon: ShieldQuestion,
   },
 ];
 
-// ─── Matriz RACI integral (extraída do doc PMBOK) ───
+// ─── Matriz de responsabilidades do fluxo operacional Ahut ───
 const RACI_ROWS: [string, string, string, string, string][] = [
-  ["Develop Project Charter", "Chris", "Jota", "Igor", "Todos"],
-  ["Identify Stakeholders", "Chris", "Jota", "Igor", "Todos"],
-  ["Collect Requirements", "Igor + Vendas", "Igor", "Chris", "Sebastian"],
-  ["Define Scope", "Chris", "Chris", "Igor", "Sebastian"],
-  ["Create WBS", "Chris", "Chris", "Sebastian", "Todos"],
-  ["Estimate Costs", "Chloe", "Chloe", "Chris", "Jota"],
-  ["Determine Budget", "Chloe", "Jota", "Chris", "Todos"],
-  ["Plan Resources", "Sebastian", "Sebastian", "Chris", "Chloe"],
-  ["Estimate Duration", "[PMO]", "Sebastian", "Chris", "Chloe"],
-  ["Develop Schedule", "[PMO]", "Sebastian", "Chris", "Chloe"],
-  ["Plan Quality", "[QA]", "Chris", "Luciana", "Todos"],
-  ["Plan Risks", "[Risco]", "Chris", "Chloe", "Todos"],
-  ["Plan Communications", "Rodrigo", "Chris", "Jota", "Todos"],
-  ["Plan Procurements", "Chloe", "Jota", "Luciana", "Todos"],
-  ["Direct & Manage Work", "Sebastian + Equipe", "Sebastian", "Chris", "Jota"],
-  ["Manage Communications", "Rodrigo", "Chris", "Todos", "Todos"],
-  ["Manage Quality", "[QA]", "Chris", "Sebastian", "Todos"],
-  ["Acquire Resources", "Sebastian", "Sebastian", "Chris", "Chloe"],
-  ["Develop Team", "Chris", "Chris", "Igor, Sebastian", "Todos"],
-  ["Manage Team", "Sebastian + Igor", "Sebastian", "Chris", "Jota"],
-  ["Manage Stakeholder Engagement", "Chris + Jota", "Jota", "Todos", "Todos"],
-  ["Monitor & Control Work", "Chris + Sebastian", "Chris", "[PMO]", "Jota"],
-  ["Control Schedule", "[PMO]", "Sebastian", "Chris", "Jota"],
-  ["Control Costs", "Chloe", "Chloe", "Chris", "Jota"],
-  ["Control Quality", "[QA]", "Chris", "Sebastian", "Jota"],
-  ["Monitor Risks", "[Risco]", "Chris", "Chloe", "Jota"],
-  ["Control Procurements", "Chloe + Luciana", "Chloe", "Jota", "Todos"],
-  ["Perform Integrated Change Control", "Chris", "Chris", "Jota", "Todos"],
-  ["Monitor Stakeholder Engagement", "Chris", "Chris", "Jota", "Todos"],
-  ["Close Project", "Chris + Luciana", "Chris", "Jota", "Todos"],
-  ["Lessons Learned", "[PMO]", "Chris", "Todos", "Todos"],
+  ["Abrir Proposta / Contrato", "Chris", "Jota", "Igor", "Todos"],
+  ["Mapear Clientes-chave", "Chris", "Jota", "Igor", "Todos"],
+  ["Levantar Necessidades", "Igor + Vendas", "Igor", "Chris", "Sebastian"],
+  ["Definir Escopo", "Chris", "Chris", "Igor", "Sebastian"],
+  ["Estruturar Plano de Trabalho", "Chris", "Chris", "Sebastian", "Todos"],
+  ["Estimar Custos", "Chloe", "Chloe", "Chris", "Jota"],
+  ["Definir Orçamento", "Chloe", "Jota", "Chris", "Todos"],
+  ["Planejar Recursos", "Sebastian", "Sebastian", "Chris", "Chloe"],
+  ["Estimar Prazos", "[Fluxo]", "Sebastian", "Chris", "Chloe"],
+  ["Montar Cronograma", "[Fluxo]", "Sebastian", "Chris", "Chloe"],
+  ["Planejar Qualidade", "[QA]", "Chris", "Luciana", "Todos"],
+  ["Planejar Riscos", "[Risco]", "Chris", "Chloe", "Todos"],
+  ["Planejar Comunicação", "Rodrigo", "Chris", "Jota", "Todos"],
+  ["Planejar Aquisições", "Chloe", "Jota", "Luciana", "Todos"],
+  ["Conduzir o Trabalho", "Sebastian + Equipe", "Sebastian", "Chris", "Jota"],
+  ["Gerir a Comunicação", "Rodrigo", "Chris", "Todos", "Todos"],
+  ["Gerir a Qualidade", "[QA]", "Chris", "Sebastian", "Todos"],
+  ["Adquirir Recursos", "Sebastian", "Sebastian", "Chris", "Chloe"],
+  ["Desenvolver a Equipe", "Chris", "Chris", "Igor, Sebastian", "Todos"],
+  ["Gerir a Equipe", "Sebastian + Igor", "Sebastian", "Chris", "Jota"],
+  ["Gerir o Relacionamento com Clientes", "Chris + Jota", "Jota", "Todos", "Todos"],
+  ["Monitorar e Controlar o Trabalho", "Chris + Sebastian", "Chris", "[Fluxo]", "Jota"],
+  ["Controlar o Cronograma", "[Fluxo]", "Sebastian", "Chris", "Jota"],
+  ["Controlar Custos", "Chloe", "Chloe", "Chris", "Jota"],
+  ["Controlar Qualidade", "[QA]", "Chris", "Sebastian", "Jota"],
+  ["Monitorar Riscos", "[Risco]", "Chris", "Chloe", "Jota"],
+  ["Controlar Aquisições", "Chloe + Luciana", "Chloe", "Jota", "Todos"],
+  ["Controlar Mudanças de Escopo", "Chris", "Chris", "Jota", "Todos"],
+  ["Monitorar a Satisfação do Cliente", "Chris", "Chris", "Jota", "Todos"],
+  ["Fechar Proposta / Entrega", "Chris + Luciana", "Chris", "Jota", "Todos"],
+  ["Lições Aprendidas", "[Fluxo]", "Chris", "Todos", "Todos"],
 ];
 
 const LEGEND: { letra: string; cor: string; sigla: string; desc: string }[] = [
@@ -189,8 +189,8 @@ export default function Rh() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [faseFiltro, setFaseFiltro] = useState<string>("todos");
 
-  // Process groups (vertical) para o filtro
-  const gruposFiltro = ["todos", "Iniciação", "Planejamento", "Execução", "Monitoramento & Controle", "Encerramento"];
+  // Fases do fluxo operacional (vertical) para o filtro
+  const gruposFiltro = ["todos", "Geração de Leads", "Qualificação & Proposta", "Atendimento & Venda", "Acompanhamento no CRM", "Fechamento & Pós-venda"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -209,7 +209,7 @@ export default function Rh() {
       <div className={cn("flex flex-col flex-1", sidebarCollapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
         <Header
           title="Recursos Humanos (RH)"
-          subtitle="Organograma da empresa e matriz de responsabilidades RACI (PMBOK)"
+          subtitle="Organograma e matriz de responsabilidades do fluxo operacional Ahut"
           onMobileMenuClick={() => setMobileOpen(true)}
         />
 
@@ -222,13 +222,14 @@ export default function Rh() {
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-foreground">
-                  Estrutura PMBOK da Agência Hut
+                  Estrutura Operacional da Agência Hut
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Mapeamento dos profissionais nos 5 grupos de processos do PMBOK (Iniciação,
-                  Planejamento, Execução, Monitoramento &amp; Controle, Encerramento) e nas 10 áreas
-                  de conhecimento, com matriz RACI de responsabilidades. Fonte: documento PMBOK —
-                  Agência Hut (Manus AI).
+                  Modelo de Operação Ahut: mapeamento dos profissionais nos ciclos do fluxo
+                  operacional (Geração de Leads → Qualificação &amp; Proposta → Atendimento &amp; Venda →
+                  Acompanhamento no CRM → Fechamento &amp; Pós-venda), com matriz de responsabilidades
+                  própria desenhada a partir do jeito real de trabalhar da agência (CRM, funil,
+                  quadros e meritocracia).
                 </p>
               </div>
             </div>
@@ -295,7 +296,7 @@ export default function Rh() {
                       </div>
                     </div>
                     <div className="mt-3 space-y-2 text-sm">
-                      <p><span className="text-muted-foreground">Papel PMBOK:</span> <span className="text-foreground">{r.pmo}</span></p>
+                      <p><span className="text-muted-foreground">Papel no fluxo:</span> <span className="text-foreground">{r.pmo}</span></p>
                       <p><span className="text-muted-foreground">Foco:</span> <span className="text-foreground">{r.foco}</span></p>
                       <p><span className="text-muted-foreground">Grupos:</span> <span className="text-foreground">{r.grupos}</span></p>
                       <p className="text-muted-foreground leading-relaxed">{r.resumo}</p>
@@ -369,7 +370,7 @@ export default function Rh() {
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b border-border/40 text-xs text-muted-foreground">
-                    <th className="px-4 py-3">Processo PMBOK</th>
+                    <th className="px-4 py-3">Processo do fluxo</th>
                     <th className="px-4 py-3 text-center">R</th>
                     <th className="px-4 py-3 text-center">A</th>
                     <th className="px-4 py-3 text-center">C</th>
@@ -380,16 +381,19 @@ export default function Rh() {
                   {RACI_ROWS.map((row, idx) => {
                     const processo = row[0];
                     const [_, r, a, c, i] = row;
-                    // filtro simples por palavra-chave
+                    // filtro simples por palavra-chave por fase do fluxo
                     if (faseFiltro !== "todos") {
-                      const fase = faseFiltro.toLowerCase().replace("& ", "").replace("controle", "control");
-                      // Palavras-chave por fase para agrupar visualmente
                       const inFase =
-                        (faseFiltro === "Iniciação" && /Charter|Stakeholders|Requirements|Scope|WBS/.test(processo)) ||
-                        (faseFiltro === "Planejamento" && /Estimate|Budget|Resources|Duration|Schedule|Quality|Risks|Communications|Procurements|Scope|WBS/.test(processo)) ||
-                        (faseFiltro === "Execução" && /Direct|Manage Communications|Manage Quality|Acquire|Develop Team|Manage Team|Manage Stakeholder Engagement/.test(processo)) ||
-                        (faseFiltro === "Monitoramento & Controle" && /Monitor|Control/.test(processo)) ||
-                        (faseFiltro === "Encerramento" && /Close|Lessons/.test(processo));
+                        (faseFiltro === "Geração de Leads" &&
+                          /Abrir Proposta|Mapear Clientes|Levantar Necessidades|Definir Escopo|Estruturar Plano/.test(processo)) ||
+                        (faseFiltro === "Qualificação & Proposta" &&
+                          /Estimar Custos|Definir Orçamento|Planejar Recursos|Estimar Prazos|Montar Cronograma|Planejar Qualidade|Planejar Riscos|Planejar Comunicação|Planejar Aquisições/.test(processo)) ||
+                        (faseFiltro === "Atendimento & Venda" &&
+                          /Conduzir o Trabalho|Gerir a Comunicação|Gerir a Qualidade|Adquirir Recursos|Desenvolver a Equipe|Gerir a Equipe|Gerir o Relacionamento/.test(processo)) ||
+                        (faseFiltro === "Acompanhamento no CRM" &&
+                          /Monitorar e Controlar|Controlar o Cronograma|Controlar Custos|Controlar Qualidade|Monitorar Riscos|Controlar Aquisições|Controlar Mudanças|Monitorar a Satisfação/.test(processo)) ||
+                        (faseFiltro === "Fechamento & Pós-venda" &&
+                          /Fechar Proposta|Lições Aprendidas/.test(processo));
                       if (!inFase) return null;
                     }
                     return (

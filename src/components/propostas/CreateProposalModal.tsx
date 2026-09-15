@@ -1,5 +1,15 @@
-import { useState, useEffect } from "react";
-import { FileText, DollarSign, User, Building2, ClipboardList } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
+import {
+  FileText,
+  User,
+  Building2,
+  Landmark,
+  BadgeDollarSign,
+  ClipboardList,
+  AlarmClock,
+  StickyNote,
+  Calculator,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,9 +27,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useLeads } from "@/hooks/use-leads";
-import { useProperties } from "@/hooks/use-properties";
+import { AsyncCombobox } from "@/components/ui/AsyncCombobox";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  useCreateCommercialProposal,
+  type ProposalCurrency,
+} from "@/hooks/use-commercial-proposals";
+import { toast } from "@/hooks/use-toast";
 
+/** Shape legacy — mantido para compatibilidade com Propostas.tsx (tabela `proposals`). */
 export interface ProposalFormData {
   client_name: string;
   lead_id: string;
@@ -36,283 +52,478 @@ interface CreateProposalModalProps {
   onConfirm: (data: ProposalFormData) => void;
 }
 
-const initialFormData: ProposalFormData = {
+interface CommercialFormValues {
+  client_id: string;
+  client_name: string;
+  seller_id: string;
+  seller_name: string;
+  property_id: string;
+  loteamento: string;
+  manzana: string;
+  lote: string;
+  // Valores como string p/ edição livre; parseados com toNum no cálculo/salvamento.
+  valor_total: string;
+  valor_entrada_percentual: string;
+  numero_parcelas: string;
+  currency: ProposalCurrency;
+  exchange_rate_manual: string;
+  prazo_emissao_contrato_dias: string;
+  validade_proposta_dias: string;
+  observacoes: string;
+}
+
+const initialForm = (sellerId: string): CommercialFormValues => ({
+  client_id: "",
   client_name: "",
-  lead_id: "",
+  seller_id,
+  seller_name: "",
   property_id: "",
-  value: "",
-  payment_type: "Financiamento",
-  status: "Docs Enviados",
-  notes: "",
+  loteamento: "",
+  manzana: "",
+  lote: "",
+  valor_total: "",
+  valor_entrada_percentual: "0",
+  numero_parcelas: "1",
+  currency: "Gs",
+  exchange_rate_manual: "",
+  prazo_emissao_contrato_dias: "120",
+  validade_proposta_dias: "5",
+  observacoes: "",
+});
+
+const toNum = (s: string): number => {
+  if (s === "" || s == null) return 0;
+  const n = parseFloat(String(s));
+  return Number.isFinite(n) ? n : 0;
 };
 
 export function CreateProposalModal({ open, onOpenChange, onConfirm }: CreateProposalModalProps) {
-  const [formData, setFormData] = useState<ProposalFormData>(initialFormData);
+  const { profile } = useAuth();
   const [step, setStep] = useState(1);
+  const [form, setForm] = useState<CommercialFormValues>(() => initialForm(profile?.id || ""));
+  const createCommercial = useCreateCommercialProposal();
 
-  const { data: leads = [] } = useLeads({});
-  const { data: properties = [] } = useProperties();
-
+  // Reset ao fechar
   useEffect(() => {
-    if (!open) {
-      setFormData(initialFormData);
+    if (open) {
+      setForm(initialForm(profile?.id || ""));
       setStep(1);
     }
-  }, [open]);
+  }, [open, profile?.id]);
 
-  // Auto-fill client name when lead is selected
-  useEffect(() => {
-    if (formData.lead_id) {
-      const lead = leads.find((l) => l.id === formData.lead_id);
-      if (lead && !formData.client_name) {
-        setFormData((prev) => ({ ...prev, client_name: lead.name }));
-      }
-    }
-  }, [formData.lead_id, leads]);
+  const set = <K extends keyof CommercialFormValues>(key: K, value: CommercialFormValues[K]) =>
+    setForm((p) => ({ ...p, [key]: value }));
 
-  const handleChange = (field: keyof ProposalFormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  // CÁLCULO AUTOMÁTICO (data-binding reativo) — derivado de valor_total/percentual/parcelas
+  const calc = useMemo(() => {
+    const total = toNum(form.valor_total);
+    const parcelas = Math.max(1, Math.round(toNum(form.numero_parcelas)) || 1);
+    const valorParcela = total / parcelas;
+    const valorEntrada = total * (toNum(form.valor_entrada_percentual) / 100);
+    return {
+      total,
+      parcelas,
+      valorParcela,
+      valorEntrada,
+      valorTotalInicial: valorEntrada + valorParcela,
+    };
+  }, [form.valor_total, form.numero_parcelas, form.valor_entrada_percentual]);
+
+  const formatMoney = (value: number, currency?: ProposalCurrency) => {
+    const cur: ProposalCurrency = currency || form.currency;
+    const v = Number.isFinite(value) ? value : 0;
+    if (cur === "Gs") return `Gs ${Math.round(v).toLocaleString("pt-BR")}`;
+    if (cur === "USD")
+      return v.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+    return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 2 });
   };
+
+  const isStep1Valid = !!form.client_id;
+  const isStep2Valid = calc.total > 0;
+
+  const previewItems: { icon: React.ReactNode; label: string; value: string }[] = [
+    { icon: <User className="h-4 w-4 text-accent" />, label: "Cliente", value: form.client_name || "—" },
+    { icon: <Building2 className="h-4 w-4 text-accent" />, label: "Vendedor / Corretor", value: form.seller_name || "—" },
+    {
+      icon: <Landmark className="h-4 w-4 text-accent" />,
+      label: "Imóvel",
+      value: form.property_id
+        ? `${form.loteamento || ""} ${form.manzana ? "· Mç. " + form.manzana : ""} ${form.lote ? "· Lt. " + form.lote : ""}`.trim() || "Vinculado"
+        : "Nenhum vínculo",
+    },
+    {
+      icon: <BadgeDollarSign className="h-4 w-4 text-accent" />,
+      label: "Valor Total",
+      value: formatMoney(calc.total),
+    },
+    { icon: <Calculator className="h-4 w-4 text-accent" />, label: "Valor da Parcela", value: formatMoney(calc.valorParcela) },
+    { icon: <BadgeDollarSign className="h-4 w-4 text-accent" />, label: "Valor de Entrada", value: formatMoney(calc.valorEntrada) },
+    { icon: <Calculator className="h-4 w-4 text-accent" />, label: "Total Inicial", value: formatMoney(calc.valorTotalInicial) },
+    { icon: <StickyNote className="h-4 w-4 text-accent" />, label: "Prazo do Contrato", value: `${form.prazo_emissao_contrato_dias || "0"} dias` },
+    { icon: <AlarmClock className="h-4 w-4 text-accent" />, label: "Validade da Proposta", value: `${form.validade_proposta_dias || "0"} dias` },
+  ];
 
   const handleSubmit = () => {
-    onConfirm(formData);
-    onOpenChange(false);
+    if (createCommercial.isPending) return;
+    const payload = {
+      client_id: form.client_id || null,
+      agent_id: form.seller_id || null,
+      property_id: form.property_id || null,
+      client_name: form.client_name || null,
+      loteamento: form.loteamento?.trim() || null,
+      manzana: form.manzana?.trim() || null,
+      lote: form.lote?.trim() || null,
+      valor_total: calc.total,
+      valor_entrada_percentual: toNum(form.valor_entrada_percentual),
+      valor_entrada_calculado: calc.valorEntrada,
+      numero_parcelas: calc.parcelas,
+      valor_parcela: calc.valorParcela,
+      valor_total_inicial: calc.valorTotalInicial,
+      currency: form.currency,
+      exchange_rate_manual: form.exchange_rate_manual === "" ? null : toNum(form.exchange_rate_manual),
+      prazo_emissao_contrato_dias: Math.round(toNum(form.prazo_emissao_contrato_dias)) || 120,
+      validade_proposta_dias: Math.round(toNum(form.validade_proposta_dias)) || 5,
+      observacoes: form.observacoes?.trim() || null,
+      status: "Rascunho",
+    };
+
+    createCommercial.mutate(payload, {
+      onSuccess: () => {
+        toast({
+          title: "Proposta Comercial Criada",
+          description: `Proposta de ${formatMoney(calc.total)} (${form.currency}) registrada.`,
+        });
+        // Compatibilidade com o fluxo legacy (tabela `proposals`)
+        onConfirm({
+          client_name: form.client_name,
+          lead_id: form.client_id,
+          property_id: form.property_id,
+          value: String(calc.total),
+          payment_type: "Financiamento",
+          status: "Docs Enviados",
+          notes: form.observacoes,
+        });
+        onOpenChange(false);
+      },
+      onError: (err) => {
+        toast({
+          title: "Erro ao criar proposta",
+          description: (err as any)?.message || "Tente novamente.",
+          variant: "destructive",
+        });
+      },
+    });
   };
 
-  const isStep1Valid = formData.client_name.trim() && formData.value.trim();
-  const isStep2Valid = true; // optional fields
-  const totalSteps = 3;
-
-  const formatPrice = (price: number) =>
-    price.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  const glassCard = "rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl";
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 !bg-[#0a0a0a]/95 !border-white/10 backdrop-blur-3xl">
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-card border-b border-border px-6 py-5">
+        <div className="sticky top-0 z-10 border-b border-white/10 bg-black/30 px-6 py-5 backdrop-blur-xl">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center">
+            <DialogTitle className="flex items-center gap-3 text-xl font-semibold text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15">
                 <FileText className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <span>Nova Proposta</span>
-                <p className="text-sm font-normal text-muted-foreground mt-0.5">
-                  Etapa {step} de {totalSteps}
+                <span>Nova Proposta Comercial</span>
+                <p className="mt-0.5 text-sm font-normal text-white/50">
+                  Etapa {step} de 3
                 </p>
               </div>
             </DialogTitle>
           </DialogHeader>
-          {/* Progress bar */}
-          <div className="flex gap-2 mt-4">
-            {Array.from({ length: totalSteps }).map((_, i) => (
+          <div className="mt-4 flex gap-2">
+            {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className={`flex-1 h-1.5 rounded-full transition-colors ${
-                  i < step ? "bg-accent" : "bg-muted"
-                }`}
+                className={`flex-1 h-1.5 rounded-full transition-colors ${i <= step ? "bg-accent" : "bg-white/10"}`}
               />
             ))}
           </div>
         </div>
 
-        <div className="px-6 py-5 space-y-6">
-          {/* Step 1: Cliente e Valor */}
+        <div className="space-y-6 px-6 py-5 text-white">
+          {/* ============ BLOCO 1 — Imóvel e Envolvidos ============ */}
           {step === 1 && (
-            <>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                  <User className="h-4 w-4 text-accent" />
-                  <span>Cliente e Valor</span>
+            <div className="space-y-5">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <User className="h-4 w-4 text-accent" />
+                <span>Imóvel e Envolvidos</span>
+              </div>
+
+              <div className={`${glassCard} space-y-4 p-4`}>
+                <div className="space-y-1.5">
+                  <Label className="text-white/70">Cliente *</Label>
+                  <AsyncCombobox
+                    table="leads"
+                    searchFields={["name", "phone"]}
+                    selectFields="id,name,phone"
+                    labelField="name"
+                    subtitleField="phone"
+                    placeholder="Buscar cliente por nome ou telefone..."
+                    value={form.client_id}
+                    icon={<User className="h-4 w-4 text-accent" />}
+                    onChange={(item) => {
+                      if (!item) {
+                        set("client_id", "");
+                        set("client_name", "");
+                      } else {
+                        set("client_id", item.id);
+                        set("client_name", item.name || "");
+                      }
+                    }}
+                  />
                 </div>
-                <div className="bg-muted/30 rounded-xl p-4 space-y-4 border border-border/50">
-                  <div className="space-y-2">
-                    <Label>Lead Vinculado</Label>
-                    <Select
-                      value={formData.lead_id}
-                      onValueChange={(v) => handleChange("lead_id", v)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione um lead (opcional)" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {leads.map((lead) => (
-                          <SelectItem key={lead.id} value={lead.id}>
-                            {lead.name} — {lead.email}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Nome do Cliente *</Label>
+
+                <div className="space-y-1.5">
+                  <Label className="text-white/70">Vendedor / Corretor</Label>
+                  <AsyncCombobox
+                    table="profiles"
+                    searchFields={["full_name"]}
+                    selectFields="id,full_name"
+                    labelField="full_name"
+                    subtitleField="phone"
+                    placeholder="Selecionar corretor..."
+                    value={form.seller_id}
+                    icon={<Building2 className="h-4 w-4 text-accent" />}
+                    onChange={(item) => {
+                      set("seller_id", item ? item.id : "");
+                      set("seller_name", item ? item.full_name || "" : "");
+                    }}
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label className="text-white/70">Imóvel / Lote</Label>
+                  <AsyncCombobox
+                    table="properties"
+                    searchFields={["title", "code", "loteamento"]}
+                    selectFields="id,title,code,loteamento,quadra,lote,valor_total,price"
+                    labelField="title"
+                    subtitleField="loteamento"
+                    placeholder="Buscar lote, código, loteamento..."
+                    value={form.property_id}
+                    icon={<Landmark className="h-4 w-4 text-accent" />}
+                    onChange={(item) => {
+                      if (!item) {
+                        set("property_id", "");
+                        return;
+                      }
+                      const p = item as any;
+                      setForm((prev) => ({
+                        ...prev,
+                        property_id: p.id ?? "",
+                        loteamento: p.loteamento ? String(p.loteamento) : p.loteamento || prev.loteamento,
+                        manzana: p.quadra ? String(p.quadra) : p.manzana ? String(p.manzana) : prev.manzana,
+                        lote: p.lote ? String(p.lote) : prev.lote || prev.lote,
+                        valor_total: typeof p.valor_total === "number" && p.valor_total > 0 ? String(p.valor_total) : prev.valor_total,
+                        currency: p.currency || prev.currency,
+                      }));
+                    }}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Loteamento</Label>
                     <Input
-                      placeholder="Ex: João Silva"
-                      value={formData.client_name}
-                      onChange={(e) => handleChange("client_name", e.target.value)}
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      placeholder="Ex: Vale Verde"
+                      value={form.loteamento}
+                      onChange={(e) => set("loteamento", e.target.value)}
                     />
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label>Valor da Proposta (R$) *</Label>
-                      <Input
-                        placeholder="Ex: 1250000"
-                        value={formData.value}
-                        onChange={(e) => handleChange("value", e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Forma de Pagamento</Label>
-                      <Select
-                        value={formData.payment_type}
-                        onValueChange={(v) => handleChange("payment_type", v)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Financiamento">Financiamento</SelectItem>
-                          <SelectItem value="À Vista">À Vista</SelectItem>
-                          <SelectItem value="Parcelado Direto">Parcelado Direto</SelectItem>
-                          <SelectItem value="FGTS + Financiamento">FGTS + Financiamento</SelectItem>
-                          <SelectItem value="Permuta">Permuta</SelectItem>
-                          <SelectItem value="Consórcio">Consórcio</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Manzana</Label>
+                    <Input
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      placeholder="Ex: Mç 12"
+                      value={form.manzana}
+                      onChange={(e) => set("manzana", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Lote</Label>
+                    <Input
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      placeholder="Ex: Lt 45"
+                      value={form.lote}
+                      onChange={(e) => set("lote", e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           )}
 
-          {/* Step 2: Imóvel */}
+          {/* ============ BLOCO 2 — Estrutura de Pagamento ============ */}
           {step === 2 && (
-            <>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                  <Building2 className="h-4 w-4 text-accent" />
-                  <span>Imóvel Vinculado</span>
-                </div>
-                <div className="bg-muted/30 rounded-xl p-4 space-y-4 border border-border/50">
-                  <div className="space-y-2">
-                    <Label>Selecione o Imóvel</Label>
-                    <Select
-                      value={formData.property_id}
-                      onValueChange={(v) => handleChange("property_id", v)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione um imóvel" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {properties.map((p) => (
-                          <SelectItem key={p.id} value={p.id}>
-                            {p.code} — {p.title} ({formatPrice(p.price)})
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+            <div className="space-y-5">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <BadgeDollarSign className="h-4 w-4 text-accent" />
+                <span>Estrutura de Pagamento</span>
+              </div>
+
+              <div className={`${glassCard} space-y-4 p-4`}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Valor Total</Label>
+                  <Input
+                    type="number"
+                    inputMode="decimal"
+                    className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                    placeholder="0"
+                    value={form.valor_total}
+                    onChange={(e) => set("valor_total", e.target.value)}
+                  />
                   </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-white/70">Entrada (%)</Label>
+                    <Input
+                      type="number"
+                      inputMode="decimal"
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      value={form.valor_entrada_percentual}
+                      onChange={(e) => set("valor_entrada_percentual", e.target.value)}
+                    />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-white/70">Nº de Parcelas</Label>
+                    <Input
+                      type="number"
+                      inputMode="numeric"
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      value={form.numero_parcelas}
+                      onChange={(e) => set("numero_parcelas", e.target.value)}
+                    />
+                    </div>
+                  </div>
+                </div>
 
-                  {formData.property_id && (() => {
-                    const selected = properties.find((p) => p.id === formData.property_id);
-                    if (!selected) return null;
-                    return (
-                      <div className="bg-card rounded-lg p-4 border border-border">
-                        <p className="font-semibold text-foreground">{selected.title}</p>
-                        <p className="text-sm text-muted-foreground">{selected.address || selected.location}</p>
-                        <p className="text-lg font-bold text-accent mt-2">{formatPrice(selected.price)}</p>
-                      </div>
-                    );
-                  })()}
-
-                  <div className="space-y-2">
-                    <Label>Status Inicial</Label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Moeda</Label>
                     <Select
-                      value={formData.status}
-                      onValueChange={(v) => handleChange("status", v)}
+                      value={form.currency}
+                      onValueChange={(v) => set("currency", v as ProposalCurrency)}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="!border-white/10 !bg-white/5 text-white">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Docs Enviados">Docs Enviados</SelectItem>
-                        <SelectItem value="Proposta Comprador">Proposta Comprador</SelectItem>
-                        <SelectItem value="Finalizada Comprador">Finalizada Comprador</SelectItem>
-                        <SelectItem value="Proposta Vendedor">Proposta Vendedor</SelectItem>
-                        <SelectItem value="Finalizada">Finalizada</SelectItem>
+                      <SelectContent className="!bg-[#0a0a0a]/95 !border-white/10 text-white backdrop-blur-3xl">
+                        <SelectItem value="Gs" className="text-white focus:!bg-white/10">Gs — Guaraní (PY)</SelectItem>
+                        <SelectItem value="BRL" className="text-white focus:!bg-white/10">R$ — Real (BR)</SelectItem>
+                        <SelectItem value="USD" className="text-white focus:!bg-white/10">US$ — Dólar (US)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Step 3: Revisão */}
-          {step === 3 && (
-            <>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                  <ClipboardList className="h-4 w-4 text-accent" />
-                  <span>Revisão e Observações</span>
-                </div>
-
-                {/* Summary */}
-                <div className="bg-muted/30 rounded-xl p-4 space-y-3 border border-border/50">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-xs text-muted-foreground">Cliente</p>
-                      <p className="font-medium text-foreground">{formData.client_name || "—"}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Valor</p>
-                      <p className="font-medium text-accent">
-                        {formData.value
-                          ? parseFloat(formData.value).toLocaleString("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                              maximumFractionDigits: 0,
-                            })
-                          : "—"}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Pagamento</p>
-                      <p className="font-medium text-foreground">{formData.payment_type}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Status</p>
-                      <p className="font-medium text-foreground">{formData.status}</p>
-                    </div>
-                    <div className="col-span-2">
-                      <p className="text-xs text-muted-foreground">Imóvel</p>
-                      <p className="font-medium text-foreground">
-                        {formData.property_id
-                          ? properties.find((p) => p.id === formData.property_id)?.title || "—"
-                          : "Nenhum vinculado"}
-                      </p>
-                    </div>
+                  <div className="space-y-1.5 col-span-1">
+                    <Label className="text-white/70">Cotação do dia (manual)</Label>
+                    <Input
+                      type="number"
+                      inputMode="decimal"
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      placeholder="Opcional"
+                      value={form.exchange_rate_manual}
+                      onChange={(e) => set("exchange_rate_manual", e.target.value)}
+                    />
                   </div>
                 </div>
+              </div>
 
-                <div className="space-y-2">
-                  <Label>Observações</Label>
+              {/* Resultados calculados automaticamente */}
+              <div className={`${glassCard} space-y-3 p-4`}>
+                <p className="text-xs font-medium uppercase tracking-widest text-white/40">
+                  Cálculo Automático
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="rounded-lg border border-white/10 bg-accent/10 p-3">
+                    <p className="text-xs text-white/50">Valor da Parcela</p>
+                    <p className="mt-1 text-lg font-bold text-white">{formatMoney(calc.valorParcela)}</p>
+                  </div>
+                  <div className="rounded-lg border border-white/10 bg-accent/10 p-3">
+                    <p className="text-xs text-white/50">Valor de Entrada</p>
+                    <p className="mt-1 text-lg font-bold text-white">{formatMoney(calc.valorEntrada)}</p>
+                  </div>
+                  <div className="rounded-lg border border-accent/30 bg-accent/10 p-3">
+                    <p className="text-xs text-white/50">Total Inicial</p>
+                    <p className="mt-1 text-lg font-bold text-accent">{formatMoney(calc.valorTotalInicial)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============ BLOCO 3 — Condições Legais e Observações + Preview ============ */}
+          {step === 3 && (
+            <div className="space-y-5">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <ClipboardList className="h-4 w-4 text-accent" />
+                <span>Condições Legais e Observações</span>
+              </div>
+
+              <div className={`${glassCard} space-y-4 p-4`}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Prazo Emissão Contrato (dias)</Label>
+                    <Input
+                      type="number"
+                      inputMode="numeric"
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      value={form.prazo_emissao_contrato_dias}
+                      onChange={(e) => set("prazo_emissao_contrato_dias", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-white/70">Validade da Proposta (dias)</Label>
+                    <Input
+                      type="number"
+                      inputMode="numeric"
+                      className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                      value={form.validade_proposta_dias}
+                      onChange={(e) => set("validade_proposta_dias", e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-white/70">Observações</Label>
                   <Textarea
-                    placeholder="Notas adicionais sobre a proposta..."
-                    value={formData.notes}
-                    onChange={(e) => handleChange("notes", e.target.value)}
                     rows={4}
+                    className="!border-white/10 !bg-white/5 text-white placeholder:text-white/40"
+                    placeholder="Notas adicionais sobre a proposta..."
+                    value={form.observacoes}
+                    onChange={(e) => set("observacoes", e.target.value)}
                   />
                 </div>
               </div>
-            </>
+
+              {/* Pré-visualização do payload (exatamente como o cliente verá) */}
+              <div className={`${glassCard} space-y-3 p-4`}>
+                <p className="text-xs font-medium uppercase tracking-widest text-white/40">
+                  Pré-visualização da Proposta
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5">
+                  {previewItems.map((item) => (
+                    <div key={item.label} className="flex items-center gap-2.5">
+                      {item.icon}
+                      <div className="min-w-0">
+                        <p className="text-xs text-white/45">{item.label}</p>
+                        <p className="truncate text-sm font-medium text-white">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-card border-t border-border px-6 py-4 flex justify-between gap-3">
+        <div className="sticky bottom-0 flex items-center justify-between gap-3 border-t border-white/10 bg-black/30 px-6 py-4 backdrop-blur-xl">
           <div>
             {step > 1 && (
               <Button variant="outline" onClick={() => setStep(step - 1)}>
@@ -324,17 +535,17 @@ export function CreateProposalModal({ open, onOpenChange, onConfirm }: CreatePro
             <Button variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
-            {step < totalSteps ? (
+            {step < 3 ? (
               <Button
                 variant="cta"
                 onClick={() => setStep(step + 1)}
-                disabled={step === 1 && !isStep1Valid}
+                disabled={step === 1 ? !isStep1Valid : !isStep2Valid}
               >
                 Próximo
               </Button>
             ) : (
-              <Button variant="cta" onClick={handleSubmit} disabled={!isStep1Valid}>
-                Criar Proposta
+              <Button variant="cta" onClick={handleSubmit} disabled={createCommercial.isPending}>
+                {createCommercial.isPending ? "Criando..." : "Criar Proposta"}
               </Button>
             )}
           </div>

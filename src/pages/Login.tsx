@@ -118,7 +118,7 @@ export default function Login() {
       <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
         <img
           src="https://i.imgur.com/cUiF709.png"
-          alt="Estate.ia Imobiliaria"
+          alt="Estate.AI"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
@@ -213,7 +213,7 @@ export default function Login() {
           </div>
 
           <p className="mt-10 text-center text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Estate.ia. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} Estate.AI - Agents Ecosystem. Todos os direitos reservados.
           </p>
         </div>
       </div>

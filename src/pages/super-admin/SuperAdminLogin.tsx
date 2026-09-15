@@ -61,7 +61,7 @@ export default function SuperAdminLogin() {
       <div className="relative w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <img src={logoEstate} alt="Estate.ia" className="h-16 mx-auto mb-5" />
+          <img src={logoEstate} alt="Estate.AI" className="h-16 mx-auto mb-5" />
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-medium" style={{ borderColor: 'rgba(200,89,10,0.4)', background: 'rgba(200,89,10,0.08)', color: '#e07a3a' }}>
             <Shield className="w-3 h-3" />
             Painel de Controle Global
@@ -132,7 +132,7 @@ export default function SuperAdminLogin() {
         </div>
 
         <p className="text-center text-xs mt-6" style={{ color: 'rgba(255,255,255,0.2)' }}>
-          Estate.ia &copy; {new Date().getFullYear()} · Todos os direitos reservados
+          Estate.AI &copy; {new Date().getFullYear()} · Todos os direitos reservados
         </p>
       </div>
     </div>

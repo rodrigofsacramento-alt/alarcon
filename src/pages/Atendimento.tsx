@@ -14,6 +14,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { useConversations, useMessages, useMarkMessagesRead, useCreateConversation, useUpdateConversationTags, useDeleteConversation, useUpdateConversationSettings, useSetConversationAIEnabled, useLeadNextActions, useLeadPropertyRecommendations, useMarkPropertyRecommended, type Conversation, type LeadNextAction, type LeadPropertyRecommendation, type Message } from "@/hooks/use-messages";
 import { useAgents } from "@/hooks/use-agents";
+import { useSdrAnswers } from "@/hooks/use-sdr";
 import { useSendWhatsAppMessage, useWhatsAppSession } from "@/hooks/use-whatsapp";
 import WhatsAppConnect from "@/components/whatsapp/WhatsAppConnect";
 import WhatsAppSettingsDrawer from "@/components/whatsapp/WhatsAppSettingsDrawer";
@@ -397,6 +398,17 @@ const getLeadActionDescription = (action?: string | null) => {
   }
 };
 
+const qualificaStepLabel = (code?: string | null) => {
+  switch (code) {
+    case 'open': return 'Abertura';
+    case 'finance': return 'Orçamento';
+    case 'region': return 'Cidade preferida';
+    case 'presentation': return 'Apresentação';
+    case 'compromise': return 'Compromisso';
+    default: return code || 'Etapa';
+  }
+};
+
 const buildQualificationDraft = (leadAction?: LeadNextAction | null) => {
   const missing = (leadAction?.missing_fields || []).map(getMissingFieldLabel);
   if (!missing.length) {
@@ -709,6 +721,9 @@ function AtendimentoContent() {
   const { data: agents = [] } = useAgents();
 
   const selectedConv = conversations.find(c => c.id === selectedConvId) || null;
+  const { data: sdrData } = useSdrAnswers(!!selectedConvId && !!selectedConv, selectedConvId);
+  const sdrSession = sdrData?.session ?? null;
+  const sdrAnswers = sdrData?.answers ?? [];
 
   useEffect(() => {
     const initialSearch = searchParams.get("search");
@@ -3269,6 +3284,34 @@ function AtendimentoContent() {
                             <p className="text-sm font-medium">{formatTime(selectedConv.last_message_at)}</p>
                           </div>
                         </div>
+                        {(sdrSession || sdrAnswers.length > 0) && (
+                          <div className="border-t pt-3 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <Bot className="h-3.5 w-3.5 text-accent shrink-0" />
+                              <p className="text-xs font-semibold text-foreground">Qualificação SDR (Ava)</p>
+                              {sdrSession?.status && (
+                                <Badge variant="outline" className="h-4 px-1.5 text-[9px]">{sdrSession.status}</Badge>
+                              )}
+                            </div>
+                            {sdrAnswers.length === 0 && sdrSession ? (
+                              <p className="text-xs text-muted-foreground/60 italic">SDR em andamento — aguardando respostas.</p>
+                            ) : (
+                              sdrAnswers.map((ans) => (
+                                <div key={ans.id} className="space-y-0.5 rounded-md border bg-muted/30 px-2.5 py-1.5">
+                                  <p className="text-[11px] font-medium text-foreground">
+                                    {ans.step_label ?? qualificaStepLabel(ans.step_code)}
+                                  </p>
+                                  {ans.question_text && (
+                                    <p className="text-[11px] text-muted-foreground/70">{ans.question_text}</p>
+                                  )}
+                                  <p className="text-xs font-semibold text-foreground">
+                                    {ans.answer_text || <span className="text-muted-foreground/50 italic">(resposta não registrada)</span>}
+                                  </p>
+                                </div>
+                              ))
+                            )}
+                          </div>
+                        )}
                       </>
                     )}
                   </div>

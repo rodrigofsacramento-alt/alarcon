@@ -1,5 +1,28 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## ✅ 14/09 — PREPARAÇÃO AMBIENTE TESTE SDR: CONTATO 6257 INEXISTENTE + FIX RPC + AUTO-ENABLE
+**Exclusão em PROD (autorizada por Rodrigo):** telefone **5511915306257** (Jonathan Gúsman) **purgado** de todas as tabelas — whatsapp_messages=0, messages=0, conversations=0, whatsapp_contacts=0, profiles=0, conversation_events=0, sdr_sessions=0. Backup `limpeza_6257_20260914_164755.json`. Trigger `trg_conversations_audit` reativado.
+**Fix RPC (causa raiz de bloqueio do teste):** worker chamava `rpc('fn_sdr_should_reply',{p_conv})` mas a function espera **`p_conv_id`** → erro de schema cache. Corrigido no src e redeployado (PM2 id 14 online, inscrito Realtime, dist 13:57).
+**Auto-enable SDR:** o worker agora auto-habilita `sdr_enabled=true` **apenas para contato inédito** (sem histórico/sem sessão) — regra de ouro preservada (base antiga = `has_history` barrada). `shouldReply` bloqueia só base antiga e sessão duplicada. **Ambiente pronto: próximo inbound inédito dispara Pergunta 1 sozinho.**
+
+## ✅ 14/09 — FASE 3 AGENTE SDR (Ava da HUT): PAINEL UI NO TESTE
+**Painel "Qualificação SDR (Ava)"** no card *Dados de Contato* do Atendimento: renderiza dinamicamente `sdr_steps ↔ sdr_answers` (pergunta → resposta registrada) com dados reais do banco. Novo hook `src/hooks/use-sdr.ts` (busca sessão da conversa + respostas + roteiro). Labels por step (Abertura/Orçamento/Cidade preferida/Apresentação/Compromisso). Build Vite OK + deploy TESTE (PARITY_OK bundle `Atendimento-Sxcfm-HT.js`). **Pergunta 3 = cidade de preferência aplicada no PROD.**
+
+## ✅ 14/09 — FASE 1 AGENTE SDR (Ava da HUT): WORKER ONLINE NO PM2
+**sdr-agent-worker** (PM2 id14, `/root/crmahut/sdr-agent-worker`) online + inscrito Realtime `whatsapp_messages` inbound. Travas via RPC `fn_sdr_should_reply` (toggle `sdr_enabled` ON + contato inedito + sem sessao). Envio via OUTBOX `whatsapp_messages pending/from_me=true` (broker coleta no poll). Qwen/OpenRouter (chave Hermes) interpreta resposta: avanca OU repregunta a MESMA etapa; registra em `sdr_answers`. Publicacao realtime ADD: `whatsapp_messages`+`sdr_sessions`+`sdr_answers`+`sdr_steps`. **PENDENTE Fase 4: ligar `sdr_enabled` p/ validar lead inedito no app TESTE.** Pitfall: bootstrap sob PM2 NAO usa guard `process.argv[1]` (levantaria ocioso) — inicia incondicional.
+
+## ✅ 14/09 — FASE 0 AGENTE SDR (Ava da HUT): SCHEMA PRÓPRIO APLICADO NO PROD
+**Decisão do Comandante:** testar no schema PROD via app TESTE; estrutura PRÓPRIA de tabelas p/ perguntas/respostas (NÃO usa `p1..p9` legado); chave OpenRouter do Hermes REUTILIZADA; DeepSeek = programação; Qwen (`qwen/qwen3.5-flash-02-23`) = exclusivo do agente de atendimento (validado HTTP 200).
+**Objectivos aplicados em PROD `ptochsyoyatsydfysacc` (idempotente, backup `scripts/backups_sdr/sdr_fase0_20260914_152202.json`):**
+- `sdr_steps` (roteiro 5 perguntas, seed: open/finance/region/presentation/compromise, `question_text` editável)
+- `sdr_sessions` (estado: conversation_id, current_step 1..5, status active/completed/aborted, llm)
+- `sdr_answers` (UMA LINHA POR RESPOSTA: session_id, step_code, answer_text, llm_interpretation jsonb, answered_at)
+- `conversations.sdr_enabled` (trava de toggle DEDICADA, opção B — não colide com ai_enabled)
+- RPC `fn_sdr_should_reply(uuid)` → jsonb {enabled, conv_id, has_history, sent_by_agent, exists_session} — validada em conversa real (enabled:false) e id fake (não quebra)
+- RLS + policies + grants padrão squad.
+**Prova pós-ALDO:** 3 tabelas criadas + seed 5 perguntas + coluna toggle + RPC. Chave Hermes funcional (Qwen respondeu).}
+**Pendente Fase 1:** worker PM2 `sdr-agent-worker` (Node, Realtime inbound, travas, Etapa 1, Qwen para parsear resposta).
+
 ## ✅ 09/09 — HOTFIX CADASTRO DE IMÓVEL: colunas `amount`/`currency`/`maps_link` NÃO existiam na base PROD
 **Bug reportado por Rodrigo:** ao clicar "Confirmar Cadastro" com tudo preenchido, erro `could not find the 'amount' column in 'properties' in the schema cache`.
 **Causa-raiz (provada, não assumida):** o build M1 (09/09) insere `amount`,`currency`,`maps_link`, mas o M2 registrado no changelog 13:30 **nunca foi aplicado de fato** na base `ptochsyoyatsydfysacc` — a tabela real só tinha `price`/`price_type`(default 'sale'). Pipeline divergente.

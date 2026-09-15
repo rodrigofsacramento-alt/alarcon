@@ -12,7 +12,6 @@ import { SuperAdminRoute } from "@/components/super-admin/SuperAdminRoute";
 import { GlobalNotificationListener } from "@/components/GlobalNotificationListener";
 import { GroupSidePanel } from "@/components/groups/GroupSidePanel";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { useGroupPanelStore } from "@/store/useGroupPanelStore";
 // Lazy Loaded Tenant App Pages
 const Login = lazy(() => import("./pages/Login"));
 const Index = lazy(() => import("./pages/Index"));
@@ -33,6 +32,7 @@ const GestaoClientes = lazy(() => import("./pages/GestaoClientes"));
 const Configuracoes = lazy(() => import("./pages/Configuracoes"));
 const RoutingLog = lazy(() => import("./pages/RoutingLog"));
 const Rh = lazy(() => import("./pages/Rh"));
+const Tecnologia = lazy(() => import("./pages/Tecnologia"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Blocked = lazy(() => import("./pages/Blocked"));
 const MarketingLayout = lazy(() => import("./pages/marketing/MarketingLayout"));
@@ -76,8 +76,6 @@ const SALazyOutlet = () => (
 );
 
 const App = () => {
-  const { openPanel } = useGroupPanelStore();
-
   return (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
@@ -90,14 +88,6 @@ const App = () => {
             <ErrorBoundary name="GroupSidePanel">
               <GroupSidePanel />
             </ErrorBoundary>
-            
-            {/* DEBUG BUTTON PARA TESTE DO PAINEL LATERAL DE GRUPOS */}
-            <button 
-              onClick={() => openPanel('mock-group-123')}
-              className="fixed bottom-4 right-4 z-50 bg-brand-orange text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform"
-            >
-              Testar Painel de Grupo
-            </button>
 
             <Suspense fallback={<SALoadingFallback />}>
               <Routes>
@@ -119,6 +109,7 @@ const App = () => {
                 <Route path="/dashboard-performance" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DashboardPerformance /></ProtectedRoute>} />
                 <Route path="/routing-log" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><RoutingLog /></ProtectedRoute>} />
                 <Route path="/rh" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Rh /></ProtectedRoute>} />
+                <Route path="/tecnologia" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><Tecnologia /></ProtectedRoute>} />
                 <Route path="/clientes" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><GestaoClientes /></ProtectedRoute>} />
                 <Route path="/configuracoes" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Configuracoes /></ProtectedRoute>} />
                 <Route path="/marketing/*" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><MarketingLayout /></ProtectedRoute>} />

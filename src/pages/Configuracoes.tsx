@@ -84,7 +84,7 @@ export default function Configuracoes() {
 
   // Company form state
   const [companyForm, setCompanyForm] = useState({
-    name: "Estate.ia Imobiliária",
+    name: "Estate.AI - Agents Ecosystem",
     cnpj: "12.345.678/0001-90",
     address: "Av. Paulista, 1000 - São Paulo, SP",
     website: "https://estate.ia",

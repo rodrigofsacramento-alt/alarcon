@@ -40,7 +40,7 @@ export function SuperAdminLayout({ children }: Props) {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="pl-3 pr-8 py-1" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <img src={logoEstate} alt="Estate.ia" className="w-full h-auto object-contain scale-110 origin-left -my-4" />
+        <img src={logoEstate} alt="Estate.AI" className="w-full h-auto object-contain scale-110 origin-left -my-4" />
       </div>
 
       {/* Nav */}
