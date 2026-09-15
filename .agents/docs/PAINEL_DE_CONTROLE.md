@@ -1,5 +1,25 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## 📊 REUNIÃO SQUAD — 15/09 — ANÁLISE 7 DIAS (09/09→15/09) + SCORECARDS + EVOLUÇÃO DE AGENTES
+**Atividades do período (ordem cronológica):**
+- 09/09 — Hotfix cadastro de imóvel (`amount`/`currency`/`maps_link` ausentes na base PROD), insumos p/ Jhon Wick (briefing + manifest MD5 broker `9eb2e374` 100% compatível), RAG semântico postergado (aguarda decisão do store).
+- 14/09 — Agente SDR (Ava da HUT): Fase 0 (schema próprio + RPC `fn_sdr_should_reply` + toggle `sdr_enabled` no PROD), Fase 1 (worker PM2 `sdr-agent-worker` id14 online + Realtime inbound + OUTBOX), Fase 3 (painel UI qualificação no Atendimento, bundle `Atendimento-Sxcfm-HT.js` TESTE). Limpeza em PROD do contato `5511915306257` + fix RPC `p_conv_id` + auto-enable p/ contato inédito.
+- 15/09 — Frente B mídia-reply no broker (fix 3 patches `session-manager.ts`, tsc EXIT:0 + teste Node PASS, promovido PROD via `pm2 reload`) + **incidente: reload deslogou sessão WhatsApp PROD `595994857156`** (comportamento destrutivo pré-existente `cleanupDisconnectedSessions`); recuperação pausada por decisão do Comandante. Frontend: fix mídia + teto PostgREST commit `773ed19`. **Task 15/09: page Chamados evolvida** (cadastro guiado + anexos foto/áudio/doc + print + visual moderno, commit `242696e` TESTE).
+
+**SCORECARD 14/09 (SDR Fase 0-3, 3 entregas):** TEMPO 8 · RETRABALHO 7 (1 fix RPC `p_conv_id`) · CONFORMIDADE 10 · COBERTURA 10 · AUTONOMIA 8 (auto-análise sem comando) · APRENDIZADO 10 → **88/100**
+**SCORECARD 15/09 (mídia-reply + incidente + page Chamados):** TEMPO 8 · RETRABALHO 6 (gatilho do incidente — reload deletou sessão; responsabilidade assumida, mitigação pendente) · CONFORMIDADE 9 · COBERTURA 9 · AUTONOMIA 8 · APRENDIZADO 9 → **82/100**
+
+**LACUNAS & MELHORIAS (rankeadas):**
+1. 🔴 **CRÍTICO — broker destrói auth sem backup no reload/restart** (custo real: 1 sessão PROD perdida 15/09). Fix: backup automático `auth_info/` antes de qualquer `stopSession(deleteAuth=true)` + NÃO apagar auth em desconexão transitória. Prioridade máxima.
+2. 🟡 **Validação ao vivo não automatizada** — o runbook manda validar na tela real, mas depende de browser/Chrome (daemon indisponível no backend). Proposta: prova programática via HTTP + curl dos bundles + Playwright headless quando Chrome disponível.
+3. 🟡 **Fase 4 SDR não fechada** — painel no TESTE ok; falta conectar `sdr_enabled` p/ validar lead inédito no app (Ava da HUT aguarda validação real).
+4. 🟢 **RAG semântico (Camada C)** postergado — base 63 docs pronta; aguarda escolha do store (decisão do Comandante).
+
+**VIABILIDADE DE EVOLUÇÃO/CRIAÇÃO DE AGENTE:**
+- **Evoluir (recomendado, não criar novo):** o squad não precisa de agente novo — precisa de **robustez no AJAX (broker)** contra falhas destrutivas. Atualizar a skill `ajax-whatsapp-business` com a guarda de backup-de-auth pré-reload (aprendizado do incidente 15/09).
+- **Criar?** 🚫 NÃO agora. A proposta `wab-client` (agente novo) segue **provável mas não urgente** — o valor viria depois da Fase 4 SDR e da robustez do broker. Revisitar pós-fechamento Fase 4.
+- **Novo agente em avaliação:** `qas-tickets` (curador de chamados técnicos p/ leigos) — viável como evolução da própria page de Chamados (formato ficha técnica auto-gerado), NÃO como processo separado.
+
 ## ✅ 14/09 — PREPARAÇÃO AMBIENTE TESTE SDR: CONTATO 6257 INEXISTENTE + FIX RPC + AUTO-ENABLE
 **Exclusão em PROD (autorizada por Rodrigo):** telefone **5511915306257** (Jonathan Gúsman) **purgado** de todas as tabelas — whatsapp_messages=0, messages=0, conversations=0, whatsapp_contacts=0, profiles=0, conversation_events=0, sdr_sessions=0. Backup `limpeza_6257_20260914_164755.json`. Trigger `trg_conversations_audit` reativado.
 **Fix RPC (causa raiz de bloqueio do teste):** worker chamava `rpc('fn_sdr_should_reply',{p_conv})` mas a function espera **`p_conv_id`** → erro de schema cache. Corrigido no src e redeployado (PM2 id 14 online, inscrito Realtime, dist 13:57).
