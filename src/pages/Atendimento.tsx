@@ -92,7 +92,17 @@ const extractMediaUrl = (content: string) => content.match(/https?:\/\/[^\s]+/g)
 const renderMessageContent = (content: string, type?: string) => {
   const normalized = content.trim().toLowerCase();
 
-  if (normalized === '[midia]' || normalized.startsWith('[midia indisponivel]') || normalized.startsWith('[mídia indisponível]')) {
+  // --- Detección robusta de marcador de mídia: busca el marcador en CUALQUIER
+  // posición del content (no solo al inicio), para no fallar cuando la mídia es
+  // una RESPUESTA (reply) cuyo preludio "↳ Respondendo a …" antecede al marcador.
+  const has = (...m: string[]) => m.some((x) => normalized.includes(x));
+  const isMidia = has('[midia]', '[mídia]', '[midia indisponivel]', '[mídia indisponível]');
+  const isImagem = has('[imagem]', '[image]');
+  const isVideo = has('[video]');
+  const isAudio = has('[audio]', '[áudio]');
+  const isArquivo = has('[arquivo]', '[documento]');
+
+  if (isMidia && !isImagem && !isVideo && !isAudio && !isArquivo) {
     return (
       <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
         <FileText className="h-4 w-4 shrink-0" />
@@ -101,7 +111,7 @@ const renderMessageContent = (content: string, type?: string) => {
     );
   }
 
-  if (type === 'image' || content.startsWith('[Imagem]')) {
+  if (type === 'image' || isImagem) {
     const match = content.match(/https?:\/\/[^\s]+/g);
     if (match) {
       const url = match[0];
@@ -113,11 +123,11 @@ const renderMessageContent = (content: string, type?: string) => {
     }
   }
 
-  if (type === 'video' || content.startsWith('[Video]')) {
+  if (type === 'video' || isVideo) {
     const match = content.match(/https?:\/\/[^\s]+/g);
     if (match) {
       const url = match[0];
-      const filename = content.replace(/\[Video\]\s*/, '').split('\n')[0] || 'Vídeo';
+      const filename = content.replace(/\[(Video|Vídeo)\]\s*/i, '').split('\n')[0]?.split('↳')[0]?.trim() || 'Vídeo';
       return (
         <div className="space-y-2">
           <div className="rounded-lg overflow-hidden border border-border max-w-[320px] bg-muted/20">
@@ -131,7 +141,7 @@ const renderMessageContent = (content: string, type?: string) => {
     }
   }
 
-  if (type === 'audio' || content.startsWith('[Audio]') || content.startsWith('[Áudio]')) {
+  if (type === 'audio' || isAudio) {
     const url = extractMediaUrl(content);
     if (url) {
       return (
@@ -147,11 +157,11 @@ const renderMessageContent = (content: string, type?: string) => {
     }
   }
 
-  if (type === 'document' || content.startsWith('[Arquivo]')) {
+  if (type === 'document' || isArquivo) {
     const match = content.match(/https?:\/\/[^\s]+/g);
     if (match) {
       const url = match[0];
-      const filename = content.replace(/\[Arquivo\]\s*/, '').split('\n')[0] || 'Documento';
+      const filename = content.replace(/\[(Arquivo|Documento)\]\s*/i, '').split('\n')[0]?.split('↳')[0]?.trim() || 'Documento';
       return (
         <a 
           href={url} 

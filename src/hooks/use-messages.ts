@@ -177,10 +177,15 @@ export function useMessages(conversationId: string | null) {
           sender:profiles!messages_sender_id_fkey(id, full_name, role, avatar_url)
         `)
         .eq('conversation_id', conversationId)
-        .order('created_at', { ascending: true });
+        // Busca as MAIS RECENTES primeiro (o PostgREST tem teto default ~1000 linhas:
+        // com order ASC ele devolvia as 1000 mais antigas e cortava o histórico novo —
+        // por isso grupos grandes "paravam" de exibir mensagens). Limitamos às 300
+        // mais recentes e invertemos a ordem para exibição cronológica.
+        .order('created_at', { ascending: false })
+        .limit(300);
 
       if (error) throw error;
-      return data as Message[];
+      return (data as Message[]).reverse();
     },
   });
 
@@ -208,7 +213,11 @@ export function useMessages(conversationId: string | null) {
               return aTime - bTime;
             });
           });
-          queryClient.invalidateQueries({ queryKey: ['messages', conversationId] });
+          // NÃO invalidar ['messages', conversationId] aqui: o setQueryData acima já
+          // inseriu o balão novo. Um invalidate imediato força refetch que, em race com
+          // o commit (eventual consistency), pode substituir o array sem a linha recém
+          // inserida -> a mensagem "aparece e some" da tela de registros. Mantém só o
+          // invalidate de conversations (atualiza o card).
           queryClient.invalidateQueries({ queryKey: ['conversations'] });
         }
       )
