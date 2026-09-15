@@ -27,6 +27,46 @@ export interface TechTicketRow {
   updated_at?: string;
 }
 
+export interface TicketAttachment {
+  name: string;
+  mime: string;
+  url: string;
+  size: number;
+  uploadedAt: string;
+}
+
+// Guarda um anexo do chamado no bucket público 'tech-tickets' e devolve o metadado.
+export async function uploadTicketAttachment(file: File, ticketCode?: string): Promise<TicketAttachment> {
+  const ext = (file.name.split(".").pop() || "bin").toLowerCase();
+  const folder = ticketCode ? `ticket-${ticketCode.replace(/[^A-Za-z0-9-]/g, "")}` : "novo";
+  const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const { error } = await supabase.storage.from("tech-tickets").upload(path, file, {
+    cacheControl: "3600",
+    upsert: false,
+    contentType: file.type || "application/octet-stream",
+  });
+  if (error) throw error;
+  const { data: urlData } = supabase.storage.from("tech-tickets").getPublicUrl(path);
+  return {
+    name: file.name,
+    mime: file.type || "application/octet-stream",
+    url: urlData.publicUrl,
+    size: file.size,
+    uploadedAt: new Date().toISOString(),
+  };
+}
+
+// Converte o jsonb 'attachments' em array tipado (aceita array novo ou objeto legado).
+export function parseAttachments(raw: unknown): TicketAttachment[] {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw as TicketAttachment[];
+  if (typeof raw === "object") {
+    const o = raw as Record<string, unknown>;
+    if (Array.isArray(o.files)) return o.files as TicketAttachment[];
+  }
+  return [];
+}
+
 export function rowToTicket(row: any): TechTicketRow {
   return {
     id: row.id,
