@@ -1,5 +1,28 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## ✅ REGISTRO NO APP — TAREFAS DOS 7 DIAS (08/09→15/09) COMO CHAMADOS (teste+prod compartilham o mesmo Supabase `ptochsyoyatsydfysacc`)
+**Solicitado por Rodrigo (15/09):** registrar os cards dos últimos 7 dias (iniciadas/em andamento/executadas) no app TESTE e/ou PROD com datas e desenvolvimento de cada ticket.
+**Entregue:** 15 tickets criados na tabela `technology_tickets` (aparecem em TESTE e PROD — mesmo banco). Códigos `TCK-2026-094` a `TCK-2026-108` + `TCK-2026-098` (RAG postergado, `a_analisar`) + `TCK-2026-104` (incidente broker, `a_analisar`). Cada um com `timeline[]` (from/to/note/actor/at) registrando o desenvolvimento passo a passo, `description` técnica, `business_impact`, `acceptance_criteria`. Validado ao vivo no TESTE (kanban renderiza os 17 TCK, screenshot `tickets_7dias_kanban.png`).
+**Detalhe de schema (pitfall descoberto):** `technology_tickets.subcategory` tem CHECK constraint fixa = apenas `nao_especificado`/`em_aplicacao`/`atualizado`. `priority` = `alta/media/baixa`. `delivery_forecast` é DATE (não aceita `""`). Script: `/opt/data/scripts/_registro_tickets_7dias.py` (chmod 600).
+
+| Ticket | Data | Título (resumo) | Status |
+|---|---|---|---|
+| TCK-2026-094 | 08/09 | ANTIGRAVITY Fase 3-C: reidratação JSX commitada | executado |
+| TCK-2026-095 | 09/09 | Hotfix imóvel `amount`/`currency`/`maps_link` PROD | executado |
+| TCK-2026-096 | 09/09 | Insumos Jhon Wick (briefing + compat broker) | executado |
+| TCK-2026-097 | 09/09 | Retorno Jhon Wick: migração remodel-copy + paridade 100% | executado |
+| TCK-2026-098 | 09/09 | RAG semântico (Camada C) — POSTERGADO | a_analisar |
+| TCK-2026-099 | 14/09 | SDR Fase 0: schema próprio + RPC + toggle PROD | executado |
+| TCK-2026-100 | 14/09 | SDR Fase 1: worker PM2 + Realtime + OUTBOX | executado |
+| TCK-2026-101 | 14/09 | SDR Fase 3: painel UI qualificação TESTE | executado |
+| TCK-2026-102 | 14/09 | Prep ambiente teste SDR (limpeza 6257 + fix RPC) | executado |
+| TCK-2026-103 | 15/09 | Frente B mídia-reply broker (3 patches, PROD) | executado |
+| TCK-2026-104 | 15/09 | **INCIDENTE** reload deslogou sessão PROD (auth deletado) | a_analisar |
+| TCK-2026-105 | 15/09 | Frontend fix mídia + teto PostgREST (773ed19) | executado |
+| TCK-2026-106 | 15/09 | Commit todas atualizações (f36dae4) | executado |
+| TCK-2026-107 | 15/09 | Evolução page Chamados (cadastro guiado + anexos) TESTE | executado |
+| TCK-2026-108 | 15/09 | Reunião squad: análise 7 dias + scorecards + evolução | executado |
+
 ## 📊 REUNIÃO SQUAD — 15/09 — ANÁLISE 7 DIAS (09/09→15/09) + SCORECARDS + EVOLUÇÃO DE AGENTES
 **Atividades do período (ordem cronológica):**
 - 09/09 — Hotfix cadastro de imóvel (`amount`/`currency`/`maps_link` ausentes na base PROD), insumos p/ Jhon Wick (briefing + manifest MD5 broker `9eb2e374` 100% compatível), RAG semântico postergado (aguarda decisão do store).
