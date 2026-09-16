@@ -22,6 +22,10 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { MobileSidebar } from "@/components/layout/MobileSidebar";
 import { GroupDetailsPanel } from "@/components/atendimento/GroupDetailsPanel";
+import { FollowUpModal } from "@/components/atendimento/FollowUpModal";
+import { FollowUpBadge } from "@/components/atendimento/FollowUpBadge";
+import { TagsManager } from "@/components/atendimento/TagsManager";
+import { usePendingFollowupsByConversation } from "@/hooks/use-followups";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Search,
@@ -64,6 +68,7 @@ import {
   Check,
   ArrowLeft,
   ArrowRightLeft,
+  AlarmClock,
   UserPlus,
   ExternalLink,
   Mic,
@@ -561,6 +566,16 @@ class AtendimentoErrorBoundary extends React.Component<{children: React.ReactNod
   }
 }
 
+// Componente hijo memoizado (fuera del map) que consulta los follow-ups pendientes
+// de una conversa y muestra el badge-reloj (FollowUpBadge) del más próximo.
+// Fuera del bucle porque los hooks no pueden llamarse dentro de filteredConversations.map().
+const FollowUpBadgeForConversation = ({ conversationId }: { conversationId: string }) => {
+  const { data = [] } = usePendingFollowupsByConversation(conversationId);
+  const firstPending = data && data.length > 0 ? data[0] : null;
+  if (!firstPending || !firstPending.scheduled_at) return null;
+  return <FollowUpBadge scheduled_at={firstPending.scheduled_at} />;
+};
+
 function AtendimentoContent() {
   const queryClient = useQueryClient();
 
@@ -693,6 +708,11 @@ function AtendimentoContent() {
   const isDirecionado = (conv: Conversation) =>
     Boolean(conv.agent_id || conv.agent?.id || conv.lead?.responsible?.id);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  // Follow-up & Tags modal states (FollowUpModal / TagsManager)
+  const [isFollowUpOpen, setIsFollowUpOpen] = useState(false);
+  const [followUpConvId, setFollowUpConvId] = useState<string | null>(null);
+  const [isTagsOpen, setIsTagsOpen] = useState(false);
+  const currentTenantId = profile?.tenant_id ?? "";
   const createLeadMutation = useCreateLead();
   const createVisitMutation = useCreateVisit();
 
@@ -2438,11 +2458,12 @@ function AtendimentoContent() {
                                  {tag}
                                </Badge>
                              ))}
-                             {hiddenTagsCount > 0 && (
-                               <Badge variant="outline" className="text-[10px] h-5 px-1.5">+{hiddenTagsCount}</Badge>
-                             )}
-                             
-                             <Popover>
+                            {hiddenTagsCount > 0 && (
+                              <Badge variant="outline" className="text-[10px] h-5 px-1.5">+{hiddenTagsCount}</Badge>
+                            )}
+                            <FollowUpBadgeForConversation conversationId={conv.id} />
+
+                                                         <Popover>
                                  <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
                                    <button type="button" className="inline-flex items-center justify-center rounded-full border border-dashed border-input bg-transparent text-[10px] h-5 px-1 font-medium hover:bg-accent hover:text-accent-foreground cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
                                      <Plus className="h-2.5 w-2.5" />
@@ -2733,6 +2754,28 @@ function AtendimentoContent() {
                           <span className="hidden md:inline">Testar Painel de Grupo</span>
                         </Button>
                       )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          if (selectedConv) {
+                            setFollowUpConvId(selectedConv.id);
+                            setIsFollowUpOpen(true);
+                          }
+                        }}
+                        title="Agendar follow-up"
+                        disabled={!selectedConv}
+                      >
+                        <AlarmClock className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsTagsOpen(true)}
+                        title="Gestionar tus tags"
+                      >
+                        <Tag className="h-4 w-4" />
+                      </Button>
                       <Button
                         variant="ghost"
                         size="icon"
@@ -3895,6 +3938,17 @@ function AtendimentoContent() {
 
       <WhatsAppSettingsDrawer open={showSettings} onOpenChange={setShowSettings} />
       <ImportLeadsModal open={isImportModalOpen} onOpenChange={setIsImportModalOpen} />
+
+      {followUpConvId && (
+        <FollowUpModal
+          open={isFollowUpOpen}
+          onOpenChange={setIsFollowUpOpen}
+          tenantId={currentTenantId}
+          conversationId={followUpConvId}
+          onCreated={() => queryClient.invalidateQueries({ queryKey: ['conversations'] })}
+        />
+      )}
+      <TagsManager open={isTagsOpen} onOpenChange={setIsTagsOpen} />
 
       {/* Modal Adicionar Contato */}
       {isAddContactOpen && (
