@@ -1,0 +1,10 @@
+name: squad-commands
+label: Comandos do Squad Ahut
+kind: agent
+version: 1.0.0
+description: >
+  Registra os 5 slash commands de orquestracao do Squad Tech Ahut
+  (/executar, /performance, /criar-agente, /evolucao, /resumo). Cada um
+  injeta as instrucoes deterministas de orquestracao (guias + skill minima)
+  para o agente Hermes executar de forma real no Telegram.
+author: Hermes OS (Jarvis Orchestrator)
