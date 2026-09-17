@@ -56,8 +56,8 @@ Quando o comando `/executar` for recebido (o "comando programado"):
 
 ### 📁 Deploy: Document Root Real (aprendido 26/08)
 **REGRA CRÍTICA:** NUNCA confie no caminho do subdomínio como document root.
-- Exemplo: `dev-ahut-ecosystem.apexfyhub.com.br` NÃO aponta para o subdomínio próprio
-- O docroot REAL é um subdiretório do domínio principal: `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
+- Exemplo: `teste-ahut-ecosystem.apexfyhub.com.br` NÃO aponta para o subdomínio próprio
+- O docroot REAL é um subdiretório do domínio principal: `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - Produção (`ahut-ecosystem`) segue o mesmo padrão: `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
 - **SEMPRE** verificar no hPanel ou via SFTP qual o document root real antes de fazer deploy
 - Se o HTML servido for diferente do HTML no disco, o docroot está errado — move o deploy
@@ -65,16 +65,17 @@ Quando o comando `/executar` for recebido (o "comando programado"):
 ## Controle de Versão e Repositórios GitHub
 ### REGRA ATUALIZADA (25/08/2026)
 - **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
+- **TESTE/EDIÇÃO** (`teste-ahut-ecosystem.apexfyhub.com.br`) → edição/build no **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main); consultar `check/src/` como referência
 - **NUNCA inverter** os repositórios. Cada um tem seu propósito.
 
 ### Repositório `ahut-ecosystem-active`
 - Contém: snapshots de produção, bundles JS, backups, hotfixes aplicados
 - Commits: `2a82fa7` (backup inicial), `e2aec18` (snapshot 24/08), `fdc44e0` (hotfix textarea), `5ad7764` (registro hotfix)
 
-### Repositório `ahut-ecosystem-remodel`
-- Contém: código TSX de engenharia reversa, componentes, páginas, hooks
-- Commits: `6c2d924` (Ctrl+Space), `046541c` (Command+Space), `f37f438` (eng reversa)
+### Repositório `remodel-copy` (repo CENTRAL — NUNCA vincular a `rodrigofsacramento-alt-ahut-ecosystem-remodel`)
+- Contém: código TSX de engenharia reversa — **EDIÇÃO ativa = `src_recovered_1_1/`** (`remodel-copy`), bundle TESTE (`1.1_FRONTEND_PROD_TESTE`) e bundle PROD cliente (`01_FRONTEND_PRODUCAO_HOSTINGER`). [⚠️ `00_ANTIGRAVITY_FASE3_CORRECCION/check/src` é DUPLICATA em consolidação — consulte AGENTS.md]
+- **REGRA CRÍTICA:** o repo `rodrigofsacramento-alt-ahut-ecosystem-remodel` está DESCARTADO para sempre. Toda edição/commit/deploy passa por `remodel-copy` (branch `remodel`).
+- Commits legado (referência histórica): `6c2d924` (Ctrl+Space), `046541c` (Command+Space), `f37f438` (eng reversa)
 
 ---
 
@@ -143,7 +144,8 @@ O ecossistema opera em 3 camadas de orquestração:
         ▼
     [7] Deploy + Commit
         │    • Produção → ahut-ecosystem-active
-        │    • Dev → ahut-ecosystem-remodel
+        │    • Teste → 1.1_FRONTEND_PROD_TESTE (remodel-copy); edição/eng reversa em remodel-copy 00_ANTIGRAVITY/src
+        │    • PROD cliente (validado) → 01_FRONTEND_PRODUCAO_HOSTINGER (remodel-copy)
         │
         ▼
     [8] Ticket no Kanban Tecnologia
@@ -291,23 +293,24 @@ O Squad Tech Ahut está construindo o **QUBITS**: um sistema que torna empresas 
 ### Comando `/reuniao` — Convocar Reunião Geral do Squad
 Dispara o **ARGUS** como orchestrator para facilitar uma reunião com todos os 11 agentes. Cada agente dá 3 contribuições (bom, gargalo, sugestão). Gera relatório em `PLANO_MELHORIA_QUBITS.md` com diagnóstico, propostas priorizadas (P1/P2/P3), roadmap por sprints e métricas de autonomia.
 
-### Comando `/executar fluxo completo`
-O Comandante pode disparar o fluxo de orquestração completo com o comando `/executar fluxo completo` no Telegram. Quando receber este comando:
-- **OBRIGATÓRIO** executar TODAS as 9 etapas do fluxo
-- **NÃO** pular [6] ARGUS (aprendizado), [8] TCK Kanban, [9] Performance
-- **NÃO** pular [5] AURA (QA) — rodar `npx tsc --noEmit` e `npm run build` antes de considerar pronto
-- **NÃO** pular [4] Jarvis revisa + ensina — se houver erro, ensinar o agente e registrar
+### Comando `/executar` — Fluxo Delegado (ATUALIZADO 16/09)
+O Comandante dispara o fluxo de orquestração completo com o comando **`/executar`** no Telegram. **O antigo `/executar` não existe mais** — o comando canônico é `/executar`. Quando receber este comando, Jarvis **NÃO executa passo a passo**: 
+- **DELEGA a execução ao `AXIOM`** (executor autônomo, o antigo "Agents Orchestrator" renomeado em 16/09).
+- Jarvis Novo (Chief) atua **apenas nos GATES HITL**:
+  - **Gate 1:** valida o status report do AXIOM + loop Dev↔QA (só aprova task com **PROVA VISUAL real**, não só tsc/build).
+  - **Gate 2:** apto a subir PRODUÇÃO? → SE SIM, espeta a decisão para o **COMANDANTE** aprovar.
+  - **Gate 3:** pós-entrega → performance (6 indicadores) + análise de lacuna + aprendizado (Jarvis mantém).
+- **Regras que permanecem:** não pular AURA (QA real), não pular ARGUS (aprendizado), não pular TCK Kanban nem Performance.
 - Prioridade máxima: este comando sobrescreve qualquer dúvida sobre "preciso perguntar antes?"
-- O comando pode ser anexado a uma demanda específica (ex: `/executar fluxo completo Diagnostique o áudio e corrija`)
-
+- O comando pode ser anexado a uma demanda específica (ex: `/executar Diagnostique o áudio e corrija`).
 ### Regra de Repositórios (NÃO INVERTER)
 - **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
+- **TESTE/EDIÇÃO** (`teste-ahut-ecosystem.apexfyhub.com.br`) → edição/build no **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main); consultar `check/src/` como referência
 - Se comittei no repositório errado, corrigir imediatamente com revert + commit no repo correto
 
 ### Document Root Real
 - `ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-- `dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
+- `teste-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/`
 - Sempre verificar no hPanel → Subdomínios antes de fazer deploy
 
 ### Cache LiteSpeed Hostinger
@@ -320,32 +323,32 @@ Quando o Comandante disser que é **URGENTE**:
 1. **Fazer alteração direto na PRODUÇÃO** (bundle JS via Hostinger SFTP ou broker VPS)
 2. **Testar a alteração** — pode ser testado no **Supabase DEV** (banco separado, `xmsulduzvufdzkfktovk`) OU no **Supabase PRODUÇÃO** (`ptochsyoyatsydfysacc`) dependendo da urgência e do escopo. O Comandante vai especificar qual banco usar.
 3. **Após validar que funcionou** → Commit no `ahut-ecosystem-active` (repositório de produção) com `git add -A && git commit -m "🐛..."`
-4. **Imediatamente após commit** → Fazer **engenharia reversa** do que foi alterado, implementando no código fonte TSX do `ahut-ecosystem-remodel`
-5. **Commit no remodel** com a engenharia reversa completa
+4. **Imediatamente após commit** → Fazer **engenharia reversa** do que foi alterado, implementando no código fonte de EDIÇÃO do **`remodel-copy`**: `src_recovered_1_1/` (NUNCA no repo `ahut-ecosystem-remodel`, descartado).
+5. **Commit no `remodel-copy`** (branch `remodel`) com a engenharia reversa completa. Para subir a TESTE: build → `1.1_FRONTEND_PROD_TESTE` → commit + deploy hosting `teste-ahut-ecosystem.apexfyhub.com.br`. **Se validado → PROD cliente:** `01_FRONTEND_PRODUCAO_HOSTINGER` → commit + deploy hosting `ahut-ecosystem.apexfyhub.com.br`.
 
 **Importante:** O Comandante vai DETALHAR que é urgente. Quando ele falar "urgente", é direto na produção. Quando ele não falar, é no dev primeiro.
 
 ### 📋 Ambientes de Teste (NOVO 27/08)
 - **Frontend PRODUÇÃO** → conectado no **Supabase PRODUÇÃO** (`ptochsyoyatsydfysacc`)
 - **Frontend DEV** → conectado no **Supabase DEV** (`xmsulduzvufdzkfktovk`)
-  - Anon key: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhtc3VsZHV6dnVmZHprZmt0b3ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzNTU1OTgsImV4cCI6MjEwMDkzMTU5OH0.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0`
-  - Service role: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhtc3VsZHV6dnVmZHprZmt0b3ZrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NTM1NTU5OCwiZXhwIjoyMTAwOTMxNTk4fQ.EhchaQ1GsUrwG1QyJih68EEa8ArxD439ocHup7LwNOg`
+  - Anon key: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0`
+  - Service role: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.EhchaQ1GsUrwG1QyJih68EEa8ArxD439ocHup7LwNOg`
   - DB: `postgresql://postgres:Dir%40124!%40%24!%40%24@db.xmsulduzvufdzkfktovk.supabase.co:6543/postgres`
 - **Isso não afeta a estrutura produtiva do cliente**
 - Testes no DEV usam banco separado, dados de teste
 - Schema clonado da produção em 27/08: 68 tabelas, 179 funções, 55 triggers
 
-### 🟢 Destino de Deploy DEV (único, diferente da produção)
-Diferente da produção que tem **4 destinos**, o DEV tem **apenas 1**:
+### 🟢 Destino de Deploy TESTE (homologação — diferente da produção)
+Diferente da produção que tem **4 destinos**, o TESTE tem **apenas 1** (fonte de EDIÇÃO = `src/` do Jhon Wick):
 | # | Destino | Servidor | Caminho |
 |---|---|---|---|
-| 1 | `dev-ahut-ecosystem.apexfyhub.com.br` | Hostinger `82.25.73.206:65002` u817195350 | `~/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/` |
+| 1 | `teste-ahut-ecosystem.apexfyhub.com.br` | Hostinger `82.25.73.206:65002` u817195350 | `~/domains/apexfyhub.com.br/public_html/teste/` |
 
 ### 🔄 Engenharia Reversa Contínua
 Após qualquer hotfix em produção (urgente):
 1. ✅ Commit no `ahut-ecosystem-active`
-2. ✅ Implementar no TSX do `ahut-ecosystem-remodel`
-3. ✅ Commit no remodel
+2. ✅ Implementar no `src/` do **Jhon Wick** (`/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, main)
+3. ✅ Commit no Jhon Wick + subir em teste-ahut
 4. ✅ Assim o sistema DEV se equaliza com o PRODUTIVO rapidamente
 **REGRA CRÍTICA:** O frontend de produção é servido em **4 destinos simultâneos**. Um deploy só está completo quando TODOS os 4 estão atualizados:
 
@@ -353,8 +356,8 @@ Após qualquer hotfix em produção (urgente):
 |---|---|---|---|
 | 1 | VPS nginx: `/var/www/html/` | `2.24.95.98` root | SFTP/SCP via VPS |
 | 2 | VPS crm: `/var/www/crm-imobiliaria/` | `2.24.95.98` root | SFTP/SCP via VPS |
-| 3 | Hostinger subdomínio: `ahut-ecosystem.apexfyhub.com.br` → `~/domains/ahut-ecosystem.../public_html/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: Dir@5207411605) |
-| 4 | Hostinger ahut/: `apexfyhub.com.br/ahut/` → `~/domains/apexfyhub.com.br/public_html/ahut/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: Dir@5207411605) |
+| 3 | Hostinger subdomínio: `ahut-ecosystem.apexfyhub.com.br` → `~/domains/ahut-ecosystem.../public_html/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_REDIGIDA_HERMES) |
+| 4 | Hostinger ahut/: `apexfyhub.com.br/ahut/` → `~/domains/apexfyhub.com.br/public_html/ahut/` | `82.25.73.206:65002` u817195350 | SFTP/SCP (senha: SENHA_REDIGIDA_HERMES) |
 
 ### 🔄 RESTORE DE PRODUÇÃO (aprendido 27/08)
 Fluxo para restaurar versão anterior:
@@ -391,3 +394,21 @@ Ao comparar bundles (produção vs dev), verificar:
   - textarea + auto-resize + whitespace-pre-wrap
 - **Chunks faltantes vs bundle único Vite**: produção usa chunk system (rolável), dev usa Vite single-bundle
 - **Pipeline áudio no broker**: verificar `convertBufferToWhatsAppAudio`, `return sendResult`, `convId` no `dist/session-manager.js`
+
+## 🏛️ PROTOCOLOS DE GOVERNANÇA GLOBAL (09/SET/2026)
+
+### 1. Protocolo READ-FIRST (Regra 0)
+Antes de iniciar qualquer ação, o Jarvis e todos os agentes devem consultar obrigatoriamente:
+- .agents/docs/KNOWLEDGE_BASE_GLOBAL.md (Base de conhecimento global)
+- .agents/docs/PAINEL_DE_CONTROLE.md (Kanban e status de tarefas)
+- .agents/docs/<0X_AGENTE>/SKILL.md (Skill nativa unificada na pasta do agente)
+
+### 2. Protocolo WRITE-LAST (Registro no Diário de Bordo)
+Após a conclusão de qualquer tarefa ou entrega de código/documentação:
+- É OBRIGATÓRIO registrar uma entrada no arquivo CHANGELOG_APEXFY.md na raiz do repositório com Data/Hora, Módulo, Arquivos Modificados, Agente Responsável e Descrição detalhada.
+- Comitar e enviar o push no branch 
+emodel do repositório 
+emodel-copy.
+
+### 3. Estrutura Unificada de Agentes (.agents/docs/)
+Todas as skills foram integradas em suas respectivas pastas numeradas de agente em .agents/docs/0X_<AGENTE>/SKILL.md. A pasta duplicada .agents/skills/ foi totalmente removida.
