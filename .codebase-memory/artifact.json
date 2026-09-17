@@ -1,0 +1,12 @@
+{
+    "schema_version": 2,
+    "commit": "0e89fbb9af92493e6d4b0b6e3dd8c9df473d3964",
+    "indexed_at": "2026-09-17T20:49:08Z",
+    "project": "opt-data-ahut-ecosystem-remodel-copy",
+    "nodes": 152588,
+    "edges": 844191,
+    "original_size": 720371712,
+    "compressed_size": 83964234,
+    "compression_level": 3,
+    "reconcile_basis": "git-clean-head"
+}
