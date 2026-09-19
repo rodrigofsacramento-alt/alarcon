@@ -1,5 +1,15 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## ✅ 19/09 — MÓDULO CONTAS BANCÁRIAS (`/financeiro/contas`) — CONSTRUIDO + DEPLOY TESTE
+**Solicitado por Rodrigo:** sub-páginas financeiras pendientes / reconstrução do mapeo financeiro como Jarvis.
+**Entregue:** nova página `Contas.tsx` (rasta `/financeiro/contas`, roles admin/manager) + hook `use-financial-banks.ts` + tipo `financial_banks` agregado al gen-types.
+- **Backend/schema validado na BD real:** `financial_banks` (14 cuentas activas tenant Ahut) tem RLS `ALL public` (sin tenant-scope) → front filtra por `tenantId` explícito. Saldo total consolidado **Gs 95.048.576** (Itaú 24.731.625, Efectivo Gs Imigración 22.082.600, Criptos 21.978.000, etc. — 9/9 cuentas com saldo ≠ 0).
+- **Saldo via `financial_transactions`** (RSL tenant-scope, tipada) agregando income-expense por `bank_id` → replica EXACTO la view `financial_saldo` (validado: Itaú 405.480.627−380.749.002=24.731.625 ✓). Não se delegou na view (não tipada, sem tenant-scope na SQL).
+- **UI:** banner saldo consolidado, listado de cuentas por grid (nome, saldo, movimientos, entradas/saídas, toggle activo/inactivo), detalle transacciones por cuenta (clique en card), modal "Nueva Cuenta", botón "Volver al Financeiro". Campos dinámicos/reativos del DB real (critério Rodrigo). Moneda Gs.
+- **Rutas/navegación:** import lazy + Route `/financeiro/contas` en App.tsx; botón "Contas Bancárias" en header Financeiro.tsx.
+- **Build OK** (tsc limpio em mis archivos — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/Contas-Cw5quPl2.js` (11 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 591 assets + `DEPLOY_OK`; verificado live: index `index-kYOd1bTU.js` servido + `Contas-Cw5quPl2.js` HTTP 200 + ruta `/financeiro/contas` no registro JS.
+- **Próximas faltas financeiras:** Livro Geral/Extrato completo con filtros (hoy solo top 10 en el painel) y segmento Vendas & Imigración sin tela dedicada.
+
 ## ✅ REGISTRO NO APP — TAREFAS DOS 7 DIAS (08/09→15/09) COMO CHAMADOS (teste+prod compartilham o mesmo Supabase `ptochsyoyatsydfysacc`)
 **Solicitado por Rodrigo (15/09):** registrar os cards dos últimos 7 dias (iniciadas/em andamento/executadas) no app TESTE e/ou PROD com datas e desenvolvimento de cada ticket.
 **Entregue:** 15 tickets criados na tabela `technology_tickets` (aparecem em TESTE e PROD — mesmo banco). Códigos `TCK-2026-094` a `TCK-2026-108` + `TCK-2026-098` (RAG postergado, `a_analisar`) + `TCK-2026-104` (incidente broker, `a_analisar`). Cada um com `timeline[]` (from/to/note/actor/at) registrando o desenvolvimento passo a passo, `description` técnica, `business_impact`, `acceptance_criteria`. Validado ao vivo no TESTE (kanban renderiza os 17 TCK, screenshot `tickets_7dias_kanban.png`).

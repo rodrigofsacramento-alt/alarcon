@@ -24,6 +24,7 @@ import {
   Filter,
   Calendar,
   Loader2,
+  Landmark,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -155,6 +156,10 @@ export default function Financeiro() {
           subtitle="Visão geral do fluxo de caixa e comissões"
           actionButton={
             <div className="flex items-center gap-2">
+              <Button variant="outline" className="gap-2" onClick={() => navigate('/financeiro/contas')}>
+                <Landmark className="h-4 w-4" />
+                Contas Bancárias
+              </Button>
               <Button variant="outline" className="gap-2" onClick={() => navigate('/financeiro/comissoes')}>
                 <Users className="h-4 w-4" />
                 Gestão de Comissões

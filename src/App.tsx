@@ -24,6 +24,7 @@ const Juridico = lazy(() => import("./pages/Juridico"));
 const Vendas = lazy(() => import("./pages/Vendas"));
 const Financeiro = lazy(() => import("./pages/Financeiro"));
 const Comissoes = lazy(() => import("./pages/Comissoes"));
+const Contas = lazy(() => import("./pages/Contas"));
 const Corretores = lazy(() => import("./pages/Corretores"));
 const AreaCliente = lazy(() => import("./pages/AreaCliente"));
 const CorretorDashboard = lazy(() => import("./pages/CorretorDashboard"));
@@ -105,6 +106,7 @@ const App = () => {
                 <Route path="/vendas" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Vendas /></ProtectedRoute>} />
                 <Route path="/financeiro" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Financeiro /></ProtectedRoute>} />
                 <Route path="/financeiro/comissoes" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Comissoes /></ProtectedRoute>} />
+                <Route path="/financeiro/contas" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Contas /></ProtectedRoute>} />
                 <Route path="/corretores" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Corretores /></ProtectedRoute>} />
                 <Route path="/dashboard-performance" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DashboardPerformance /></ProtectedRoute>} />
                 <Route path="/routing-log" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><RoutingLog /></ProtectedRoute>} />
