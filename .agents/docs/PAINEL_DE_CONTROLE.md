@@ -18,7 +18,17 @@
 - **UI:** cards resumo (registros + entradas/saídas da página visível), painel de filtros (busca, tipo, categoria, banco, range datas reativas — Springer Rodrigo: mudança num campo re-executa query), checkbox "somente realizadas", tabela com tipo/categoria/banco/situação, **paginação** Anterior/Próximo, botões **CSV** (exportToCSV) e **PDF** (exportToPDF) do export-utils. Moneda Gs.
 - **Rutas/navegación:** import lazy + Route `/financeiro/livro` en App.tsx; botón "Livro Geral" (BookOpen) en header Financeiro.tsx, junto a Contas/Comissões.
 - **Build OK** (tsc limpio nos meus arquivos — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/Livro-DJVrClKB.js` (9.6 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 661 assets + `DEPLOY_OK`; verificado live: index `index-CY5INcGH.js` servido + `Livro-DJVrClKB.js` HTTP 200 + ruta `/financeiro/livro` no registro JS.
-- **Falta financeira pendiente:** segmento **Vendas & Imigración** (7 vendas Gs 71.6M) sem tela dedicada.
+- **Falta financeira pendiente:** Transferências/Ajustes entre bancos (movimentação P4b, saldo inicial 01/01/2026) e relatório de transferências. Vendas & Imigración YA implementado (ver entrada abajo).
+
+## ✅ 20/09 — MÓDULO VENDAS & IMIGRAÇÃO (`/financeiro/vendas`) — CONSTRUIDO + DEPLOY TESTE
+**Solicitado por Rodrigo:** «pode seguir para faltas financeiras» — última sub-página financeira pendiente do mapeo.
+**Entregue:** nova página `VendasImigracion.tsx` (rasta `/financeiro/vendas`, roles admin/manager) com **KPIs + listado das 7 vendas de imigração**.
+- **Schema validado na BD real:** `sales_records` do tenant está **vazio (0 rows)** — a fonte real das vendas de imigração é **`financial_transactions` WHERE `source='import_imigracao'`** (P2). Confirmado: 7 vendas income, **todas `is_realized=true`**, soma **Gs. 71.599.999**, categoria Imigração (13bacf33), banco Banco Itaú (5ab2f8f1), datas 01–19/08/2026, `reference_id`/`reference_type` nulos. Banco de dados real (critério Rodrigo).
+- **Backend:** novo hook `useFinancialSales` em `use-financial-sales.ts` — query RLS tenant-scope (financial_transactions), agrega totalVendas/totalValor/media/maiorValor, parseia o comprador do nome composto "COMPRADOR — residência temporária…" (`parseBuyerName`).
+- **UI:** 4 KPIs (total vendas, valor total, ticket médio, maior venda), tabela com comprador/descrição/data/situação/valor, botões **CSV** e **PDF** (export-utils). Moneda Gs.
+- **Rutas/navegación:** import lazy + Route `/financeiro/vendas` en App.tsx; botón "Vendas & Imigração" (Plane) en header Financeiro.tsx.
+- **Build OK** (tsc limpio — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/VendasImigracion-CPO716xJ.js` (6.5 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 734 assets + `DEPLOY_OK`; verificado live: index `index-Q-xMiWe2.js` servido + `VendasImigracion-CPO716xJ.js` HTTP 200 + ruta `/financeiro/vendas` no registro JS.
+- **Falta financeira pendiente (fora do mapeo principal):** tela de Transferências/Ajustes entre bancos (movimentação de saldo inicial / transferências internas).
 
 ## ✅ REGISTRO NO APP — TAREFAS DOS 7 DIAS (08/09→15/09) COMO CHAMADOS (teste+prod compartilham o mesmo Supabase `ptochsyoyatsydfysacc`)
 **Solicitado por Rodrigo (15/09):** registrar os cards dos últimos 7 dias (iniciadas/em andamento/executadas) no app TESTE e/ou PROD com datas e desenvolvimento de cada ticket.
