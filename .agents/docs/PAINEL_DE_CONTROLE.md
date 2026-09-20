@@ -8,7 +8,17 @@
 - **UI:** banner saldo consolidado, listado de cuentas por grid (nome, saldo, movimientos, entradas/saídas, toggle activo/inactivo), detalle transacciones por cuenta (clique en card), modal "Nueva Cuenta", botón "Volver al Financeiro". Campos dinámicos/reativos del DB real (critério Rodrigo). Moneda Gs.
 - **Rutas/navegación:** import lazy + Route `/financeiro/contas` en App.tsx; botón "Contas Bancárias" en header Financeiro.tsx.
 - **Build OK** (tsc limpio em mis archivos — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/Contas-Cw5quPl2.js` (11 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 591 assets + `DEPLOY_OK`; verificado live: index `index-kYOd1bTU.js` servido + `Contas-Cw5quPl2.js` HTTP 200 + ruta `/financeiro/contas` no registro JS.
-- **Próximas faltas financeiras:** Livro Geral/Extrato completo con filtros (hoy solo top 10 en el painel) y segmento Vendas & Imigración sin tela dedicada.
+- **Próximas faltas financeiras:** segmento Vendas & Imigración sin tela dedicada (7 vendas Gs 71.6M). Livro Geral/Extrato completo YA implementado (ver entrada abajo).
+
+## ✅ 20/09 — MÓDULO LIVRO GERAL / EXTRATO (`/financeiro/livro`) — CONSTRUIDO + DEPLOY TESTE
+**Solicitado por Rodrigo:** «pode seguir para faltas financeiras» — implementar as sub-páginas financeiras pendientes.
+**Entregue:** nova página `Livro.tsx` (rasta `/financeiro/livro`, roles admin/manager) com **extrato completo paginado + filtros + busca + export PDF/CSV**, superando o antigo limite de "top-10 sem filtros" do painel.
+- **Schema validado na BD real:** `financial_transactions` (20 colunas; coluna real de texto = `name` + `description` opcional, `type` text, `bank_id` FK, `is_realized`, `source`, `date`, `agent_id`). Dados tenant Ahut: **340 transações** (90 income + 250 expense), todas realizadas, rang 01/01/2026→17/09/2026, fontes: import_livro_geral(324)/import_abertura(9)/import_imigracao(7). `agent_id` vazio no tenant (sem join necessário).
+- **Backend:** novo hook `useFinancialLedger` em `use-financial.ts` — query paginada (`count:'exact'` + `.range`) com filtros (type, categoryId, bankId, dateFrom, dateTo, realizedOnly, search ilike) + joins de categoria e banco (`FinancialTransaction` estendido com `bank`). Reaproveita `useFinancialCategories` e `useFinancialBanks`.
+- **UI:** cards resumo (registros + entradas/saídas da página visível), painel de filtros (busca, tipo, categoria, banco, range datas reativas — Springer Rodrigo: mudança num campo re-executa query), checkbox "somente realizadas", tabela com tipo/categoria/banco/situação, **paginação** Anterior/Próximo, botões **CSV** (exportToCSV) e **PDF** (exportToPDF) do export-utils. Moneda Gs.
+- **Rutas/navegación:** import lazy + Route `/financeiro/livro` en App.tsx; botón "Livro Geral" (BookOpen) en header Financeiro.tsx, junto a Contas/Comissões.
+- **Build OK** (tsc limpio nos meus arquivos — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/Livro-DJVrClKB.js` (9.6 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 661 assets + `DEPLOY_OK`; verificado live: index `index-CY5INcGH.js` servido + `Livro-DJVrClKB.js` HTTP 200 + ruta `/financeiro/livro` no registro JS.
+- **Falta financeira pendiente:** segmento **Vendas & Imigración** (7 vendas Gs 71.6M) sem tela dedicada.
 
 ## ✅ REGISTRO NO APP — TAREFAS DOS 7 DIAS (08/09→15/09) COMO CHAMADOS (teste+prod compartilham o mesmo Supabase `ptochsyoyatsydfysacc`)
 **Solicitado por Rodrigo (15/09):** registrar os cards dos últimos 7 dias (iniciadas/em andamento/executadas) no app TESTE e/ou PROD com datas e desenvolvimento de cada ticket.

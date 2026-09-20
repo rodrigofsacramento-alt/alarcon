@@ -3,9 +3,11 @@ import { supabase } from '@/lib/supabase';
 import type { Tables, TablesInsert } from '@/types/database';
 
 export type FinancialCategory = Tables<'financial_categories'>;
+export type FinancialBank = Tables<'financial_banks'>;
 
-export type FinancialTransaction = Omit<Tables<'financial_transactions'>, 'category'> & {
+export type FinancialTransaction = Omit<Tables<'financial_transactions'>, 'category' | 'bank'> & {
   category?: FinancialCategory | null;
+  bank?: FinancialBank | null;
 };
 
 // Fetch real categories (RLS já filtra por tenant get_my_tenant_id())
@@ -25,6 +27,9 @@ export function useFinancialCategories() {
 
 const CATEGORY_SELECT =
   'category:financial_categories!financial_transactions_category_id_fkey(id, name, category)';
+
+const BANK_SELECT =
+  'bank:financial_banks!financial_transactions_bank_id_fkey(id, name, is_active)';
 
 export function useFinancialTransactions(filters?: {
   type?: string;
@@ -56,6 +61,61 @@ export function useFinancialTransactions(filters?: {
       const { data, error } = await query;
       if (error) throw error;
       return (data || []) as FinancialTransaction[];
+    },
+  });
+}
+
+export type LedgerFilters = {
+  type?: string;
+  categoryId?: string;
+  bankId?: string;
+  dateFrom?: string;
+  dateTo?: string;
+  realizedOnly?: boolean;
+  search?: string;
+  page?: number;
+  pageSize?: number;
+};
+
+export type LedgerResult = {
+  transactions: FinancialTransaction[];
+  total: number;
+  page: number;
+  pageSize: number;
+};
+
+// Livro Geral / extrato completo com paginação + filtros + contagem exacta
+export function useFinancialLedger(filters: LedgerFilters = {}) {
+  const page = filters.page ?? 1;
+  const pageSize = filters.pageSize ?? 20;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  return useQuery({
+    queryKey: ['financial_ledger', filters],
+    queryFn: async () => {
+      let query = supabase
+        .from('financial_transactions')
+        .select(`*, ${CATEGORY_SELECT}, ${BANK_SELECT}`, { count: 'exact' })
+        .order('date', { ascending: false })
+        .range(from, to);
+
+      if (filters?.type) query = query.eq('type', filters.type);
+      if (filters?.categoryId) query = query.eq('category_id', filters.categoryId);
+      if (filters?.bankId) query = query.eq('bank_id', filters.bankId);
+      if (filters?.dateFrom) query = query.gte('date', filters.dateFrom);
+      if (filters?.dateTo) query = query.lte('date', filters.dateTo);
+      if (filters?.realizedOnly) query = query.eq('is_realized', true);
+      if (filters?.search) query = query.ilike('name', `%${filters.search}%`);
+
+      const { data, error, count } = await query;
+      if (error) throw error;
+      return {
+        transactions: (data || []) as FinancialTransaction[],
+        total: count ?? 0,
+        page,
+        pageSize,
+      } as LedgerResult;
     },
   });
 }
