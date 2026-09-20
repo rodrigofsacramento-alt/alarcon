@@ -30,6 +30,10 @@
 - **Build OK** (tsc limpio — error `ai-prompts.ts` preexistente no tocado) → `dist/assets/VendasImigracion-CPO716xJ.js` (6.5 KB). **Deploy TESTE ✅** (`teste-ahut-ecosystem`): backup 734 assets + `DEPLOY_OK`; verificado live: index `index-Q-xMiWe2.js` servido + `VendasImigracion-CPO716xJ.js` HTTP 200 + ruta `/financeiro/vendas` no registro JS.
 - **Falta financeira pendiente (fora do mapeo principal):** tela de Transferências/Ajustes entre bancos (movimentação de saldo inicial / transferências internas).
 
+## ✅ DECISIÓN 20/09 — GRÁFICO DE FATURAMENTO SE DEIXA COMO ESTÁ (KPIs principais quadram)
+**Análise (datos reais):** desfase junio 66,6M (nosso) vs 112,5M (Emilio/Vercel). Causa raíz: **dois projetos Supabase**. Nosso app (prod+teste) apunta a `ptochsyoyatsydfysacc`; dashboard Emilio usa `njyckmhocrucqqetexju` (JWT `emilioatendente@gmail.com` verificado). O módulo Faturamento de Emilio = **Assessoria + Comissões de Loteadoras**; el volume 112,5M de comisiones **não existe em `ptoch`** (sólo 17,0M em junho) → vive em `njyckm` (sem credencial).
+**Decisión del usuario (opção 4 elegida):** «Deja el faturamento como está; bastan los KPIs del dashboard principal que ya cuadran». **NO se modifica a query do gráfico.** KPIs principais (9,87M/60,27M/−50,4M) já cuadran entre ambas apps.
+
 ## ✅ REGISTRO NO APP — TAREFAS DOS 7 DIAS (08/09→15/09) COMO CHAMADOS (teste+prod compartilham o mesmo Supabase `ptochsyoyatsydfysacc`)
 **Solicitado por Rodrigo (15/09):** registrar os cards dos últimos 7 dias (iniciadas/em andamento/executadas) no app TESTE e/ou PROD com datas e desenvolvimento de cada ticket.
 **Entregue:** 15 tickets criados na tabela `technology_tickets` (aparecem em TESTE e PROD — mesmo banco). Códigos `TCK-2026-094` a `TCK-2026-108` + `TCK-2026-098` (RAG postergado, `a_analisar`) + `TCK-2026-104` (incidente broker, `a_analisar`). Cada um com `timeline[]` (from/to/note/actor/at) registrando o desenvolvimento passo a passo, `description` técnica, `business_impact`, `acceptance_criteria`. Validado ao vivo no TESTE (kanban renderiza os 17 TCK, screenshot `tickets_7dias_kanban.png`).
