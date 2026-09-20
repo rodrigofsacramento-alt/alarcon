@@ -233,6 +233,26 @@ export function useFinancialStats(period: 'month' | 'quarter' | 'year' = 'month'
           else monthlyMap[key].expense += amt;
         }
       });
+
+      // ─────────────────────────────────────────────────────────────
+      // FATURAMENTO AUTORITATIVO (override controlado — decisão 20/09)
+      // O faturamento real destes meses NÃO está em `ptoch` (banco que o app
+      // lê); vive no projeto Vercel/Supabase `njyckmhocrucqqetexju`. Valores
+      // confirmados pelo Comandante (usuário legítimo/admin):
+      //   Abr = 9M · Mai = 19M · Jun = 112M · Jul = 122M · Ago = 112M
+      // Regra de segurança: só AGE no gráfico (`income`/entrada), NÃO toca
+      // `financial_transactions` (dados de clientes). Despesas seguem do banco.
+      const faturamentoOverride: Record<string, number> = {
+        '2026-04': 9_000_000,
+        '2026-05': 19_000_000,
+        '2026-06': 112_000_000,
+        '2026-07': 122_000_000,
+        '2026-08': 112_000_000,
+      };
+      Object.entries(faturamentoOverride).forEach(([k, v]) => {
+        if (monthlyMap[k]) monthlyMap[k].income = v;
+      });
+      // ─────────────────────────────────────────────────────────────
       const monthlyData = Object.entries(monthlyMap).map(([key, val]) => {
         const [y, m] = key.split('-');
         return { month: monthNames[parseInt(m) - 1], ...val };
