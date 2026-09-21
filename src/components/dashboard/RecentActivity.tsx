@@ -7,7 +7,10 @@ import {
   Calendar,
   MessageSquare,
   DollarSign,
+  ArrowRight,
+  Mail,
 } from "lucide-react";
+import { useRecentActivity } from "@/hooks/use-dashboard";
 
 interface Activity {
   id: string;
@@ -15,62 +18,30 @@ interface Activity {
   title: string;
   description: string;
   time: string;
-  user: {
-    name: string;
-    avatar?: string;
-  };
+  user: { name: string };
 }
 
-const activities: Activity[] = [
-  {
-    id: "1",
-    type: "lead",
-    title: "Novo lead qualificado",
-    description: "Maria Silva - Apt 3 quartos Jardins",
-    time: "2 min",
-    user: { name: "Carlos" },
-  },
-  {
-    id: "2",
-    type: "visit",
-    title: "Visita confirmada",
-    description: "Casa Alphaville - João Pedro",
-    time: "15 min",
-    user: { name: "Ana" },
-  },
-  {
-    id: "3",
-    type: "proposal",
-    title: "Proposta enviada",
-    description: "Cobertura Moema - R$ 2.8M",
-    time: "32 min",
-    user: { name: "Roberto" },
-  },
-  {
-    id: "4",
-    type: "sale",
-    title: "Venda fechada!",
-    description: "Apt Itaim - R$ 1.4M",
-    time: "1h",
-    user: { name: "Patricia" },
-  },
-  {
-    id: "5",
-    type: "property",
-    title: "Novo imóvel captado",
-    description: "Casa 4 suítes - Morumbi",
-    time: "2h",
-    user: { name: "Lucas" },
-  },
-  {
-    id: "6",
-    type: "message",
-    title: "Follow-up realizado",
-    description: "Cliente retornou interesse",
-    time: "3h",
-    user: { name: "Fernanda" },
-  },
-];
+const TIMELINE_TYPE_MAP: Record<string, { type: Activity["type"]; icon: "default" }> = {
+  lead_created: { type: "lead", icon: "default" },
+  status: { type: "message", icon: "default" },
+  edit: { type: "property", icon: "default" },
+  note: { type: "message", icon: "default" },
+  visit: { type: "visit", icon: "default" },
+  proposal: { type: "proposal", icon: "default" },
+  sale: { type: "sale", icon: "default" },
+};
+
+function relativeTime(iso?: string): string {
+  if (!iso) return "—";
+  const then = new Date(iso).getTime();
+  const diffMin = Math.round((Date.now() - then) / 60000);
+  if (diffMin < 1) return "agora";
+  if (diffMin < 60) return `${diffMin} min`;
+  const hours = Math.round(diffMin / 60);
+  if (hours < 24) return `${hours}h`;
+  const days = Math.round(hours / 24);
+  return days === 1 ? "ontem" : `${days}d`;
+}
 
 const getActivityIcon = (type: Activity["type"]) => {
   switch (type) {
@@ -108,6 +79,25 @@ const getActivityColor = (type: Activity["type"]) => {
 
 export function RecentActivity() {
   const navigate = useNavigate();
+  const { data: timeline } = useRecentActivity();
+
+  const activities: Activity[] = (timeline || []).slice(0, 8).map((item: any) => {
+    const mapped = TIMELINE_TYPE_MAP[item.type]?.type || "message";
+    const leadName = item.lead?.name;
+    const userName = item.user?.full_name || "Sistema";
+    const desc =
+      item.description
+        ? leadName ? `${leadName} — ${item.description}` : item.description
+        : leadName || item.title || "Atividade de lead";
+    return {
+      id: item.id,
+      type: mapped,
+      title: item.title || item.type?.replace('_', ' ') || "Atividade",
+      description: desc,
+      time: relativeTime(item.created_at),
+      user: { name: userName },
+    };
+  });
 
   return (
     <div className="rounded-xl bg-card p-6 shadow-md h-full">
@@ -120,6 +110,11 @@ export function RecentActivity() {
         </button>
       </div>
 
+      {activities.length === 0 ? (
+        <p className="text-sm text-muted-foreground py-6 text-center">
+          Sem atividades recentes registradas.
+        </p>
+      ) : (
       <div className="space-y-4">
         {activities.map((activity) => (
           <div
@@ -149,6 +144,7 @@ export function RecentActivity() {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

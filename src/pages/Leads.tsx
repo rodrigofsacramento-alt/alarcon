@@ -99,14 +99,19 @@ const formatTime = (dateStr: string | null): string => {
 
 const stages = [
   "Todos",
-  "Lead Cadastrado",
-  "Primeiro Atendimento",
-  "Follow-up",
-  "Agendamento de Visita",
-  "Visita Agendada",
+  "A Selecionar",
+  "Contato Cadastrado",
+  "Primeiro Atendimento / Qualificação",
+  "Qualificado",
+  "Follow Up",
+  "Buscar Imóveis",
+  "Agendamento Visita/Reunião",
+  "Visita/Reunião Agendada",
+  "Match Pronto",
+  "Apresentar Imóveis",
   "Imóvel Escolhido",
-  "Em Aprovação de Correspondência",
   "Proposta Solicitada",
+  "Vendido",
 ];
 
 const sources = [

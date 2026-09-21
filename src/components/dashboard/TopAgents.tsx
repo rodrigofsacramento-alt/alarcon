@@ -1,71 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Trophy, TrendingUp, Target } from "lucide-react";
+import { usePerformanceDashboard } from "@/hooks/use-performance-dashboard";
 
 interface Agent {
   id: string;
   name: string;
-  avatar?: string;
   initials: string;
   sales: number;
-  revenue: string;
-  conversion: number;
+  interacciones: number;
+  propuestas: number;
+  score: number;
   rank: number;
-  trend: "up" | "down" | "stable";
 }
 
-const agents: Agent[] = [
-  {
-    id: "1",
-    name: "Patricia Santos",
-    initials: "PS",
-    sales: 8,
-    revenue: "R$ 7.2M",
-    conversion: 24,
-    rank: 1,
-    trend: "up",
-  },
-  {
-    id: "2",
-    name: "Carlos Mendes",
-    initials: "CM",
-    sales: 6,
-    revenue: "R$ 5.4M",
-    conversion: 21,
-    rank: 2,
-    trend: "up",
-  },
-  {
-    id: "3",
-    name: "Ana Rodrigues",
-    initials: "AR",
-    sales: 5,
-    revenue: "R$ 4.8M",
-    conversion: 18,
-    rank: 3,
-    trend: "stable",
-  },
-  {
-    id: "4",
-    name: "Roberto Lima",
-    initials: "RL",
-    sales: 4,
-    revenue: "R$ 3.6M",
-    conversion: 16,
-    rank: 4,
-    trend: "down",
-  },
-  {
-    id: "5",
-    name: "Fernanda Costa",
-    initials: "FC",
-    sales: 3,
-    revenue: "R$ 2.7M",
-    conversion: 14,
-    rank: 5,
-    trend: "up",
-  },
-];
+function initialsOf(name: string): string {
+  if (!name) return "";
+  const clean = name.replace(/[^\p{L}\p{N} ]/gu, " ").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return clean ? clean : "??";
+  return parts
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join("")
+    .toUpperCase();
+}
 
 const getRankBadge = (rank: number) => {
   switch (rank) {
@@ -98,6 +57,22 @@ const getRankBadge = (rank: number) => {
 
 export function TopAgents() {
   const navigate = useNavigate();
+  const { data } = usePerformanceDashboard();
+  const ranking = data?.ranking || [];
+
+  const agents: Agent[] = ranking
+    .sort((a, b) => (b.score || 0) - (a.score || 0))
+    .slice(0, 6)
+    .map((agent, index) => ({
+      id: agent.agent_id,
+      name: agent.agente || "Corretor",
+      initials: initialsOf(agent.agente),
+      sales: agent.vendas || 0,
+      interacciones: agent.interacciones || 0,
+      propuestas: agent.propuestas || 0,
+      score: agent.score || 0,
+      rank: index + 1,
+    }));
 
   return (
     <div className="rounded-xl bg-card p-6 shadow-md">
@@ -108,24 +83,24 @@ export function TopAgents() {
             Ranking Corretores
           </h3>
         </div>
-        <select className="text-sm border border-border rounded-lg px-3 py-1.5 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent">
-          <option>Este mês</option>
-          <option>Este trimestre</option>
-          <option>Este ano</option>
-        </select>
       </div>
 
+      {agents.length === 0 ? (
+        <p className="text-sm text-muted-foreground py-6 text-center">
+          Sem dados de corretores disponíveis.
+        </p>
+      ) : (
       <div className="space-y-3">
         {agents.map((agent) => (
           <div
-            key={agent.id}
+            key={`${agent.id}-${agent.rank}`}
             className={cn(
               "flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-secondary",
               agent.rank === 1 && "bg-accent/5 hover:bg-accent/10"
             )}
           >
             {getRankBadge(agent.rank)}
-            
+
             <div
               className={cn(
                 "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
@@ -142,34 +117,25 @@ export function TopAgents() {
                 {agent.name}
               </p>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span>{agent.sales} vendas</span>
+                <span>{agent.interacciones} interações</span>
                 <span>•</span>
-                <span className="text-success flex items-center gap-0.5">
-                  <Target className="h-3 w-3" />
-                  {agent.conversion}%
-                </span>
+                <span>{agent.propuestas} propostas</span>
               </div>
             </div>
 
             <div className="text-right">
               <p className="text-sm font-semibold text-foreground">
-                {agent.revenue}
+                {agent.sales} vendas
               </p>
-              <div
-                className={cn(
-                  "text-xs flex items-center justify-end gap-0.5",
-                  agent.trend === "up" && "text-success",
-                  agent.trend === "down" && "text-destructive",
-                  agent.trend === "stable" && "text-muted-foreground"
-                )}
-              >
-                {agent.trend === "up" && <TrendingUp className="h-3 w-3" />}
-                {agent.trend === "up" ? "↑ Subindo" : agent.trend === "down" ? "↓ Descendo" : "→ Estável"}
+              <div className="text-xs text-muted-foreground flex items-center justify-end gap-0.5">
+                <Target className="h-3 w-3" />
+                score {agent.score}
               </div>
             </div>
           </div>
         ))}
       </div>
+      )}
 
       <button onClick={() => navigate('/corretores')} className="w-full mt-4 py-2 text-sm font-medium text-accent hover:underline">
         Ver ranking completo →

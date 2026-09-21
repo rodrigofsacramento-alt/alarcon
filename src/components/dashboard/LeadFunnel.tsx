@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useDashboardStats } from "@/hooks/use-dashboard";
 
 interface FunnelStage {
   label: string;
@@ -8,40 +9,54 @@ interface FunnelStage {
   color: string;
 }
 
-const stages: FunnelStage[] = [
-  { label: "Novos Leads", count: 248, value: "R$ 186M", conversion: 100, color: "bg-chart-1" },
-  { label: "Qualificados", count: 186, value: "R$ 142M", conversion: 75, color: "bg-chart-2" },
-  { label: "Em Atendimento", count: 124, value: "R$ 98M", conversion: 67, color: "bg-chart-3" },
-  { label: "Visita Agendada", count: 68, value: "R$ 54M", conversion: 55, color: "bg-chart-4" },
-  { label: "Proposta Enviada", count: 42, value: "R$ 38M", conversion: 62, color: "bg-chart-5" },
-  { label: "Em Negociação", count: 28, value: "R$ 24M", conversion: 67, color: "bg-success" },
-  { label: "Fechados", count: 18, value: "R$ 16.2M", conversion: 64, color: "bg-accent" },
+// ValueError real: aqui vienen los conteos por etapa desde el hook (no estáticos)
+const STAGE_COLORS = [
+  "bg-chart-1",
+  "bg-chart-2",
+  "bg-chart-3",
+  "bg-chart-4",
+  "bg-chart-5",
+  "bg-success",
+  "bg-accent",
 ];
 
 export function LeadFunnel() {
-  const maxCount = stages[0].count;
+  const { data: stats } = useDashboardStats();
+  const funnel = stats?.funnel || [];
+
+  const totalLeads = funnel.reduce((s, f) => s + f.count, 0);
+  const stages: FunnelStage[] = funnel.map((item, index) => ({
+    label: item.stage,
+    count: item.count,
+    value: `${item.count}`,
+    conversion: index > 0 && totalLeads > 0
+      ? Math.max(0, Math.round((item.count / totalLeads) * 100))
+      : undefined,
+    color: STAGE_COLORS[index % STAGE_COLORS.length],
+  }));
+
+  const maxCount = stages.length ? Math.max(...stages.map((s) => s.count)) : 1;
 
   return (
     <div className="rounded-xl bg-card p-6 shadow-md">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-semibold text-foreground">Funil de Vendas</h3>
-          <p className="text-sm text-muted-foreground">Conversão por etapa</p>
+          <p className="text-sm text-muted-foreground">Conversão por etapa (leads reais)</p>
         </div>
-        <select className="text-sm border border-border rounded-lg px-3 py-1.5 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent">
-          <option>Este mês</option>
-          <option>Últimos 7 dias</option>
-          <option>Últimos 30 dias</option>
-          <option>Este trimestre</option>
-        </select>
       </div>
 
+      {stages.length === 0 ? (
+        <p className="text-sm text-muted-foreground py-6 text-center">
+          Sem dados de leads por etapa.
+        </p>
+      ) : (
       <div className="space-y-3">
         {stages.map((stage, index) => {
           const widthPercentage = (stage.count / maxCount) * 100;
           
           return (
-            <div key={stage.label} className="group relative">
+            <div key={`${stage.label}-${index}`} className="group relative">
               <div className="funnel-stage">
                 <div className="flex items-center gap-3 z-10 relative">
                   <div className={cn("h-2.5 w-2.5 rounded-full", stage.color)} />
@@ -54,7 +69,7 @@ export function LeadFunnel() {
                     {stage.count}
                   </span>
                   <span className="text-sm text-muted-foreground min-w-[80px] text-right">
-                    {stage.value}
+                    {stage.value} leads
                   </span>
                   {stage.conversion !== undefined && index > 0 && (
                     <span className={cn(
@@ -83,16 +98,17 @@ export function LeadFunnel() {
           );
         })}
       </div>
+      )}
 
       {/* Summary */}
       <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
         <div>
-          <p className="text-sm text-muted-foreground">Taxa de conversão geral</p>
-          <p className="text-xl font-bold text-foreground">7.3%</p>
+          <p className="text-sm text-muted-foreground">Leads ativos</p>
+          <p className="text-xl font-bold text-foreground">{totalLeads}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm text-muted-foreground">Ticket médio</p>
-          <p className="text-xl font-bold text-accent">R$ 900.000</p>
+          <p className="text-sm text-muted-foreground">Vendas do mês</p>
+          <p className="text-xl font-bold text-accent">{stats?.vendasMes || 0}</p>
         </div>
       </div>
     </div>

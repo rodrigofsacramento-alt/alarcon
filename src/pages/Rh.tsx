@@ -18,6 +18,7 @@ import {
   AlertTriangle,
   ClipboardCheck,
   ShieldQuestion,
+  CheckCircle2,
 } from "lucide-react";
 
 // ─── Papéis definidos no Modelo de Operação Ahut ───
@@ -33,90 +34,133 @@ const ROLES = [
     cor: "bg-primary/10 text-primary",
     resumo:
       "Aprova a abertura de propostas e contratos, valida orçamentos e viabilidade financeira, e gerencia os clientes-chave. Prospecta contas Enterprise, mas repassa a execução para a operação. Revisa o fluxo de caixa com Chloe e aprova limites de desconto.",
+    responsabilidades: [
+      "Responsável por geração e liberação de Leads",
+      "Responsável por liderar as vendas das casas",
+      "Responsável por toda e qualquer aprovação das vendas e negociação",
+      "Responsável por Orçamentos e liberação das negociações",
+      "Responsável por descontos e valores nas parcelas",
+      "Responsável por permitir a liberação de descontos para os vendedores",
+      "Responsável por solicitação de atualização no sistema, incluindo o acompanhamento / efetivação dos testes",
+      "Responsável por compra, inclusões de plataformas, registro e upgrade de ferramentas do sistema",
+      "Responsável por incluir novos negócios imobiliários - loteadoras e empreendimentos",
+      "Responsável por todo e qualquer entrada de novos negócios",
+    ],
   },
   {
     id: "chris",
     nome: "Chris Racanelli",
     cargo: "Business Advisor & CRO",
     pmo: "Estrategista Chefe, Arquiteta de Soluções e Gestora de Crescimento",
-    foco: "Estruturação, Neuropsicologia Corporativa, Escalabilidade e Otimização",
-    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
+    foco: "Estructuración, Neuropsicologia Corporativa, Escalabilidade e Otimização",
+    grupos: "Qualificación & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: TrendingUp,
     cor: "bg-accent/10 text-accent",
     resumo:
-      "Define o escopo do serviço e estrutura o plano de trabalho, desenha a arquitetura das soluções, treina a equipe com neuropsicologia corporativa e conduz o controle de mudanças de escopo. Analisa a conversão (CRO) em ciclos de melhoria contínua e faz auditorias de qualidade por amostragem.",
+      "Define o escopo do serviço e estrutura o plano de trabalho, desenha a arquitetura das soluções, treina a equipe com neuropsicologia corporativa e conduz o controle de mudanças de escopo. Analiza la conversión (CRO) en ciclos de mejora continua y hace auditorías de calidad por muestreo.",
+    responsabilidades: [
+      "Assume o Controle Operacional: poder executivo para tomar decisões difíceis e imediatas",
+      "Preserva o Caixa: estanca a perda de dinheiro, corta custos cortantes e administra a liquidez de curto prazo",
+      "Reorganiza o Negócio: vende ativos que não são o foco da empresa (no-core) e fecha divisões que dão prejuízo",
+      "Auditoria de Recebíveis: rastreamento de todos os recursos que entraram",
+      "Mapeia os recebíveis futuros",
+      "Implementação de DRE e Fluxo de Caixa: demonstrações financeiras profissionais e semanais",
+    ],
   },
   {
     id: "chloe",
     nome: "Chloe",
     cargo: "Financeiro",
     pmo: "Gestora Financeira, de Custos e de Aquisições",
-    foco: "Saúde financeira, controle de custos, Imigraciones e Compliance",
-    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
+    foco: "Saúde financeira, controlo de custos, Imigraciones e Compliance",
+    grupos: "Qualificación & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: Landmark,
     cor: "bg-success/10 text-success",
     resumo:
-      "Estima e controla custos, precifica serviços e garante margem. Faz o dashboard de DRE, revisa o fluxo de caixa com Jota, padroniza o checklist de Imigraciones e gerencia contratos com fornecedores.",
+      "Estima e controla custos, precifica serviços e garante margen. Faz o dashboard de DRE, revisa o fluxo de caixa com Jota, padroniza o checklist de Imigraciones e gerencia contratos com fornecedores.",
+    responsabilidades: [
+      "Preenche todos os dados e alimenta o sistema financeiro com informações diárias",
+      "Responsável pelo fluxo de caixa desde sua entrada, até a colocação de cada informação para que haja competência na formulação do DRE",
+    ],
   },
   {
     id: "luciana",
     nome: "Luciana",
-    cargo: "Administração",
-    pmo: "Gestora Administrativa, da Informação e de Compliance Documental",
+    cargo: "Auxiliar Administrativo",
+    pmo: "Auxiliar Administrativo, da Información e de Compliance Documental",
     foco: "Documentação, organização de processos administrativos, encerramento e arquivo",
     grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM, Fechamento & Pós-venda",
     icon: FileText,
     cor: "bg-warning/10 text-warning",
     resumo:
       "Arquiva projetos, organiza a documentação e garante a conformidade documental. Mantém a estrutura de pastas padronizada por cliente, controla assinaturas (DocuSign) e registra lições aprendidas.",
+    responsabilidades: [],
   },
   {
     id: "igor",
     nome: "Igor",
     cargo: "Gerente de Vendas",
-    pmo: "Gestor de Necessidades, Aquisição de Clientes e Líder da Equipe Comercial",
-    foco: "Liderar a força de vendas, garantir o pipeline e fechar negócios",
-    grupos: "Geração de Leads, Atendimento & Venda",
+    pmo: "Gestor de Necessidades, Distribución do Funil (CRM) e Líder da Equipe Comercial",
+    foco: "Acompañar a la equipe na transacción de vendas e controlar o funil no CRM",
+    grupos: "Acompanhamento de grupos de Leads, Atendimento & Venda",
     icon: Users,
     cor: "bg-primary/10 text-primary",
     resumo:
-      "Levanta necessidades (SPIN Selling), lidera a equipe de vendas (5 profissionais) com Daily de 15 min, controla o funil no CRM e acompanha conversão, ticket médio e ciclo de vendas.",
+      "Faz toda a distribuição e controla o funil no CRM, acompanha todo o processo de conversão de vendas, negocia junto aos vendedores e faz a ponte da negociação com Jota. Lidera a equipe de vendas (5 profissionais) com Daily de 15 min.",
+    responsabilidades: [
+      "Acompanha a equipe na transação de vendas",
+      "Faz toda a distribuição e controla o funil no CRM",
+      "Acompanha todo o processo de conversão de vendas",
+      "Negocia junto aos vendedores e faz a ponte da negociação com Jota",
+    ],
   },
   {
     id: "vendas",
     nome: "Equipe de Vendas (5)",
     cargo: "Vendedores",
     pmo: "Executores do Fluxo de Geração e Atendimento Comercial",
-    foco: "Prospecção, qualificação, apresentação e fechamento",
+    foco: "Prospección, cualificación, presentación e fechamento",
     grupos: "Geração de Leads, Atendimento & Venda",
     icon: UserRound,
     cor: "bg-muted text-foreground",
     resumo:
-      "Executam o processo comercial padronizado: qualificam leads, alimentam o CRM, movem oportunidades no funil Kanban, seguem limites de desconto aprovados e o escopo de serviços.",
+      "Executan o proceso comercial estandarizado: cualifican leads, alimentan o CRM, moven oportunidades no funil Kanban, seguen límites de desconto aprobados e o escopo de servicios.",
+    responsabilidades: [],
   },
   {
     id: "sebastian",
     nome: "Sebastian",
     cargo: "Gerente Operacional",
-    pmo: "Gerente de Operação, Entrega e Recursos",
-    foco: "Fazer a entrega acontecer no prazo e com os recursos certos",
-    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
+    pmo: "Gerente de Operación, Entrega e Recursos",
+    foco: "Facer a entrega acontecer no prazo e cos recursos correctos",
+    grupos: "Qualificación & Proposta, Atendimento & Venda, Acompanhamento no CRM",
     icon: Wrench,
     cor: "bg-accent/10 text-accent",
     resumo:
-      "Planeja e estima recursos, direciona a execução e coordena o cronograma. Usa o plano de trabalho da Chris, quadros Kanban e reajusta o plano proativamente em caso de atrasos.",
+      "Planifica e estima recursos, direcciona a execución e coordena o cronograma. Usa o plan de traballo da Chris, cadros Kanban e reajusta o plan proactivamente en caso de atrasos.",
+    responsabilidades: [],
   },
   {
     id: "rodrigo",
     nome: "Rodrigo",
-    cargo: "Sistemas e Marketing Digital",
-    pmo: "Gestor de Comunicação, Conhecimento e Tecnologia",
-    foco: "Geração de leads, infraestrutura tecnológica e automação",
-    grupos: "Qualificação & Proposta, Atendimento & Venda, Acompanhamento no CRM",
+    cargo: "Programador de Sistema",
+    pmo: "Programador de Sistema para Infraestructura Tecnológica e Automação",
+    foco: "Administração do Sistema, integrações e automação, análise de CAC, backup e acompanhamento de campanhas",
+    grupos: "Administração do Sistema, acompanhamento do sistema de gestão, integrações e automatizaciones personalizadas, análises de cac, backup de sistema, verificação e acompanhamento de CRM, acompanhamento de campanhas de tráfico junto a Jota",
     icon: MonitorSmartphone,
     cor: "bg-success/10 text-success",
     resumo:
-      "Planeja campanhas (pago e orgânico), analisa CAC, administra o CRM e o sistema de gestão, mantém integrações e automações e faz backups regulares.",
+      "Programador responsável pela infraestructura tecnológica e automação. Administra o sistema de gestão, mantém integrações e automatizaciones personalizadas, analiza o CAC, faz backups e acompanha campanhas de tráfico junto a Jota. Organiza e ajusta o sistema mediante solicitudes programadas pelo propietario.",
+    responsabilidades: [
+      "Administração do Sistema",
+      "Acompanhamento do sistema de gestão",
+      "Integrações e automatizaciones personalizadas",
+      "Análises de CAC",
+      "Backup de sistema",
+      "Verificação e acompanhamento de CRM",
+      "Acompanhamento de campanhas de tráfico junto a Jota",
+      "Organização e ajustes no sistema mediante solicitudes programadas pelo propietario",
+    ],
   },
 ];
 
@@ -144,36 +188,36 @@ const GAPS = [
 
 // ─── Matriz de responsabilidades do fluxo operacional Ahut ───
 const RACI_ROWS: [string, string, string, string, string][] = [
-  ["Abrir Proposta / Contrato", "Chris", "Jota", "Igor", "Todos"],
-  ["Mapear Clientes-chave", "Chris", "Jota", "Igor", "Todos"],
-  ["Levantar Necessidades", "Igor + Vendas", "Igor", "Chris", "Sebastian"],
+  ["Abrir Proposta / Contrato", "Igor", "Jota", "Jota", "Todos"],
+  ["Mapear Clientes-chave", "Jota", "Jota", "Igor", "Todos"],
+  ["Levantar Necessidades", "Igor + Vendas", "Igor", "Chris", "Jota"],
   ["Definir Escopo", "Chris", "Chris", "Igor", "Sebastian"],
   ["Estruturar Plano de Trabalho", "Chris", "Chris", "Sebastian", "Todos"],
   ["Estimar Custos", "Chloe", "Chloe", "Chris", "Jota"],
   ["Definir Orçamento", "Chloe", "Jota", "Chris", "Todos"],
-  ["Planejar Recursos", "Sebastian", "Sebastian", "Chris", "Chloe"],
-  ["Estimar Prazos", "[Fluxo]", "Sebastian", "Chris", "Chloe"],
-  ["Montar Cronograma", "[Fluxo]", "Sebastian", "Chris", "Chloe"],
+  ["Planejar Recursos", "Jota", "Jota", "Chris", "Chloe"],
+  ["Estimar Prazos", "[Fluxo]", "Sebastian", "Chloe", "Chloe"],
+  ["Montar Cronograma", "[Fluxo]", "Chloe", "Chris", "Chloe"],
   ["Planejar Qualidade", "[QA]", "Chris", "Luciana", "Todos"],
   ["Planejar Riscos", "[Risco]", "Chris", "Chloe", "Todos"],
-  ["Planejar Comunicação", "Rodrigo", "Chris", "Jota", "Todos"],
-  ["Planejar Aquisições", "Chloe", "Jota", "Luciana", "Todos"],
+  ["Planejar Comunicação", "Jota", "Chris", "Jota", "Todos"],
+  ["Planejar Aquisições", "Chloe", "Jota", "Chloe", "Todos"],
   ["Conduzir o Trabalho", "Sebastian + Equipe", "Sebastian", "Chris", "Jota"],
-  ["Gerir a Comunicação", "Rodrigo", "Chris", "Todos", "Todos"],
-  ["Gerir a Qualidade", "[QA]", "Chris", "Sebastian", "Todos"],
-  ["Adquirir Recursos", "Sebastian", "Sebastian", "Chris", "Chloe"],
+  ["Gerir a Comunicação", "Jota", "Chris", "Todos", "Todos"],
+  ["Gerir a Qualidade", "Jota", "Chris", "Sebastian", "Todos"],
+  ["Adquirir Recursos", "Jota", "Jota", "Chloe", "Todos"],
   ["Desenvolver a Equipe", "Chris", "Chris", "Igor, Sebastian", "Todos"],
   ["Gerir a Equipe", "Sebastian + Igor", "Sebastian", "Chris", "Jota"],
   ["Gerir o Relacionamento com Clientes", "Chris + Jota", "Jota", "Todos", "Todos"],
-  ["Monitorar e Controlar o Trabalho", "Chris + Sebastian", "Chris", "[Fluxo]", "Jota"],
-  ["Controlar o Cronograma", "[Fluxo]", "Sebastian", "Chris", "Jota"],
+  ["Monitorar e Controlar o Trabalho", "Chris + Sebastian", "Chris", "Igor", "Jota"],
+  ["Controlar o Cronograma", "[Fluxo]", "Sebastian", "Igor", "Jota"],
   ["Controlar Custos", "Chloe", "Chloe", "Chris", "Jota"],
-  ["Controlar Qualidade", "[QA]", "Chris", "Sebastian", "Jota"],
+  ["Controlar Qualidade", "[QA]", "Jota", "Sebastian", "Jota"],
   ["Monitorar Riscos", "[Risco]", "Chris", "Chloe", "Jota"],
-  ["Controlar Aquisições", "Chloe + Luciana", "Chloe", "Jota", "Todos"],
-  ["Controlar Mudanças de Escopo", "Chris", "Chris", "Jota", "Todos"],
-  ["Monitorar a Satisfação do Cliente", "Chris", "Chris", "Jota", "Todos"],
-  ["Fechar Proposta / Entrega", "Chris + Luciana", "Chris", "Jota", "Todos"],
+  ["Controlar Aquisições", "Chloe", "Chloe", "Jota", "Todos"],
+  ["Controlar Mudanças de Escopo", "Jota", "Chris", "Jota", "Chris"],
+  ["Monitorar a Satisfação do Cliente", "Jota", "Igor", "Jota", "Todos"],
+  ["Fechar Proposta / Entrega", "Jota", "Chris", "Jota", "Todos"],
   ["Lições Aprendidas", "[Fluxo]", "Chris", "Todos", "Todos"],
 ];
 
@@ -204,7 +248,7 @@ export default function Rh() {
         activeModule="rh"
         onModuleChange={() => {}}
         open={mobileOpen}
-        onClose={() => setMobileOpen(false)}
+        onOpenChange={setMobileOpen}
       />
       <div className={cn("flex flex-col flex-1", sidebarCollapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
         <Header
@@ -300,6 +344,19 @@ export default function Rh() {
                       <p><span className="text-muted-foreground">Foco:</span> <span className="text-foreground">{r.foco}</span></p>
                       <p><span className="text-muted-foreground">Grupos:</span> <span className="text-foreground">{r.grupos}</span></p>
                       <p className="text-muted-foreground leading-relaxed">{r.resumo}</p>
+                      {r.responsabilidades && r.responsabilidades.length > 0 && (
+                        <div className="mt-1">
+                          <p><span className="text-muted-foreground">Responsabilidades:</span></p>
+                          <ul className="mt-1 space-y-1.5">
+                            {r.responsabilidades.map((resp, i) => (
+                              <li key={i} className="flex items-start gap-2">
+                                <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
+                                <span className="text-foreground">{resp}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );

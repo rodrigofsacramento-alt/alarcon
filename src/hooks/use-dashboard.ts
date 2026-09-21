@@ -171,11 +171,22 @@ export function useDashboardStats() {
       const slaWarning = combinedAlerts.filter(l => l.status === 'warning').length;
       const slaCritical = combinedAlerts.filter(l => l.status === 'critical' || l.status === 'expired').length;
 
-      // Lead funnel
+      // Lead funnel — 13 estágios de vendas de atendimento (FUNNEL_STAGES),
+      // fuente sincronizada en leads.stage (módulo Atendimento).
       const stages = [
-        'Lead Cadastrado', 'Primeiro Atendimento', 'Follow-up',
-        'Agendamento de Visita', 'Visita Agendada', 'Imóvel Escolhido',
-        'Em Aprovação de Correspondência', 'Proposta Solicitada', 'Convertido',
+        "A Selecionar",
+        "Contato Cadastrado",
+        "Primeiro Atendimento / Qualificación",
+        "Qualificado",
+        "Follow Up",
+        "Buscar Imóveis",
+        "Agendamento Visita/Reunião",
+        "Visita/Reunião Agendada",
+        "Match Pronto",
+        "Apresentar Imóveis",
+        "Imóvel Escolhido",
+        "Proposta Solicitada",
+        "Vendido",
       ];
       const funnel = stages.map(stage => ({
         stage,
