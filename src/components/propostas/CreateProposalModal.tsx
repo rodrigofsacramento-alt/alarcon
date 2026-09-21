@@ -301,7 +301,7 @@ export function CreateProposalModal({ open, onOpenChange, onConfirm }: CreatePro
                   <AsyncCombobox
                     table="properties"
                     searchFields={["title", "code", "loteamento"]}
-                    selectFields="id,title,code,loteamento,quadra,lote,valor_total,price"
+                    selectFields="id,title,code,loteamento,quadra,lote,price"
                     labelField="title"
                     subtitleField="loteamento"
                     placeholder="Buscar lote, código, loteamento..."
@@ -319,7 +319,7 @@ export function CreateProposalModal({ open, onOpenChange, onConfirm }: CreatePro
                         loteamento: p.loteamento ? String(p.loteamento) : p.loteamento || prev.loteamento,
                         manzana: p.quadra ? String(p.quadra) : p.manzana ? String(p.manzana) : prev.manzana,
                         lote: p.lote ? String(p.lote) : prev.lote || prev.lote,
-                        valor_total: typeof p.valor_total === "number" && p.valor_total > 0 ? String(p.valor_total) : prev.valor_total,
+                        valor_total: typeof p.price === "number" && p.price > 0 ? String(p.price) : prev.valor_total,
                         currency: p.currency || prev.currency,
                       }));
                     }}
