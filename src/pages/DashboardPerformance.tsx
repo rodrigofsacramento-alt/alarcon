@@ -128,7 +128,7 @@ const fmtMetrica = (key: string, v: number) => {
 export default function DashboardPerformance() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetas, upsertMeta } = usePerformanceDashboard();
+  const { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetaGlobal, upsertMetaGlobal, fetchMetas, upsertMeta } = usePerformanceDashboard();
   const { profile } = useAuth();
   const [linIni, setLinIni] = useState<Date>(() => new Date(Date.now() - 30 * 86400000));
   const [selectedLíneaAgentes, setSelectedLíneaAgentes] = useState<string[]>([]);
@@ -297,6 +297,8 @@ export default function DashboardPerformance() {
         <MetasAcoes
           corretores={rankingData}
           tenantId={profile?.tenant_id ?? ""}
+          loadGlobal={fetchMetaGlobal}
+          saveGlobal={upsertMetaGlobal}
           loadMetas={fetchMetas}
           saveMeta={upsertMeta}
         />

@@ -28,7 +28,18 @@ export type CorretorMetaRow = {
   meta_fechamentos: number;   // fechamento = vendas
   updated_at?: string;
 };
-export const META_DEFAULTS: Omit<CorretorMetaRow, "agent_id"> = {
+export type MetasValores = Omit<CorretorMetaRow, "id" | "tenant_id" | "agent_id" | "updated_at">;
+// Meta GLOBAL padrão por indicador (vale para todos os corretores do tenant).
+export type MetasGlobalRow = {
+  id?: string;
+  tenant_id?: string;
+  meta_leads: number;
+  meta_reunioes: number;
+  meta_propostas: number;
+  meta_fechamentos: number;
+  updated_at?: string;
+};
+export const META_DEFAULTS: MetasValores = {
   meta_leads: 0, meta_reunioes: 0, meta_propostas: 0, meta_fechamentos: 0,
 };
 
@@ -117,9 +128,31 @@ export function usePerformanceDashboard() {
     [],
   );
 
-  return { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetas, upsertMeta };
+  return { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetaGlobal, upsertMetaGlobal, fetchMetas, upsertMeta };
 
-  // ---- Metas de ações por corretor (nova tabla corretor_metas) ----
+  // ---- Metas GLOBAL padron por indicador (nova tabla corretor_metas_global) ----
+  async function fetchMetaGlobal(): Promise<MetasGlobalRow> {
+    const { data, error } = await supabase
+      .from("corretor_metas_global")
+      .select("*")
+      .limit(1);
+    if (error) throw error;
+    const row = Array.isArray(data) ? data[0] : data;
+    return (row as MetasGlobalRow) ?? { meta_leads: 0, meta_reunioes: 0, meta_propostas: 0, meta_fechamentos: 0 };
+  }
+
+  // Upsert da meta global (uma por tenant, PK UNIQUE tenant_id).
+  async function upsertMetaGlobal(tenant_id: string, m: MetasValores): Promise<void> {
+    const { error } = await supabase
+      .from("corretor_metas_global")
+      .upsert(
+        { tenant_id, ...m, updated_at: new Date().toISOString() },
+        { onConflict: "tenant_id" },
+      );
+    if (error) throw error;
+  }
+
+  // ---- Exceções por corretor (nova tabla corretor_metas) ----
   async function fetchMetas(): Promise<CorretorMetaRow[]> {
     const { data, error } = await supabase
       .from("corretor_metas")
@@ -129,8 +162,17 @@ export function usePerformanceDashboard() {
     return (data as CorretorMetaRow[]) ?? [];
   }
 
-  // Upsert por UNIQUE (tenant_id, agent_id): crea o actualiza a meta do corretor.
-  async function upsertMeta(agent_id: string, tenant_id: string, m: Omit<CorretorMetaRow, "agent_id" | "tenant_id">): Promise<void> {
+  // Upsert de uma exceção por corretor (UNIQUE tenant_id+agent_id). Null remove a exceção.
+  async function upsertMeta(agent_id: string, tenant_id: string, m: MetasValores | null): Promise<void> {
+    if (m === null) {
+      const { error } = await supabase
+        .from("corretor_metas")
+        .delete()
+        .eq("tenant_id", tenant_id)
+        .eq("agent_id", agent_id);
+      if (error) throw error;
+      return;
+    }
     const { error } = await supabase
       .from("corretor_metas")
       .upsert(
