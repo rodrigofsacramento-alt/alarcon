@@ -47,7 +47,9 @@ import {
   AlertTriangle,
   HelpCircle,
   ArrowLeft,
+  UserRound,
 } from "lucide-react";
+import { AsyncCombobox } from "@/components/ui/AsyncCombobox";
 
 type Tab = "chamados" | "atualizacoes";
 
@@ -217,6 +219,8 @@ export default function Tecnologia() {
   const [gPassos, setGPassos] = useState("");
   const [gTentou, setGTentou] = useState("");
   const [gAnexos, setGAnexos] = useState<TicketAttachment[]>([]);
+  // Solicitante: por defecto o usuário logado; seleccionable desde os usuarios com login.
+  const [gSolicitante, setGSolicitante] = useState({ id: profile?.id || "", full_name: profile?.full_name || "", role: profile?.role || "" });
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const [notaLog, setNotaLog] = useState("");
@@ -262,9 +266,10 @@ export default function Tecnologia() {
       title: gAssunto.trim(),
       description: gDescription || gAssunto.trim(),
       module: gModulo,
-      requesterName: profile?.full_name || "Equipe Interna",
-      requesterRole: profile?.role || "",
+      requesterName: gSolicitante.full_name || profile?.full_name || "Equipe Interna",
+      requesterRole: gSolicitante.role || profile?.role || "",
       requesterDepartment: "Operações",
+      requester_id: gSolicitante.id || undefined,
       priority: gPrioridade,
       main_status: "a_analisar",
       subcategory: "nao_especificado",
@@ -281,13 +286,18 @@ export default function Tecnologia() {
           from: null,
           to: "a_analisar",
           note: "Chamado aberto pela equipe.",
-          actor: "Sistema",
+          actor: gSolicitante.full_name || "Sistema",
         },
       ],
       created_at: now,
       updated_at: now,
     };
-    await upsertTicket.mutateAsync(ticket);
+    try {
+      await upsertTicket.mutateAsync(ticket);
+    } catch (err) {
+      setNotaLog(`❌ **No se pudo guardar el chamado** (${ticket.code}). Error: ${err instanceof Error ? err.message : String(err)}.`);
+      return;
+    }
     // reset
     setGAssunto(""); setGModulo("Atendimento (WhatsApp)"); setGPrioridade("media");
     setGImpacto("Médio"); setGPrazo(""); setGEmpresarial("");
@@ -396,7 +406,7 @@ export default function Tecnologia() {
   return (
     <div className="min-h-screen bg-background">
       <Sidebar activeModule="tecnologia" onModuleChange={() => {}} collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} />
-      <MobileSidebar open={mobileOpen} onClose={() => setMobileOpen(false)} activeModule="tecnologia" />
+      <MobileSidebar activeModule="tecnologia" onModuleChange={() => {}} open={mobileOpen} onOpenChange={setMobileOpen} />
       <div className={cn("transition-all duration-300", sidebarCollapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
         <Header title="Tecnologia" subtitle="Chamados de suporte interno e atualizações do sistema" onMobileMenuClick={() => setMobileOpen(true)} />
 
@@ -589,6 +599,26 @@ export default function Tecnologia() {
                     <label className="flex items-center gap-1.5 text-sm font-medium"><GitBranch className="h-4 w-4 text-accent" /> Qual parte do sistema?</label>
                     <p className="text-xs text-muted-foreground mt-1">Selecione o módulo onde o problema acontece. Se não souber, deixe como está.</p>
                     <input value={gModulo} list="modulos" onChange={(e) => setGModulo(e.target.value)} className="w-full mt-2 px-3 py-2.5 rounded-lg border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent" />
+                  </div>
+                  <div>
+                    <label className="flex items-center gap-1.5 text-sm font-medium"><UserRound className="h-4 w-4 text-accent" /> Solicitante *</label>
+                    <p className="text-xs text-muted-foreground mt-1">Quem abre o chamado. Selecione o usuário entre os que têm login e senha no app.</p>
+                    <AsyncCombobox
+                      table="profiles"
+                      searchFields={["full_name", "email"]}
+                      selectFields="id,full_name,email,role"
+                      labelField="full_name"
+                      subtitleField="email"
+                      value={gSolicitante.id}
+                      onChange={(item) =>
+                        setGSolicitante({
+                          id: item?.id || profile?.id || "",
+                          full_name: item?.full_name || profile?.full_name || "",
+                          role: item?.role || profile?.role || "",
+                        })
+                      }
+                      icon={<UserRound className="h-4 w-4" />}
+                    />
                   </div>
                 </div>
               )}

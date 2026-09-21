@@ -11,6 +11,7 @@ export interface TechTicketRow {
   requesterName: string;
   requesterRole: string;
   requesterDepartment: string;
+  requester_id?: string;
   priority: string;
   main_status: string;
   subcategory: string;
@@ -77,6 +78,7 @@ export function rowToTicket(row: any): TechTicketRow {
     requesterName: row.requester_name || row.requesterName || "Equipe Interna",
     requesterRole: row.requester_role || "",
     requesterDepartment: row.requester_department || "Operações",
+    requester_id: row.requester_id || undefined,
     priority: row.priority || "media",
     main_status: row.main_status || "a_analisar",
     subcategory: row.subcategory || "nao_especificado",
@@ -95,7 +97,7 @@ export function rowToTicket(row: any): TechTicketRow {
 }
 
 export function ticketToRow(t: TechTicketRow): any {
-  return {
+  const row: any = {
     id: t.id,
     code: t.code,
     title: t.title,
@@ -107,7 +109,6 @@ export function ticketToRow(t: TechTicketRow): any {
     priority: t.priority,
     main_status: t.main_status,
     subcategory: t.subcategory,
-    delivery_forecast: t.delivery_forecast,
     assigned_to: t.assigned_to,
     impact_level: t.impact_level,
     is_ai_triaged: t.is_ai_triaged,
@@ -118,6 +119,10 @@ export function ticketToRow(t: TechTicketRow): any {
     timeline: t.timeline,
     updated_at: new Date().toISOString(),
   };
+  if (t.requester_id) row.requester_id = t.requester_id;
+  // delivery_forecast é DATE: omitir quando vazio, senão PostgREST lança 22007
+  if (t.delivery_forecast && t.delivery_forecast.trim()) row.delivery_forecast = t.delivery_forecast;
+  return row;
 }
 
 // Busca chamados do Supabase (RLS isola por requester_id / admin)
@@ -157,12 +162,16 @@ export function useUpsertTechTicket() {
     mutationFn: async (ticket: TechTicketRow) => {
       const { data: tenantId } = await supabase.rpc("get_my_tenant_id");
       const { data: user } = await supabase.auth.getUser();
+      const currentUid = user?.user?.id || null;
+      // O solicitante seleccionado prevalece; si no, cae al usuario autenticado.
+      // Un admin puede abrir en nombre de outro; un agente solo en el propio (RLS).
+      const requesterId = ticket.requester_id || currentUid;
       const { data, error } = await supabase
         .from("technology_tickets")
         .upsert({
           ...ticketToRow(ticket),
           tenant_id: tenantId,
-          requester_id: user?.user?.id || null,
+          requester_id: requesterId,
         }, { onConflict: "id" })
         .select()
         .single();
