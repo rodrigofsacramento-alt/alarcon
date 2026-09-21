@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SuperAdminProvider } from "@/contexts/SuperAdminContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -27,7 +27,6 @@ const Comissoes = lazy(() => import("./pages/Comissoes"));
 const Contas = lazy(() => import("./pages/Contas"));
 const Livro = lazy(() => import("./pages/Livro"));
 const VendasImigracion = lazy(() => import("./pages/VendasImigracion"));
-const Corretores = lazy(() => import("./pages/Corretores"));
 const AreaCliente = lazy(() => import("./pages/AreaCliente"));
 const CorretorDashboard = lazy(() => import("./pages/CorretorDashboard"));
 const GestaoClientes = lazy(() => import("./pages/GestaoClientes"));
@@ -111,7 +110,7 @@ const App = () => {
                 <Route path="/financeiro/contas" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Contas /></ProtectedRoute>} />
                 <Route path="/financeiro/livro" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Livro /></ProtectedRoute>} />
                 <Route path="/financeiro/vendas" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><VendasImigracion /></ProtectedRoute>} />
-                <Route path="/corretores" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Corretores /></ProtectedRoute>} />
+                <Route path="/corretores" element={<Navigate to="/dashboard-performance" replace />} />
                 <Route path="/dashboard-performance" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DashboardPerformance /></ProtectedRoute>} />
                 <Route path="/routing-log" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><RoutingLog /></ProtectedRoute>} />
                 <Route path="/rh" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Rh /></ProtectedRoute>} />

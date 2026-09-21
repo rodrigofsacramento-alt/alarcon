@@ -137,7 +137,7 @@ export function TopAgents() {
       </div>
       )}
 
-      <button onClick={() => navigate('/corretores')} className="w-full mt-4 py-2 text-sm font-medium text-accent hover:underline">
+      <button onClick={() => navigate('/dashboard-performance')} className="w-full mt-4 py-2 text-sm font-medium text-accent hover:underline">
         Ver ranking completo →
       </button>
     </div>
