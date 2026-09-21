@@ -26,6 +26,7 @@ import { FollowUpModal } from "@/components/atendimento/FollowUpModal";
 import { FollowUpBadge } from "@/components/atendimento/FollowUpBadge";
 import { TagsManager } from "@/components/atendimento/TagsManager";
 import { usePendingFollowupsByConversation } from "@/hooks/use-followups";
+import { useUserTags, useUserTagCategories, useCreateUserTag, groupTagsByCategory } from "@/hooks/use-user-tags";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Search,
@@ -814,6 +815,10 @@ function AtendimentoContent() {
   const sendWhatsAppMutation = useSendWhatsAppMessage();
   const markReadMutation = useMarkMessagesRead();
   const updateTagsMutation = useUpdateConversationTags();
+  // Catálogo de tags por usuário (TagsManager / persistencia ao criar)
+  const { data: userTagsCatalog = [] } = useUserTags();
+  const { data: userTagCategories = [] } = useUserTagCategories();
+  const createUserTagMutation = useCreateUserTag();
   const deleteConversationMutation = useDeleteConversation();
   const updateSettingsMutation = useUpdateConversationSettings();
   const setConversationAIMutation = useSetConversationAIEnabled();
@@ -851,6 +856,12 @@ function AtendimentoContent() {
     try {
       await updateTagsMutation.mutateAsync({ conversationId: activeConv.id, tags: newTags });
       toast({ title: "Tag adicionada", description: `A tag "${normalizedTag}" foi adicionada com sucesso.` });
+      // Persistir no catálogo do usuário (user_tags) quando a tag ainda não existe →
+      // fica "na memória" para reaparecer nas próximas conversas sem recriar.
+      const already = userTagsCatalog.some(c => c.label.toLowerCase() === normalizedTag.toLowerCase());
+      if (!already) {
+        await createUserTagMutation.mutateAsync({ label: normalizedTag, color: "#3b82f6" });
+      }
     } catch (err) {
       toast({ title: "Erro ao adicionar tag", description: (err as Error).message || "Ocorreu um erro.", variant: "destructive" });
     }
@@ -2496,28 +2507,38 @@ function AtendimentoContent() {
                                    <hr className="border-border opacity-50" />
                                    
                                    <div className="space-y-1">
-                                     <p className="text-[9px] text-muted-foreground uppercase font-semibold tracking-wider">Sugestões</p>
-                                     <div className="flex flex-wrap gap-1">
-                                       {['Quente', 'Frio', 'Visita', 'Negociação', 'Pendente'].map((suggestedTag) => {
-                                         const isAlreadyAdded = conv.tags?.includes(suggestedTag);
-                                         if (isAlreadyAdded) return null;
-                                         return (
-                                           <Button
-                                             key={suggestedTag}
-                                             variant="outline"
-                                             size="sm"
-                                             onClick={(e) => {
-                                               e.stopPropagation();
-                                               handleAddTag(suggestedTag, conv.id);
-                                             }}
-                                             className={cn("text-[9px] h-5 px-1.5 py-0 font-medium", getTagStyles(suggestedTag))}
-                                           >
-                                             + {suggestedTag}
-                                           </Button>
-                                         );
-                                       })}
-                                     </div>
-                                   </div>
+                                                                       <p className="text-[9px] text-muted-foreground uppercase font-semibold tracking-wider">Sugestões do catálogo</p>
+                                                                       <div className="flex flex-wrap gap-1">
+                                                                         {groupTagsByCategory(userTagsCatalog, userTagCategories).map(({ category, tags: catTags }) => (
+                                                                           <div key={category?.id ?? "uncat"} className="contents">
+                                                                             {category && (
+                                                                               <span className="w-full text-[8px] text-muted-foreground font-medium" style={{ color: category.color }}>
+                                                                                 {category.name}
+                                                                               </span>
+                                                                             )}
+                                                                             {catTags.map((cattag) => {
+                                                                               const isAlreadyAdded = conv.tags?.includes(cattag.label);
+                                                                               if (isAlreadyAdded) return null;
+                                                                               return (
+                                                                                 <Button
+                                                                                   key={cattag.id}
+                                                                                   variant="outline"
+                                                                                   size="sm"
+                                                                                   onClick={(e) => {
+                                                                                     e.stopPropagation();
+                                                                                     handleAddTag(cattag.label, conv.id);
+                                                                                   }}
+                                                                                   className="text-[9px] h-5 px-1.5 py-0 font-medium border"
+                                                                                   style={{ backgroundColor: `${cattag.color}1a`, color: cattag.color, borderColor: `${cattag.color}55` }}
+                                                                                 >
+                                                                                   + {cattag.label}
+                                                                                 </Button>
+                                                                               );
+                                                                             })}
+                                                                           </div>
+                                                                         ))}
+                                                                       </div>
+                                                                     </div>
                                  </PopoverContent>
                               </Popover>
                            </div>
@@ -2648,23 +2669,33 @@ function AtendimentoContent() {
                               </div>
                               <hr className="border-border opacity-50" />
                               <div className="space-y-1">
-                                <p className="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">Sugestões Rápidas</p>
+                                <p className="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">Sugestões do catálogo</p>
                                 <div className="flex flex-wrap gap-1">
-                                  {['Quente', 'Frio', 'Visita', 'Negociação', 'Pendente'].map((suggestedTag) => {
-                                    const isAlreadyAdded = selectedConv.tags?.includes(suggestedTag);
-                                    if (isAlreadyAdded) return null;
-                                    return (
-                                      <Button
-                                        key={suggestedTag}
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handleAddTag(suggestedTag)}
-                                        className={cn("text-[10px] h-6 px-2 py-0 font-medium", getTagStyles(suggestedTag))}
-                                      >
-                                        + {suggestedTag}
-                                      </Button>
-                                    );
-                                  })}
+                                  {groupTagsByCategory(userTagsCatalog, userTagCategories).map(({ category, tags: catTags }) => (
+                                    <div key={category?.id ?? "uncat"} className="contents">
+                                      {category && (
+                                        <span className="w-full text-[9px] text-muted-foreground font-medium" style={{ color: category.color }}>
+                                          {category.name}
+                                        </span>
+                                      )}
+                                      {catTags.map((cattag) => {
+                                        const isAlreadyAdded = selectedConv.tags?.includes(cattag.label);
+                                        if (isAlreadyAdded) return null;
+                                        return (
+                                          <Button
+                                            key={cattag.id}
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => handleAddTag(cattag.label)}
+                                            className="text-[10px] h-6 px-2 py-0 font-medium border"
+                                            style={{ backgroundColor: `${cattag.color}1a`, color: cattag.color, borderColor: `${cattag.color}55` }}
+                                          >
+                                            + {cattag.label}
+                                          </Button>
+                                        );
+                                      })}
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
                               <hr className="border-border opacity-50" />
