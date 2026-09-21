@@ -75,7 +75,7 @@ interface CommercialFormValues {
 const initialForm = (sellerId: string): CommercialFormValues => ({
   client_id: "",
   client_name: "",
-  seller_id,
+  seller_id: sellerId,
   seller_name: "",
   property_id: "",
   loteamento: "",
