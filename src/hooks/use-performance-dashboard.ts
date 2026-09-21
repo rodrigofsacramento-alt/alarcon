@@ -17,6 +17,21 @@ export type RankingMetricasRow = {
 };
 export type LineaRow = { bucket: string; agente: string; stage: string; total: number };
 
+// ---- Metas de ações por corretor (configurable na página) ----
+export type CorretorMetaRow = {
+  id?: string;
+  tenant_id?: string;
+  agent_id: string;
+  meta_leads: number;
+  meta_reunioes: number;      // reuniões = agendamento/visitas
+  meta_propostas: number;
+  meta_fechamentos: number;   // fechamento = vendas
+  updated_at?: string;
+};
+export const META_DEFAULTS: Omit<CorretorMetaRow, "agent_id"> = {
+  meta_leads: 0, meta_reunioes: 0, meta_propostas: 0, meta_fechamentos: 0,
+};
+
 export type PerformanceDashboardData = {
   esfuerzo: EsfuerzoRow[];
   funil: FunilRow[];
@@ -102,5 +117,26 @@ export function usePerformanceDashboard() {
     [],
   );
 
-  return { data, state, error, refresh, fetchLinea, fetchRankingMetricas };
+  return { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetas, upsertMeta };
+
+  // ---- Metas de ações por corretor (nova tabla corretor_metas) ----
+  async function fetchMetas(): Promise<CorretorMetaRow[]> {
+    const { data, error } = await supabase
+      .from("corretor_metas")
+      .select("*")
+      .order("updated_at", { ascending: false });
+    if (error) throw error;
+    return (data as CorretorMetaRow[]) ?? [];
+  }
+
+  // Upsert por UNIQUE (tenant_id, agent_id): crea o actualiza a meta do corretor.
+  async function upsertMeta(agent_id: string, tenant_id: string, m: Omit<CorretorMetaRow, "agent_id" | "tenant_id">): Promise<void> {
+    const { error } = await supabase
+      .from("corretor_metas")
+      .upsert(
+        { agent_id, tenant_id, ...m, updated_at: new Date().toISOString() },
+        { onConflict: "tenant_id,agent_id" },
+      );
+    if (error) throw error;
+  }
 }

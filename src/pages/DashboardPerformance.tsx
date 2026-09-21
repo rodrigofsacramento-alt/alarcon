@@ -21,6 +21,8 @@ import {
   Legend,
 } from "recharts";
 import { usePerformanceDashboard, PerformanceDashboardData, LineaRow, RankingMetricasRow } from "@/hooks/use-performance-dashboard";
+import MetasAcoes from "@/components/dashboard/MetasAcoes";
+import { useAuth } from "@/contexts/AuthContext";
 
 // ---- Utilidades de formato ----
 const fmtSla = (segundos: number) => {
@@ -126,7 +128,8 @@ const fmtMetrica = (key: string, v: number) => {
 export default function DashboardPerformance() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { data, state, error, refresh, fetchLinea, fetchRankingMetricas } = usePerformanceDashboard();
+  const { data, state, error, refresh, fetchLinea, fetchRankingMetricas, fetchMetas, upsertMeta } = usePerformanceDashboard();
+  const { profile } = useAuth();
   const [linIni, setLinIni] = useState<Date>(() => new Date(Date.now() - 30 * 86400000));
   const [selectedLíneaAgentes, setSelectedLíneaAgentes] = useState<string[]>([]);
   const [selectedLíneaStages, setSelectedLíneaStages] = useState<string[]>(["Agendamento Visita/Reunião", "Proposta Solicitada", "Vendido"]);
@@ -287,6 +290,16 @@ export default function DashboardPerformance() {
             );
           })}
         </div>
+      </section>
+
+      {/* ---- METAS DE AÇÕES por Corretor (configurable, período del ranking) ---- */}
+      <section className="mt-8">
+        <MetasAcoes
+          corretores={rankingData}
+          tenantId={profile?.tenant_id ?? ""}
+          loadMetas={fetchMetas}
+          saveMeta={upsertMeta}
+        />
       </section>
 
       {/* ---- PROTÓCOLO 2.1: FUNIL + SLA ---- */}
