@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
@@ -88,9 +89,30 @@ export default function Imoveis() {
   const [deleteTarget, setDeleteTarget] = useState<Property | null>(null);
 
   const { user } = useAuth();
+  const location = useLocation();
   const { data: properties = [], isLoading } = useProperties({ type: activeTab });
   const createPropertyMutation = useCreateProperty();
   const deletePropertyMutation = useDeleteProperty();
+
+  // Deeplink: autoabre el inmueble al llegar /imoveis?property={id} o state.selectedPropertyId
+  useEffect(() => {
+    if (isLoading) return;
+    const qs = new URLSearchParams(location.search);
+    const fromQuery = qs.get("property");
+    const state = location.state as { selectedPropertyId?: string } | null;
+    const targetId = fromQuery || state?.selectedPropertyId;
+    if (targetId) {
+      const prop = properties.find((p) => p.id === targetId);
+      if (prop) {
+        setSelectedProperty(prop);
+        setIsDetailOpen(true);
+      }
+      // limpa a query para nao reabrir a cada navigate
+      if (fromQuery) {
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    }
+  }, [location.search, location.state, properties, isLoading]);
 
   const handleRequestDelete = (property: Property, e: React.MouseEvent) => {
     e.stopPropagation();

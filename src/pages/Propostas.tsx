@@ -6,6 +6,7 @@ import { MobileSidebar } from "@/components/layout/MobileSidebar";
 import { useProposals, useCreateProposal, useUpdateProposal, type Proposal } from "@/hooks/use-proposals";
 import { useAuth } from "@/contexts/AuthContext";
 import { CreateProposalModal, type ProposalFormData } from "@/components/propostas/CreateProposalModal";
+import { ProposalDetailModal } from "@/components/propostas/ProposalDetailModal";
 import { toast } from "@/hooks/use-toast";
 import {
   Plus,
@@ -105,6 +106,19 @@ export default function Propostas() {
       { id: proposal.id, status: "Cancelada" },
       {
         onSuccess: () => toast({ title: "Proposta Cancelada", description: `Proposta ${proposal.proposal_number} foi cancelada.` }),
+        onError: (err: any) => toast({ title: "Erro", description: err?.message || "Tente novamente.", variant: "destructive" }),
+      }
+    );
+  };
+
+  const handleUpdateProposalFields = (id: string, data: Record<string, unknown>) => {
+    updateProposalMutation.mutate(
+      { id, ...data } as Parameters<typeof updateProposalMutation.mutate>[0],
+      {
+        onSuccess: () => {
+          toast({ title: "Proposta Atualizada", description: "Alterações salvas com sucesso." });
+          setSelectedProposalId(null);
+        },
         onError: (err: any) => toast({ title: "Erro", description: err?.message || "Tente novamente.", variant: "destructive" }),
       }
     );
@@ -547,46 +561,14 @@ export default function Propostas() {
         </main>
       </div>
 
-      {/* Proposal Detail Panel - TODO: implement real detail panel */}
+      {/* Proposal Detail Modal — editável + deeplinks */}
       {selectedProposal && (
-        <div className="fixed right-0 top-0 h-screen w-[400px] bg-card border-l border-border shadow-lg overflow-y-auto z-50 p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold">{selectedProposal.proposal_number}</h3>
-            <Button variant="ghost" size="sm" onClick={() => setSelectedProposalId(null)}>Fechar</Button>
-          </div>
-          <div className="space-y-4">
-            <div>
-              <p className="text-xs text-muted-foreground">Imóvel</p>
-              <p className="font-medium">{selectedProposal.property?.title || '-'}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Cliente</p>
-              <p className="font-medium">{selectedProposal.client_name}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Valor</p>
-              <p className="font-medium">{formatValue(selectedProposal.value)}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Status</p>
-              <Badge variant="outline">{selectedProposal.status}</Badge>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Pagamento</p>
-              <p className="font-medium">{selectedProposal.payment_type || '-'}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Corretor</p>
-              <p className="font-medium">{selectedProposal.agent?.full_name || '-'}</p>
-            </div>
-            {selectedProposal.notes && (
-              <div>
-                <p className="text-xs text-muted-foreground">Notas</p>
-                <p className="text-sm">{selectedProposal.notes}</p>
-              </div>
-            )}
-          </div>
-        </div>
+        <ProposalDetailModal
+          proposal={selectedProposal}
+          onClose={() => setSelectedProposalId(null)}
+          onSave={handleUpdateProposalFields}
+          isSaving={updateProposalMutation.isPending}
+        />
       )}
 
       {/* Create Proposal Modal */}
