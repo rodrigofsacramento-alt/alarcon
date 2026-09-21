@@ -12,6 +12,7 @@ import { SuperAdminRoute } from "@/components/super-admin/SuperAdminRoute";
 import { GlobalNotificationListener } from "@/components/GlobalNotificationListener";
 import { GroupSidePanel } from "@/components/groups/GroupSidePanel";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ChunkErrorBoundary } from "@/components/ChunkErrorBoundary";
 // Lazy Loaded Tenant App Pages
 const Login = lazy(() => import("./pages/Login"));
 const Index = lazy(() => import("./pages/Index"));
@@ -91,8 +92,9 @@ const App = () => {
               <GroupSidePanel />
             </ErrorBoundary>
 
-            <Suspense fallback={<SALoadingFallback />}>
-              <Routes>
+            <ChunkErrorBoundary>
+              <Suspense fallback={<SALoadingFallback />}>
+                <Routes>
                 {/* ── Tenant App routes ── */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/blocked" element={<Blocked />} />
@@ -138,8 +140,9 @@ const App = () => {
                 </Route>
 
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+                </Routes>
+              </Suspense>
+            </ChunkErrorBoundary>
           </BrowserRouter>
         </TooltipProvider>
       </SuperAdminProvider>
