@@ -1,5 +1,16 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## ✅ 22/09 — EVOLUTION API — DOCUMENTAÇÃO OFICIAL ATRIBUÍDA AO AGENTE AJAX + CORREÇÃO DE ESTRUTURA
+**Correção do Comandante:** «Estamos configurando a evolution e não a baileys» — a Evolution tem estrutura própria (REST), diferente do Baileys puro.
+**Entregue (commit `311e811`):** buscada a **documentação oficial** (docs.evolutionfoundation.com.br — `llms.txt`/`llms-full.txt`, OpenAPI v2.3.7) e **atribuída ao agente especialista AJAX** (`ajax-whatsapp-broker`), cobrindo **mensagens E mídia E todos os formatos de arquivo**.
+- **Formato correto de envio de TEXTO:** `POST /message/sendText/{inst}` body `{"number":"...","textMessage":{"text":"..."}}` — campo é `textMessage` (objeto), NÃO `text` solto.
+- **Formato de MÍDIA:** `POST /message/sendMedia/{inst}` multipart `{number, mediatype image|video|audio|document, media (binário/base64/URL), caption, fileName}` — cobre **imagem, vídeo, áudio (PTT/voz), documento/anexo**.
+- **Outros formatos de arquivo contemplados na documentação:** `sendContact` (vCard), `sendLocation`, `sendButtons`, `sendList`, `sendPoll`, `sendTemplate`, `sendReaction`.
+- **Recebimento:** webhook `POST /webhook/instance` com `events: [MESSAGES_UPSERT, MESSAGE_UPDATE, CONNECTION_UPDATE, SEND_MESSAGE]`.
+- **CAUSA RAIZ "Redis disconnected"** (envios pendurados): a var env correta da Evolution é **`CACHE_REDIS_URI`**, NÃO `REDIS_URI`.
+- **Persistido:** `docs-oficiais/01..07` no repo + seção "EVOLUTION API — CONHECIMENTO OFICIAL" no SKILL do AJAX + memória global do squad + README atualizado.
+- **PENDENTE (próximo passo):** corrigir `.env`/compose **na VPS** (`CACHE_REDIS_*`) e re-testar envio para `5511988192658`.
+
 ## ✅ 19/09 — MÓDULO CONTAS BANCÁRIAS (`/financeiro/contas`) — CONSTRUIDO + DEPLOY TESTE
 **Solicitado por Rodrigo:** sub-páginas financeiras pendientes / reconstrução do mapeo financeiro como Jarvis.
 **Entregue:** nova página `Contas.tsx` (rasta `/financeiro/contas`, roles admin/manager) + hook `use-financial-banks.ts` + tipo `financial_banks` agregado al gen-types.
