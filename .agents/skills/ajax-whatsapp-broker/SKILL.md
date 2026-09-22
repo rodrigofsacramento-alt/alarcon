@@ -60,8 +60,23 @@ Body **oficial v2.3.7** (campo é `textMessage`, UM OBJETO):
 Erros comuns (400): mandar `"text"` solto em vez de `"textMessage": {"text": ...}`.
 
 ### ENVIO DE MÍDIA — FORMATO CORRETO (imagem, vídeo, áudio, documento)
-Endpoint: `POST /message/sendMedia/{instanceName}` — `multipart/form-data`:
-Campos: `number`, `mediatype` (`image`|`video`|`audio`|`document`), `media` (binário OR base64 OR URL), `caption`, `fileName`.
+Endpoint: `POST /message/sendMedia/{instanceName}` — **funciona via JSON com `media` = base64 PURO ou URL** (v2.3.7 testado em 22/09):
+```json
+{ "number": "5511988192658", "mediatype": "image|video|audio|document",
+  "media": "<base64 PURO, SEM prefixo data:mime;base64,>",
+  "caption": "legenda opcional", "fileName": "nome.ext (opcional p/ document)" }
+```
+- **`media` NÃO aceita** data-URI (`data:image/...;base64,`) → erro `"Owned media must be a url or base64"`.
+- **multipart** (`-F media=@arquivo`) → erro `Unexpected field` (multer). Usar JSON.
+- **Áudio (nota de voz):** obrigatório `"ptt": true` (sem isso → erro `Received type boolean (false)`) + `mimetype`.
+- `mediatype` enum: `image | video | audio | document`. Resposta 201 com `key` + `message.{imageMessage|videoMessage|audioMessage|documentMessage}`.
+
+### RECEBER MÍDIA (download de mensagem recebida)
+1. Listar mensagens de uma conversa: `POST /chat/findMessages/{instance}` body `{"where":{"remoteJid":"5511...@s.whatsapp.net"},"limit":N,"order":"desc"}` → campo `messageType` (`audioMessage` etc.) e `key.id`.
+2. Baixar a mídia: `POST /chat/getBase64FromMediaMessage/{instance}` body **`{"message":{"key":{"id":"<key.id>","remoteJid":"<jid>"}}}`** (exige objeto `message.key` aninhado; `messageKey` solto → erro) → retorna `base64` + `mediaType: audioMessage` + `mimetype` + `fileName`. Decodificar base64 p/ salvar (ex.: `.oga` p/ áudio).
+- Recebimento em tempo real: webhook `MESSAGES_UPSERT` (configurar via `POST /webhook/set/{instance}` body `{"webhook":{"enabled":true,"url":"...","base64":true,"events":["MESSAGES_UPSERT",...]}}` — **`base64:true`** controla o base64 da mídia no webhook).
+
+### OUTROS FORMATOS DE ENVIO (sendContact/sendLocation/etc.)
 
 ### 🗂️ FORMATOS DE ENVIO DE ARQUIVO CONTEMPLADOS NA DOCUMENTAÇÃO (todos os `send*`)
 Todas as rotas são `POST /message/<rota>/{instanceName}` com header `apikey`:

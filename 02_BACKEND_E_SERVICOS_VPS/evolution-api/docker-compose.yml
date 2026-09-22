@@ -16,7 +16,11 @@ services:
       - .env
     environment:
       # Conecta no redis e postgres da própria stack
-      REDIS_URI: redis://redis:6379
+      # ⚠️ REDIS para cache/fila: usar CACHE_REDIS_* (nome certo). 'REDIS_URI' é OBSOLETO e causa "redis disconnected".
+      CACHE_REDIS_ENABLED: "true"
+      CACHE_REDIS_URI: redis://redis:6379/6
+      CACHE_REDIS_PREFIX_KEY: evolution_ahut
+      CACHE_REDIS_SAVE_INSTANCES: "true"
       DATABASE_PROVIDER: postgresql
       DATABASE_CONNECTION_URI: postgresql://evolution:evolution@postgres:5432/evolution
     depends_on:

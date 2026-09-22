@@ -11,6 +11,14 @@
 - **Persistido:** `docs-oficiais/01..07` no repo + seção "EVOLUTION API — CONHECIMENTO OFICIAL" no SKILL do AJAX + memória global do squad + README atualizado.
 - **PENDENTE (próximo passo):** corrigir `.env`/compose **na VPS** (`CACHE_REDIS_*`) e re-testar envio para `5511988192658`.
 
+## ✅✅ 22/09 — EVOLUTION API — CORREÇÃO APLICADA NA VPS + MÍDIA PONTA A PONTA VALIDADA (TEXTO/IMAGEM/VÍDEO/PDF/LOCALIZAÇÃO/ÁUDIO — RECEBE E DEVOLVE)
+**Status: 🟢 VALIDADO EM PRODUÇÃO DE TESTE** (v2.3.7, instância `wpp-ahut-teste`, `connectionState: open`). Commit pendente no ramo `remodel`.
+- **CAUSA RAIZ corrigida na VPS:** env `REDIS_URI` (obsoleto) → **`CACHE_REDIS_URI=redis://redis:6379/6` + `CACHE_REDIS_ENABLED=true` + `CACHE_REDIS_PREFIX_KEY` + `CACHE_REDIS_SAVE_INSTANCES`** no compose `/opt/evolution-api`; container `evolution_api` recriado; logs `[Redis] redis ready` (sumiu o loop "redis disconnected").
+- **Envio validado (HTTP 201):** texto `{number,text}` (schema exato da instância, NÃO `textMessage` da doc mais nova), **imagem** (jpg), **vídeo** (mp4 13,6MB), **PDF** (fileName preservado), **localização** (`sendLocation`), **áudio** (`sendMedia` + **`ptt:true`**).
+- **Recebimento validado:** `POST /chat/findMessages` → `POST /chat/getBase64FromMediaMessage/{instance}` com body **`{"message":{"key":{"id","remoteJid"}}}`** → baixado áudio `.oga` (6.731 B) e **devolvido com sucesso** (eco confirmado pelo usuário).
+- **Webhook inbound configurado:** `POST /webhook/set/{instance}` body `{"webhook":{"enabled":true,"url":"https://teste-ahut-ecosystem.apexfyhub.com.br/api/evolution-webhook","base64":true,"events":[...]}}` → `webhookBase64:true`; endpoint do broker respondeu HTTP 200.
+- **Chaves técnicas novas (no SKILL AJAX):** mídia via base64 PURO (não data-URI); `ptt:true` p/ áudio; download com body `message.key` aninhado.
+
 ## ✅ 19/09 — MÓDULO CONTAS BANCÁRIAS (`/financeiro/contas`) — CONSTRUIDO + DEPLOY TESTE
 **Solicitado por Rodrigo:** sub-páginas financeiras pendientes / reconstrução do mapeo financeiro como Jarvis.
 **Entregue:** nova página `Contas.tsx` (rasta `/financeiro/contas`, roles admin/manager) + hook `use-financial-banks.ts` + tipo `financial_banks` agregado al gen-types.
