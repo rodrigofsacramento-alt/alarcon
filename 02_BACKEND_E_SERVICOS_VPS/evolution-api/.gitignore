@@ -1,0 +1,6 @@
+# .gitignore — Evolution API local
+# Protege credenciais e dados de runtime de irem para o git.
+
+.env
+instances/
+*.log
