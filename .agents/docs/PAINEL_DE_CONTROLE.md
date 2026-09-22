@@ -19,6 +19,14 @@
 - **Webhook inbound configurado:** `POST /webhook/set/{instance}` body `{"webhook":{"enabled":true,"url":"https://teste-ahut-ecosystem.apexfyhub.com.br/api/evolution-webhook","base64":true,"events":[...]}}` → `webhookBase64:true`; endpoint do broker respondeu HTTP 200.
 - **Chaves técnicas novas (no SKILL AJAX):** mídia via base64 PURO (não data-URI); `ptt:true` p/ áudio; download com body `message.key` aninhado.
 
+## 🧪 22/09 — EXPERIMENTO: OmniRoute (gateway IA free) — INSTALADO + PROBADO + DESCARTADO em TESTE
+**A pedido do Comandante** («omniroute está famoso estas semanas»): instalado e testado em TESTE (docker `omniroute`, puerto 20128, password forte `OmniRoute_Ahut_2R7x!qT9` a rotar).
+- **O que É (verificado):** gateway/router IA self-hosted MIT `diegosouzapw/OmniRoute` (~68k⭐ / 33.9k⭐ GitHub v3.8.48), agrega **350+ providers / 90–150+ free tiers / ~1.5B tokens gratis-mes** atrás de um endpoint `localhost:20128/v1`. Promete auto-fallback + compresión tokens + "funciona de entrada sem chaves".
+- **Verificação empírica:** login admin OK · API key criada OK (ligada a `machineId`) · `GET /v1/models` → **490 modelos / 40 combos** (`auto/best-free`, `auto/best-coding`…).
+- **VERDICT (a verdade, não o hype):** o chat FALLA nos providers keyless por omisión → `oc/big-pickle` **403** (OpenCode free só desde dentro do OpenCode), `felo/*` **400/429**, `oc/deepseek-v4-flash-free` **400 "Model unavailable"**, `ddgw/gpt-oss-120b` **418 anti-abuse**.
+- **CONCLUSÃO: ❌ NO se adota.** O «FREE Claude/GPT gratuito de entrada» **NO se sustenta** ao integrar a um endpoint externo (providers exigem seu próprio cliente / rechazam IP foránea) — padrão igual ao 9Router. Container eliminado, nada dejado corriendo.
+- **Persistido:** `EXPERIMENTO_OMNIROUTE.md` + CHANGELOG (restaurada também a linha do estudo 9Router/GUÍA que un patch prévio sobrescrebiu por engano).
+
 ## ✅ 19/09 — MÓDULO CONTAS BANCÁRIAS (`/financeiro/contas`) — CONSTRUIDO + DEPLOY TESTE
 **Solicitado por Rodrigo:** sub-páginas financeiras pendientes / reconstrução do mapeo financeiro como Jarvis.
 **Entregue:** nova página `Contas.tsx` (rasta `/financeiro/contas`, roles admin/manager) + hook `use-financial-banks.ts` + tipo `financial_banks` agregado al gen-types.
