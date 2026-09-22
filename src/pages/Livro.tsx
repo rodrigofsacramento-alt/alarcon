@@ -18,14 +18,24 @@ import {
   FileSpreadsheet,
   ChevronLeft,
   ChevronRight,
+  Plus,
 } from "lucide-react";
 import {
   useFinancialLedger,
   useFinancialCategories,
+  useCreateFinancialTransaction,
 } from "@/hooks/use-financial";
-import { useFinancialBanks } from "@/hooks/use-financial-banks";
+import { useFinancialBanks, useBankSaldo } from "@/hooks/use-financial-banks";
 import { useAuth } from "@/contexts/AuthContext";
 import { exportToCSV, exportToPDF } from "@/lib/export-utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 
 /** Moneda padrão del cuaderno (Gs = guaraníes, datos reales Ahut). */
 function formatGs(value: number) {
@@ -74,6 +84,61 @@ export default function Livro() {
 
   const { data: categories } = useFinancialCategories();
   const { data: banks } = useFinancialBanks(tenantId);
+  const { data: bankSaldos } = useBankSaldo(banks);
+  const createTx = useCreateFinancialTransaction();
+
+  // ─── Modal de cadastro de lançamento ───
+  const [modalOpen, setModalOpen] = useState(false);
+  const [fData, setFData] = useState(() => new Date().toISOString().slice(0, 10));
+  const [fTipo, setFTipo] = useState<string>("expense");
+  const [fDescricao, setFDescricao] = useState("");
+  const [fCategoria, setFCategoria] = useState<string>("");
+  const [fBanco, setFBanco] = useState<string>("");
+  const [fSituacao, setFSituacao] = useState<string>("realizada");
+  const [fValor, setFValor] = useState("");
+  const [fErro, setFErro] = useState<string | null>(null);
+
+  const openModal = useCallback(() => {
+    setFData(new Date().toISOString().slice(0, 10));
+    setFTipo("expense");
+    setFDescricao("");
+    setFCategoria("");
+    setFBanco(banks && banks.length === 1 ? banks[0].id : "");
+    setFSituacao("realizada");
+    setFValor("");
+    setFErro(null);
+    setModalOpen(true);
+  }, [banks]);
+
+  const handleSubmit = useCallback(() => {
+    const valorNum = parseFloat(fValor.replace(/\./g, "").replace(",", "."));
+    if (!fData) { setFErro("Informe a data."); return; }
+    if (!fDescricao.trim()) { setFErro("Informe a descrição."); return; }
+    if (!fBanco) { setFErro("Selecione o banco."); return; }
+    if (!valorNum || valorNum <= 0) { setFErro("Informe um valor maior que zero."); return; }
+
+    createTx.mutate(
+      {
+        type: fTipo,
+        name: fDescricao.trim(),
+        description: fDescricao.trim(),
+        date: fData,
+        amount: valorNum,
+        category_id: fCategoria || null,
+        bank_id: fBanco,
+        is_realized: fSituacao === "realizada",
+        paid_date: fSituacao === "realizada" ? new Date().toISOString().slice(0, 10) : null,
+      } as never,
+      {
+        onSuccess: () => {
+          setModalOpen(false);
+          setPage(1);
+        },
+        onError: (err: unknown) =>
+          setFErro(`Erro ao salvar: ${err instanceof Error ? err.message : String(err)}`),
+      }
+    );
+  }, [fData, fDescricao, fBanco, fValor, fTipo, fCategoria, fSituacao, createTx]);
 
   const result = useFinancialLedger({
     type: type || undefined,
@@ -229,6 +294,10 @@ export default function Livro() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="font-semibold text-sm">Filtros</h3>
               <div className="flex items-center gap-2">
+                <Button size="sm" className="gap-1.5" onClick={openModal}>
+                  <Plus className="h-4 w-4" />
+                  Novo Lançamento
+                </Button>
                 <Button variant="outline" size="sm" className="gap-1.5" onClick={buildCsv}>
                   <FileSpreadsheet className="h-4 w-4" />
                   CSV
@@ -409,6 +478,119 @@ export default function Livro() {
               </div>
             </div>
           </div>
+
+          {/* ─── Modal: Novo Lançamento ─── */}
+          <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+            <DialogContent className="sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle>Novo Lançamento — Receita/Despesa</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-3 py-2">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="f-data">Data</Label>
+                    <Input id="f-data" type="date" value={fData} onChange={(e) => setFData(e.target.value)} />
+                  </div>
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="f-tipo">Tipo</Label>
+                    <select
+                      id="f-tipo"
+                      className="h-10 rounded-md border bg-background px-3 text-sm"
+                      value={fTipo}
+                      onChange={(e) => setFTipo(e.target.value)}
+                    >
+                      <option value="expense">Saída (Despesa)</option>
+                      <option value="income">Entrada (Receita)</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="f-desc">Descrição</Label>
+                  <Input id="f-desc" placeholder="Ex.: Energia, Comissão, Venda…" value={fDescricao} onChange={(e) => setFDescricao(e.target.value)} />
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="f-cat">Categoria</Label>
+                  <select
+                    id="f-cat"
+                    className="h-10 rounded-md border bg-background px-3 text-sm"
+                    value={fCategoria}
+                    onChange={(e) => setFCategoria(e.target.value)}
+                  >
+                    <option value="">Selecione…</option>
+                    {(categories || []).map((c) => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="f-banco">Banco</Label>
+                  <select
+                    id="f-banco"
+                    className="h-10 rounded-md border bg-background px-3 text-sm"
+                    value={fBanco}
+                    onChange={(e) => setFBanco(e.target.value)}
+                  >
+                    <option value="">Selecione…</option>
+                    {(banks || []).map((b) => (
+                      <option key={b.id} value={b.id}>{b.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="f-sit">Situação</Label>
+                    <select
+                      id="f-sit"
+                      className="h-10 rounded-md border bg-background px-3 text-sm"
+                      value={fSituacao}
+                      onChange={(e) => setFSituacao(e.target.value)}
+                    >
+                      <option value="realizada">Realizada</option>
+                      <option value="pendente">Pendente</option>
+                    </select>
+                  </div>
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="f-valor">Valor</Label>
+                    <Input id="f-valor" inputMode="decimal" placeholder="0" value={fValor} onChange={(e) => setFValor(e.target.value)} />
+                  </div>
+                </div>
+                {fErro && (
+                  <p className="text-sm text-rose-600">{fErro}</p>
+                )}
+              </div>
+              <DialogFooter>
+                <div className="w-full">
+                  {/* Saldos dos bancos (tempo real, transações realizadas) */}
+                  {(bankSaldos || []).length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {bankSaldos.map((s) => (
+                        <span
+                          key={s.bank_id}
+                          className={cn(
+                            "rounded-full border px-2.5 py-1 text-xs",
+                            s.saldo >= 0
+                              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-700"
+                              : "border-rose-500/20 bg-rose-500/10 text-rose-700"
+                          )}
+                        >
+                          {s.banco}: {formatGs(s.saldo)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" onClick={() => setModalOpen(false)} disabled={createTx.isPending}>
+                      Cancelar
+                    </Button>
+                    <Button onClick={handleSubmit} disabled={createTx.isPending} className="gap-1.5">
+                      {createTx.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+                      Salvar Lançamento
+                    </Button>
+                  </div>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>
