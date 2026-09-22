@@ -72,9 +72,11 @@ No hay que pedir clave nueva. Solo cambiar el slug del modelo al hacer fallback:
 ### B5. Mistral — volumen código (~$10/mes free con opt-in training)
 - Key: `https://console.mistral.ai/api-keys` · `https://api.mistral.ai/v1` · Modelo: `codestral`/`mistral-small-4`
 
-### B6. Kiro — Claude Sonnet 4.5 gratis (50 créditos/mes)
-- Sign-in con GitHub/Google: `https://kiro.dev` · Acceso a Claude Sonnet 4.5 + open-weights
-- Los créditos se agotan rápido → usar SOLO para las partes más difíciles.
+### B6. Kiro — Claude Sonnet 4.5 gratis (única vía real; 50 créditos/mes)
+- Sign-in con GitHub/Google: `https://kiro.dev` · Acceso a Claude Sonnet 4.5
+- ⚠️ **Claude NO está en Ollama Cloud** (Ollama solo sirve open-weights: DeepSeek/GLM/Qwen/Kimi/Nemotron/Mistral/GPT-OSS). El OpenRouter `:free` tampoco tiene `claude-sonnet-4.5`.
+- **Kiro free:** bonus único 500 créditos + ~50 créditos/mes → incluye Sonnet 4.5 + Auto agent + open-weights.
+- Los créditos **se agotan rápido** (Sonnet/Opus queman créditos) → usar SOLO para las partes más difíciles, no para operación continua.
 
 ---
 
