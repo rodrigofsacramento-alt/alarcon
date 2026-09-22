@@ -195,6 +195,9 @@ export default function Tecnologia() {
 
   const { profile } = useAuth();
   const isAdmin = profile?.role === "admin" || profile?.role === "manager";
+  // Task 3: histórico/estágio editável SOMENTE pelo Comandante Rodrigo Sacramento.
+  // Demais usuários: apenas comentários (registrados na timeline sem mudar estágio).
+  const isComandante = profile?.email === "sacramento@apexfyhub.com.br" || (profile?.role === "admin" && profile?.email?.endsWith("@apexfyhub.com.br"));
 
   const { data: tickets, isLoading: loadingTickets } = useTechTickets();
   const upsertTicket = useUpsertTechTicket();
@@ -242,7 +245,7 @@ export default function Tecnologia() {
     try {
       const existing = [...gAnexos];
       for (const f of Array.from(files)) {
-        if (f.size > 10 * 1024 * 1024) continue; // limite do bucket
+        if (f.size > 25 * 1024 * 1024) continue; // limite do bucket (25MB)
         try {
           const att = await uploadTicketAttachment(f);
           existing.push(att);
@@ -308,7 +311,29 @@ export default function Tecnologia() {
     );
   };
 
+  // ===== Drag & Drop de cards entre estágios (kanban) =====
+  const [dragTicketId, setDragTicketId] = useState<string | null>(null);
+  const [dragOverCol, setDragOverCol] = useState<string | null>(null);
+  const onDragStartCard = (e: React.DragEvent, t: TechTicketRow) => {
+    if (!isComandante) { e.preventDefault(); return; } // somente o Comandante arrasta cards
+    setDragTicketId(t.id);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", t.id);
+  };
+  const onDropColumn = (e: React.DragEvent, status: string) => {
+    e.preventDefault();
+    setDragOverCol(null);
+    if (!isComandante) return; // coluna não reage ao drop sem permissão
+    const id = dragTicketId || e.dataTransfer.getData("text/plain");
+    setDragTicketId(null);
+    if (!id) return;
+    const t = filteredTickets.find((x) => x.id === id);
+    if (!t || (t.main_status || "a_analisar") === status) return;
+    promoteStatus(t, status, `Movido para "${STATUS_LABEL[status]}" via arrastar e soltar`);
+  };
+
   const promoteStatus = async (t: TechTicketRow, nextStatus: string, note?: string) => {
+    if (!isComandante) return; // gate: somente o Comandante move o chamado de estágio
     const now = new Date().toISOString();
     const timeline = Array.isArray(t.timeline) ? t.timeline : [];
     await upsertTicket.mutateAsync({
@@ -326,6 +351,19 @@ export default function Tecnologia() {
         },
       ],
     });
+  };
+
+  // ===== Comentários: qualquer usuário pode comentar (timeline sem mudar estágio) =====
+  const [commentText, setCommentText] = useState("");
+  const addComment = async () => {
+    const note = commentText.trim();
+    if (!note || !selectedTicket) return;
+    const now = new Date().toISOString();
+    const timeline = Array.isArray(selectedTicket.timeline) ? selectedTicket.timeline : [];
+    const ev = { at: now, from: selectedTicket.main_status, to: selectedTicket.main_status, note, actor: profile?.full_name || "Equipe" };
+    await upsertTicket.mutateAsync({ ...selectedTicket, updated_at: now, timeline: [...timeline, ev] });
+    setSelectedTicket({ ...selectedTicket, updated_at: now, timeline: [...timeline, ev] });
+    setCommentText("");
   };
 
   const submitLog = async () => {
@@ -394,7 +432,7 @@ export default function Tecnologia() {
   <div class="section">${mdToHtml(t.description || "")}</div>
   ${t.business_impact ? `<h2>Impacto no negócio</h2><div class="section">${t.business_impact}</div>` : ""}
   ${Array.isArray(t.acceptance_criteria) && t.acceptance_criteria.length ? `<h2>Critérios de aceite</h2><ul>${t.acceptance_criteria.map(c=>`<li>${c}</li>`).join("")}</ul>` : ""}
-  ${timeline.length ? `<h2>Histórico / Atividades</h2><div class="timeline">${timeline.map(ev=>`<div><b>${STATUS_LABEL[ev.to] || ev.to}:</b> ${ev.note || ""}<br/><span class="muted">${ev.actor || "Squad"} • ${fmtDate(ev.at)}</span></div>`).join("")}</div>` : ""}
+  ${timeline.length ? `<h2>Histórico / Atividades</h2><div class="timeline">${timeline.map(ev=>`<div><b>${ev.from && ev.from === ev.to ? "Comentário" : (STATUS_LABEL[ev.to] || ev.to)}:</b> ${ev.note || ""}<br/><span class="muted">${ev.actor || "Squad"} • ${fmtDate(ev.at)}</span></div>`).join("")}</div>` : ""}
   ${atts.length ? `<h2>Anexos (${atts.length})</h2><div class="attachments">${atts.map(a=>`<a href="${a.url}" target="_blank">${a.name}<br/><span class="muted">${fmtBytes(a.size)}</span></a>`).join("")}</div>` : ""}
   <footer>Gerado em ${new Date().toLocaleString("pt-BR")} • ${t.code || ""} • Estate.AI - Agents Ecosystem</footer>
   <script>window.onload=function(){window.print();}</script>
@@ -456,7 +494,13 @@ export default function Tecnologia() {
                     {STATUS_ORDER.map((status) => {
                       const colTickets = filteredTickets.filter((t) => (t.main_status || "a_analisar") === status);
                       return (
-                        <div key={status} className="rounded-xl border bg-muted/30 p-2.5 space-y-2.5">
+                        <div
+                          key={status}
+                          onDragOver={(e) => { if (!isComandante) return; e.preventDefault(); e.dataTransfer.dropEffect = "move"; setDragOverCol(status); }}
+                          onDragLeave={() => setDragOverCol((c) => (c === status ? null : c))}
+                          onDrop={(e) => onDropColumn(e, status)}
+                          className={cn("rounded-xl border bg-muted/30 p-2.5 space-y-2.5 transition-colors", dragOverCol === status && "border-accent bg-accent/5 border-dashed")}
+                        >
                           <div className="flex items-center justify-between px-1">
                             <div className="flex items-center gap-2">
                               <span className={cn("h-2.5 w-2.5 rounded-full", STATUS_DOT[status])} />
@@ -472,7 +516,7 @@ export default function Tecnologia() {
                                 const atts = parseAttachments(t.attachments);
                                 const nImgs = atts.filter((a) => isImage(a.mime)).length;
                                 return (
-                                  <div key={t.id} onClick={() => setSelectedTicket(t)} className="rounded-lg border bg-card p-3 space-y-2 shadow-sm cursor-pointer hover:border-accent/60 hover:shadow-md transition-all group">
+                                  <div key={t.id} onClick={() => setSelectedTicket(t)} draggable={isComandante} onDragStart={(e) => onDragStartCard(e, t)} className={cn("rounded-lg border bg-card p-3 space-y-2 shadow-sm cursor-pointer hover:border-accent/60 hover:shadow-md transition-all group active:cursor-grabbing", dragTicketId === t.id && "opacity-40 border-dashed")}>
                                     <div className="flex items-start justify-between gap-2">
                                       <p className="text-[10px] font-mono text-muted-foreground">{t.code}</p>
                                       <span className={cn("px-1.5 py-0.5 rounded-full text-[10px] font-medium", PRIORITY_COLOR[t.priority] || "bg-slate-100 text-slate-600")}>{PRIORITY_LABEL[t.priority] || t.priority}</span>
@@ -491,14 +535,18 @@ export default function Tecnologia() {
                                         <Clock className="h-3 w-3" /> {fmtDate(t.created_at)}
                                       </div>
                                     </div>
-                                    {isAdmin && t.main_status !== "atualizado_producao" && (
+                                    {(isComandante || isAdmin) && t.main_status !== "atualizado_producao" && (
                                       <div className="flex items-center gap-1 pt-1 border-t">
-                                        <button onClick={(e) => { e.stopPropagation(); const i = STATUS_ORDER.indexOf(t.main_status || "a_analisar"); if (i < STATUS_ORDER.length - 1) promoteStatus(t, STATUS_ORDER[i + 1]); }} className="flex-1 inline-flex items-center justify-center gap-1 text-[10px] font-medium text-accent hover:bg-accent/10 rounded-md py-1 transition-colors">
-                                          Avançar <ChevronRight className="h-3 w-3" />
-                                        </button>
-                                        <button onClick={(e) => { e.stopPropagation(); printTicket(t); }} className="p-1 rounded-md text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors" title="Imprimir / PDF">
-                                          <Printer className="h-3.5 w-3.5" />
-                                        </button>
+                                        {isComandante && (
+                                          <button onClick={(e) => { e.stopPropagation(); const i = STATUS_ORDER.indexOf(t.main_status || "a_analisar"); if (i < STATUS_ORDER.length - 1) promoteStatus(t, STATUS_ORDER[i + 1]); }} className="flex-1 inline-flex items-center justify-center gap-1 text-[10px] font-medium text-accent hover:bg-accent/10 rounded-md py-1 transition-colors">
+                                            Avançar <ChevronRight className="h-3 w-3" />
+                                          </button>
+                                        )}
+                                        {isAdmin && (
+                                          <button onClick={(e) => { e.stopPropagation(); printTicket(t); }} className={cn("p-1 rounded-md text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors", !isComandante && "ml-auto")} title="Imprimir / PDF">
+                                            <Printer className="h-3.5 w-3.5" />
+                                          </button>
+                                        )}
                                       </div>
                                     )}
                                   </div>
@@ -686,10 +734,10 @@ export default function Tecnologia() {
                 <div className="space-y-4">
                   <div className="rounded-lg border border-sky-200 bg-sky-50/60 p-3 flex items-start gap-2 text-xs text-sky-900">
                     <Wand2 className="h-4 w-4 shrink-0 mt-0.5" />
-                    <p>Anexe <b>prints, fotos, áudios, vídeos ou arquivos</b> que ajudem a entender o problema (máx. 10MB por arquivo). Quanto mais contexto, mais rápido a equipe resolve.</p>
+                    <p>Anexe <b>prints, fotos, áudios, vídeos ou qualquer tipo de documento</b> que ajude a entender o problema (máx. 25MB por arquivo). Quanto mais contexto, mais rápido a equipe resolve.</p>
                   </div>
                   <div className="rounded-xl border-2 border-dashed p-4 text-center">
-                    <input ref={fileRef} type="file" multiple accept="image/*,audio/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.csv" className="hidden" onChange={(e) => addFiles(e.target.files)} />
+                    <input ref={fileRef} type="file" multiple className="hidden" onChange={(e) => addFiles(e.target.files)} />
                     <button onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent/10 text-accent text-sm font-medium hover:bg-accent/20 disabled:opacity-50">
                       {uploading ? <Sparkles className="h-4 w-4 animate-pulse" /> : <Paperclip className="h-4 w-4" />} {uploading ? "Enviando..." : "Escolher arquivos"}
                     </button>
@@ -837,7 +885,7 @@ export default function Tecnologia() {
                           {i < selectedTicket.timeline.length - 1 && <span className="w-px flex-1 bg-border min-h-6" />}
                         </div>
                         <div className="pb-4">
-                          <p className="text-sm"><b>{STATUS_LABEL[ev.to] || ev.to}</b>{ev.from && ev.from !== ev.to ? <span className="text-muted-foreground"> (de {STATUS_LABEL[ev.from] || ev.from})</span> : null}</p>
+                          <p className="text-sm"><b>{ev.from && ev.from === ev.to ? "Comentário" : STATUS_LABEL[ev.to] || ev.to}</b>{ev.from && ev.from !== ev.to ? <span className="text-muted-foreground"> (de {STATUS_LABEL[ev.from] || ev.from})</span> : null}</p>
                           {ev.note && <p className="text-xs text-muted-foreground mt-0.5">{ev.note}</p>}
                           <p className="text-[11px] text-muted-foreground/70 mt-0.5">{ev.actor || "Squad"} • {fmtDate(ev.at)}</p>
                         </div>
@@ -847,8 +895,30 @@ export default function Tecnologia() {
                 </div>
               )}
 
-              {/* acoes admin */}
-              {isAdmin && selectedTicket.main_status !== "atualizado_producao" && (
+              {/* comentario (todos os usuarios) */}
+              <div className="rounded-lg border bg-muted/10 p-3 space-y-2">
+                <label className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><UserRound className="h-3.5 w-3.5" /> Adicionar comentário</label>
+                <textarea
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  rows={2}
+                  placeholder="Escreva uma atualização ou informação adicional sobre este chamado..."
+                  className="w-full px-3 py-2 rounded-lg border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+                />
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  {!isComandante && <p className="text-[11px] text-muted-foreground">Apenas o Comandante move o chamado de estágio — seu comentário fica registrado no histórico.</p>}
+                  <button
+                    onClick={addComment}
+                    disabled={!commentText.trim() || upsertTicket.isPending}
+                    className={cn("inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent text-accent-foreground text-xs font-medium hover:opacity-90 disabled:opacity-40 shrink-0", !isComandante && "ml-auto")}
+                  >
+                    <Send className="h-3.5 w-3.5" /> {upsertTicket.isPending ? "Enviando..." : "Comentar"}
+                  </button>
+                </div>
+              </div>
+
+              {/* acoes de estagio (somente Comandante) */}
+              {isComandante && selectedTicket.main_status !== "atualizado_producao" && (
                 <div className="flex items-center gap-2 pt-2 border-t">
                   <button onClick={() => { const i = STATUS_ORDER.indexOf(selectedTicket.main_status || "a_analisar"); if (i < STATUS_ORDER.length - 1) { promoteStatus(selectedTicket, STATUS_ORDER[i + 1]); setSelectedTicket({ ...selectedTicket, main_status: STATUS_ORDER[i + 1] }); } }} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-accent text-accent-foreground text-sm font-medium hover:opacity-90">
                     Avançar para "{STATUS_LABEL[STATUS_ORDER[STATUS_ORDER.indexOf(selectedTicket.main_status || "a_analisar") + 1]]}" <ChevronRight className="h-4 w-4" />
