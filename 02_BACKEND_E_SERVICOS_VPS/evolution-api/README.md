@@ -60,6 +60,12 @@ DATABASE_SAVE_HISTORIC=true
 
 # Conexão do tipo Baileys (WhatsApp Web)
 CONNECTION_TYPE=baileys
+
+# ⚠️ REDIS — usar CACHE_REDIS_* (NÃO REDIS_URI, nome errado causa "redis disconnected")
+CACHE_REDIS_ENABLED=true
+CACHE_REDIS_URI=redis://redis:6379/6
+CACHE_REDIS_PREFIX_KEY=evolution_ahut
+CACHE_REDIS_SAVE_INSTANCES=true
 ```
 > 🔒 A `<SUA_CHAVE_API_AQUI>` deve ser trocada por uma chave forte (gerar com `openssl rand -hex 32`).
 > Este `.env` **NUNCA deve ir para o git** — veja `.gitignore` na raiz.
@@ -116,27 +122,33 @@ Resultado esperado: `"state": "open"` → número conectado e estável.
 Quando uma mensagem chegar, a Evolution avisa sua URL. Configure apontando para **o endpoint do seu broker (homologação)**:
 
 ```bash
-curl -X POST "http://localhost:8080/webhook/set/wpp-ahut-teste" \
+curl -X POST http://localhost:8080/webhook/instance/wpp-ahut-teste \
   -H "Content-Type: application/json" \
-  -H "apikey: <SUA_CHAVE_API_AQUI>" \
+  -H "apikey: <SUA_C...UI>" \
   -d '{
-        "webhook": {
-          "url": "https://teste-ahut-ecosystem.apexfyhub.com.br/api/evolution-webhook",
-          "events": ["MESSAGES_UPSERT","MESSAGE_UPDATE","CONNECTION_UPDATE"]
-        }
+        "enabled": true,
+        "url": "https://teste-ahut-ecosystem.apexfyhub.com.br/api/evolution-webhook",
+        "webhook_by_events": false,
+        "events": ["MESSAGES_UPSERT","MESSAGE_UPDATE","CONNECTION_UPDATE","SEND_MESSAGE"]
       }'
 ```
 
-### 9) Enviar mensagem (teste do endpoint REST)
+### 9) Enviar mensagem de TEXTO (formato REST oficial da Evolution)
 ```bash
 curl -X POST http://localhost:8080/message/sendText/wpp-ahut-teste \
   -H "Content-Type: application/json" \
-  -H "apikey: <SUA_CHAVE_API_AQUI>" \
+  -H "apikey: <SUA_C...UI>" \
   -d '{
-        "number": "5511915306257",
-        "text": "Teste Evolution API — mensagem enviada via REST"
+        "number": "5511988192658",
+        "textMessage": { "text": "Teste Evolution API — mensagem enviada via REST" }
       }'
 ```
+> ⚠️ Campo é `textMessage` (objeto aninhado), NÃO `text` solto.
+
+### 9b) Enviar MÍDIA (imagem/vídeo/áudio/documento) e outros formatos
+- **Mídia:** `POST /message/sendMedia/wpp-ahut-teste` (`multipart/form-data`) com campos `number`, `mediatype` (`image`|`video`|`audio`|`document`), `media` (binário OR base64 OR URL), `caption`, `fileName`.
+- **Outros formatos contemplados na documentação:** `sendContact` (vCard), `sendLocation`, `sendButtons`, `sendList`, `sendPoll`, `sendTemplate`, `sendReaction`.
+- **Corpo e campos de cada um:** ver `docs-oficiais/07_formatos-de-envio.md`.
 
 ### 10) Mapear para o modelo do broker atual
 O payload que a Evolution envia no webhook traz `remoteJid` (o mesmo campo que o broker atual usa).
