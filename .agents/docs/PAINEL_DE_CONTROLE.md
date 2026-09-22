@@ -1,5 +1,8 @@
 # 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
 
+## ✅ 22/09 18:40 — FINANCEIRO → LIVRO GERAL: BOTÃO NOVO LANÇAMENTO + SALDOS DOS BANCOS (TESTE+PROD VALIDADO)
+**Commit `b91ca3c` · `src/pages/Livro.tsx` (+183 linhas).** Botão **"Novo Lançamento"** no header de filtros da página `/financeiro/livro`: modal com **Data** (default hoje), **Tipo** (Entrada/Saída), **Descrição**, **Categoria** (dropdown real), **Banco** (dropdown real), **Situação** (Realizada/Pendente → `is_realized`/`paid_date`), **Valor** (parser pt-BR) + **chips de saldo por banco em tempo real** no rodapé (Σ realizadas). Grava via `useCreateFinancialTransaction` (RLS tenant; invalida ledger/stats/dashboard). Fluxo: tsc 0 erros → build OK → deploy TESTE (`_deploy_teste_remodel.py`, backup 1013 assets) → chunk `Livro-frz0bRN-.js` validado HTTP 200 com a string → deploy PROD 2 docroots (`_deploy_prod_livro.py`, backup index pré-deploy) → validado no ar. Dados de clientes intocados.
+
 ## ✅ 22/09 — EVOLUTION API — DOCUMENTAÇÃO OFICIAL ATRIBUÍDA AO AGENTE AJAX + CORREÇÃO DE ESTRUTURA
 **Correção do Comandante:** «Estamos configurando a evolution e não a baileys» — a Evolution tem estrutura própria (REST), diferente do Baileys puro.
 **Entregue (commit `311e811`):** buscada a **documentação oficial** (docs.evolutionfoundation.com.br — `llms.txt`/`llms-full.txt`, OpenAPI v2.3.7) e **atribuída ao agente especialista AJAX** (`ajax-whatsapp-broker`), cobrindo **mensagens E mídia E todos os formatos de arquivo**.
