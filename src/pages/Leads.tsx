@@ -210,6 +210,19 @@ export default function Leads() {
     }
   }, [location.state]);
 
+  // Deep link por ID: ?id=<uuid> abre o detalhe do lead; clicar num card atualiza a URL.
+  useEffect(() => {
+    const urlId = searchParams.get("id");
+    if (urlId && urlId !== selectedLeadId && leads.some(l => l.id === urlId)) {
+      setSelectedLeadId(urlId);
+    }
+  }, [searchParams, leads, selectedLeadId]);
+
+  const selectLeadDeepLink = (id: string | null) => {
+    setSelectedLeadId(id);
+    setSearchParams(id ? { id } : {}, { replace: true });
+  };
+
   const selectedLead = leads.find(l => l.id === selectedLeadId) || null;
 
   const getSlaStyles = (status: string | null) => {
@@ -355,7 +368,7 @@ export default function Leads() {
   };
 
   const startEditingLead = (lead: typeof leads[number]) => {
-    setSelectedLeadId(lead.id);
+    selectLeadDeepLink(lead.id);
     setEditFormData({
       name: lead.name,
       email: lead.email,
@@ -615,7 +628,7 @@ export default function Leads() {
 
               {mainView === "pipeline" ? (
                 <LeadPipeline 
-                  onSelectLead={(id) => setSelectedLeadId(id)} 
+                  onSelectLead={(id) => selectLeadDeepLink(id)} 
                   filters={{
                     search: searchQuery || undefined,
                     stage: stageFilter !== "Todos" ? stageFilter : undefined,
@@ -672,7 +685,7 @@ export default function Leads() {
                           <tr
                             key={lead.id}
                             onClick={() => {
-                              setSelectedLeadId(lead.id);
+                              selectLeadDeepLink(lead.id);
                               setIsEditing(false);
                             }}
                             className={cn(
@@ -846,7 +859,7 @@ export default function Leads() {
                                   className="h-8 w-8"
                                   onClick={(event) => {
                                     event.stopPropagation();
-                                    setSelectedLeadId(lead.id);
+                                    selectLeadDeepLink(lead.id);
                                     setIsEditing(false);
                                   }}
                                   title="Abrir detalhes"
@@ -889,7 +902,7 @@ export default function Leads() {
                 {/* Backdrop for mobile/tablet */}
                 <div
                   className="fixed inset-0 bg-black/40 z-40 lg:hidden"
-                  onClick={() => setSelectedLeadId(null)}
+                  onClick={() => selectLeadDeepLink(null)}
                 />
                 <div className="fixed right-0 top-0 h-screen w-[min(380px,90vw)] bg-card border-l border-border shadow-xl overflow-y-auto z-50 animate-in slide-in-from-right duration-300">
                 <div className="p-6">
@@ -922,7 +935,7 @@ export default function Leads() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => setSelectedLeadId(null)}
+                      onClick={() => selectLeadDeepLink(null)}
                     >
                       <X className="h-4 w-4" />
                     </Button>

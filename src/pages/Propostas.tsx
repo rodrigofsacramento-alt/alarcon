@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
@@ -86,6 +87,21 @@ export default function Propostas() {
   const { data: proposals = [], isLoading } = useProposals();
   const createProposalMutation = useCreateProposal();
   const updateProposalMutation = useUpdateProposal();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Deep link por ID: ?id=<uuid> abre o detalhe da proposta; clicar num card atualiza a URL.
+  useEffect(() => {
+    const urlId = searchParams.get("id");
+    if (urlId && urlId !== selectedProposalId && proposals.some(p => p.id === urlId)) {
+      setSelectedProposalId(urlId);
+    }
+  }, [searchParams, proposals, selectedProposalId]);
+
+  const selectProposalDeepLink = (id: string | null) => {
+    setSelectedProposalId(id);
+    setSearchParams(id ? { id } : {}, { replace: true });
+  };
+
 
   const handleAdvanceStage = (proposal: Proposal) => {
     const currentStage = proposal.current_stage || 0;
@@ -406,7 +422,7 @@ export default function Propostas() {
                     <tr 
                       key={proposal.id} 
                       className="border-b border-border hover:bg-muted/30 transition-colors cursor-pointer"
-                      onClick={() => setSelectedProposalId(proposal.id)}
+                      onClick={() => selectProposalDeepLink(proposal.id)}
                     >
                       <td className="p-4">
                         <div className="flex items-center gap-3">
@@ -476,12 +492,12 @@ export default function Propostas() {
                       <td className="p-4">
                         <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                           {progress === 100 ? (
-                            <Button variant="cta" size="sm" onClick={() => setSelectedProposalId(proposal.id)}>
+                            <Button variant="cta" size="sm" onClick={() => selectProposalDeepLink(proposal.id)}>
                               Ver Contrato
                             </Button>
                           ) : (
                             <>
-                              <Button variant="ghost" size="icon" title="Ver detalhes" onClick={() => setSelectedProposalId(proposal.id)}>
+                              <Button variant="ghost" size="icon" title="Ver detalhes" onClick={() => selectProposalDeepLink(proposal.id)}>
                                 <Eye className="h-4 w-4" />
                               </Button>
                               <Button variant="ghost" size="icon" title="Avançar etapa" onClick={() => handleAdvanceStage(proposal)}>
@@ -496,7 +512,7 @@ export default function Propostas() {
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                              <DropdownMenuItem onClick={() => setSelectedProposalId(proposal.id)}>
+                              <DropdownMenuItem onClick={() => selectProposalDeepLink(proposal.id)}>
                                 <Eye className="h-4 w-4 mr-2" />
                                 Ver Detalhes
                               </DropdownMenuItem>
@@ -565,7 +581,7 @@ export default function Propostas() {
       {selectedProposal && (
         <ProposalDetailModal
           proposal={selectedProposal}
-          onClose={() => setSelectedProposalId(null)}
+          onClose={() => selectProposalDeepLink(null)}
           onSave={handleUpdateProposalFields}
           isSaving={updateProposalMutation.isPending}
         />

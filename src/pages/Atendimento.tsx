@@ -596,6 +596,12 @@ function AtendimentoContent() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+
+  const selectConvDeepLink = (id: string | null) => {
+    setSelectedConvId(id);
+    setSearchParams(id ? { id } : {}, { replace: true });
+  };
+
   const [searchQuery, setSearchQuery] = useState(() => searchParams.get("search") || "");
   const [messageInput, setMessageInput] = useState("");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -719,6 +725,15 @@ function AtendimentoContent() {
 
   // Real data hooks
   const { data: conversations = [], isLoading: convLoading } = useConversations(user?.id, profile?.role || 'admin');
+
+  // Deep link por ID: ?id=<uuid> abre a conversa; clicar numa conversa atualiza a URL.
+  useEffect(() => {
+    const urlId = searchParams.get("id");
+    if (urlId && urlId !== selectedConvId && conversations.some((c: { id: string }) => c.id === urlId)) {
+      setSelectedConvId(urlId);
+    }
+  }, [searchParams, conversations, selectedConvId]);
+
   const { data: messages = [] } = useMessages(selectedConvId);
   // Contatos de Atendimiento (clientes das conversations) para o modal compartido CreateVisitModal
   const availableContacts: Contact[] = useMemo(
@@ -1033,7 +1048,7 @@ function AtendimentoContent() {
 
   const openTransferDialog = (conversationId: string) => {
     const conv = conversations.find(c => c.id === conversationId);
-    setSelectedConvId(conversationId);
+    selectConvDeepLink(conversationId);
     setTransferConversationId(conversationId);
     setTransferAgentId(conv?.agent_id || "");
   };
@@ -2330,7 +2345,7 @@ function AtendimentoContent() {
                     <div
                       key={conv.id}
                       onClick={() => {
-                        setSelectedConvId(conv.id);
+                        selectConvDeepLink(conv.id);
                         const isGroup = (conv.whatsapp_contact && conv.whatsapp_contact[0]?.is_group) || (conv.client as any)?.is_group;
                         if (isGroup) {
                           useGroupPanelStore.getState().openPanel(conv.id);
@@ -2617,7 +2632,7 @@ function AtendimentoContent() {
                         size="icon"
                         className="lg:hidden shrink-0 -ml-2 mr-1"
                         onClick={() => {
-                          setSelectedConvId(null); // state clear: vuelve a la lista
+                          selectConvDeepLink(null); // state clear: vuelve a la lista
                           setSearchQuery("");       // limpia deep link para no re-succionar el chat
                           setSearchParams({}, { replace: true });
                         }}
