@@ -331,9 +331,9 @@ Quando o Comandante disser que é **URGENTE**:
 ### 📋 Ambientes de Teste (NOVO 27/08)
 - **Frontend PRODUÇÃO** → conectado no **Supabase PRODUÇÃO** (`ptochsyoyatsydfysacc`)
 - **Frontend DEV** → conectado no **Supabase DEV** (`xmsulduzvufdzkfktovk`)
-  - Anon key: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0`
-  - Service role: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.EhchaQ1GsUrwG1QyJih68EEa8ArxD439ocHup7LwNOg`
-  - DB: `postgresql://postgres:Dir%40124!%40%24!%40%24@db.xmsulduzvufdzkfktovk.supabase.co:6543/postgres`
+  - Anon key: `[CREDENCIAL: ver keys_ahut.py]`
+  - Service role: `[CREDENCIAL: ver keys_ahut.py]`
+  - DB: `[CREDENCIAL: ver keys_ahut.py]`
 - **Isso não afeta a estrutura produtiva do cliente**
 - Testes no DEV usam banco separado, dados de teste
 - Schema clonado da produção em 27/08: 68 tabelas, 179 funções, 55 triggers

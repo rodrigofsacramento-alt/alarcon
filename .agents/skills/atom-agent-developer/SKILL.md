@@ -71,10 +71,10 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 
 - **Banco de Dados Oficial:** Supabase `ptochsyoyatsydfysacc`
   - URL: `https://ptochsyoyatsydfysacc.supabase.co`
-  - Postgres: `db.ptochsyoyatsydfysacc.supabase.co:5432` | User: `postgres` | Pass: `Dir@124!@$!@$`
-- **Frontend Hostinger SFTP:** `82.25.73.206:65002` | User: `u817195350` | Pass: `Dir@5207411605`
+  - Postgres: `db.ptochsyoyatsydfysacc.supabase.co:5432` | User: `postgres` | Pass: `[CREDENCIAL: ver keys_ahut.py]`
+- **Frontend Hostinger SFTP:** `82.25.73.206:65002` | User: `u817195350` | Pass: `[CREDENCIAL: ver keys_ahut.py]`
   - Destinos: `domains/ahut-ecosystem.apexfyhub.com.br/public_html`, `public_html/ahut-ecosystem`
-- **Backend VPS (SSH):** `2.24.95.98:22` | User: `root` | Pass: `Dir@5207411605` | App: `/var/www/html`
+- **Backend VPS (SSH):** `2.24.95.98:22` | User: `root` | Pass: `[CREDENCIAL: ver keys_ahut.py]` | App: `/var/www/html`
 
 ---
 

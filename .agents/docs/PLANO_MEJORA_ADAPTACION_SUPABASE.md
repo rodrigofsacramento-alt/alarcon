@@ -26,7 +26,7 @@
 ### PRIORIDAD ALTA — Riesgo/Deuda que corregir YA
 
 1. **🔴 Credencial DEV hardcodeada en scripts**
-   - Hoy: `conectar_dev.py`, `seed_financeiro_dev.py`, etc. contienen la password en texto plano (`Dir@124!@$!@$`).
+   - Hoy: `conectar_dev.py`, `seed_financeiro_dev.py`, etc. contienen la password en texto plano (`[CREDENCIAL: ver keys_ahut.py]`).
    - Acción: mover a `.env` (chmod 600) / variable de entorno / `keys_ahut.py` (ya existe el patrón) y gitignore. **Nunca en repos.**
    - Verificación: `git grep` no devuelva la clave; scripts lean de env.
 

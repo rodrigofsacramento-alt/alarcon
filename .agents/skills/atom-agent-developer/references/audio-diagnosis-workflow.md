@@ -78,7 +78,7 @@ pm2 show 0 | grep -E "status|uptime|restarts|pid"
 
 ### Verificar sessão
 ```bash
-PGPASSWORD='Dir@124!@$!@$' /usr/lib/postgresql/17/bin/psql -h db.ptochsyoyatsydfysacc.supabase.co -p 5432 -U postgres -d postgres -c "SELECT id, status, phone_number, updated_at::text FROM whatsapp_sessions WHERE status='connected'"
+PGPASSWORD='[CREDENCIAL: ver keys_ahut.py]' /usr/lib/postgresql/17/bin/psql -h db.ptochsyoyatsydfysacc.supabase.co -p 5432 -U postgres -d postgres -c "SELECT id, status, phone_number, updated_at::text FROM whatsapp_sessions WHERE status='connected'"
 ```
 
 ## Histórico de Correções
