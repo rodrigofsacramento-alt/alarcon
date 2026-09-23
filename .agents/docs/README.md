@@ -1,6 +1,6 @@
 # 🧠 SQUAD AGENTES IA — Índice de Perfis
 
-**Fonte da verdade do organograma:** `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/docs/audio-failsafe/ORGANOGRAMA_SQUAD_QUBITS.md`
+**Fonte da verdade do organograma:** `KNOWLEDGE_BASE_GLOBAL.md` §7 (14 agentes; [corrigido 23/09 — caminho antigo morto]). Histórico: `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx/docs/audio-failsafe/ORGANOGRAMA_SQUAD_QUBITS.md`
 
 **Regra:** a **skill** (`.agents/docs/<nome>`) é a fonte da regra de operação de cada agente; a **pasta** abaixo é o perfil/fluxo humano-legível. Todo agente tem BOTH.
 

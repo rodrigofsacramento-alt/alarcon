@@ -3,54 +3,47 @@ name: atlas-agent-devops
 description: Atlas, o Especialista em Monitoramento de Infraestrutura e Diagnóstico Backend para o sistema Ahut Ecosystem. Focado na integração do WhatsApp (Baileys) e banco de dados Supabase (PostgreSQL).
 ---
 
-# 🚀 DEPLOY DO AMBIENTE DEV — SUBDOMÍNIO Hostinger
+# 🚀 FLUXO DE DEPLOY — CANÔNICO (KB §7; destinos = tabela KB §3)
 
 ## Contexto e fluxo
-O ambiente de **validação dev** é servido no subdomínio `dev-ahut-ecosystem.apexfyhub.com.br` na **Hostinger** (SSH/SFTP: `82.25.73.206`, porta `65002`, usuário `u817195350`, senha nos scripts `deploy_*.mjs` / `.env`). Fluxo padrão do squad: **publicar o build na pasta dev → comandante valida no subdomínio → após aprovação, commit no repositório `ahut-ecosystem-remodel`**.
+Fluxo canônico (23/09): **editar `src/` do `remodel-copy` → `npm run build` → deploy TESTE (`public_html/teste/`, script `_deploy_teste_remodel.py`) → validação do Comandante (com PROVA VISUAL) → Gate 2 → PROD (`public_html/ahut/`) → backup pré-deploy → purge → validação HTTP**. URGENTE: direto PROD → validar → commit no `remodel-copy` (branch `remodel`) → engenharia reversa no `src/`.
 
 ## 🔴 REGRA DE OURO (NUNCA VIOLAR)
-- **Document root REAL da produção AHUT:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut` (verificar no hPanel Subdomínios antes de qualquer deploy)
-- **Document root do DEV:** `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
-- **PASTA DEV (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
-- NUNCA confiar no caminho óbvio `domains/ahut-ecosystem...` — SEMPRE verificar o document root no hPanel antes de subir.
-- Deploy em produção requer AUTORIZAÇÃO EXPLÍCITA do comandante Rodrigo Sacramento.
+- **TESTE:** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/` (assets na raiz)
+- **PRODUÇÃO:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
+- **NUNCA confiar no caminho óbvio `domains/ahut-ecosystem...`** — SEMPRE verificar o document root no hPanel antes de subir. Subdomínio aponta para subpasta do domínio principal (`/ahut/`, `/teste/`).
+- **DESTINOS MORTOS [REVOGADO 23/09]:** `public_html/dev/`, pasta fantasma `/ahut-ecosystem/`, subdomínio `dev-ahut-ecosystem...` — NUNCA subir deploy para elas. Destinos únicos = **tabela KB §3**.
+- Acesso Hostinger: SSH/SFTP `82.25.73.206:65002` usuário `u817195350` — credencial em `keys_ahut.py` (chmod 600), NUNCA em docs.
+- Deploy em produção requer AUTORIZAÇÃO EXPLÍCITA do comandante Rodrigo Sacramento (Gate 2).
 
-## 📂 Estrutura correta (Hostinger)
-- **PASTA DEV (publicar aqui):** `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
-- **PRODUÇÃO (NÃO TOCAR):** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-
-## 🔧 Como subir o app na pasta dev (via SSH/SFTP, paramiko)
-1. **Gerar o build** no projeto reverso:
+## 🔧 Como subir (via SSH/SFTP, paramiko `/opt/data/ssh-venv/bin/python3`)
+1. **Gerar o build** no repo canônico:
    ```bash
-   cd /opt/data/ahut-ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/codigo_engenharia_reversa_tsx
-   npm run build    # gera dist/
+   cd /opt/data/ahut-ecosystem-remodel-copy && npm run build    # gera dist/
    ```
-2. **Conectar** via paramiko (`/opt/data/ssh-venv/bin/python3`) à Hostinger (host `82.25.73.206`, porta `65002`, usuário `u817195350`).
-3. **Subir o conteúdo de `dist/`** para `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`:
-   - Criar a pasta se não existir (`mkdir -p`); usar SFTP (`cli.open_sftp()`).
+2. **Conectar** via paramiko à Hostinger (host `82.25.73.206`, porta `65002`, usuário `u817195350`, senha de `keys_ahut.py`).
+3. **Subir o conteúdo de `dist/`** para o destino (TESTE primeiro; PROD só após Gate 2):
    - Estrutura no destino: `index.html` + `assets/index-*.js` + `assets/index-*.css`.
-4. **Verificar pós-upload**: `ls -la <DEV>/assets` confirma o JS/CSS novo; `cat <DEV>/index.html` deve referenciar nosso `assets/index-<hash>.js`.
-5. **Testar acesso**: `curl -sk https://dev-ahut-ecosystem.apexfyhub.com.br/` deve retornar o nosso app (não "Página padrão" da Hostinger).
+4. **Backup pré-deploy** dos assets existentes no destino antes de sobrescrever.
+5. **Verificar pós-upload**: `ls -la <destino>/assets` confirma o JS/CSS novo; `cat <destino>/index.html` deve referenciar o `assets/index-<hash>.js` novo.
+6. **Purge LiteSpeed** (passo obrigatório): `curl -sk https://ahut-ecosystem.apexfyhub.com.br/purge.php` ou hPanel → Cache → Limpar Tudo.
+7. **Testar acesso**: `curl -sk https://<host>/` deve retornar o app com o bundle novo (HTTP 200).
 
 ## 📦 REGRA DE REPOSITÓRIOS (NUNCA INVERTER)
-- **PRODUÇÃO** (`ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-active`**
-- **DEV** (`dev-ahut-ecosystem.apexfyhub.com.br`) → commit em **`ahut-ecosystem-remodel`**
-- NUNCA inverter. Cada repositório tem seu propósito.
+- ÚNICO repo de edição/commit: **`remodel-copy`** (`/opt/data/ahut-ecosystem-remodel-copy`, branch `remodel`, remote `rodrigofsacramento-alt/remodel-copy.git`) — regra completa = **KB §7**.
+- `ahut-ecosystem-active`, `ahut-ecosystem-remodel`, `/tmp/legacy_re` (Jhon Wick) = LEGADO [REVOGADO 23/09] — NUNCA commitar/deployar deles/para eles.
 
 ### 🔒 CHECK OBRIGATÓRIO ANTES DE QUALQUER COMMIT (REGRA CRÍTICA)
 ANTES de rodar `git commit`, o Atlas DEVE executar SEMPRE, sem exceção:
 1. `git -C <repo> status` → confirma branch atual e arquivos staged (never commit cego)
 2. `git -C <repo> diff --stat HEAD` → confere EXATAMENTE o que está indo pro commit
-3. `git -C <repo> branch --show-current` → confirma: DEV→`remodel`, PROD→`ahut-ecosystem-active`
+3. `git -C <repo> branch --show-current` → confirma: **`remodel`** (único branch de commit)
 4. Confirmar que o conteúdo staged é o **código-fonte/destino correto do ambiente** — NENHUM bundle ou código de PRODUÇÃO deve ser commitado num commit de DEV, e vice-versa.
 5. **NUNCA commitar código/bundle de PRODUÇÃO por engano.** Se detectar arquivo indevido no status, **stashear/desfazer ANTES**:
    - `git restore --staged <arquivo>` (tira do index) ou `git stash` para arquivos não-commitados
 6. Se o commit já foi feito por engano: **reverter imediatamente** (`git revert <hash>` ou `git reset --hard HEAD~1` local) e reportar ao Jarvis.
 
 > ⚠️ **Lições registradas (05/09):** o squad já COMMITOU código de produção indevido e a equipe precisou "cobrir" o erro. Commit cego = falha crítica de cobertura/autonomia. O `git status` + `git diff --stat` são OBRIGATÓRIOS — nunca commit em branco/certo.
-
-## ⚠️ Ajuste pendente no painel Hostinger (validar antes de confiar no subdomínio)
-- O subdomínio `dev-ahut-ecosystem` deve ter o **Documento raiz / Diretório** apontando para `/home/u817195350/domains/apexfyhub.com.br/public_html/dev`. Se ainda apontar para a raiz (página padrão do cliente), pedir ao comandante para ajustar no painel Subdomínios.
 
 ---
 
@@ -103,12 +96,8 @@ js[js.index(old):js.index(old)+len(old)] = new
 
 # 🌐 HOSTINGER — CACHE E DOCUMENT ROOT
 - **Document root real da produção AHUT:** `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut`
-- **Document root do dev:** `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html`
-- **ATENÇÃO: 4 destinos de deploy obrigatórios:**
-  1. VPS nginx: `/var/www/html/`
-  2. VPS crm: `/var/www/crm-imobiliaria/`
-  3. Hostinger subdomínio: `/home/u817195350/domains/ahut-ecosystem.apexfyhub.com.br/public_html/`
-  4. Hostinger ahut/: `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
+- **Document root TESTE:** `/home/u817195350/domains/apexfyhub.com.br/public_html/teste`
+- **[REVOGADO 23/09 — destino morto]:** o antigo "4 destinos de deploy obrigatórios" (VPS nginx/crm + subdomínio + pasta fantasma `/ahut-ecosystem/`). **Destinos únicos = tabela KB §3:** `/ahut/` (PROD) e `/teste/` (TESTE).
 - O domínio `ahut-ecosystem.apexfyhub.com.br` aponta para Hostinger (LiteSpeed), não para o VPS
 - LiteSpeed cache é agressivo — `CacheDisable` no .htaccess é frequentemente ignorado
 - Limpeza pelo hPanel: Avançado → Cache → Limpar Tudo
@@ -125,9 +114,10 @@ js[js.index(old):js.index(old)+len(old)] = new
 - **Prevenção:** Agrupar múltiplos patches em UM restart. Verificar `pm2 show 0` após restart
 
 ### 📦 Restauração de Versão Anterior via Git
+> **[HISTÓRICO — REVOGADO 23/09]:** restauração hoje = hist. git do **remodel-copy** ou backup do docroot; destinos = **KB §3** (`/ahut/`, `/teste/`). Bloco abaixo é registro da época (repo `ahut-ecosystem-active` = legado, NUNCA commit).
 Quando precisar reverter o frontend de produção para um commit específico (ex: deploy quebrou):
 ```bash
-# No repositório ahut-ecosystem-active (VPS 2.24.95.98)
+# No repositório ahut-ecosystem-active (VPS 2.24.95.98) [LEGADO — histórico]
 cd /root/.hermes/ahut-ecosystem-active
 git config --global --add safe.directory /root/.hermes/ahut-ecosystem-active
 

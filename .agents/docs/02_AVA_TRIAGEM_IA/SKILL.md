@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ava-agent-intake/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/AVA_TRIAGEM_IA/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: ava-agent-intake
 description: Agente Especialista em Triagem, Entrevista Empática e Especificação Técnica de Chamados Imobiliários (Estate.ia / Ahut Ecosystem) para o ATOM.

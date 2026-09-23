@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO — REVOGADO 23/09]** plano executado; commits de produção hoje = `remodel-copy` (KB §7).
+
 # 🔧 PLANO DE IMPLEMENTAÇÃO — CORREÇÃO DE ÁUDIO CRM
 
 **Baseado no:** Manual Mestre RUNBOOK (Seção 5 - Pipeline de Áudio)

@@ -1,3 +1,5 @@
+> ⚠️ **[REVOGADO 09/09 — task RAG cancelada pelo Comandante]** (ver CHANGELOG 09/09 00:10). Histórico; NÃO executar.
+
 # 🧠 PLANO DE IMPLEMENTAÇÃO — AGENTE RAG SEMÂNTICO (Camada C)
 
 **Data:** 09/set/2026 · **Autor:** Jarvis (Orquestrador) · **Executor previsto:** Jhon Wick (com supervisão Jarvis/Rodrigo)

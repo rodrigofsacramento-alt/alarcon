@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO — CICLO 1]** registro cronológico; caminhos citados = legado [REVOGADO 23/09]. Vigente = KB §7.
+
 # CONTEXTO DE ORQUESTRAÇÃO — JARVIS → SQUAD (Ciclo 1)
 
 ## Ambiente materializado (caminhos REAIS — NÃO são os do Mac)

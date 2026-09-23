@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/aria-monitor-leads/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ARIA_MONITOR_LEADS/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: aria-monitor-leads
 description: Agente especialista em Monitoramento de Leads, cruzamento de dados de atendimento e vigilância no ecossistema Ahut.

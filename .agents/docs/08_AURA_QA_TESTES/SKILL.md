@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/aura-qa-tester/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/AURA_QA_TESTES/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: aura-qa-tester
 description: Engenheira de Qualidade (QA/Tester), responsável por validar build, TypeScript e testes manuais/automatizados.

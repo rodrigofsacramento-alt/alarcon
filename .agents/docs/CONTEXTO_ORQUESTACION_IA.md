@@ -20,8 +20,8 @@
 |---|---|---|---|---|
 | **EDIÇÃO** | `/opt/data/ahut-ecosystem-remodel-copy` (branch `remodel`, repo `remodel-copy`) | ⭐ FUENTE de código ACTIVA (React/TSX, buildable) | — | 🟢 ÚNICO autorizado |
 | **REFERÊNCIA (Pedra Roseta)** | `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` | mapa de tipagem Supabase real / nombres reales | — | 🔒 NO editar |
-| **TESTE (homologação)** | `1.1_FRONTEND_PROD_TESTE` (bundle) → hosting | validar antes de prod | `teste-ahut-ecosystem.apexfyhub.com.br` | 🟢 |
-| **PROD cliente** | `01_FRONTEND_PRODUCAO_HOSTINGER` (bundle) → hosting | distribución a cliente | `ahut-ecosystem.apexfyhub.com.br` | 🟢 |
+| **TESTE (homologação)** | build `dist/` → docroot `/public_html/teste/` (KB §3) | validar antes de prod | `teste-ahut-ecosystem.apexfyhub.com.br` | 🟢 |
+| **PROD cliente** | build `dist/` → docroot `/public_html/ahut/` (KB §3) | distribuição a cliente | `ahut-ecosystem.apexfyhub.com.br` | 🟢 |
 | **PROD Backend/Broker** | `/root/crmahut/backend-broker` (PM2 `whatsapp-broker`) | broker WhatsApp + Supabase PROD | — | 🟢 |
 | **SDR worker** | worker SDR (PM2 id14) | agente de disparo de leads | — | 🟢 (0 disparos) |
 
@@ -30,13 +30,7 @@
 ---
 
 ## 3️⃣ CÓMO EDITAR (flujo correcto)
-1. `cd /opt/data/ahut-ecosystem-remodel-copy` → `git branch --show-current` (debe ser `remodel`).
-2. Leer `AGENTS.md`, `.agents/docs/PAINEL_DE_CONTROLE.md`, `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md`.
-3. Validar el alvo: `find <src> -maxdepth 2`, `md5sum <archivo>` contra el bundle vivo (producción ≠ git).
-4. Editar el `src/` de topo usado por Vite (NO `src/src/`).
-5. Build: `npm run build` (exit 0, con `dist/assets/`).
-6. Deploy **TESTE primero** → validar → recién PROD. (Excepción: hotfix tela blanca directo a PROD.)
-7. Registrar en `CHANGELOG_APEXFY.md` (WRITE-LAST) y commitear junto.
+→ **Flujo canónico: KB §7 + AGENTS.md** (fonte única — não duplicar aqui). Resumo: `src/` do remodel-copy → `npm run build` → TESTE → Gate 2 (Comandante) → PROD.
 
 **PITFALL comunes:** PROD = docroot `/teste/`(homologación) y `/ahut/`(producción), nunca pasta fantasma. Bundle DEV (unicio/dark) NUNCA a PROD (code-split/light). `md5sum` del bundle vivo antes de confiar.
 
@@ -61,17 +55,15 @@
 ---
 
 ## 6️⃣ AGENTES & ORQUESTADOR (squad)
+→ **Organograma canónico: KB §7 (14 agentes: JARVIS → AXIOM → executores; ARGUS no processo; ASIMOV cria agentes; FINISH-GATE na UI).** Skills vivas: `.agents/skills/`.
 | Agente | Rol |
 |---|---|
-| **Jarvis Orchestrator** | Chef / planifica / divide / valida / registra (WRITE-LAST) |
+| **Jarvis Orchestrator** | Chef / revisa o AXIOM nos gates HITL / valida / registra (WRITE-LAST) |
+| **AXIOM** | Orquestrador técnico (despacha e revisa os executores — não executa tudo sozinho) |
 | **Claude Code** | ⭐ Executor principal (código, tests, deploys) |
 | **Hermes** | Executor alterno + soporte al Claude (revisa, documenta, orquesta) |
-| AXIOM | Executor |
-| ASIMOV | Crea AGENTES |
-| autonomous-optimization-architect | Optimiza modelos IA |
-| Ajax (@ajax-whatsapp-business) | WhatsApp media/messaging |
 - **Adopción de agente externo:** reunión del squad — FUNDIR (preferido) vs SUBAGENTE.
-- **Orquestación:** ver `.agents/docs/03_ORQUESTRADOR_CHIEF/`.
+- **Orquestación:** ver `.agents/skills/jarvis-orchestrator/SKILL.md` + `.agents/skills/axiom/SKILL.md`.
 
 ---
 
@@ -84,12 +76,7 @@
 ---
 
 ## 8️⃣ LECTURA OBLIGATORIA ANTES DE ACCIÓN (índice)
-- `AGENTS.md` (anti-amnésia de pasta)
-- `.agents/docs/PAINEL_DE_CONTROLE.md` (kanban/histórico TASK-NNN)
-- `.agents/docs/KNOWLEDGE_BASE_GLOBAL.md` (mapa completo repo/schema/env/reglas)
-- `.agents/docs/MANUAL_MASTER_RUNBOOK.md` (arquitectura/backend)
-- `.agents/docs/PROMPT_ENGENHARIA_REVERSA_CONTINUA.md` (ingeniería reversa)
-- `CHANGELOG_APEXFY.md` (histórico WRITE-LAST)
+→ **REGRA 0: `AGENTS.md` (REGRA 0) + KB §8** são a única versão deste índice. Ordem: `AGENTS.md` → KB_GLOBAL (§8 checklist) → PAINEL → skill do domínio.
 
 ---
 *Generado por Jarvis Orchestrator · 21/09/2026 · revisar/ampliar ante cualquier cambio estructural.*

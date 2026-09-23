@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO — REVOGADO 23/09]** este prompt descreve o fluxo antigo (EDIÇÃO = Jhon Wick). **Hoje:** engenharia reversa contínua = passo 5 do fluxo URGENTE (jarvis SKILL / KB §7) — destino = `src/` do **remodel-copy**. Ler como histórico; NÃO seguir como instrução.
+
 # 🤖 PROMPT MESTRE — ENGENHARIA REVERSA CONTÍNUA EM LOOP
 ## Sistema ApeXfy / Ahut Ecosystem · Operação Autônoma
 

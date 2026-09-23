@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO — REVOGADO 23/09]** plano antigo com destinos mortos (`ahut-ecosystem-active`). Regra vigente = KB §7 (remodel-copy único).
+
 # 📋 PLANO DE IMPLEMENTAÇÃO — ENGENHARIA REVERSA PRODUÇÃO → DEV
 
 **Data:** 27/08/2026  

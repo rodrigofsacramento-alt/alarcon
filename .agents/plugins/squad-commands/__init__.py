@@ -1,10 +1,12 @@
 """squad-commands plugin — slash commands do Squad Tech Ahut.
 
-Registra os 5 comandos de orquestracao (/executar, /performance,
+Registra os 5 comandos de orquestracao (/go, /performance,
 /criar-agente, /evolucao, /resumo) que o Comandante Rodrigo usa para
-disparar os fluxos do squad. Cada handler devolve um texto deterministico
-com as instrucoes minimas do fluxo; o agente (Jarvis) executa em seguida,
-sempre abrindo o cerebro primeiro (KB_GLOBAL + PAINEL + skill minima).
+disparar os fluxos do squad. /go substitui o antigo /executar
+(renomeado em 23/09, sem alterar a semantica dos 3 gates).
+Cada handler devolve um texto deterministico com as instrucoes minimas
+do fluxo; o agente (Jarvis) executa em seguida, sempre abrindo o
+cerebro primeiro (KB_GLOBAL + PAINEL + skill minima).
 """
 
 from __future__ import annotations
@@ -15,25 +17,34 @@ logger = logging.getLogger(__name__)
 
 # Camada anti-amesia obrigatoria (AGENTS.md REGRA 0) — prefixo padrao
 _CEREBRO = (
-    "ANTES DE TUDO: leia 04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/"
-    "00_SQUAD_AGENTES_IA/KNOWLEDGE_BASE_GLOBAL.md e PAINEL_DE_CONTROLE.md "
-    "(cerebro do squad) e valide o estado real com find/md5sum antes de agir."
+    "ANTES DE TUDO: leia .agents/docs/KNOWLEDGE_BASE_GLOBAL.md e "
+    ".agents/docs/PAINEL_DE_CONTROLE.md (cerebro do squad) e valide o "
+    "estado real com find/md5sum antes de agir."
     " Responda EM PORTUGUES BRASILEIRO."
 )
 
-_EXECUTAR = (
-    "INSTRUCAO /executar — FLUXO COMPLETO do squad:\n"
+_GO = (
+    "INSTRUCAO /go — FLUXO COMPLETO do squad (Fluxo 1→6; antigo /executar, "
+    "renomeado 23/09, gates inalterados):\n"
     "1. Diagnostique a tarefa citada (ou peca contexto se ausente).\n"
-    "2. Escale os agentes do squad (delegacao paralela) para resolver.\n"
-    "3. Execute com ferramentas REAIS (termina o trabalho, nao descreva).\n"
-    "4. QA com prova visual; gate de seguranca (secrets/RLS) antes do deploy.\n"
-    "5. Pontue a entrega (/performance) e registre aprendizado no PAINEL.\n"
-    "6. Comite com backup no repo remodel-copy.\n"
-    "FORMATO: tabela curta + conclusao + proximo passo acionavel (preferencia de Rodrigo)."
+    "2. JARVIS valida a demanda e DESPACHA AO AXIOM (orquestrador tecnico).\n"
+    "3. AXIOM ORQUESTRA os agentes executores conforme topologia (nao executa "
+    "tudo sozinho); execucao com ferramentas REAIS (termina o trabalho, nao "
+    "descreva).\n"
+    "4. AXIOM revisa no loop dev<->QA (max 3 retries); QA com PROVA VISUAL REAL "
+    "(tarefa de codigo sem prova visual anexada = Gate 1 RECUSA); gate de "
+    "seguranca (secrets/RLS) antes do deploy.\n"
+    "5. JARVIS valida nos GATES HITL 1/2/3: Gate 1 = prova visual; Gate 2 = PROD "
+    "so com aprovacao do COMANDANTE; Gate 3 = disparar o FLUXO 6 (P1-P6: "
+    "performance, lacuna, conhecimento de todo o squad via ARGUS, WRITE-LAST "
+    "+ TCK, Graph/Atlas como ultima etapa).\n"
+    "6. Comite no repo remodel-copy (branch remodel) com backup.\n"
+    "FORMATO: tabela curta + conclusao + proximo passo acionavel (preferencia "
+    "de Rodrigo)."
 )
 
 _PERFORMANCE = (
-    "INSTRUCAO /performance — pontue a ULTIMA entrega:\n"
+    "INSTRUCAO /performance — pontue a ULTIMA entrega (P1 do FLUXO 6):\n"
     "Indicadores: TEMPO_EXECUCAO, RETRABALHO (regra de ponderacao de Rodrigo: "
     "so penaliza instrucao que o squad podia resolver sozinho; NAO penaliza "
     "credencial/senha nunca fornecida), COBERTURA_TECNICA, "
@@ -47,7 +58,7 @@ _CRIAR_AGENTE = (
     "1. So criar se um gap real justificar; NUNCA duplicar papel existente.\n"
     "2. Nome deve comecar com A (precedente do squad).\n"
     "3. Entregar SKILL.md completo (frontmatter name/description + secoes).\n"
-    "4. Registrar no PAINEL_DE_CONTROLE + positions no organograma.\n"
+    "4. Registrar no PAINEL_DE_CONTROLE + positions no organograma (KB §7).\n"
     "5. Hierarquia: especialista -> generalista (superior tem contexto p/ validar).\n"
     "Preferencia: ASIMOV (criador de agentes) conduz; Jarvis valida."
 )
@@ -61,13 +72,13 @@ _EVOLUCAO = (
 
 _RESUMO = (
     "INSTRUCAO /resumo — STATUS DO SQUAD HOJE:\n"
-    "Liste: agentes ativos (organograma), skills carregadas, tarefas "
-    "pendentes no PAINEL, proxima acao. Tabela curta e objetiva."
+    "Liste: agentes ativos (organograma, 14 agentes), skills carregadas, "
+    "tarefas pendentes no PAINEL, proxima acao. Tabela curta e objetiva."
 )
 
 
-def _handle_executar(raw_args: str) -> str:
-    return f"{_CEREBRO}\n\n{_EXECUTAR}\n\nCONTEXTO: {raw_args}".strip()
+def _handle_go(raw_args: str) -> str:
+    return f"{_CEREBRO}\n\n{_GO}\n\nCONTEXTO: {raw_args}".strip()
 
 
 def _handle_performance(raw_args: str) -> str:
@@ -89,9 +100,9 @@ def _handle_resumo(raw_args: str) -> str:
 def register(ctx) -> None:
     """Registra os 5 slash commands do squad no Hermes."""
     ctx.register_command(
-        "executar",
-        handler=_handle_executar,
-        description="Fluxo COMPLETO do squad: diagnostica, escala agentes, executa, QA, pontua e comita.",
+        "go",
+        handler=_handle_go,
+        description="Fluxo COMPLETO do squad: JARVIS despacha, AXIOM orquestra a execucao, QA com prova visual, gates e commit.",
         args_hint="<descricao da tarefa>",
     )
     ctx.register_command(
@@ -116,4 +127,4 @@ def register(ctx) -> None:
         handler=_handle_resumo,
         description="Status do squad hoje: agentes, skills, pendencias.",
     )
-    logger.info("squad-commands: registrados 5 comandos (/executar /performance /criar-agente /evolucao /resumo)")
+    logger.info("squad-commands: registrados 5 comandos (/go /performance /criar-agente /evolucao /resumo)")

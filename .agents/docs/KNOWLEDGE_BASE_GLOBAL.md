@@ -45,8 +45,8 @@ Root: `/opt/data/ahut-ecosystem`
 - `04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/`
   - `.agents/docs/` — ⭐ **cérebro do squad** (docs, kanban, prompts)
     - `PAINEL_DE_CONTROLE.md` (kanban/histórico), `KNOWLEDGE_BASE.md` (aprendizados), `MANUAL_MASTER_RUNBOOK.md` (arquitetura/backend), `PROMPT_ENGENHARIA_REVERSA_CONTINUA.md`, `ORGANOGRAMA_SQUAD_QUBITS.md`, perfil de cada agente (`01_ATOM_DEVELOPER/`, `02_AVA_TRIAGEM_IA/`, `04_ARIA_MONITOR_LEADS/`, `05_ATLAS_DEVOPS_IA/`)
-  - `ahut-ecosystem-active/` — fonte TSX antiga (superada 08/09 — usar Jhon Wick)
-    - **EDIÇÃO:** `src/` do repo **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, clone `/tmp/legacy_re`, ~170 arq, Vite buildable)
+  - `ahut-ecosystem-active/` — fonte TSX antiga [HISTÓRICO 08/09 — REVOGADO 23/09; EDIÇÃO hoje = `src/` do **remodel-copy**, §7]
+    - **[HISTÓRICO — NÃO usar como instrução]:** EDIÇÃO da época = `src/` do repo **Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, clone `/tmp/legacy_re`, ~170 arq, Vite buildable). Hoje: `/tmp/legacy_re` = SOMENTE LEITURA (§1/§7).
     - **REFERÊNCIA (Pedra de Roseta):** `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` — tipagem Supabase real, nomes RPC/tabelas/pages. Consultar, NÃO editar.
     - `ahut-whatsapp-broker/`, `prod_snapshot_2408/`, `crm-dr-gustavo-original/`, `wpp-drgustavorocha-original/`
   - `crm-dr-gustavo/` — frontend-clone do módulo (Tecnologia.tsx e outras conforme o caso)
@@ -56,26 +56,26 @@ Root: `/opt/data/ahut-ecosystem`
 - `ahut-hermes-os/`, `ahut-telegram-orchestrator/` — componentes de orquestração/telegram
 - `scratch/`, `test-results/` — rascunhos/resultados de teste
 
-**PITFALL estrutural (amnésia recorrente):** alguns clones têm `src/` duplicado como `src/src/` (árvore fantasma). O build Vite usa **`src/`** (não `src/src/`). No Jhon Wick, editar SEMPRE o `src/` de topo usado pelo build.
+**PITFALL estrutural (amnésia recorrente):** alguns clones têm `src/` duplicado como `src/src/` (árvore fantasma). O build Vite usa **`src/`** (não `src/src/`). Editar SEMPRE o `src/` de topo usado pelo build (hoje: remodel-copy; menção histórica ao Jhon Wick = [REVOGADA 23/09]).
 
 ---
 
 ## 🔐 3. AMBIENTES & ACESSOS (destinos oficiais)
 
-### 🟢 PRODUÇÃO (4 destinos — DOCROOT `/ahut/`)
+### 🟢 PRODUÇÃO (destinos oficiais — DOCROOT `/ahut/`) — ⭐ TABELA ÚNICA DE DESTINOS (23/09)
 | # | Destino | Host:Porta | Usuário | Caminho |
 |---|---|---|---|---|
-| 1 | VPS nginx | 2.24.95.98 (root) | root | `/var/www/html/` |
-| 2 | VPS crm | 2.24.95.98 (root) | root | `/var/www/crm-imobiliaria/` |
-| 3 | **Hostinger PROD (subdomínio → `/ahut/`)** | 82.25.73.206:65002 | u817195350 | `~/domains/apexfyhub.com.br/public_html/ahut/` |
-| 4 | Hostinger Legacy | 82.25.73.206:65002 | u817195350 | `~/domains/apexfyhub.com.br/public_html/ahut-ecosystem/` |
+| 1 | **Hostinger PROD (`ahut-ecosystem.apexfyhub.com.br` → `/ahut/`)** | 82.25.73.206:65002 | u817195350 | `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/` |
+| 2 | VPS nginx | 2.24.95.98 (root) | root | `/var/www/html/` |
+| 3 | VPS crm | 2.24.95.98 (root) | root | `/var/www/crm-imobiliaria/` |
 
-> ⚠️ **PITFALL 03/09:** subdomínio `ahut-ecosystem.apexfyhub.com.br` aponta para a pasta **`/ahut/`** do domínio principal (NÃO pasta de mesmo nome). NUNCA subir para pastas legado/fantasma.
+> ⚠️ **PITFALL 03/09:** subdomínio `ahut-ecosystem.apexfyhub.com.br` aponta para a pasta **`/ahut/`** do domínio principal (NÃO pasta de mesmo nome).
+> 🚫 **DESTINOS MORTOS [REVOGADO 23/09 — NUNCA deploy/commit]:** pasta fantasma `/ahut-ecosystem/` (`public_html/ahut-ecosystem/`), pasta `dev/` (`public_html/dev/`), subdomínio `dev-ahut-ecosystem...`, pastas de bundle `1.1_FRONTEND_PROD_TESTE` e `01_FRONTEND_PRODUCAO_HOSTINGER` como destino de deploy, repo `ahut-ecosystem-active` como destino de commit. Os ÚNICOS destinos de deploy frontend são `/ahut/` (PROD) e `/teste/` (TESTE), nesta tabela.
 
-### 🟢 TESTE/HOMOLOGAÇÃO (1 destino — substitui o antigo DEV `public_html/dev/`)
+### 🟢 TESTE/HOMOLOGAÇÃO (1 destino — substitui o antigo DEV `public_html/dev/` [REVOGADO 23/09 — destino morto])
 | Destino | Host:Porta | Caminho |
 |---|---|---|
-| `teste-ahut-ecosystem.apexfyhub.com.br` | 82.25.73.206:65002 | `~/domains/apexfyhub.com.br/public_html/teste/` |
+| `teste-ahut-ecosystem.apexfyhub.com.br` | 82.25.73.206:65002 | `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/` |
 
 > Assets na **raiz** (`/assets/...`), não `/teste/assets/`. Cache bypass com nomes únicos `app-{uuid}.js`.
 
@@ -93,8 +93,8 @@ Root: `/opt/data/ahut-ecosystem`
 |---|---|---|---|---|
 | **Broker WhatsApp** (roda o WhatsApp) | **PROD** | VPS `/root/crmahut/backend-broker` (PM2 `whatsapp-broker`, script `dist/index.js`) | **PROD** `ptochsyoyatsydfysacc` | branch PROD do repo broker |
 | **Broker WhatsApp** | **DEV** | `/root/crmahut/backend-broker-dev` (PM2 `rodrigo.whatsapp-broker-dev`) | **DEV** `xmsulduzvufdzkfktovk` | branch DEV |
-| **Frontend** | **PROD** | Hostinger `~/domains/apexfyhub.com.br/public_html/ahut/` (+ VPS `/var/www/html/`, `/var/www/crm-imobiliaria/`) | — | build vindo do **src/ Jhon Wick** (após aprovação humana) |
-| **Frontend** | **TESTE** | Hostinger `~/domains/apexfyhub.com.br/public_html/teste/` | — | **src/ Jhon Wick** (`REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, `/tmp/legacy_re`) |
+| **Frontend** | **PROD** | Hostinger `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/` (+ VPS `/var/www/html/`, `/var/www/crm-imobiliaria/`) | — | build vindo do **`src/` do remodel-copy** (após aprovação humana — Gate 2) |
+| **Frontend** | **TESTE** | Hostinger `/home/u817195350/domains/apexfyhub.com.br/public_html/teste/` | — | **`src/` do remodel-copy** (script `_deploy_teste_remodel.py`) |
 | **Backend** (API/analise) | **PROD** | VPS `/var/www/api.rh` (`analise-backend`) | PROD | — |
 | **Banco** | PROD/DEV | Supabase (ver tabela acima) | `ptochsyoyatsydfysacc` / `xmsulduzvufdzkfktovk` | via migrations/sql |
 
@@ -154,33 +154,37 @@ Root: `/opt/data/ahut-ecosystem`
 ---
 
 ## 🤝 7. DECISÕES & PROTOCOLOS APROVADOS (squad)
-- **LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (canônica, 08/09):**
-  - **Diretório de EDIÇÃO** (novas features + deploys): `src/` do **Jhon Wick** (repo `rodrigofsacramento-alt/REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arquivos, buildable Vite). É aqui que se fazem as edições reais, gera-se o re-build e sobe-se para `teste-ahut`.
-  - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (210 arquivos reidratados). Usar **apenas como mapa** — consultar como as coisas rodam em produção, tipagem real do Supabase, nomes originais. **NÃO editar/compilar daqui; tsc não compila** (reidratado `e.jsx`).
-  - **Fluxo:** editar `src/` (Jhon Wick/main) → re-build → deploy `dist/` em teste-ahut → validar → (prod segue regra de aprovação humana).
-- **ORGANOGRAMA (estrutura oficial):** `ORGANOGRAMA_SQUAD_QUBITS.md`. Hierarquia:
+- **LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA — ÚNICA VIGENTE (CANÔNICO 11/09, confirmado 23/09):**
+  - **Diretório de EDIÇÃO** (novas features + deploys): **`src/` do `remodel-copy`** (`/opt/data/ahut-ecosystem-remodel-copy`, repo único buildable, remote `rodrigofsacramento-alt/remodel-copy.git`, branch `remodel`). É aqui que se fazem as edições reais, gera-se o re-build e sobe-se para TESTE.
+  - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` + `src_recovered_1_1/` (reidratados). Usar **apenas como mapa** — consultar como as coisas rodam em produção, tipagem real do Supabase, nomes originais. **NÃO editar/compilar daqui; tsc não compila** (reidratado `e.jsx`).
+  - **Fluxo:** editar `src/` (remodel-copy) → `npm run build` → deploy TESTE (`public_html/teste/`, `_deploy_teste_remodel.py`) → validar → **Gate 2 (aprovação do Comandante)** → PROD (`/ahut/`). URGENTE = direto PROD→valida→commit→eng. reversa no `src/`.
+  - **REVOGADA 23/09 [histórico — NÃO usar]:** a lei anterior de 08/09 (EDIÇÃO = `src/` do Jhon Wick `/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`). `/tmp/legacy_re` = SOMENTE LEITURA (área /tmp volátil). Repos NUNCA editar: `ahut-ecosystem-active`, `/tmp/legacy_re` (Jhon Wick), `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` (descartado). Pastas de bundle `1.1_FRONTEND_PROD_TESTE`/`01_FRONTEND_PRODUCAO_HOSTINGER` = [REVOGADO 23/09 — destino morto]; destinos únicos = **tabela §3**.
+- **ORGANOGRAMA (estrutura oficial — 14 agentes, declaração do Comandante 23/09):** Hierarquia:
 
   ```
-  🧠 JARVIS — Orquestrador Chefe & CEO
-  ├── 🛠️ ATOM — Engenheiro Sênior Full-Stack (Tech Lead)
-  │     ├── 🎨 ADA — Front-End / UI-UX
-  │     ├── 🚀 ATLAS — DevOps & Infraestrutura
-  │     ├── 🔍 AURA — QA & Testes
-  │     └── 🛡️ AEGIS — Security Ops
+  🧠 JARVIS — Orquestrador Chefe & CEO (revisa o AXIOM nos Gates HITL 1/2/3;
+  │           interface com o Comandante)
+  ├── ⚡ AXIOM — Orquestrador Técnico de Engenharia (pipeline; despacha e
+  │     │       revisa os executores — não executa tudo sozinho)
+  │     └── 🛠️ ATOM — Engenheiro Sênior Full-Stack (Tech Lead)
+  │           ├── 🎨 ADA — Front-End / UI-UX (com subagente FINISH-GATE)
+  │           ├── 🚀 ATLAS — DevOps & Infraestrutura
+  │           ├── 🔍 AURA — QA & Testes
+  │           ├── 🛡️ AEGIS — Security Ops
+  │           └── 📱 AJAX — WhatsApp Business Specialist
   ├── 👁️ ARGUS — Scrum Master & Processo
   │     ├── 🎙️ AVA — Triagem & Especificação
   │     ├── 📊 APOLLO — Data & BI
   │     └── 📈 ARIA — Monitor de Leads
-  └── 📱 AJAX — WhatsApp Business Specialist (formalizado; substituiu "wab-client")
+  └── 🤖 ASIMOV — Criador de Agentes (sob o JARVIS)
   ```
 
-  - **JARVIS** = único com acesso ao Comandante (Rodrigo); escala, revisa, aprova/recusa.
-  - **ATOM** (técnico) e **ARGUS** (processo) são os 2 generais → reportam a JARVIS.
-  - **AJAX** é perpendicular (especialista WhatsApp/broker/mídia), reporta a JARVIS.
-  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões.
-  - Skills versionadas em `.agents/docs/` (16 arquivos) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
+  - **JARVIS** = único com acesso ao Comandante (Rodrigo); revisa o trabalho do AXIOM nos gates, aprova/recusa. **ANTES de 16/05 não existia AXIOM** — hoje AXIOM é o orquestrador de engenharia na prática, sob o JARVIS.
+  - **AXIOM** orquestra o pipeline; **ATOM** (técnico) e **ARGUS** (processo) conduzem os especialistas → reportam ao AXIOM.
+  - **AJAX** é perpendicular (especialista WhatsApp/broker/mídia), reporta ao ATOM.
+  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | FINISH-GATE=revisão visual pré-ship.
+  - Skills versionadas em **`.agents/skills/`** (árvore viva, 25 skills + 14 agentes; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
-- **Fluxo deploy (CANÔNICO 11/09/2026 — CENTRALIZADO):** URGENTE = direto PROD→valida→commit. NORMAL = edição `src/` **REMODEL-COPY** (`/opt/data/ahut-ecosystem-remodel-copy`, repo único buildable, remote `rodrigofsacramento-alt/remodel-copy.git`) → `npm run build` → deploy **teste-ahut** (`public_html/teste/`, script `_deploy_teste_remodel.py`) → aprovação humana → PROD (`/ahut/`). **`/tmp/legacy_re` = SOMENTE LEITURA (não editar; área /tmp volátil).** REFERÊNCIA reidratada: `src_recovered_1_1/` (não editar).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.
 - **CI/anti-cache:** `build_anticache.mjs`, nomes únicos `app-{uuid}`, purge `curl .../purge.php`.

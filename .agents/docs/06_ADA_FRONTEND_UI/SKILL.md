@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ada-frontend-ui/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ADA_FRONTEND_UI/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: ada-frontend-ui
 description: Especialista em Frontend, UI/UX (React/Tailwind) do Esquadrão Tech Ahut.

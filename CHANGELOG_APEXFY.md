@@ -10,13 +10,17 @@
 
 | Camada | Branch / Target | Finalidade | Status Atual |
 |---|---|---|:---:|
-| **Edição Ativa (React/TSX)** | `remodel` (Branch 1.1) | Fonte de desenvolvimento, componentes e rotas TypeScript reidratados. | 🟢 ATIVO & BUILDÁVEL (`npx tsc` Exit 0) |
-| **Microcompilação / Deploy** | `main` / `dist/` (Branch 1.0) | Bundle minificado de produção deployed em `teste-ahut-ecosystem`. | 🟢 DEPLOYED (`teste-ahut-ecosystem.apexfyhub.com.br`) |
-| **Centralização de Agentes** | `.agents/` | Cérebro nativo de regras (`rules/`), habilidades (`skills/`) e documentação (`docs/`). | 🟢 CENTRALIZADO |
+| **Edição Ativa (React/TSX)** | `remodel-copy` (branch `remodel`, fonte **`src/`**) | Fonte única de desenvolvimento, componentes e rotas TypeScript. | 🟢 ATIVO & BUILDÁVEL (`npx tsc` Exit 0) |
+| **Deploy** | build `dist/` → **TESTE** `public_html/teste/` → **PROD** `public_html/ahut/` (KB §7) | Bundle minificado deployado por docroot real. | 🟢 DEPLOYED (`teste-ahut-ecosystem` + `ahut-ecosystem`) |
+| **Centralização de Agentes** | `.agents/` | Cérebro nativo de regras (`rules/`), habilidades (`skills/` — árvore viva, 14 agentes) e documentação (`docs/`; `0X_` congelado). | 🟢 CENTRALIZADO |
+
+> Fluxo vigente (KB §7): `src/` → build → TESTE → Gate 2 (Comandante) → PROD. Pastas de bundle `1.1_FRONTEND_PROD_TESTE`/`01_FRONTEND_PRODUCAO_HOSTINGER` e repo `ahut-ecosystem-active` = [REVOGADO 23/09 — destino morto].
 
 ---
 
 ## 📋 LOG DE ALTERAÇÕES (WRITE-LAST RECORD)
+
+| **23/09/2026 ~09:15** | **🔐 CC-06/CC-07 — FASE 0 + FASE 1 (governança do squad) — só docs/skills/agents** | `.agents/skills/{jarvis-orchestrator,axiom,aura-qa-tester,argus-scrum-master,atlas-agent-devops,ava-agent-intake}/SKILL.md` · `AGENTS.md` · `CLAUDE.md` · `.gitignore` · `.agents/docs/{KNOWLEDGE_BASE_GLOBAL,GUIA_COMANDANTE,GUIA_DESENVOLVEDOR_JUNIOR,PAINEL_DE_CONTROLE,CONTEXTO_ORQUESTACION_IA,PROTOCOLO_CONHECIMENTO}.md` · `.agents/docs/0X_*/SKILL.md` (banner congelado) · `.agents/plugins/squad-commands/{__init__.py,plugin.yaml}` · `.agents/rules/learning.md` · `CHANGELOG_APEXFY.md` | Claude Code (GLM-5.3) — task CC-06/CC-07 do Comandante | 🟢 APLICADO (docs validados por grep; sem deploy; app/src intocado) | **FASE 0:** segredos redigidos (commit `792176f`) + ponte `.agents/docs/keys_ahut.py` (600, gitignored → `/opt/data/scripts/keys_ahut.py`) + KB §7 com UMA lei (08/09 Jhon Wick = [REVOGADA 23/09]). **HIERARQUIA (declaração Comandante 23/09):** Comandante → JARVIS (Gates HITL 1/2/3, revisa o AXIOM) → AXIOM (orquestrador técnico, orquestra os executores) → agentes; 14 agentes (ASIMOV existe; FINISH-GATE incluso). **/executar → /go** em todos os fluxos + plugin v1.1.0 (gates inalterados; restart Hermes pendente). **R-11:** prova visual real obrigatória (QA/Gate 1/AURA/GUIA) — REGRA DURA: sem prova visual = Gate 1 RECUSA. **R-12:** destinos únicos = KB §3 (`/ahut/` PROD, `/teste/` TESTE); pastas bundle/active/fantasma/dev = [REVOGADO — destino morto]. **Pós-entrega unificado P1-P6** (Graph/Atlas = P6, última). Pendente FASE 2: create_tck.py, protocolo Hermes↔CC, rotação de credenciais (E2-0.2), restart Hermes. |
 
 | Data/Hora (UTC-3) | Módulo / Feature | Arquivos Modificados | Agente Responsável | Status (1.1 vs 1.0) | Descrição / Evidência da Alteração |
 |---|---|---|:---:|:---:|---|
@@ -58,7 +62,7 @@
 
 ---
 
-## 🏗️ ESTRUCTURA POST-MIGRAÇÃO (diretriz do Comandante, 09/09/2026)
+## 🏗️ ESTRUCTURA POST-MIGRAÇÃO (diretriz do Comandante, 09/09/2026) — ⚠️ HISTÓRICO (superseded por KB §7, 11/09 — confirmado 23/09: pastas de bundle = [REVOGADO — destino morto]; destinos únicos = tabela KB §3)
 
 | Etapa | Destino REAL | Repo | Deploy |
 |---|---|---|---|

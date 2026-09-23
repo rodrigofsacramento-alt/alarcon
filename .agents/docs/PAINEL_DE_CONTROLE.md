@@ -1,4 +1,17 @@
-# 📌 CANÔNICA (08/09) — LEI DE ATUAÇÃO EDIÇÃO/REFERÊNCIA (diretriz do Comandante)
+# 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
+
+## ✅ 23/09 — CC-06/CC-07: FASE 0 + FASE 1 aplicadas (hierarquia corrigida, /go, R-11, R-12)
+**Executor:** Claude Code (GLM-5.3) · **Escopo:** só docs/skills/agents — app/src intocado, sem deploy.
+- **FASE 0:** segredos redigidos (commit `792176f`) + `.agents/docs/keys_ahut.py` = ponte para `/opt/data/scripts/keys_ahut.py` (600, fora do repo, gitignored) + KB §7 com UMA lei de atuação (08/09 Jhon Wick = [REVOGADA 23/09]).
+- **HIERARQUIA (declaração do Comandante 23/09):** Comandante → JARVIS (revisa o AXIOM nos Gates HITL 1/2/3) → AXIOM (orquestrador técnico, orquestra os executores) → ATOM/ADA/ATLAS/AURA/AEGIS/AJAX, ARGUS (processo), ASIMOV, FINISH-GATE = **14 agentes**.
+- **/executar → /go** em todos os fluxos (jarvis, axiom, GUIA_COMANDANTE, plugin squad-commands, PAINEL); gates 1/2/3 inalterados. Plugin E-01 aplicado (v1.1.0) — **pendente: reinício do gateway Hermes em janela calma p/ carregar /go**.
+- **R-11:** prova visual real obrigatória em [5] QA, Gate 1, GUIA_COMANDANTE e SKILL AURA — REGRA DURA: tarefa de código sem prova visual anexada = Gate 1 RECUSA.
+- **R-12:** destinos únicos = KB §3 (`/ahut/` PROD · `/teste/` TESTE); `1.1_FRONTEND`/`01_FRONTEND`/`ahut-ecosystem-active`/pasta fantasma `/ahut-ecosystem/`/`dev/` = [REVOGADO 23/09 — destino morto].
+- **Pós-entrega unificado P1-P6** (Graph/Atlas = P6, última etapa) no jarvis SKILL + KB §7. Protocolo de conhecimento: `.agents/docs/PROTOCOLO_CONHECIMENTO.md`.
+- **Pendências FASE 2:** create_tck.py (TCK automático via API), protocolo Hermes↔CC, rotação das credenciais expostas (E2-0.2), restart Hermes.
+
+---
+## 📜 HISTÓRICO (entradas abaixo anteriores a 23/09 — registros cronológicos, não instrução vigente; regra viva = KB §7)
 
 ## ✅ 22/09 18:40 — FINANCEIRO → LIVRO GERAL: BOTÃO NOVO LANÇAMENTO + SALDOS DOS BANCOS (TESTE+PROD VALIDADO)
 **Commit `b91ca3c` · `src/pages/Livro.tsx` (+183 linhas).** Botão **"Novo Lançamento"** no header de filtros da página `/financeiro/livro`: modal com **Data** (default hoje), **Tipo** (Entrada/Saída), **Descrição**, **Categoria** (dropdown real), **Banco** (dropdown real), **Situação** (Realizada/Pendente → `is_realized`/`paid_date`), **Valor** (parser pt-BR) + **chips de saldo por banco em tempo real** no rodapé (Σ realizadas). Grava via `useCreateFinancialTransaction` (RLS tenant; invalida ledger/stats/dashboard). Fluxo: tsc 0 erros → build OK → deploy TESTE (`_deploy_teste_remodel.py`, backup 1013 assets) → chunk `Livro-frz0bRN-.js` validado HTTP 200 com a string → deploy PROD 2 docroots (`_deploy_prod_livro.py`, backup index pré-deploy) → validado no ar. Dados de clientes intocados.
@@ -142,7 +155,7 @@
 - Validação: INSERT teste completo (MONTHLY+GS+maps_link) OK → cleanup → 15 reais intactos
 **Lição:** após qualquer ALTER, rodar `_schema_properties.py` para PROVAR colunas na base real antes de fechar a task (não confiar só no changelog).
 
-**Diretório de EDIÇÃO** (novas features + deploys): `src/` do **Jhon Wick** (repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arq, buildable). É aqui que se fazem as **edições reais**, gera-se o **re-build** e sobe-se para **teste-ahut**.
+**[REVOGADA 23/09 — lei antiga 08/09; vigente = KB §7: EDIÇÃO = `src/` do `remodel-copy`] Lei da época:** editar `src/` do Jhon Wick (repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`, branch `main`, montado em `/tmp/legacy_re`, 170 arq, buildable). É aqui que se fazem as **edições reais**, gera-se o **re-build** e sobe-se para **teste-ahut**.
 **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` (210 arq reidratados). **Só como mapa** — conferir como roda em produção, tipagem Supabase real, nomes originais. **NÃO editar/compilar daqui**.
 **Fluxo estrito:** editar `src/` (Jhon Wick/main) → re-build → deploy dist em teste-ahut → validar → prod (aprovação humana).
 
@@ -181,8 +194,8 @@
 ## 📊 Painel de Controle Consolidado do Squad IA
 
 **Última Atualização:** 03/09/2026 (Ciclo 5 — Zombie dupla-montagem + push código + Funil de Performance)  
-**Ambiente Ativo:** Produção (`ahut-ecosystem.apexfyhub.com.br`) | Repo: `rodrigofsacramento-alt-...-remodel` (branch `remodel`, docroot `/ahut/`)  
-**Dev Subdomínio:** `https://dev-ahut-ecosystem.apexfyhub.com.br` ✅ Funcionando (SPA routing fix)  
+**[HISTÓRICO 03/09 — REVOGADO 23/09: repo descartado] Ambiente da época:** Produção (`ahut-ecosystem.apexfyhub.com.br`) | Repo da época: `rodrigofsacramento-alt-...-remodel` (DESCARTADO; hoje = `remodel-copy`, branch `remodel`, KB §7 — docroot `/ahut/`)  
+**[REVOGADO 23/09 — destino morto]** ~~Dev Subdomínio: `https://dev-ahut-ecosystem.apexfyhub.com.br`~~ (homologação hoje = `/teste/`)  
 
 ## ✅ PROGRESSO CICLO 5 — ZOMBIE DUPLA-MONTAGEM DO LOGIN (03/09) — RESOLVIDO
 - ✅ **Push GitHub** — commits `b69dfaa` (filtro atendentes) / `1722d54` (filtro admin-only) confirmados no remote `origin/remodel`. Filtro de atendentes 100% funcional no PROD (sha `55cd3037`, `Atendimento-live-v14.js` = mesmo conteúdo de `v12` versionado).
@@ -349,7 +362,7 @@
 
 O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 
-![Último Teste Local](file:///Users/christianeracanelli/Desktop/Ahut%20Ecosystem/.agents/docs/01_ATOM_DEVELOPER/ULTIMO_TESTE_LOCAL.png)
+![Último Teste Local](caminho Mac — [REVOGADO 23/09: link morto, imagem não acessível neste servidor])
 
 ---
 

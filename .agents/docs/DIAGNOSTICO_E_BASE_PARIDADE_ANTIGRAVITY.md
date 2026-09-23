@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO]** diagnóstico/paridade de 08-09/09; fluxo citado (Jhon Wick) = [REVOGADO 23/09]. Vigente = KB §7.
+
 # 🔎 ANTIGRAVITY — DIAGNÓSTICO COM EVIDÊNCIA + BASE DE PARIDADE (para o Jhon Wick executar)
 
 **Data:** 2026-09-08 | **Autor auditor:** Jarvis (Master Orchestrator / Lead Architect)

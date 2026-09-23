@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/argus-scrum-master/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ARGUS_SCRUM_MASTER/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: argus-scrum-master
 description: Scrum Master e Inspetor de Fluxo do Esquadrão Tech, coordena o time debaixo do Atom e garante aderência aos processos.

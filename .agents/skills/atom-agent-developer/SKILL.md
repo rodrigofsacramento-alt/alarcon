@@ -40,6 +40,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 > Essas pastas são lixo de backup/cópia antiga. Se você editar nelas, seu código NUNCA irá para o cliente e você estará desperdiçando tempo.
 
 ### 🟢 PASTAS OFICIAIS DE DESENVOLVIMENTO (ONDE VOCÊ DEVE EDITAR):
+> **[HISTÓRICO 24-25/08 — REVOGADO 23/09]:** os caminhos abaixo (Mac `/Users/christianeracanelli/...` e `ahut-ecosystem-active`) NÃO são instrução vigente. **Hoje (KB §7):** EDIÇÃO = `/opt/data/ahut-ecosystem-remodel-copy`, branch `remodel`, fonte `src/` — ÚNICO. Mantido só como registro da época.
 1. **Frontend Dev:**
    `/Users/christianeracanelli/Desktop/Ahut Ecosystem/04_CODIGOS_FONTE_LOCAIS_E_DESENVOLVIMENTO/ahut-ecosystem-active/01_FRONTEND_PRODUCAO_HOSTINGER_BKP`
 2. **Frontend TSX Nativo:**
@@ -59,7 +60,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 
 ## 🔒 3. BLOQUEIO ABSOLUTO DE DEPLOY SEM APROVAÇÃO MANUAL
 
-1. **Desenvolva apenas nas pastas de desenvolvimento (`ahut-ecosystem-active`).**
+1. **Desenvolva apenas no `src/` do `remodel-copy`** (canônico KB §7; `ahut-ecosystem-active` = [REVOGADO 23/09 — destino morto]).
 2. **Suba o servidor local em porta isolada** (ex: `http://localhost:5174`).
 3. **Apresente o resultado** ao usuário para validação manual.
 4. **AGUARDE a confirmação expressa do usuário ("Pode subir / Aprovado").**
@@ -73,7 +74,7 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
   - URL: `https://ptochsyoyatsydfysacc.supabase.co`
   - Postgres: `db.ptochsyoyatsydfysacc.supabase.co:5432` | User: `postgres` | Pass: `[CREDENCIAL: ver keys_ahut.py]`
 - **Frontend Hostinger SFTP:** `82.25.73.206:65002` | User: `u817195350` | Pass: `[CREDENCIAL: ver keys_ahut.py]`
-  - Destinos: `domains/ahut-ecosystem.apexfyhub.com.br/public_html`, `public_html/ahut-ecosystem`
+  - Destinos (únicos — KB §3): `public_html/teste/` (TESTE) e `public_html/ahut/` (PROD). Pasta `ahut-ecosystem/` = fantasma, NUNCA.
 - **Backend VPS (SSH):** `2.24.95.98:22` | User: `root` | Pass: `[CREDENCIAL: ver keys_ahut.py]` | App: `/var/www/html`
 
 ---

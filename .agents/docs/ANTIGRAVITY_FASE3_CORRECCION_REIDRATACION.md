@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO]** registro da reidratação (Fase 3); destino "Jhon Wick" da época = [REVOGADO 23/09]. Vigente = KB §7.
+
 # 🛠 FASE 3 — CORRECCIÓN DE RUTA (Reidratación React/TSX REAL)
 
 **Lead Architect:** Jarvis (Hermes OS)

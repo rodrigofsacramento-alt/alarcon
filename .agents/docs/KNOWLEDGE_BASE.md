@@ -1,3 +1,5 @@
+> ⚠️ **[HISTÓRICO — CONGELADO 23/09]** aprendizados antigos; cérebro vivo = `KNOWLEDGE_BASE_GLOBAL.md` + `PAINEL_DE_CONTROLE.md` + protocolo `PROTOCOLO_CONHECIMENTO.md`. Ler como histórico.
+
 # Base de Conhecimento do Esquadrão Tech (KNOWLEDGE BASE)
 
 Este arquivo é a memória de longo prazo de todos os agentes (Atom, Ada, Aura, Atlas, Aegis, Apollo, Argus, Aria, Ava).

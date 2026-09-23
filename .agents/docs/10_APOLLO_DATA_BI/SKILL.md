@@ -1,3 +1,5 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/apollo-data-bi/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: apollo-data-bi
 description: Cientista de Dados (Data Analyst/BI) responsável por auditoria de banco de dados, insights, dashboards e KPIs.

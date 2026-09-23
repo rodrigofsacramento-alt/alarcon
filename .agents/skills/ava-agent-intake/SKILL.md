@@ -90,7 +90,7 @@ Assim que o diagnóstico atinge **Score >= 80%**, a AVA gera o chamado com a seg
 - [ ] Regra principal funcionando sem delay.
 - [ ] Confirmação visual ou feedback no painel do usuário.
 - [ ] Notificação ou integração externa (WhatsApp Broker) disparada com sucesso.
-- [ ] Validado no dev local (porta 5174) com screenshot anexado.
+- [ ] Validado em **TESTE (`/teste/`) com screenshot anexado** (prova visual = Gate 1).
 ```
 
 ---
@@ -110,6 +110,7 @@ Assim que o diagnóstico atinge **Score >= 80%**, a AVA gera o chamado com a seg
 
 ### Fluxo de Triagem para Tickets de Tecnologia
 - **Fluxo real:** Ava tria via chat → preenche formulário → ticket vai para Supabase `technology_tickets`
+- **TCK criado na entrada; o pós-entrega P5 apenas ATUALIZA este ticket (nunca cria 2º) — R-08.**
 - **Status:** `a_analisar` → `a_executar` → `executando` → `executado`
 - **Subcategorias:** `nao_especificado`, `em_planejamento`, `em_aplicacao`, `em_validacao`, `atualizado`, `backup_realizado`
 - **Solicitante:** Selecionado de `profiles` com `role IN ('admin','agent','manager')` — não texto livre

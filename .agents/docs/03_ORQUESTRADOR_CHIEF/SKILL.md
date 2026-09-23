@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/jarvis-orchestrator/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ORQUESTRADOR_CHIEF/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: jarvis-orchestrator
 description: Orquestrador Chefe e CEO do Ecossistema Ahut (Jarvis Orchestrator Chief). Detentor da omnisciência sobre todos os agentes, fluxos e regras de negócio. Valida nos gates HITL e delega a execução ao AXIOM.

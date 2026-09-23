@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/atlas-agent-devops/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ATLAS_DEVOPS_IA/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: atlas-agent-devops
 description: Atlas, o Especialista em Monitoramento de Infraestrutura e Diagnóstico Backend para o sistema Ahut Ecosystem. Focado na integração do WhatsApp (Baileys) e banco de dados Supabase (PostgreSQL).

@@ -1,3 +1,7 @@
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/atom-agent-developer/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
+> ⚠️ **CONGELADO em 23/09 — versão viva em `.agents/skills/ATOM_DEVELOPER/SKILL.md`** (árvore viva do squad). Este arquivo é histórico; NÃO editar.
+
 ---
 name: atom-agent-developer
 description: Diretrizes de desenvolvimento, arquitetura imobiliária, segurança e fluxo de deploy para o agente ATOM no ecossistema Ahut / ApeXfy.

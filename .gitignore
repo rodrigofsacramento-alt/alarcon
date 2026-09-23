@@ -30,3 +30,7 @@ copia-do004_codigos_fonte_locais/Estate.AI-main/node_modules/
 
 # Hermes internal workspace
 .hermes/
+
+# Credenciais — NUNCA no repo (valores reais só em /opt/data/scripts/keys_ahut.py, chmod 600)
+.agents/docs/keys_ahut.py
+
