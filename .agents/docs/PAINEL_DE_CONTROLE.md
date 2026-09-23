@@ -1,5 +1,17 @@
 # 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
 
+## ✅ 23/09 — CC-09: Fila de pendências executada (P5 create_tck · protocolo /go · sanitização · Atlas · CLAUDE.md 15)
+**Executor:** Claude Code (GLM-5.3) · ordem planejada com verificação anti-conflito (nenhum deploy/AI concorrente; git limpo no `remodel`).
+- **P5 — `create_tck.py`** (`/opt/data/scripts/`, stdlib only): POST `/rest/v1/technology_tickets` PROD via `SB_SERVICE`, code ordinal (MAX+1), validação client-side dos enums reais (priority alta/media/baixa · status 5 · subcat nao_especificado/em_aplicacao/atualizado · forecast DATE). Flags `--next/--delete/--next`. **Teste de ponta:** TCK-2026-710 criado (executado/em_aplicacao) → DELETE ok → ordinal volta a 710 (sem poluir kanban).
+- **Protocolo Hermes↔CC (E3):** `/opt/data/scripts/go_dispatch.py` — prepare/run/resume + selftest; prompt-porta `/tmp/hermes/go_prompt.md`, marcador `GATE2:` detectado por regex e persistido em `/tmp/hermes/gate2_pendente.md`; 2ª passada `resume` apaga o arquivo (ciclo fechado). Smoke end-to-end real (tarefa de leitura, sem PROD): resposta completa do CC, GATE2 N/A como esperado. Integração no handler `/go` do plugin: **deferida** (handler atual só monta texto; o dispatch é do próprio Hermes — decisão registrada no relatório CC-09).
+- **Sanitização E2-0.3:** 129 scripts de `/opt/data/scripts/` com senha hardcoded → REDACTED (`REDACTED-VER-KEYS_AHUT`); originais preservados em `/opt/data/_quarentena_creds/scripts_legados/` (chmod 700). 0 JWT fora do `keys_ahut.py`; `/opt/data/scripts` não é repo git → sem history-purge. 4 scripts já quebrados ANTES (sessões antigas): `diag_igor_convapi.py`, `find_todos.py`, `deploy_teste_v15.py`, `montar_stage_v15.py`.
+- **Rotação E2-0.2 (lado local):** `keys_ahut.py` reorganizado com marcadores `ROTAÇÃO PENDENTE` (valores antigos funcionais mantidos; DEV truncado apontado) + **instruções passo a passo** para o Comandante em `/opt/data/_quarentena_creds/ROTACAO_INSTRUCOES.md` (Hostinger SFTP → Supabase PROD DB → Supabase DEV keys → VPS root; ordem segura fora de janela de deploy).
+- **Atlas (P6):** grafo verificado ATUALIZADO (198/198 arquivos src/ no disco, 0 órfãos, arestas = imports reais — false alarm do diff: imports multilinha). Deploy idempotente re-verificado: md5 idêntico local == `ahut/jarvis` == `ahut-ecosystem/jarvis` == **`teste/jarvis` (novo)**; HTTP 200 nos 2 domínios.
+- **CLAUDE.md global:** atualizado p/ 15 agentes (ATEM incluso) + novos caminhos (create_tck, go_dispatch, quarentena) — aplicado via `/tmp/cc09_CLAUDE.md` e validado em sessão CC fresca.
+- **Pendente (Comandante):** rotação nos provedores (instruções prontas), deploy PROD da UI subtasks (Gate 2 após validar no TESTE), posições ARGUS/AJAX no organograma (opções no relatório CC-09), restart Hermes p/ carregar `/tck`.
+
+---
+
 ## ✅ 23/09 — CC-08: ATEM (gerente de chamados TCK) + gatilhos de validação do Comandante via Telegram
 **Executor:** Claude Code (GLM-5.3) · **FASE 2 liberada pelo Comandante** (código incluído).
 - **Novo agente ATEM** (15º do squad, sob o AXIOM): dono do ciclo de vida do card TCK no kanban `/tecnologia`. Skill: `.agents/skills/atem-kanban-manager/SKILL.md`. Registrado no organograma (KB §7).
