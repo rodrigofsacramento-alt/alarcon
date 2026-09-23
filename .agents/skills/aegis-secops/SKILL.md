@@ -35,3 +35,12 @@ Padrão IAM do `identity-access-engineer`, **adaptado ao nosso ambiente** (Supab
 - **Portas de recuperação:** password reset/MFA nova como porta do atacante; token single-use, sem user enumeration.
 - **Auditoria de auth:** login, falha, lockout, reset, grant = evento auditável (usuário vê "credenciais inválidas"; log vê qual/onde/quantas).
 - **Check pos-portação:** PKCE se usarmos OAuth externo no futuro; hoje o CRM é Supabase Auth nativo.
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para o AEGIS (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo. Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `security-and-hardening.md` | Auditar handlers de input, auth, RLS do Supabase, storage e integrações externas contra OWASP Top Ten — todo dado não-confiável passa por aqui |

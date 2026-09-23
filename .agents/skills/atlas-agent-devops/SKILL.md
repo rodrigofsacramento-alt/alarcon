@@ -260,3 +260,16 @@ Como Atlas, você deve conhecer detalhadamente o schema do banco de dados (Supab
 * O Webhook/Broker intercepta mensagens do Baileys e mapeia o `remote_jid`.
 * Se a mensagem for de um grupo, o `sender_id` é o `profile_id` do membro, mas as mensagens do Broker/Empresa levam o `sender_id` igual ao `client_id` (o grupo) por causa do disparo direto.
 * Sempre verifique a restrição de FK em `profiles` apontando para `auth.users` ao sugerir inserções diretas no banco.
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para o ATLAS (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo (docroots, ambientes, restrições). Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `ci-cd-and-automation.md` | Montar/modificar pipelines de build e deploy — gates de qualidade e estratégia para `/ahut/` e `/teste/` |
+| `shipping-and-launch.md` | Pré-launch em produção — checklist, monitoramento, rollout gradual e rollback (Hostinger/Supabase) |
+| `observability-and-instrumentation.md` | Instrumentar código para produção (logs, métricas, alertas) — feature em PROD exige evidência |
+| `deprecation-and-migration.md` | Remover sistemas/features antigas ou migrar schema Supabase sem downtime (expand/contract) |
+| `git-workflow-and-versioning.md` | Qualquer mudança de código — commits atômicos, branches, PRs; repo canônico = remodel-copy (branch `remodel`) |

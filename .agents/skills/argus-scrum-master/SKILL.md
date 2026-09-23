@@ -47,3 +47,14 @@ Enquanto o **Jarvis** orquestra o ecossistema macro e o **Atom** (Tech Lead) pro
 - `ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
 - `dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/dev-ahut-ecosystem.apexfyhub.com.br/public_html/`
 - Sempre verificar no hPanel → Subdomínios antes de fazer deploy
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para o ARGUS (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo. Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `documentation-and-adrs.md` | Documentar decisão de arquitetura (ADR), racional de design e contexto para futuros agentes |
+| `idea-refine.md` | Ideia vaga → pensamento divergente/convergente até conceito acionável |
+| `interview-me.md` | Pedido subespecificado ("build X" sem para quem/por quê) → entrevista de uma pergunta por vez até ~95% de confiança |

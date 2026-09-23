@@ -303,3 +303,18 @@ return await sock.sendMessage(jid, { audio: rawBuf, mimetype: 'audio/webm', ptt:
 ||```
 |- **Compilação:** `npx tsc` sem erros (necessário usar `convId` temporário para evitar TS18047)
 |- **Commit:** `4852487` no `ahut-ecosystem-active`
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para o ATOM (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo (caminhos, ambientes, restrições). Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `test-driven-development.md` | Antes de implementar qualquer lógica/bug/mudança de comportamento — red-green-refactor com Vitest (`npm run test`) |
+| `debugging-and-error-recovery.md` | Teste falhou, build quebrou, comportamento divergiu — causa-raiz antes de editar |
+| `incremental-implementation.md` | Feature que toca vários arquivos — fatias finas e verificáveis |
+| `code-simplification.md` | Código funciona mas está difícil de manter — clareza sem mudar comportamento |
+| `api-and-interface-design.md` | Endpoints (Edge Functions), tipos TS compartilhados, contratos frontend↔backend |
+| `doubt-driven-development.md` | Decisão não-trivial (arquitetura, schema, fluxo de leads) — revisão adversarial das premissas |
+| `source-driven-development.md` | Código de framework (React 19/Vite/Tailwind/Supabase) de memória — verificar doc oficial e citar fonte |

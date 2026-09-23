@@ -412,3 +412,18 @@ emodel-copy.
 
 ### 3. Estrutura Unificada de Agentes (.agents/docs/)
 Todas as skills foram integradas em suas respectivas pastas numeradas de agente em .agents/docs/0X_<AGENTE>/SKILL.md. A pasta duplicada .agents/skills/ foi totalmente removida.
+
+> **Nota (23/09/2026):** a pasta `.agents/skills/` foi recriada como biblioteca de skills do squad (uma pasta por agente + índice `README.md`). As skills herdadas abaixo vivem lá.
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para o JARVIS (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo. Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `planning-and-task-breakdown.md` | Spec/requisitos claros → quebrar em tarefas ordenadas, estimar escopo e paralelizar o squad |
+| `spec-driven-development.md` | Projeto/feature significativa sem especificação → redigir PRD antes de delegar código |
+| `constraint-driven-development.md` | Fixar a barra de qualidade como contrato (CONSTRAINTS.md) e impedir que agentes a rebaixem silenciosamente |
+| `context-engineering.md` | Início de sessão, degradação de qualidade dos agentes ou troca de tarefa — configurar contexto |
+| `using-agent-skills.md` | Meta-skill de descoberta — qual skill/workflow se aplica; consultar índice `.agents/skills/README.md` |

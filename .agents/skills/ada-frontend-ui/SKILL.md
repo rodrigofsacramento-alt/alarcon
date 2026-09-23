@@ -160,3 +160,13 @@ Status Inicial: A Executar
   - `messages.content = "[midia]"`, `messages.message_type = 'text'`
   - Frontend renderiza como texto, não como player de áudio
 - **Regra de ouro para debug:** `SELECT * FROM whatsapp_messages ORDER BY created_at DESC` primeiro, depois `messages`
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para a ADA (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo. Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `frontend-ui-engineering.md` | Construir/modificar telas, componentes e layouts do CRM (React+Vite+Tailwind) com qualidade de produção, responsividade e WCAG |
+| `performance-optimization.md` | Otimizar Core Web Vitals, carregamento, N+1 em queries Supabase e gargalos de frontend/backend |

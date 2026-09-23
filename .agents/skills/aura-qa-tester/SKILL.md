@@ -62,3 +62,13 @@ Você é a **Aura**, a Engenheira de Qualidade (QA/Tester) do Ahut Ecosystem. Su
   - **Banco:** `whatsapp_messages.media_status = 'downloaded'` para áudios processados após o patch
   - **Sessão:** `whatsapp_sessions.status = 'connected'` (ou 'qr_ready' se precisar reconectar)
 - **Métrica:** Zero falhas de áudio (media_status IS NULL ou 'failed') nas últimas 24h
+
+---
+
+## Skills herdadas (agent-skills)
+Skills do repositório `addyosmani/agent-skills` distribuídas para a AURA (CC-02, 23/09/2026). Cada arquivo é uma skill secundária nesta pasta, com bloco de adaptação Ahut no topo. Em conflito, prevalece este SKILL.md.
+
+| Skill (arquivo) | Quando usar |
+|---|---|
+| `code-review-and-quality.md` | Antes de qualquer merge — revisão multieixo (próprio, de outros agentes ou humano), checando nicho imobiliário |
+| `browser-testing-with-devtools.md` | Testar/debugar o frontend React+Vite em navegador real (DOM, console, rede, visual) — requer Chrome DevTools MCP |
