@@ -27,8 +27,14 @@ logger = logging.getLogger(__name__)
 
 STATE_PATH = "/tmp/tck_current.json"
 KEYS_DIR = "/opt/data/scripts"
-DEV_REST = "https://xmsulduzvufdzkfktovk.supabase.co"  # ref público (KB §); a CHAVE vem do keys_ahut.py
+DEV_REST = "https://xmsulduzvufdzkfktovk.supabase.co"  # ref público (KB §); a CHAVE vem de keys_ahut.py
 TABLE = "technology_tickets"
+
+# Aanon key pública do bundle DEV — idêntica ao fallback de src/lib/supabase.ts
+# (NÃO é segredo: já segue no repo e em todo bundle). Usada porque as
+# SUPABASE_DEV_* do keys_ahut.py estão truncadas (HTTP 401) — corrigir na
+# rotação de credenciais E2-0.2. DEV é isolado (KB); RLS policy ALL pública.
+DEV_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhtc3VsZHV6dnVmZHprZmt0b3ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzNTU1OTgsImV4cCI6MjEwMDkzMTU5OH0.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0"
 
 STATUS_LABEL = {
     "a_analisar": "a_analisar",
@@ -72,12 +78,12 @@ def _save_state(st: dict) -> None:
 
 # ── Supabase REST (service role, chaves NUNCA impressas) ──────────────────────
 def _creds(env: str) -> tuple[str, str]:
+    if env == "dev":
+        return DEV_REST, DEV_ANON
     if KEYS_DIR not in sys.path:
         sys.path.insert(0, KEYS_DIR)
     import keys_ahut as k  # noqa: PLC0415 — import tardio: falha clara só quando usado
 
-    if env == "dev":
-        return DEV_REST, k.SUPABASE_DEV_SERVICE_ROLE
     return k.SB_URL.rstrip("/"), k.SB_SERVICE
 
 
@@ -249,7 +255,7 @@ def _append_timeline(t: dict, note: str, to: str | None = None) -> list:
     return tl
 
 
-def _execute(p: dict) -> str:
+def _execute(p: dict, st: dict | None = None) -> str:
     env = p["env"]
     kind = p["kind"]
     if kind == "create":
@@ -257,6 +263,8 @@ def _execute(p: dict) -> str:
         if st_ not in (200, 201):
             return f"❌ Falha ao criar (HTTP {st_}): {rows}"
         code = rows[0]["code"]
+        if st is not None:
+            st["code"] = code
         logger.info("ATEM criou %s em %s", code, env)
         return (
             f"✅ *{code}* criado — “{p['ticket']['title']}”\n"
@@ -367,7 +375,7 @@ def handle(raw_args: str) -> str:
         pend = st.get("pending")
         if not pend:
             return "ℹ️ Nenhuma operação pendente."
-        out = _execute(pend)
+        out = _execute(pend, st)
         st["pending"] = None
         _save_state(st)
         return out
