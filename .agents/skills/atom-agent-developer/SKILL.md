@@ -173,13 +173,9 @@ Como Tech Lead (Chefe de Tecnologia e Desenvolvimento), você está no topo da h
 - **Patch aplicado em:** `Atendimento-DcqAjCvf.js` (produção) e `ahut/assets/` (ambas as URLs)
 
 ### Document Root Final (confirmado 26/08)
-- **Produção — 4 destinos obrigatórios:**
-  1. VPS nginx: `/var/www/html/`
-  2. VPS crm: `/var/www/crm-imobiliaria/`
-  3. Hostinger subdomínio: `/home/u817195350/domains/ahut-ecosystem.apexfyhub.com.br/public_html/`
-  4. Hostinger ahut/: `/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`
-- **Dev:** `https://dev-ahut-ecosystem.apexfyhub.com.br` → `/home/u817195350/domains/apexfyhub.com.br/public_html/dev/`
-- **SEMPRE deployar nos 4 destinos.** O domínio `ahut-ecosystem.apexfyhub.com.br` aponta para Hostinger (LiteSpeed), não para o VPS
+- **Produção — destinos únicos (tabela KB §3, 23/09):** Hostinger `/ahut/` (`/home/u817195350/domains/apexfyhub.com.br/public_html/ahut/`) + VPS `/var/www/html/` e `/var/www/crm-imobiliaria/` · TESTE = `public_html/teste/`.
+- **[REVOGADO 23/09 — destino morto]:** o antigo "4 destinos" com pasta fantasma e o subdomínio `dev-ahut-ecosystem` (`public_html/dev/`).
+- **SEMPRE deployar nos destinos canônicos da KB §3.** O domínio `ahut-ecosystem.apexfyhub.com.br` aponta para Hostinger (LiteSpeed), não para o VPS
 - **Cache LiteSpeed:** purge via `purge.php` com `header("X-LiteSpeed-Purge: *")` ou hPanel → Avançado → Cache → Limpar Tudo
 
 ### Cache LiteSpeed Hostinger
