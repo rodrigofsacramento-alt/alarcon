@@ -1,5 +1,15 @@
 # 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
 
+## ✅ 23/09 — CC-08: ATEM (gerente de chamados TCK) + gatilhos de validação do Comandante via Telegram
+**Executor:** Claude Code (GLM-5.3) · **FASE 2 liberada pelo Comandante** (código incluído).
+- **Novo agente ATEM** (15º do squad, sob o AXIOM): dono do ciclo de vida do card TCK no kanban `/tecnologia`. Skill: `.agents/skills/atem-kanban-manager/SKILL.md`. Registrado no organograma (KB §7).
+- **Plugin squad-commands v1.2.0** (live `/opt/data/plugins/` + espelho `.agents/plugins/`): 6º comando `/tck` — `criar|planejar|atualizar|finalizar|producao|subtask|validar-sub|usar|env|status|confirmar|cancelar`. Executa via REST Supabase (PROD: service role `SB_SERVICE` via `keys_ahut.py` · DEV: anon público do bundle, pois as chaves DEV do keys_ahut estão truncadas/401 — corrigir na rotação E2-0.2). Estado corrente: `/tmp/tck_current.json`. **Escrita sempre em 2 tempos: stage → `/tck confirmar`** (`/tck cancelar` descarta). Fallback: pedido ambíguo → ATEM pergunta, nunca adivinha.
+- **Subtasks implementadas (CC-08):** coluna `subtasks JSONB DEFAULT '[]'` — migration `.agents/docs/migration_technology_tickets_subtasks.sql` **aplicada no DEV**; **PROD aguarda validação do Comandante** (não aplicar antes). Estrutura: `{id,title,status:pendente|em_andamento|validada|recusada,validated_by,validated_at,comment}`. UI: badge `n/m subtarefas` no card + seção no detalhe com validar/recusar/criar; comentário da validação vai sempre para a timeline. Guard no upsert: chave `subtasks` só é enviada quando há subtasks (PROD sem a coluna não quebra).
+- **Teste de ponta (DEV, handler real):** `TCK-2026-838` criado → a_analisar → a_executar (G2, em_planejamento) → executando (G3, em_aplicacao) → executado (G4) → atualizado_producao (+subcat atualizado); 7 eventos de timeline; subtask criada e validada; fallback e cancelar testados. **PROD intocado.**
+- **Pendente:** deploy PROD da UI (só após Comandante validar no TESTE), aplicar migration `subtasks` no PROD (idem), **restart do gateway Hermes** p/ carregar o `/tck`.
+
+---
+
 ## ✅ 23/09 — CC-06/CC-07: FASE 0 + FASE 1 aplicadas (hierarquia corrigida, /go, R-11, R-12)
 **Executor:** Claude Code (GLM-5.3) · **Escopo:** só docs/skills/agents — app/src intocado, sem deploy.
 - **FASE 0:** segredos redigidos (commit `792176f`) + `.agents/docs/keys_ahut.py` = ponte para `/opt/data/scripts/keys_ahut.py` (600, fora do repo, gitignored) + KB §7 com UMA lei de atuação (08/09 Jhon Wick = [REVOGADA 23/09]).

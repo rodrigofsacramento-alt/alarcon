@@ -9,6 +9,8 @@ import {
   useUpsertTechTicket,
   TechTicketRow,
   TicketAttachment,
+  TicketSubtask,
+  SUBTASK_STATUS_LABEL,
   uploadTicketAttachment,
   parseAttachments,
 } from "@/hooks/use-tech-tickets";
@@ -41,6 +43,7 @@ import {
   Wand2,
   Bot,
   ExternalLink,
+  ListChecks,
   Target,
   ClipboardList,
   PlayCircle,
@@ -366,6 +369,36 @@ export default function Tecnologia() {
     setCommentText("");
   };
 
+  // ===== Subtasks (CC-08/ATEM): comentário da validação vai sempre para a timeline =====
+  const [newSubtask, setNewSubtask] = useState("");
+  const updateSubtasks = async (t: TechTicketRow, subtasks: TicketSubtask[], note: string) => {
+    const now = new Date().toISOString();
+    const timeline = [...(Array.isArray(t.timeline) ? t.timeline : []), { at: now, from: t.main_status, to: t.main_status, note, actor: profile?.full_name || "Comandante" }];
+    await upsertTicket.mutateAsync({ ...t, subtasks, timeline, updated_at: now });
+    setSelectedTicket({ ...t, subtasks, timeline, updated_at: now });
+  };
+  const addSubtask = () => {
+    const t = selectedTicket;
+    const title = newSubtask.trim();
+    if (!t || !title) return;
+    setNewSubtask("");
+    updateSubtasks(t, [...(t.subtasks || []), { id: `sub-${Date.now()}`, title, status: "pendente" }], `Subtask criada: "${title}".`);
+  };
+  const resolveSubtask = (i: number, recusa: boolean) => {
+    const t = selectedTicket;
+    const s = t?.subtasks?.[i];
+    if (!t || !s) return;
+    const now = new Date().toISOString();
+    const who = profile?.full_name || "Comandante";
+    const next: TicketSubtask = recusa
+      ? { ...s, status: "recusada", validated_by: who, validated_at: now }
+      : { ...s, status: "validada", validated_by: who, validated_at: now };
+    const note = recusa
+      ? `Subtask "${s.title}" RECUSADA pelo Comandante.`
+      : `Subtask "${s.title}" VALIDADA pelo Comandante${s.comment ? ` — ${s.comment}` : ""}.`;
+    updateSubtasks(t, t.subtasks!.map((x, j) => (j === i ? next : x)), note);
+  };
+
   const submitLog = async () => {
     if (!lTitle.trim()) return;
     await upsertLog.mutateAsync({
@@ -515,6 +548,8 @@ export default function Tecnologia() {
                               colTickets.map((t) => {
                                 const atts = parseAttachments(t.attachments);
                                 const nImgs = atts.filter((a) => isImage(a.mime)).length;
+                                const subs = t.subtasks || [];
+                                const nSubsOk = subs.filter((s) => s.status === "validada").length;
                                 return (
                                   <div key={t.id} onClick={() => setSelectedTicket(t)} draggable={isComandante} onDragStart={(e) => onDragStartCard(e, t)} className={cn("rounded-lg border bg-card p-3 space-y-2 shadow-sm cursor-pointer hover:border-accent/60 hover:shadow-md transition-all group active:cursor-grabbing", dragTicketId === t.id && "opacity-40 border-dashed")}>
                                     <div className="flex items-start justify-between gap-2">
@@ -530,6 +565,9 @@ export default function Tecnologia() {
                                       <div className="flex items-center gap-1.5">
                                         {nImgs > 0 && <span className="inline-flex items-center gap-0.5 text-[10px] text-muted-foreground"><ImageIcon className="h-3 w-3" />{nImgs}</span>}
                                         {atts.length - nImgs > 0 && <span className="inline-flex items-center gap-0.5 text-[10px] text-muted-foreground"><Paperclip className="h-3 w-3" />{atts.length - nImgs}</span>}
+                                        {subs.length > 0 && (
+                                          <span className="inline-flex items-center gap-0.5 text-[10px] font-medium text-accent"><ListChecks className="h-3 w-3" />{nSubsOk}/{subs.length} subtarefas</span>
+                                        )}
                                       </div>
                                       <div className="flex items-center gap-1 text-[10px] text-muted-foreground shrink-0">
                                         <Clock className="h-3 w-3" /> {fmtDate(t.created_at)}
@@ -860,6 +898,49 @@ export default function Tecnologia() {
                       <li key={i} className="flex items-start gap-2 text-sm"><CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />{c}</li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* subtasks (CC-08/ATEM) */}
+              {selectedTicket.subtasks && selectedTicket.subtasks.length > 0 && (
+                <div>
+                  <h3 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground mb-1.5"><ListChecks className="h-3.5 w-3.5" /> Subtarefas ({selectedTicket.subtasks.length})</h3>
+                  <ul className="space-y-1.5">
+                    {selectedTicket.subtasks.map((s, i) => (
+                      <li key={s.id || i} className="rounded-lg border bg-muted/10 px-3 py-2 flex items-start gap-2">
+                        <span className={cn(
+                          "px-1.5 py-0.5 rounded-full text-[10px] font-medium shrink-0 mt-0.5",
+                          s.status === "validada" ? "bg-emerald-100 text-emerald-700"
+                          : s.status === "recusada" ? "bg-red-100 text-red-700"
+                          : s.status === "em_andamento" ? "bg-sky-100 text-sky-700"
+                          : "bg-slate-100 text-slate-600",
+                        )}>{SUBTASK_STATUS_LABEL[s.status] || s.status}</span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm leading-snug">{s.title}</p>
+                          {s.comment && <p className="text-[11px] text-muted-foreground mt-0.5">{s.comment}</p>}
+                          {s.validated_by && <p className="text-[10px] text-muted-foreground/70 mt-0.5">{s.validated_by} • {fmtDate(s.validated_at)}</p>}
+                        </div>
+                        {isComandante && (s.status === "pendente" || s.status === "em_andamento") && (
+                          <div className="flex items-center gap-1 shrink-0">
+                            <button onClick={() => resolveSubtask(i, false)} className="p-1 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors" title="Validar subtarefa"><CheckCircle2 className="h-4 w-4" /></button>
+                            <button onClick={() => resolveSubtask(i, true)} className="p-1 rounded-md text-red-500 hover:bg-red-50 transition-colors" title="Recusar subtarefa"><X className="h-4 w-4" /></button>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                  {isComandante && (
+                    <div className="flex items-center gap-2 mt-2">
+                      <input
+                        value={newSubtask}
+                        onChange={(e) => setNewSubtask(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && addSubtask()}
+                        placeholder="Nova subtarefa... (ex: patch no broker)"
+                        className="flex-1 px-2.5 py-1.5 rounded-lg border bg-background text-xs focus:outline-none focus:ring-2 focus:ring-accent"
+                      />
+                      <button onClick={addSubtask} disabled={!newSubtask.trim() || upsertTicket.isPending} className="p-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 disabled:opacity-40 transition-colors" title="Adicionar subtarefa"><Plus className="h-4 w-4" /></button>
+                    </div>
+                  )}
                 </div>
               )}
 

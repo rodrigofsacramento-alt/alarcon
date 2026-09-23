@@ -23,10 +23,28 @@ export interface TechTicketRow {
   acceptance_criteria?: string[];
   chat_transcript?: unknown;
   attachments?: unknown;
+  subtasks?: TicketSubtask[];
   timeline?: unknown;
   created_at: string;
   updated_at?: string;
 }
+
+// Subtask de um TCK (CC-08/ATEM) — vive no jsonb technology_tickets.subtasks
+export interface TicketSubtask {
+  id: string;
+  title: string;
+  status: "pendente" | "em_andamento" | "validada" | "recusada";
+  validated_by?: string;
+  validated_at?: string;
+  comment?: string;
+}
+
+export const SUBTASK_STATUS_LABEL: Record<string, string> = {
+  pendente: "Pendente",
+  em_andamento: "Em andamento",
+  validada: "Validada",
+  recusada: "Recusada",
+};
 
 export interface TicketAttachment {
   name: string;
@@ -90,6 +108,7 @@ export function rowToTicket(row: any): TechTicketRow {
     acceptance_criteria: row.acceptance_criteria || [],
     chat_transcript: row.chat_transcript || undefined,
     attachments: row.attachments || undefined,
+    subtasks: Array.isArray(row.subtasks) ? row.subtasks : [],
     timeline: row.timeline || undefined,
     created_at: row.created_at,
     updated_at: row.updated_at,
@@ -119,6 +138,9 @@ export function ticketToRow(t: TechTicketRow): any {
     timeline: t.timeline,
     updated_at: new Date().toISOString(),
   };
+  // Enviar 'subtasks' só quando existir: antes da migração chegar ao PROD,
+  // a chave inexistente quebraria o upsert (PostgREST 42703).
+  if (Array.isArray(t.subtasks) && t.subtasks.length) row.subtasks = t.subtasks;
   if (t.requester_id) row.requester_id = t.requester_id;
   // delivery_forecast é DATE: omitir quando vazio, senão PostgREST lança 22007
   if (t.delivery_forecast && t.delivery_forecast.trim()) row.delivery_forecast = t.delivery_forecast;

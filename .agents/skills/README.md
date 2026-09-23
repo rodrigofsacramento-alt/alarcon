@@ -46,6 +46,8 @@ Biblioteca de skills do squad Ahut/ApeXfy. Cada pasta de agente contém:
 ## Agentes sem skills herdadas nesta rodada
 Sem função correspondente direta às 25 skills: `apollo-data-bi`, `aria-monitor-leads`, `ajax-whatsapp-broker`, `ava-agent-intake`, `asimov`, `axiom`, `finish-gate-reviewer`. Se surgir skill de dados/BI, dono = apollo-data-bi.
 
+- **CC-08 (23/09):** novo agente **`atem-kanban-manager`** (ATEM, 15º do squad, sob o AXIOM) — SKILL.md principal própria (sem skill herdada); dono do `/tck` (plugin squad-commands v1.2.0) e dos 4 gatilhos de validação TCK via Telegram.
+
 ## Notas de decisão
 - `source-driven-development` (verificação contra docs oficiais) foi absorvido pelo **atom**: é prática de quem implementa — verificar doc oficial antes de codar e citar a fonte. Não justifica agente novo; qualquer outro agente pode consultá-lo via esta matriz.
 - Nenhum agente novo criado nesta rodada: todas as 25 funções tinham correspondência com agente existente.

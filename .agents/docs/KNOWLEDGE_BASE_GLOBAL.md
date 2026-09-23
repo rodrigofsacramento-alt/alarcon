@@ -159,19 +159,23 @@ Root: `/opt/data/ahut-ecosystem`
   - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` + `src_recovered_1_1/` (reidratados). Usar **apenas como mapa** — consultar como as coisas rodam em produção, tipagem real do Supabase, nomes originais. **NÃO editar/compilar daqui; tsc não compila** (reidratado `e.jsx`).
   - **Fluxo:** editar `src/` (remodel-copy) → `npm run build` → deploy TESTE (`public_html/teste/`, `_deploy_teste_remodel.py`) → validar → **Gate 2 (aprovação do Comandante)** → PROD (`/ahut/`). URGENTE = direto PROD→valida→commit→eng. reversa no `src/`.
   - **REVOGADA 23/09 [histórico — NÃO usar]:** a lei anterior de 08/09 (EDIÇÃO = `src/` do Jhon Wick `/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`). `/tmp/legacy_re` = SOMENTE LEITURA (área /tmp volátil). Repos NUNCA editar: `ahut-ecosystem-active`, `/tmp/legacy_re` (Jhon Wick), `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` (descartado). Pastas de bundle `1.1_FRONTEND_PROD_TESTE`/`01_FRONTEND_PRODUCAO_HOSTINGER` = [REVOGADO 23/09 — destino morto]; destinos únicos = **tabela §3**.
-- **ORGANOGRAMA (estrutura oficial — 14 agentes, declaração do Comandante 23/09):** Hierarquia:
+- **ORGANOGRAMA (estrutura oficial — 15 agentes; declaração do Comandante 23/09 + ATEM via CC-08):** Hierarquia:
 
   ```
   🧠 JARVIS — Orquestrador Chefe & CEO (revisa o AXIOM nos Gates HITL 1/2/3;
   │           interface com o Comandante)
   ├── ⚡ AXIOM — Orquestrador Técnico de Engenharia (pipeline; despacha e
   │     │       revisa os executores — não executa tudo sozinho)
-  │     └── 🛠️ ATOM — Engenheiro Sênior Full-Stack (Tech Lead)
-  │           ├── 🎨 ADA — Front-End / UI-UX (com subagente FINISH-GATE)
-  │           ├── 🚀 ATLAS — DevOps & Infraestrutura
-  │           ├── 🔍 AURA — QA & Testes
-  │           ├── 🛡️ AEGIS — Security Ops
-  │           └── 📱 AJAX — WhatsApp Business Specialist
+  │     ├── 🛠️ ATOM — Engenheiro Sênior Full-Stack (Tech Lead)
+  │     │     ├── 🎨 ADA — Front-End / UI-UX (com subagente FINISH-GATE)
+  │     │     ├── 🚀 ATLAS — DevOps & Infraestrutura
+  │     │     ├── 🔍 AURA — QA & Testes
+  │     │     ├── 🛡️ AEGIS — Security Ops
+  │     │     └── 📱 AJAX — WhatsApp Business Specialist
+  │     └── 🎫 ATEM — Gerente de Chamados TCK (kanban /tecnologia; 4 gatilhos
+  │           de validação do Comandante via Telegram — criar/planejar/
+  │           atualizar/finalizar; subtasks; /tck no plugin squad-commands)
+  │           [CC-08, 23/09]
   ├── 👁️ ARGUS — Scrum Master & Processo
   │     ├── 🎙️ AVA — Triagem & Especificação
   │     ├── 📊 APOLLO — Data & BI
@@ -182,8 +186,9 @@ Root: `/opt/data/ahut-ecosystem`
   - **JARVIS** = único com acesso ao Comandante (Rodrigo); revisa o trabalho do AXIOM nos gates, aprova/recusa. **ANTES de 16/05 não existia AXIOM** — hoje AXIOM é o orquestrador de engenharia na prática, sob o JARVIS.
   - **AXIOM** orquestra o pipeline; **ATOM** (técnico) e **ARGUS** (processo) conduzem os especialistas → reportam ao AXIOM.
   - **AJAX** é perpendicular (especialista WhatsApp/broker/mídia), reporta ao ATOM.
-  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | FINISH-GATE=revisão visual pré-ship.
-  - Skills versionadas em **`.agents/skills/`** (árvore viva, 25 skills + 14 agentes; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
+  - **ATEM** (CC-08, 23/09) é especialista em gestão de chamados TCK, sob o AXIOM: dono do ciclo de vida do card no kanban `/tecnologia` (`technology_tickets`), executa os 4 gatilhos de validação do Comandante via Telegram (`/tck` no plugin `squad-commands` v1.2.0), gerencia `subtasks` e registra a timeline — sempre com confirmação antes de escrever.
+  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | FINISH-GATE=revisão visual pré-ship | ATEM=TCK,kanban,supabase,telegram,subtasks,gatilhos,confirmação.
+  - Skills versionadas em **`.agents/skills/`** (árvore viva, 26 SKILL.md principais + 15 agentes — ATEM via CC-08; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.

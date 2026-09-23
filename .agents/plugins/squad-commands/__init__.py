@@ -98,7 +98,7 @@ def _handle_resumo(raw_args: str) -> str:
 
 
 def register(ctx) -> None:
-    """Registra os 5 slash commands do squad no Hermes."""
+    """Registra os 6 slash commands do squad no Hermes."""
     ctx.register_command(
         "go",
         handler=_handle_go,
@@ -127,4 +127,11 @@ def register(ctx) -> None:
         handler=_handle_resumo,
         description="Status do squad hoje: agentes, skills, pendencias.",
     )
-    logger.info("squad-commands: registrados 5 comandos (/go /performance /criar-agente /evolucao /resumo)")
+    logger.info("squad-commands: registrados 6 comandos (/go /performance /criar-agente /evolucao /resumo /tck)")
+
+    # ATEM — gerente de chamados TCK (CC-08, 23/09): /tck criar|planejar|atualizar|finalizar
+    try:
+        from . import tck as _tck
+        _tck.register(ctx)
+    except Exception:
+        logger.exception("squad-commands: falha ao registrar /tck (ATEM)")
