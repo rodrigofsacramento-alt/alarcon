@@ -78,3 +78,9 @@
 
 > ⚠️ **REGRA CENTRAL (09/09):** o repo `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` está **DESCARTADO para sempre**. Centralizar TODO no `remodel-copy`. Nunca vincular a esse repo antigo.
 > ⚠️ `.agents/skills` está sendo reorganizado por Jhon Wick no antigravity (por confirmar).
+
+## 2026-09-24 — UI Comandante: todos os campos do chamado editáveis
+- **Módulo:** Tecnologia (chamados TCK) — `src/pages/Tecnologia.tsx`
+- **O quê:** título do chamado editável inline (input + Enter/blur); descrição editável via lápis (textarea mono, aceita ###/>/listas); Módulo e Impacto editáveis por select; subtasks sempre visíveis para o Comandante (cria a 1ª direto, sem ovo-galinha) + renomear (clique no texto), alterar status (select), excluir (lixeira). Toda edição registra evento na timeline.
+- **Agente:** Jarvis/AXIOM (orq.) · **Status:** build OK (`Tecnologia-JUSBfFPT.js`), deploy TESTE OK, commit `a4e14db` (branch `remodel`).
+- **Gate pendente:** validação visual do Comandante no TESTE → depois deploy PROD `/ahut/`.

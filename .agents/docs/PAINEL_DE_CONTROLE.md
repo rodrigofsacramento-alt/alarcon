@@ -454,3 +454,7 @@ O **ATOM** validou o layout e tirou um screenshot automático na porta `5174`:
 - Relatórios auditoria/paridade em `.agents/docs/paridade/` + `00_ANTIGRAVITY_FASE3_CORRECCION/RELATORIO_COMPATIBILIDADE_BROKER.md` (**100% paridade MD5 do backend broker** ✅)
 
 **Significado:** a verificação de compatibilidade do broker retornou **paridade MD5 100%** entre as pastas do repo (`02_BACKEND...` / `02.2_BACKEND_BROKER_TESTE`) e o broker — ou seja, **as pastas estão alinhadas e seguras para edição**. Demandas broker-ativas reconciliadas. Próximo passo (Comandante decide): retomar deploy do build Teste → PROD.
+
+### 2026-09-24 — TASK: campos do chamado 100% editáveis (Comandante)
+- Editáveis no modal: **título** (inline), **descrição** (lápis→textarea), **módulo/impacto** (select), **subtasks** (renomear/status/excluir/criar; seção sempre visível p/ Comandante).
+- Timeline registra toda edição. `src/pages/Tecnologia.tsx` · build `Tecnologia-JUSBfFPT.js` · TESTE deployado · commit `a4e14db`. Gate 2: aguarda validação visual → PROD.
