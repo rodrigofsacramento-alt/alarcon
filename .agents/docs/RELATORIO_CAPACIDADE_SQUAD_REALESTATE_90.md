@@ -84,7 +84,7 @@ Método: cada skill pendente da operação imobiliária → afinidade com compet
 | Agente novo | Skill pai (gap) | Afinidade de criação | Sob |
 | :--- | :--- | :--- | :--- |
 | **ARTEMIS** (Marketing & Growth) | G1 tráfego pago, conteúdo, portais | Departamental — par com ARIA (demanda) | Jarvis |
-| **LEX** (Jurídico & Documental) | G2 contratos, minutas, checklist, LGPD de negócio | Par com AEGIS (compliance) | Jarvis |
+| **ALEX** (Jurídico & Documental) | G2 contratos, minutas, checklist, LGPD de negócio | Par com AEGIS (compliance) | Jarvis |
 | **ANCHOR** (Pós-venda/CS) | G3 satisfação, indicação, renovação | Par com AJAX (canal WhatsApp) | Jarvis |
 
 ### Novos DEPARTAMENTOS (empresa real — o squad como estrutura de empresa)
@@ -95,18 +95,18 @@ Método: cada skill pendente da operação imobiliária → afinidade com compet
 | **Processo & Dados** (existe) | — | ARGUS, APOLLO, AVA, ATEM, ARIA | ~90% |
 | **Comercial** (NOVO — hoje = 1 SDR humano) | Corretor só na reunião de venda | ARIA (qualificação) + ANCHOR (pós-venda) + sdr-agent-worker (resposta digital) | 70-80% |
 | **Marketing** (NOVO) | — | ARTEMIS | ~85% |
-| **Jurídico/Administrativo** (NOVO) | Assinatura final (ZapSign) | LEX | 80% |
+| **Jurídico/Administrativo** (NOVO) | Assinatura final (ZapSign) | ALEX | 80% |
 
 ### Estratégia de recrutamento (contratação mínima)
 1. **Não contratar antes de automatizar:** ligar sdr-agent-worker Fase 4 (pendente) + alocar Fluxo 1 = maior ganho por esforço, custo zero.
 2. **1 corretor por praia** (inevitável — reunião de venda é o 10% humano declarado).
 3. **1 coordenador comercial** SÓ quando volume passar de 2 corretores — antes disso, ARIA+AXIOM gerenciam a fila.
-4. Marketing e Jurídico começam 100% digitais (ARTEMIS/LEX); humano entra só se CAC ou risco jurídico justificar.
+4. Marketing e Jurídico começam 100% digitais (ARTEMIS/ALEX); humano entra só se CAC ou risco jurídico justificar.
 
 ### Sequência de execução (próximos /go)
 1. **Fase 4 SDR:** ligar `sdr_enabled` e validar lead inédito (PENDENTE registrado no PAINEL) → maior degrau único de autonomia, já construído.
 2. Alocar Fluxo 1 (skills 1-10) — ASIMOV cria as 3 skills novas nos agentes existentes.
-3. ASIMOV gera ARTEMIS, LEX, ANCHOR (skills + organograma + PAINEL).
+3. ASIMOV gera ARTEMIS, ALEX, ANCHOR (skills + organograma + PAINEL).
 4. Registrar no organograma os 4 departamentos (ENG, PROC, COM, MKT/JUR) — pendência já aberta no CC-09 (posições ARGUS/AJAX).
 
 ---
