@@ -1,5 +1,17 @@
 # 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
 
+## ✅ 24/09 — LOGIN TESTE = PROD (regra do Comandante) + CRONJOBS ativos e silenciosos
+
+**Contexto:** login no TESTE (`teste-ahut-ecosystem.apexfyhub.com.br`) falhava — causa raiz: bundle apontava o Supabase **DEV** (`xmsulduzvufdzkfktovk`), cujas anon keys retornam **401 Invalid API key**; e a conta `sacramento@apexfyhub.com.br` (Comandante) existe **somente** no auth PROD.
+**Regra declarada pelo Comandante:** *"a gestão de login deve ser PROD se você habilitou DEV está errado"* — **REGRA DE LOGIN/AUTH registrada no KB §3/§6/§7.**
+**Correção aplicada (Jarvis):** `.env` do repo com `VITE_SUPABASE_URL` PROD (`ptochsyoyatsydfysacc`) + anon PROD → `npm run build` → deploy SFTP em `/public_html/teste/` (`_deploy_teste_prod_point.py`).
+**Verificação real:** bundle publicado `index-BpDSXXPp.js` contém **1× host PROD, 0× host DEV** (curl no ar, 24/09).
+**⚠️ Consequência:** TESTE agora opera com **dados reais do PROD** — criar/editar no TESTE mexe no banco real.
+**Cronjobs (pedido do Comandante):** 4 jobs mantidos **ATIVOS** porém **silenciosos** (`deliver='local'`; scripts `worker_recordatorios.py`/`monitor_rodrigo.py` reescritos: leem senha de `keys_ahut.py` [fix pós-sanitização CC-09], schema `conversations` corrigido `agent_id IS NULL AND status='open'`, stdout vazio = zero entrega no TG, erro transatório → stderr + exit 0). Espelhados em `/opt/data/home/.hermes/scripts/` (é de lá que o scheduler Hermes executa).
+**Pendente:** re-teste do login pelo Comandante; rotação de credenciais aguarda OK; Gate 2 (UI subtasks) aguarda validação.
+
+---
+
 ## ✅ 23/09 — CC-09: Fila de pendências executada (P5 create_tck · protocolo /go · sanitização · Atlas · CLAUDE.md 15)
 **Executor:** Claude Code (GLM-5.3) · ordem planejada com verificação anti-conflito (nenhum deploy/AI concorrente; git limpo no `remodel`).
 - **P5 — `create_tck.py`** (`/opt/data/scripts/`, stdlib only): POST `/rest/v1/technology_tickets` PROD via `SB_SERVICE`, code ordinal (MAX+1), validação client-side dos enums reais (priority alta/media/baixa · status 5 · subcat nao_especificado/em_aplicacao/atualizado · forecast DATE). Flags `--next/--delete/--next`. **Teste de ponta:** TCK-2026-710 criado (executado/em_aplicacao) → DELETE ok → ordinal volta a 710 (sem poluir kanban).

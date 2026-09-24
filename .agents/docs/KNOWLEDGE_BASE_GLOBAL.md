@@ -87,6 +87,8 @@ Root: `/opt/data/ahut-ecosystem`
 
 **Credenciais DB DEV:** [REDACTED] — arquivo restrito `keys_ahut.py` (chmod 600). **Credenciais do frontend** (anon/service_role) consultar somente em arquivo restrito; nunca colar em docs/chat.
 
+> ⭐ **REGRA DE LOGIN/AUTH (declaração do Comandante 24/09): "a gestão de login deve ser PROD"** — o frontend do **TESTE autentica contra o Supabase PROD** (`ptochsyoyatsydfysacc`). A conta `sacramento@apexfyhub.com.br` (Comandante) existe **somente** no auth PROD; as anon keys do DEV (`xmsulduzvufdzkfktovk`) estão inválidas (401 Invalid API key). **Correção aplicada 24/09:** `.env` do repo com `VITE_SUPABASE_URL=https://ptochsyoyatsydfysacc.supabase.co` + anon PROD → rebuild → deploy em `/teste/` (bundle no ar contém só o host PROD — verificado por curl). ⚠️ **Consequência:** o TESTE opera com **dados reais do PROD** (criar/editar no TESTE mexe no banco real). O fallback DEV em `src/lib/supabase.ts` permanece intocado (builds leem o `.env`); deploy via `_deploy_teste_prod_point.py` (SFTP `u817195350@82.25.73.206:65002`).
+
 ### 🧭 MAPA COMPLETO DE DESTINOS POR COMPONENTE (PROD × DEV)
 
 | Componente | Ambiente | Destino/Pasta | Banco Supabase | Commit Git |
@@ -148,7 +150,7 @@ Root: `/opt/data/ahut-ecosystem`
 
 **Fonte primária:** `MANUAL_MASTER_RUNBOOK.md` (seção 9). Resumo:
 - Broker VPS `/root/crmahut/backend-broker/.env`: credenciais WhatsApp (Baileys), Supabase PROD, FFmpeg paths.
-- Frontend `src/lib/supabase.ts`: aponta **DEV** `xmsulduzvufdzkfktovk` (anon key) — editar sempre o `src/` do build.
+- Frontend `src/lib/supabase.ts`: fallback hardcoded DEV `xmsulduzvufdzkfktovk` (anon key) — **[REGRA 24/09: gestão de login = PROD]** builds leem `.env` do repo (`VITE_SUPABASE_URL` = PROD `ptochsyoyatsydfysacc`); TESTE e PROD autenticam contra o Supabase PROD. Editar sempre o `src/` do build; nunca hardcodar segredo.
 - **NUNCA commitar secrets** no remodel. Preferir variáveis de ambiente/skills de credenciais.
 
 ---
@@ -189,6 +191,7 @@ Root: `/opt/data/ahut-ecosystem`
   - **ATEM** (CC-08, 23/09) é especialista em gestão de chamados TCK, sob o AXIOM: dono do ciclo de vida do card no kanban `/tecnologia` (`technology_tickets`), executa os 4 gatilhos de validação do Comandante via Telegram (`/tck` no plugin `squad-commands` v1.2.0), gerencia `subtasks` e registra a timeline — sempre com confirmação antes de escrever.
   - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | FINISH-GATE=revisão visual pré-ship | ATEM=TCK,kanban,supabase,telegram,subtasks,gatilhos,confirmação.
   - Skills versionadas em **`.agents/skills/`** (árvore viva, 26 SKILL.md principais + 15 agentes — ATEM via CC-08; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
+- **LOGIN = PROD (declaração do Comandante 24/09, aplicada):** "a gestão de login deve ser PROD se você habilitou DEV está errado" — frontend TESTE autentica contra o Supabase **PROD**; causa raiz do login quebrado no TESTE (bundle apontava DEV com anon keys 401 + conta do Comandante inexistente no DEV). Correção: `.env` PROD-pointed + rebuild + deploy `/teste/` (24/09). **TESTE = dados reais do PROD.**
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.
