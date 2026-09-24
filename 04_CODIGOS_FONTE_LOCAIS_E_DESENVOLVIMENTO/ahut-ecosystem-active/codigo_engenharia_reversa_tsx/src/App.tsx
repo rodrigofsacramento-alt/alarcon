@@ -10,7 +10,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import NeuralBackground from './components/NeuralBackground';
 import { useResponsive } from './hooks/useResponsive';
 import ProtectedRoute from './components/ProtectedRoute';
-import RouteErrorBoundary from './components/RouteErrorBoundary';
 import Dashboard from './components/Dashboard';
 import Leads from './components/Leads';
 import Atendimento from './pages/Atendimento';
@@ -36,7 +35,6 @@ import Notificacoes from './pages/Notificacoes';
 import Vendas from './pages/Vendas';
 import Login from './pages/Login';
 import Corretores from './pages/Corretores';
-const PerformanceFunil = React.lazy(() => import('./pages/PerformanceFunil'));
 import { Configuracoes } from './pages/Configuracoes';
 import ImageEditor from './components/ImageEditor';
 import WhatsAppConnectionModal from './components/WhatsAppConnectionModal';
@@ -53,37 +51,19 @@ const queryClient = new QueryClient({
 
 function AppLayout({ children, title, subtitle, dark, onOpenWhatsApp }: { children: React.ReactNode; title: string; subtitle?: string; dark?: boolean; onOpenWhatsApp?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   useReminders();
   const useDark = dark !== false;
   const { isMobile } = useResponsive();
-  const location = useLocation();
 
   // Auto-collapse sidebar on mobile
   useEffect(() => { if (isMobile) setCollapsed(true); }, [isMobile]);
-  // Quando muda de mobile->desktop, fecha o drawer
-  useEffect(() => { if (!isMobile) setSidebarOpen(false); }, [isMobile]);
-  // Fecha o drawer ao trocar de rota
-  const closeSidebar = () => setSidebarOpen(false);
-  useEffect(() => { closeSidebar(); }, [location?.pathname]);
 
   return (
     <div className={`flex min-h-screen relative ${useDark ? 'bg-transparent text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
       {useDark && <NeuralBackground />}
-      <Sidebar
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        onOpenWhatsApp={onOpenWhatsApp}
-        mobileOpen={sidebarOpen}
-        isMobile={isMobile}
-        onCloseMobile={closeSidebar}
-      />
+      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} onOpenWhatsApp={onOpenWhatsApp} />
       <div className="flex-1 flex flex-col min-w-0 relative" style={{ zIndex: 1 }}>
-        <Header
-          title={title}
-          subtitle={subtitle}
-          onToggleSidebar={isMobile ? () => setSidebarOpen(!sidebarOpen) : undefined}
-        />
+        <Header title={title} subtitle={subtitle} />
         <motion.main
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,7 +94,6 @@ export default function App() {
         <LanguageProvider>
           <FinancialFiltersProvider>
           <Router>
-          <RouteErrorBoundary>
           <React.Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-[#06080e] text-slate-400 text-sm">Carregando...</div>}>
           <Routes>
             {/* Auth Route - public */}
@@ -322,14 +301,6 @@ export default function App() {
               }
             />
             <Route
-              path="/performance"
-              element={
-                <ProtectedAppLayout title="Performance & Funil" subtitle="Funil de conversão, SLA de atendimento e ranking de corretores em tempo real." onOpenWhatsApp={() => setWhatsappModalOpen(true)}>
-                  <PerformanceFunil />
-                </ProtectedAppLayout>
-              }
-            />
-            <Route
               path="/editor"
               element={
                 <ProtectedAppLayout title="Editor de Imagens" subtitle="Crie, edite e gerencie imagens para seus materiais." onOpenWhatsApp={() => setWhatsappModalOpen(true)}>
@@ -342,7 +313,6 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           </React.Suspense>
-          </RouteErrorBoundary>
         </Router>
         </FinancialFiltersProvider>
 
