@@ -273,6 +273,10 @@ export default function Properties() {
     comissaoParcelado: '', // Calculado automático (Total Parcelado * %)
     mesesAReceber: '1, 3, 5, 7',
     valorAReceberPorParcela: '', // Calculado automático (Comissão Parcelada / Qtd Meses)
+
+    // AVISOS DE VALIDAÇÃO (não são campos do form)
+    _warnTotal: '' as string,
+    _warnEntrada: '' as string,
   });
 
   const [saving, setSaving] = useState(false);
@@ -334,7 +338,11 @@ export default function Properties() {
     loadProperties();
   }, []);
 
-  // Manipulador de Mudança nos Inputs com CÁLCULOS AUTOMÁTICOS COM ENTRADA E SALDO FINANCIADO
+  // MOTOR DE CÁLCULO AUTOMÁTICO — Modelo financeiro correto:
+  // À VISTA: um único valor (não existe "valor à vista parcelado").
+  // PARCELADO: Total = Entrada + (Nº Parcelas × Valor da Parcela).
+  // Qualquer combinação de 2 dos 4 valores preenche os demais automaticamente.
+  // Moeda padronizada: todos os valores na mesma moeda (formData.currency).
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => {
       const updated = { ...prev, [field]: value };
@@ -346,76 +354,101 @@ export default function Properties() {
         updated.metragensMetroQuadrado = value;
       }
 
-      // 1. CÁLCULO AUTOMÁTICO: Saldo Financiado = Valor Total Parcelado - Valor Entrada Financiamento
-      // 2. CÁLCULO AUTOMÁTICO: Valor da Parcela Mensal = Saldo Financiado / Nº Parcelas
-      const numParcelas = Number(field === 'numeroParcelas' ? value : updated.numeroParcelas) || 0;
-      const totalParcelado = Number(field === 'valorTotalParcelado' ? value : updated.valorTotalParcelado) || 0;
-      const entradaFinan = Number(field === 'valorEntradaFinanciamento' ? value : updated.valorEntradaFinanciamento) || 0;
+      // ===== BLOCO FINANCEIRO (apenas quando Tipo de Valor = Parcelado) =====
+      if (updated.priceType === 'Parcelado') {
+        const nP = Number(field === 'numeroParcelas' ? value : updated.numeroParcelas) || 0;
+        const ent = Number(field === 'valorEntradaFinanciamento' ? value : updated.valorEntradaFinanciamento) || 0;
+        const vp  = Number(field === 'valorParcelaMensal' ? value : updated.valorParcelaMensal) || 0;
+        const tot = Number(field === 'valorTotalParcelado' ? value : updated.valorTotalParcelado) || 0;
+        const avista = Number(field === 'valorAVista' ? value : updated.valorAVista) || 0;
 
-      const saldoAFinanciar = Math.max(0, totalParcelado - entradaFinan);
-      updated.saldoFinanciado = saldoAFinanciar > 0 ? saldoAFinanciar.toString() : '';
-
-      if (field === 'valorTotalParcelado' || field === 'valorEntradaFinanciamento' || field === 'numeroParcelas') {
-        if (saldoAFinanciar >= 0 && numParcelas > 0) {
-          updated.valorParcelaMensal = Math.round(saldoAFinanciar / numParcelas).toString();
+        // Regra de negócio: Total Parcelado ≥ Valor À Vista (parcelado nunca vale menos que à vista)
+        if (avista > 0 && tot > 0 && tot < avista) {
+          updated._warnTotal = `⚠️ Total Parcelado (${tot.toLocaleString('pt-BR')}) não pode ser menor que o Valor À Vista (${avista.toLocaleString('pt-BR')}) na mesma moeda.`;
+        } else {
+          delete updated._warnTotal;
         }
-      } else if (field === 'valorParcelaMensal') {
-        const valMensal = Number(value) || 0;
-        if (valMensal > 0 && numParcelas > 0) {
-          updated.valorTotalParcelado = Math.round((valMensal * numParcelas) + entradaFinan).toString();
-          updated.saldoFinanciado = Math.round(valMensal * numParcelas).toString();
-        }
-      }
 
-      // 3. CÁLCULO AUTOMÁTICO: Comissão À Vista (Valor Monetário = Valor à Vista * % Comissão À Vista / 100)
-      const valVista = Number(field === 'valorAVista' ? value : updated.valorAVista) || 0;
-      const percComVista = Number(field === 'percentualComissaoAVista' ? value : updated.percentualComissaoAVista) || 0;
-
-      if (field === 'valorAVista' || field === 'percentualComissaoAVista') {
-        if (valVista > 0 && percComVista >= 0) {
-          updated.comissaoAVista = Math.round((valVista * percComVista) / 100).toString();
-        }
-      } else if (field === 'comissaoAVista') {
-        const comVistaVal = Number(value) || 0;
-        if (valVista > 0 && comVistaVal >= 0) {
-          updated.percentualComissaoAVista = ((comVistaVal / valVista) * 100).toFixed(1);
-        }
-      }
-
-      // 4. CÁLCULO AUTOMÁTICO: Comissão Parcelado (Valor Monetário = Valor Total Parcelado * % Comissão Parcelado / 100)
-      const percComParc = Number(field === 'percentualComissaoParcelado' ? value : updated.percentualComissaoParcelado) || 0;
-      const currentTotalParc = Number(field === 'valorTotalParcelado' ? value : updated.valorTotalParcelado) || 0;
-
-      if (field === 'valorTotalParcelado' || field === 'percentualComissaoParcelado') {
-        if (currentTotalParc > 0 && percComParc >= 0) {
-          updated.comissaoParcelado = Math.round((currentTotalParc * percComParc) / 100).toString();
-        }
-      } else if (field === 'comissaoParcelado') {
-        const comParcVal = Number(value) || 0;
-        if (currentTotalParc > 0 && comParcVal >= 0) {
-          updated.percentualComissaoParcelado = ((comParcVal / currentTotalParc) * 100).toFixed(1);
-        }
-      }
-
-      // 5. CÁLCULO AUTOMÁTICO: Valor a Receber por Parcela de Comissão = Comissão Parcelada / Qtd Meses a Receber
-      const currentComParc = Number(field === 'comissaoParcelado' ? updated.comissaoParcelado : (field === 'valorTotalParcelado' || field === 'percentualComissaoParcelado') ? updated.comissaoParcelado : updated.comissaoParcelado) || 0;
-      const mesesStr = field === 'mesesAReceber' ? value : updated.mesesAReceber;
-      const mesesList = (mesesStr || '').split(/[,;\s]+/).filter((m: string) => m.trim() !== '' && !isNaN(Number(m.trim())));
-      const qtdMeses = mesesList.length;
-
-      if (field === 'comissaoParcelado' || field === 'mesesAReceber' || field === 'valorTotalParcelado' || field === 'percentualComissaoParcelado') {
-        if (currentComParc > 0 && qtdMeses > 0) {
-          updated.valorAReceberPorParcela = Math.round(currentComParc / qtdMeses).toString();
-        }
-      } else if (field === 'valorAReceberPorParcela') {
-        const valPorParcela = Number(value) || 0;
-        if (valPorParcela > 0 && qtdMeses > 0) {
-          const totalComissaoCalculada = Math.round(valPorParcela * qtdMeses);
-          updated.comissaoParcelado = totalComissaoCalculada.toString();
-          if (currentTotalParc > 0) {
-            updated.percentualComissaoParcelado = ((totalComissaoCalculada / currentTotalParc) * 100).toFixed(1);
+        // 4 campos interdependentes: Total, Entrada, Nº Parcelas, Valor Parcela
+        // Preenche o que estiver faltando a partir dos outros:
+        if (field === 'valorTotalParcelado' && tot > 0) {
+          // Usuário digitou o Total: saldo = Total - Entrada → distribui nas parcelas
+          const saldo = Math.max(0, tot - ent);
+          updated.saldoFinanciado = saldo > 0 ? saldo.toString() : '';
+          if (nP > 0 && saldo > 0) {
+            updated.valorParcelaMensal = Math.round(saldo / nP).toString();
+          }
+        } else if (field === 'valorEntradaFinanciamento' && ent > 0) {
+          // Digitou Entrada: recalcula parcela com Total e Nº existentes
+          const saldo = Math.max(0, (tot || avista) - ent);
+          updated.saldoFinanciado = saldo > 0 ? saldo.toString() : '';
+          if (nP > 0 && saldo > 0) {
+            updated.valorParcelaMensal = Math.round(saldo / nP).toString();
+          }
+          // Se não há Total, sugere Total = À Vista (moeda padronizada) para o cálculo fechar
+          if (!tot && avista > 0) {
+            updated.valorTotalParcelado = avista.toString();
+          }
+        } else if (field === 'numeroParcelas' && nP > 0) {
+          // Digitou Nº Parcelas: recalcula parcela a partir do saldo existente
+          const saldo = Math.max(0, (tot || avista) - ent);
+          updated.saldoFinanciado = saldo > 0 ? saldo.toString() : '';
+          if (saldo > 0) {
+            updated.valorParcelaMensal = Math.round(saldo / nP).toString();
+          }
+          if (!tot && avista > 0) {
+            updated.valorTotalParcelado = avista.toString();
+          }
+        } else if (field === 'valorParcelaMensal' && vp > 0) {
+          // Digitou a Parcela: Total = Entrada + (Parcela × Nº)
+          if (nP > 0) {
+            const calcTot = ent + vp * nP;
+            updated.valorTotalParcelado = calcTot.toString();
+            updated.saldoFinanciado = (vp * nP).toString();
+          }
+        } else if (field === 'valorAVista' && avista > 0) {
+          // Digitou À Vista: se Tipo = Parcelado e não há Total, sugere Total = À Vista
+          if (!tot && nP > 0) {
+            const saldo = Math.max(0, avista - ent);
+            updated.valorTotalParcelado = avista.toString();
+            updated.saldoFinanciado = saldo > 0 ? saldo.toString() : '';
+            if (saldo > 0) {
+              updated.valorParcelaMensal = Math.round(saldo / nP).toString();
+            }
           }
         }
+
+        // Validação: À Vista não pode ser menor que a Entrada
+        const entFinal = Number(updated.valorEntradaFinanciamento) || 0;
+        const avFinal = Number(updated.valorAVista) || 0;
+        if (avFinal > 0 && entFinal > avFinal) {
+          updated._warnEntrada = `⚠️ Entrada (${entFinal.toLocaleString('pt-BR')}) não pode ser maior que o Valor À Vista (${avFinal.toLocaleString('pt-BR')}).`;
+        } else {
+          delete updated._warnEntrada;
+        }
+      }
+
+      // ===== COMISSÕES =====
+      // À Vista: Comissão = Valor À Vista × % À Vista
+      const valVista = Number(updated.valorAVista) || 0;
+      const percComVista = Number(updated.percentualComissaoAVista) || 0;
+      if (valVista > 0 && percComVista > 0) {
+        updated.comissaoAVista = Math.round((valVista * percComVista) / 100).toString();
+      }
+
+      // Parcelado: Comissão = Total Parcelado × % Parcelado
+      const totFinal = Number(updated.valorTotalParcelado) || 0;
+      const percComParc = Number(updated.percentualComissaoParcelado) || 0;
+      if (totFinal > 0 && percComParc > 0) {
+        updated.comissaoParcelado = Math.round((totFinal * percComParc) / 100).toString();
+      }
+
+      // Valor a Receber por Parcela de Comissão = Comissão Parcelada / Qtd Meses
+      const mesesStr = updated.mesesAReceber || '';
+      const mesesList = (mesesStr || '').split(/[,;\s]+/).filter((m: string) => m.trim() !== '' && !isNaN(Number(m.trim())));
+      const comParcFinal = Number(updated.comissaoParcelado) || 0;
+      if (comParcFinal > 0 && mesesList.length > 0) {
+        updated.valorAReceberPorParcela = Math.round(comParcFinal / mesesList.length).toString();
       }
 
       if (field === 'valorAVista') {
@@ -551,9 +584,9 @@ export default function Properties() {
       title: '',
       code: '',
       type: 'Terreno',
-      status: 'available',
+      status: 'available' as 'available' | 'reserved' | 'sold',
       price: '',
-      priceType: 'Parcelado',
+      priceType: 'Parcelado' as 'À Vista' | 'Parcelado',
       currency: 'PYG',
       cotacaoManual: '7800',
       address: '',
@@ -585,6 +618,9 @@ export default function Properties() {
       comissaoParcelado: '',
       mesesAReceber: '1, 3, 5, 7',
       valorAReceberPorParcela: '',
+
+      _warnTotal: '',
+      _warnEntrada: '',
     });
   };
 
@@ -1307,7 +1343,24 @@ export default function Properties() {
                         Cliente pagará <strong className="text-white">{formatMoneyDisplay(Number(formData.valorParcelaMensal), formData.currency)}</strong> por mês em {formData.numeroParcelas} parcelas após a entrada.
                       </p>
                     ) : null}
+                    {!formData.valorParcelaMensal && (formData.priceType === 'Parcelado') && (
+                      <p className="text-[11px] text-amber-300 font-semibold flex items-center gap-1 mt-1">
+                        ⚠️ Preencha <strong>Total Parcelado (7)</strong>, <strong>Entrada (E)</strong> e <strong>Nº de Parcelas (9)</strong> — ou informe 2 deles + a parcela — para o cálculo automático funcionar.
+                      </p>
+                    )}
                   </div>
+
+                  {/* AVISOS DE VALIDAÇÃO FINANCEIRA */}
+                  {formData._warnTotal ? (
+                    <div className="md:col-span-2 bg-red-950/60 border border-red-500/50 rounded-xl px-4 py-2.5 text-[12px] text-red-200 font-semibold">
+                      {formData._warnTotal}
+                    </div>
+                  ) : null}
+                  {formData._warnEntrada ? (
+                    <div className="md:col-span-2 bg-red-950/60 border border-red-500/50 rounded-xl px-4 py-2.5 text-[12px] text-red-200 font-semibold">
+                      {formData._warnEntrada}
+                    </div>
+                  ) : null}
                 </div>
               </section>
 
