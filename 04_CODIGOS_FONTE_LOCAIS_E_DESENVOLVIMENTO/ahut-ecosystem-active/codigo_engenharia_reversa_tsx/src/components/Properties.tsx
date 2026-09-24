@@ -71,6 +71,9 @@ export interface PropertyItem {
   valorEntradaFinanciamento?: number;
   saldoFinanciado?: number;
   entradaGuaranis?: number; // Custo administrativo no 1º pagamento
+  adminParcelado?: boolean;
+  adminNumParcelas?: number;
+  adminValorParcela?: number;
   numeroParcelas?: number;
   valorParcelaMensal?: number;
   percentualComissaoAVista?: number;
@@ -263,6 +266,9 @@ export default function Properties() {
     valorEntradaFinanciamento: '', // Entrada do financiamento
     saldoFinanciado: '', // Calculado (Total - Entrada)
     entradaGuaranis: '', // Custo administrativo no 1º pagamento
+    adminParcelado: false,
+    adminNumParcelas: '',
+    adminValorParcela: '',
     numeroParcelas: '',
     valorParcelaMensal: '', // Calculado automático ((Total - Entrada) / Parcelas)
 
@@ -319,7 +325,10 @@ export default function Properties() {
             valorTotalParcelado: Number(p.preco_parcelado) || undefined,
             valorEntradaFinanciamento: Number(p.entrada_valor) || undefined,
             saldoFinanciado: undefined,
-            entradaGuaranis: undefined,
+            entradaGuaranis: p.entrada_valor_admin != null ? Number(p.entrada_valor_admin) : undefined,
+            adminParcelado: Boolean(p.admin_parcelado),
+            adminNumParcelas: Number(p.admin_num_parcelas) || undefined,
+            adminValorParcela: Number(p.admin_valor_parcela) || undefined,
             numeroParcelas: Number(p.num_parcelas) || undefined,
             valorParcelaMensal: Number(p.valor_parcela) || undefined,
             percentualComissaoAVista: Number(p.comissao_porcentagem) || undefined,
@@ -442,6 +451,28 @@ export default function Properties() {
         }
       }
 
+      // ===== PARCELAMENTO DO CUSTO ADMIN (campo 8) =====
+      // 3 campos interdependentes: entradaGuaranis (total), adminNumParcelas (n), adminValorParcela (vp)
+      // Qualquer par preenchido calcula o terceiro.
+      const adminTot = Number(field === 'entradaGuaranis' ? value : updated.entradaGuaranis) || 0;
+      const adminN   = Number(field === 'adminNumParcelas' ? value : updated.adminNumParcelas) || 0;
+      const adminVp  = Number(field === 'adminValorParcela' ? value : updated.adminValorParcela) || 0;
+
+      if (Boolean(updated.adminParcelado) && adminTot > 0) {
+        if (field === 'adminNumParcelas' && adminN > 0) {
+          // Digitou Nº: parcela = total / n
+          updated.adminValorParcela = Math.round(adminTot / adminN).toString();
+        } else if (field === 'adminValorParcela' && adminVp > 0) {
+          // Digitou parcela: n = ceil(total / parcela)
+          updated.adminNumParcelas = Math.max(1, Math.ceil(adminTot / adminVp)).toString();
+        } else if (field === 'entradaGuaranis' && adminN > 0 && adminVp === 0) {
+          // Digitou o total: recalcula parcela com o Nº existente
+          updated.adminValorParcela = Math.round(adminTot / adminN).toString();
+        } else if (field === 'entradaGuaranis' && adminVp > 0 && adminN === 0) {
+          updated.adminNumParcelas = Math.max(1, Math.ceil(adminTot / adminVp)).toString();
+        }
+      }
+
       // ===== COMISSÕES =====
       // À Vista: Comissão = Valor À Vista × % À Vista
       const valVista = Number(updated.valorAVista) || 0;
@@ -537,6 +568,9 @@ export default function Properties() {
       valorEntradaFinanciamento: Number(formData.valorEntradaFinanciamento) || 0,
       saldoFinanciado: Number(formData.saldoFinanciado) || 0,
       entradaGuaranis: Number(formData.entradaGuaranis) || 0,
+      adminParcelado: Boolean(formData.adminParcelado),
+      adminNumParcelas: Number(formData.adminNumParcelas) || undefined,
+      adminValorParcela: Number(formData.adminValorParcela) || undefined,
       numeroParcelas: Number(formData.numeroParcelas) || 0,
       valorParcelaMensal: Number(formData.valorParcelaMensal) || 0,
       percentualComissaoAVista: Number(formData.percentualComissaoAVista) || 0,
@@ -575,6 +609,9 @@ export default function Properties() {
         preco_avista: Number(formData.valorAVista) || null,
         preco_parcelado: Number(formData.valorTotalParcelado) || null,
         entrada_valor: Number(formData.valorEntradaFinanciamento) || null,
+        admin_parcelado: Boolean(formData.adminParcelado),
+        admin_num_parcelas: formData.adminParcelado ? (Number(formData.adminNumParcelas) || null) : null,
+        admin_valor_parcela: formData.adminParcelado ? (Number(formData.adminValorParcela) || null) : null,
         num_parcelas: Number(formData.numeroParcelas) || null,
         valor_parcela: Number(formData.valorParcelaMensal) || null,
         comissao_porcentagem: Number(formData.percentualComissaoAVista) || null,
@@ -622,6 +659,9 @@ export default function Properties() {
       valorEntradaFinanciamento: Number(savedRow.entrada_valor) || 0,
       saldoFinanciado: Number(formData.saldoFinanciado) || 0,
       entradaGuaranis: Number(formData.entradaGuaranis) || 0,
+      adminParcelado: Boolean(formData.adminParcelado),
+      adminNumParcelas: Number(formData.adminNumParcelas) || undefined,
+      adminValorParcela: Number(formData.adminValorParcela) || undefined,
       numeroParcelas: Number(savedRow.num_parcelas) || 0,
       valorParcelaMensal: Number(savedRow.valor_parcela) || 0,
       percentualComissaoAVista: Number(savedRow.comissao_porcentagem) || 0,
@@ -669,6 +709,9 @@ export default function Properties() {
       valorEntradaFinanciamento: '',
       saldoFinanciado: '',
       entradaGuaranis: '',
+      adminParcelado: false,
+      adminNumParcelas: '',
+      adminValorParcela: '',
       numeroParcelas: '',
       valorParcelaMensal: '',
       percentualComissaoAVista: '10',
@@ -936,7 +979,10 @@ export default function Properties() {
                           {prop.entradaGuaranis ? (
                             <div className="flex justify-between text-slate-300">
                               <span className="text-slate-400">Entrada (Custo Admin):</span>
-                              <strong className="text-amber-300">{formatMoneyDisplay(prop.entradaGuaranis, 'PYG')}</strong>
+                              <strong className="text-amber-300">
+                                {formatMoneyDisplay(prop.entradaGuaranis, 'PYG')}
+                                {prop.adminParcelado && prop.adminNumParcelas ? ` em ${prop.adminNumParcelas}x de ${formatMoneyDisplay(prop.adminValorParcela, 'PYG')}` : ' (à vista)'}
+                              </strong>
                             </div>
                           ) : null}
 
@@ -1325,6 +1371,60 @@ export default function Properties() {
                       className="w-full bg-slate-800 border border-amber-500/40 rounded-xl px-4 py-2.5 text-sm text-amber-200 outline-none focus:border-amber-400 font-bold" 
                     />
                     <p className="text-[10px] text-slate-400">Custo administrativo cobrado extra do cliente no primeiro pagamento</p>
+
+                    {/* Opção de parcelar o custo admin */}
+                    <label className="flex items-center gap-2 cursor-pointer select-none pt-1">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(formData.adminParcelado)}
+                        onChange={(e) => handleInputChange('adminParcelado', e.target.checked)}
+                        className="w-4 h-4 accent-amber-400"
+                      />
+                      <span className="text-xs font-bold text-amber-200">Parcelar este custo administrativo</span>
+                    </label>
+
+                    {Boolean(formData.adminParcelado) && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-bold text-amber-300 flex items-center gap-1">
+                            <span className="bg-amber-950 px-2 py-0.5 rounded border border-amber-500/30 text-[10px]">8a</span>
+                            <span>Nº de Parcelas do Admin</span>
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            placeholder="Ex: 12"
+                            value={formData.adminNumParcelas}
+                            onChange={(e) => handleInputChange('adminNumParcelas', e.target.value)}
+                            className="w-full bg-slate-800 border border-amber-500/40 rounded-xl px-4 py-2.5 text-sm text-amber-200 outline-none focus:border-amber-400 font-bold"
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-bold text-amber-300 flex items-center gap-1">
+                            <span className="bg-amber-950 px-2 py-0.5 rounded border border-amber-500/30 text-[10px]">8b</span>
+                            <span>Valor por Parcela do Admin</span>
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="Auto"
+                            value={formData.adminValorParcela}
+                            onChange={(e) => handleInputChange('adminValorParcela', e.target.value)}
+                            className="w-full bg-slate-800 border border-amber-500/40 rounded-xl px-4 py-2.5 text-sm text-amber-200 outline-none focus:border-amber-400 font-bold"
+                          />
+                        </div>
+                        <p className="text-[10px] text-amber-300/70 sm:col-span-2">
+                          {(() => {
+                            const tot = Number(formData.entradaGuaranis) || 0;
+                            const n = Number(formData.adminNumParcelas) || 0;
+                            const vp = Number(formData.adminValorParcela) || 0;
+                            if (tot > 0 && n > 0 && vp > 0) return `✓ ${tot.toLocaleString('pt-BR')} ÷ ${n} = ${Math.round(tot/n).toLocaleString('pt-BR')} /parcela (dígito ≠ cálculo)`;
+                            if (tot > 0 && n > 0) return `Cálculo: ${tot.toLocaleString('pt-BR')} ÷ ${n} = ${Math.round(tot/n).toLocaleString('pt-BR')} por parcela`;
+                            if (tot > 0 && vp > 0) return `Cálculo: ${tot.toLocaleString('pt-BR')} ÷ ${vp.toLocaleString('pt-BR')} = ${Math.ceil(tot/vp)} parcelas`;
+                            return 'Preencha o Nº de parcelas ou o valor por parcela — o outro é calculado automaticamente.';
+                          })()}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* CAMPO 7: Valor Total Parcelado */}
