@@ -1,9 +1,9 @@
 # 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
 
-## ✅ 24/09 — CC-11: 4 novos agentes (ARGON · ATHENA · ANCHOR · AXON/n8n) + mapa de componentes CC
+## ✅ 24/09 — CC-11: 4 novos agentes (ARGON · LEX · ANCHOR · AXON/n8n) + mapa de componentes CC
 **Executor:** Claude Code (GLM-5.3) · ordem direta do Comandante (executar todas as fases).
 - **Levantamento (Fase 1):** gaps G1-G6 do RELATORIO_CAPACIDADE_SQUAD_REALESTATE_90.md mapeados → 3 sem dono + prioridade n8n do Comandante.
-- **Novos agentes (Fase 2, cultura A — SKILL.md própria):** **ARGON** (Marketing & Growth, gap G1 — SKILL.md já criada nesta data) · **ATHENA** (Jurídico & Documental, gap G2) · **ANCHOR** (Pós-venda/CS, gap G3) · **AXON** (Automação n8n — prioridade Comandante: agentes IA operando no n8n). Squad: 15 → **19**.
+- **Novos agentes (Fase 2, cultura A — SKILL.md própria):** **ARGON** (Marketing & Growth, gap G1 — SKILL.md já criada nesta data) · **LEX** (Jurídico & Documental, gap G2) · **ANCHOR** (Pós-venda/CS, gap G3) · **AXON** (Automação n8n — prioridade Comandante: agentes IA operando no n8n). Squad: 15 → **19**.
 - **Skills n8n instaladas de verdade (Fase 5):** via `npx claude-code-templates` (repo davila7) → `.claude/skills/`: `n8n-workflow-patterns`, `n8n-code-javascript`, `n8n-expression-syntax`, `n8n-mcp-tools-expert` — ativas nas sessões CC, referenciadas pela skill do AXON.
 - **Mapa de componentes CC (Fase 4):** acrescentado ao CATALOGO_CLAUDE_CODE_TEMPLATES.md — MCPs viáveis (supabase, github, playwright, n8n-mcp-tools, fetch), plugins/commands, settings/hooks (anti-segredo, changelog, allowlist), modes (plan, /loop). Inventário real: 0 MCP, 0 hooks hoje — instalação por fase.
 - **Fase 2 do plano n8n (pendente):** provisionar instância n8n na VPS (ATLAS) + 1º workflow piloto (gatilho TCK ou relatório semanal APOLLO).

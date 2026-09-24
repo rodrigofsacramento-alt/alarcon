@@ -888,7 +888,7 @@
 | MCPs | **Nenhum configurado** |
 | Hooks | **Nenhum configurado** |
 | Commands | `/tck` (plugin squad) · skills built-in CC (code-review, loop, etc.) |
-| Agents | 19 (15 + ATEM CC-08 + ARGON/ATHENA/ANCHOR/AXON CC-11) |
+| Agents | 19 (15 + ATEM CC-08 + ARGON/LEX/ANCHOR/AXON CC-11) |
 
 ### MCPs viáveis (prioridade de instalação)
 | MCP | Para quê no ecossistema | Dono |
@@ -905,7 +905,7 @@
 | `--command automation/ci-pipeline` | CI do build remodel | ATLAS |
 | `--command git-workflow/*` (commit-smart, pr-review) | disciplina de commit/PR | ARGUS |
 | `--command security/security-audit` | auditoria periódica | AEGIS |
-| skills `document-processing/pdf·docx·xlsx` | relatórios e contratos | ATHENA/ARGUS |
+| skills `document-processing/pdf·docx·xlsx` | relatórios e contratos | LEX/ARGUS |
 | `marketing/seo-*` · `lead-research-assistant` | captação/monitor | ARGON/ARIA |
 
 ### Settings/hooks viáveis (automatizar o processo, não o homem)
