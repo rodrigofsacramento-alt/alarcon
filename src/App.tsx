@@ -36,6 +36,7 @@ const Configuracoes = lazy(() => import("./pages/Configuracoes"));
 const RoutingLog = lazy(() => import("./pages/RoutingLog"));
 const Rh = lazy(() => import("./pages/Rh"));
 const Tecnologia = lazy(() => import("./pages/Tecnologia"));
+const Atividades = lazy(() => import("./pages/Atividades"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Blocked = lazy(() => import("./pages/Blocked"));
 const MarketingLayout = lazy(() => import("./pages/marketing/MarketingLayout"));
@@ -117,6 +118,7 @@ const App = () => {
                 <Route path="/routing-log" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><RoutingLog /></ProtectedRoute>} />
                 <Route path="/rh" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Rh /></ProtectedRoute>} />
                 <Route path="/tecnologia" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><Tecnologia /></ProtectedRoute>} />
+                <Route path="/atividades" element={<ProtectedRoute allowedRoles={['admin', 'manager', 'agent']}><Atividades /></ProtectedRoute>} />
                 <Route path="/clientes" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><GestaoClientes /></ProtectedRoute>} />
                 <Route path="/configuracoes" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><Configuracoes /></ProtectedRoute>} />
                 <Route path="/marketing/*" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><MarketingLayout /></ProtectedRoute>} />

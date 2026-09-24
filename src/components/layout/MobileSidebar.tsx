@@ -21,6 +21,7 @@ import {
     Megaphone,
     FileText,
     Monitor,
+    KanbanSquare,
 } from "lucide-react";
 
 interface MobileSidebarProps {
@@ -44,6 +45,7 @@ const allNavItems = [
   { id: "marketing", icon: Megaphone, label: "Marketing", path: "/marketing", roles: ['admin', 'manager'] as string[] },
   { id: "corretores", icon: UserCheck, label: "Corretores", path: "/dashboard-performance", roles: ['admin', 'manager'] as string[] },
     { id: "tecnologia", icon: Monitor, label: "Tecnologia", path: "/tecnologia", roles: ['admin', 'manager', 'agent'] as string[] },
+    { id: "atividades", icon: KanbanSquare, label: "Atividades da Equipe", path: "/atividades", roles: ['admin', 'manager', 'agent'] as string[] },
     { id: "clientes", icon: Smartphone, label: "Clientes", path: "/clientes", roles: ['admin', 'manager'] as string[] },
 ];
 
