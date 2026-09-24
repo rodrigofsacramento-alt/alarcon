@@ -51,6 +51,8 @@ import {
   HelpCircle,
   ArrowLeft,
   UserRound,
+  Pencil,
+  Trash2,
 } from "lucide-react";
 import { AsyncCombobox } from "@/components/ui/AsyncCombobox";
 
@@ -369,8 +371,21 @@ export default function Tecnologia() {
     setCommentText("");
   };
 
+  // ===== Edição inline do chamado (Comandante): título, descrição, módulo, impacto =====
+  const saveTicketEdit = async (t: TechTicketRow, patch: Partial<TechTicketRow>, note: string) => {
+    const now = new Date().toISOString();
+    const timeline = [...(Array.isArray(t.timeline) ? t.timeline : []), { at: now, from: t.main_status, to: t.main_status, note, actor: profile?.full_name || "Comandante" }];
+    const updated = { ...t, ...patch, timeline, updated_at: now };
+    await upsertTicket.mutateAsync(updated);
+    setSelectedTicket(updated);
+  };
+
   // ===== Subtasks (CC-08/ATEM): comentário da validação vai sempre para a timeline =====
   const [newSubtask, setNewSubtask] = useState("");
+  const [editingSub, setEditingSub] = useState<number | null>(null);
+  const [editingSubTitle, setEditingSubTitle] = useState("");
+  const [editingDesc, setEditingDesc] = useState(false);
+  const [descDraft, setDescDraft] = useState("");
   const updateSubtasks = async (t: TechTicketRow, subtasks: TicketSubtask[], note: string) => {
     const now = new Date().toISOString();
     const timeline = [...(Array.isArray(t.timeline) ? t.timeline : []), { at: now, from: t.main_status, to: t.main_status, note, actor: profile?.full_name || "Comandante" }];
@@ -397,6 +412,28 @@ export default function Tecnologia() {
       ? `Subtask "${s.title}" RECUSADA pelo Comandante.`
       : `Subtask "${s.title}" VALIDADA pelo Comandante${s.comment ? ` — ${s.comment}` : ""}.`;
     updateSubtasks(t, t.subtasks!.map((x, j) => (j === i ? next : x)), note);
+  };
+  const renameSubtask = (i: number) => {
+    const t = selectedTicket;
+    const title = editingSubTitle.trim();
+    if (!t || !t.subtasks || editingSub !== i || !title) { setEditingSub(null); return; }
+    setEditingSub(null);
+    const oldTitle = t.subtasks[i].title;
+    if (oldTitle === title) return;
+    updateSubtasks(t, t.subtasks.map((x, j) => (j === i ? { ...x, title } : x)), `Subtask renomeada: "${oldTitle}" → "${title}".`);
+  };
+  const setSubtaskStatus = (i: number, status: TicketSubtask["status"]) => {
+    const t = selectedTicket;
+    if (!t || !t.subtasks) return;
+    const s = t.subtasks[i];
+    if (s.status === status) return;
+    updateSubtasks(t, t.subtasks.map((x, j) => (j === i ? { ...x, status } : x)), `Subtask "${s.title}" → ${SUBTASK_STATUS_LABEL[status] || status} (pelo Comandante).`);
+  };
+  const deleteSubtask = (i: number) => {
+    const t = selectedTicket;
+    if (!t || !t.subtasks) return;
+    const s = t.subtasks[i];
+    updateSubtasks(t, t.subtasks.filter((_, j) => j !== i), `Subtask "${s.title}" EXCLUÍDA pelo Comandante.`);
   };
 
   const submitLog = async () => {
@@ -856,7 +893,18 @@ export default function Tecnologia() {
                     <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-medium", PRIORITY_COLOR[selectedTicket.priority])}>{PRIORITY_LABEL[selectedTicket.priority] || selectedTicket.priority}</span>
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-muted text-[10px] font-medium"><span className={cn("h-2 w-2 rounded-full", STATUS_DOT[selectedTicket.main_status] || "bg-gray-400")} />{STATUS_LABEL[selectedTicket.main_status] || selectedTicket.main_status}</span>
                   </div>
-                  <h2 className="text-lg font-semibold leading-tight mt-1">{selectedTicket.title}</h2>
+                  {isComandante ? (
+                    <input
+                      value={selectedTicket.title}
+                      onChange={(e) => setSelectedTicket({ ...selectedTicket, title: e.target.value })}
+                      onBlur={(e) => { const v = e.target.value.trim(); if (v && v !== selectedTicket.title) saveTicketEdit(selectedTicket, { title: v }, `Título alterado para "${v}" pelo Comandante.`); }}
+                      onKeyDown={(e) => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); }}
+                      className="text-lg font-semibold leading-tight mt-1 w-full bg-transparent border-0 border-b border-dashed border-transparent hover:border-accent/40 focus:border-accent focus:outline-none focus:ring-0 p-0"
+                      title="Clique para editar o título"
+                    />
+                  ) : (
+                    <h2 className="text-lg font-semibold leading-tight mt-1">{selectedTicket.title}</h2>
+                  )}
                 </div>
               </div>
               <button onClick={() => printTicket(selectedTicket)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-accent text-accent-foreground text-xs font-medium hover:opacity-90 shrink-0"><Printer className="h-4 w-4" /> Imprimir / PDF</button>
@@ -865,9 +913,17 @@ export default function Tecnologia() {
             <div className="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
               {/* metro */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Módulo</p><p className="text-sm font-medium truncate">{selectedTicket.module || "Geral"}</p></div>
+                <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Módulo</p>{isComandante ? (
+                  <select value={selectedTicket.module || "Geral"} onChange={(e) => { const v = e.target.value; if (v !== selectedTicket.module) saveTicketEdit(selectedTicket, { module: v }, `Módulo alterado para "${v}" pelo Comandante.`); }} className="text-sm font-medium w-full bg-transparent border-0 focus:outline-none focus:ring-0 cursor-pointer truncate">
+                    {[...new Set([selectedTicket.module || "Geral", ...MODULE_OPTIONS])].map((m) => <option key={m} value={m}>{m}</option>)}
+                  </select>
+                ) : (<p className="text-sm font-medium truncate">{selectedTicket.module || "Geral"}</p>)}</div>
                 <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Solicitante</p><p className="text-sm font-medium truncate">{selectedTicket.requesterName || "Equipe"}</p></div>
-                <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Impacto</p><p className="text-sm font-medium truncate">{selectedTicket.impact_level || "Médio"}</p></div>
+                <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Impacto</p>{isComandante ? (
+                  <select value={selectedTicket.impact_level || "Médio"} onChange={(e) => { const v = e.target.value; if (v !== selectedTicket.impact_level) saveTicketEdit(selectedTicket, { impact_level: v }, `Impacto alterado para "${v}" pelo Comandante.`); }} className="text-sm font-medium w-full bg-transparent border-0 focus:outline-none focus:ring-0 cursor-pointer truncate">
+                    {[...new Set([selectedTicket.impact_level || "Médio", ...IMPACT_OPTIONS])].map((m) => <option key={m} value={m}>{m}</option>)}
+                  </select>
+                ) : (<p className="text-sm font-medium truncate">{selectedTicket.impact_level || "Médio"}</p>)}</div>
                 <div className="rounded-lg border bg-muted/20 p-2.5"><p className="text-[10px] text-muted-foreground uppercase tracking-wide">Aberto em</p><p className="text-sm font-medium truncate">{fmtDate(selectedTicket.created_at)}</p></div>
               </div>
 
@@ -879,7 +935,27 @@ export default function Tecnologia() {
               )}
 
               <div>
-                <h3 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground mb-1.5"><FileText className="h-3.5 w-3.5" /> Descrição / Relatório técnico</h3>
+                <div className="flex items-center justify-between mb-1.5">
+                  <h3 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><FileText className="h-3.5 w-3.5" /> Descrição / Relatório técnico</h3>
+                  {isComandante && (
+                    <button onClick={() => setEditingDesc((v) => !v)} className="p-1 rounded-md text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors" title="Editar descrição"><Pencil className="h-3.5 w-3.5" /></button>
+                  )}
+                </div>
+                {isComandante && editingDesc ? (
+                  <div className="space-y-2">
+                    <textarea
+                      value={descDraft}
+                      onChange={(e) => setDescDraft(e.target.value)}
+                      rows={10}
+                      className="w-full px-3 py-2 rounded-lg border bg-background text-sm font-mono focus:outline-none focus:ring-2 focus:ring-accent resize-y"
+                      placeholder="Descrição técnica (aceita ### títulos, > citação, 1. listas)"
+                    />
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => { const v = descDraft.trim(); setEditingDesc(false); if (v && v !== selectedTicket.description) saveTicketEdit(selectedTicket, { description: v }, "Descrição editada pelo Comandante."); }} disabled={upsertTicket.isPending} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent text-accent-foreground text-xs font-medium hover:opacity-90 disabled:opacity-40"><CheckCircle2 className="h-3.5 w-3.5" /> Salvar</button>
+                      <button onClick={() => { setEditingDesc(false); setDescDraft(selectedTicket.description || ""); }} className="px-3 py-1.5 rounded-lg text-xs text-muted-foreground hover:bg-muted">Cancelar</button>
+                    </div>
+                  </div>
+                ) : (
                 <div className="rounded-lg border bg-muted/10 p-3 text-sm whitespace-pre-line">
                   {(selectedTicket.description || "").split("\n").map((line, i) =>
                     line.startsWith("### ") ? <h4 key={i} className="font-semibold mt-2 first:mt-0">{line.slice(4)}</h4>
@@ -888,6 +964,7 @@ export default function Tecnologia() {
                     : line ? <p key={i}>{line}</p> : <br key={i} />
                   )}
                 </div>
+                )}
               </div>
 
               {Array.isArray(selectedTicket.acceptance_criteria) && selectedTicket.acceptance_criteria.length > 0 && (
@@ -901,13 +978,18 @@ export default function Tecnologia() {
                 </div>
               )}
 
-              {/* subtasks (CC-08/ATEM) */}
-              {selectedTicket.subtasks && selectedTicket.subtasks.length > 0 && (
+              {/* subtasks (CC-08/ATEM) — sempre visível p/ Comandante (cria a 1ª direto) */}
+              {(isComandante || (selectedTicket.subtasks && selectedTicket.subtasks.length > 0)) && (
                 <div>
-                  <h3 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground mb-1.5"><ListChecks className="h-3.5 w-3.5" /> Subtarefas ({selectedTicket.subtasks.length})</h3>
+                  <h3 className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground mb-1.5"><ListChecks className="h-3.5 w-3.5" /> Subtarefas ({selectedTicket.subtasks?.length || 0})</h3>
                   <ul className="space-y-1.5">
-                    {selectedTicket.subtasks.map((s, i) => (
+                    {(selectedTicket.subtasks || []).map((s, i) => (
                       <li key={s.id || i} className="rounded-lg border bg-muted/10 px-3 py-2 flex items-start gap-2">
+                        {isComandante ? (
+                        <select value={s.status} onChange={(e) => setSubtaskStatus(i, e.target.value as TicketSubtask["status"])} className="px-1.5 py-0.5 rounded-full text-[10px] font-medium shrink-0 mt-0.5 border bg-background cursor-pointer focus:outline-none" title="Alterar status">
+                          {(["pendente", "em_andamento", "validada", "recusada"] as const).map((st) => <option key={st} value={st}>{SUBTASK_STATUS_LABEL[st]}</option>)}
+                        </select>
+                        ) : (
                         <span className={cn(
                           "px-1.5 py-0.5 rounded-full text-[10px] font-medium shrink-0 mt-0.5",
                           s.status === "validada" ? "bg-emerald-100 text-emerald-700"
@@ -915,8 +997,24 @@ export default function Tecnologia() {
                           : s.status === "em_andamento" ? "bg-sky-100 text-sky-700"
                           : "bg-slate-100 text-slate-600",
                         )}>{SUBTASK_STATUS_LABEL[s.status] || s.status}</span>
+                        )}
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm leading-snug">{s.title}</p>
+                          {isComandante && editingSub === i ? (
+                            <input
+                              autoFocus
+                              value={editingSubTitle}
+                              onChange={(e) => setEditingSubTitle(e.target.value)}
+                              onBlur={() => renameSubtask(i)}
+                              onKeyDown={(e) => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); if (e.key === "Escape") setEditingSub(null); }}
+                              className="w-full px-2 py-1 rounded-md border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                            />
+                          ) : (
+                            <p
+                              className={cn("text-sm leading-snug", isComandante && "cursor-text hover:text-accent")}
+                              onClick={() => { if (isComandante) { setEditingSub(i); setEditingSubTitle(s.title); } }}
+                              title={isComandante ? "Clique para editar a subtarefa" : undefined}
+                            >{s.title}</p>
+                          )}
                           {s.comment && <p className="text-[11px] text-muted-foreground mt-0.5">{s.comment}</p>}
                           {s.validated_by && <p className="text-[10px] text-muted-foreground/70 mt-0.5">{s.validated_by} • {fmtDate(s.validated_at)}</p>}
                         </div>
@@ -925,6 +1023,9 @@ export default function Tecnologia() {
                             <button onClick={() => resolveSubtask(i, false)} className="p-1 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors" title="Validar subtarefa"><CheckCircle2 className="h-4 w-4" /></button>
                             <button onClick={() => resolveSubtask(i, true)} className="p-1 rounded-md text-red-500 hover:bg-red-50 transition-colors" title="Recusar subtarefa"><X className="h-4 w-4" /></button>
                           </div>
+                        )}
+                        {isComandante && (
+                          <button onClick={() => deleteSubtask(i)} className="p-1 rounded-md text-muted-foreground hover:text-red-500 hover:bg-red-50 transition-colors shrink-0" title="Excluir subtarefa"><Trash2 className="h-3.5 w-3.5" /></button>
                         )}
                       </li>
                     ))}
