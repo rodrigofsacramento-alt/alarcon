@@ -55,7 +55,7 @@
 ---
 
 ## 6️⃣ AGENTES & ORQUESTADOR (squad)
-→ **Organograma canónico: KB §7 (14 agentes: JARVIS → AXIOM → executores; ARGUS no processo; ASIMOV cria agentes; FINISH-GATE na UI).** Skills vivas: `.agents/skills/`.
+→ **Organograma canónico: KB §7 (14 agentes: JARVIS → AXIOM → executores; ARGUS no processo; ASIMOV cria agentes; ARBITER na UI).** Skills vivas: `.agents/skills/`.
 | Agente | Rol |
 |---|---|
 | **Jarvis Orchestrator** | Chef / revisa o AXIOM nos gates HITL / valida / registra (WRITE-LAST) |

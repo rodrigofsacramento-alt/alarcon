@@ -161,7 +161,7 @@ Root: `/opt/data/ahut-ecosystem`
   - **Diretório de REFERÊNCIA** ("Pedra de Roseta"): `00_ANTIGRAVITY_FASE3_CORRECCION/check/src/` + `src_recovered_1_1/` (reidratados). Usar **apenas como mapa** — consultar como as coisas rodam em produção, tipagem real do Supabase, nomes originais. **NÃO editar/compilar daqui; tsc não compila** (reidratado `e.jsx`).
   - **Fluxo:** editar `src/` (remodel-copy) → `npm run build` → deploy TESTE (`public_html/teste/`, `_deploy_teste_remodel.py`) → validar → **Gate 2 (aprovação do Comandante)** → PROD (`/ahut/`). URGENTE = direto PROD→valida→commit→eng. reversa no `src/`.
   - **REVOGADA 23/09 [histórico — NÃO usar]:** a lei anterior de 08/09 (EDIÇÃO = `src/` do Jhon Wick `/tmp/legacy_re`, repo `REPOSITORIOENGENHARIAREVERSACODIGOFONTE`). `/tmp/legacy_re` = SOMENTE LEITURA (área /tmp volátil). Repos NUNCA editar: `ahut-ecosystem-active`, `/tmp/legacy_re` (Jhon Wick), `rodrigofsacramento-alt/...-ahut-ecosystem-remodel` (descartado). Pastas de bundle `1.1_FRONTEND_PROD_TESTE`/`01_FRONTEND_PRODUCAO_HOSTINGER` = [REVOGADO 23/09 — destino morto]; destinos únicos = **tabela §3**.
-- **ORGANOGRAMA (estrutura oficial — 15 agentes; declaração do Comandante 23/09 + ATEM via CC-08):** Hierarquia:
+- **ORGANOGRAMA (estrutura oficial — 19 agentes; declaração do Comandante 23/09 + ATEM CC-08 + ARGON/ATHENA/ANCHOR/AXON CC-11, 24/09 — cultura: nomes técnicos iniciados em A):** Hierarquia:
 
   ```
   🧠 JARVIS — Orquestrador Chefe & CEO (revisa o AXIOM nos Gates HITL 1/2/3;
@@ -169,7 +169,7 @@ Root: `/opt/data/ahut-ecosystem`
   ├── ⚡ AXIOM — Orquestrador Técnico de Engenharia (pipeline; despacha e
   │     │       revisa os executores — não executa tudo sozinho)
   │     ├── 🛠️ ATOM — Engenheiro Sênior Full-Stack (Tech Lead)
-  │     │     ├── 🎨 ADA — Front-End / UI-UX (com subagente FINISH-GATE)
+  │     │     ├── 🎨 ADA — Front-End / UI-UX (com subagente ARBITER)
   │     │     ├── 🚀 ATLAS — DevOps & Infraestrutura
   │     │     ├── 🔍 AURA — QA & Testes
   │     │     ├── 🛡️ AEGIS — Security Ops
@@ -178,10 +178,19 @@ Root: `/opt/data/ahut-ecosystem`
   │           de validação do Comandante via Telegram — criar/planejar/
   │           atualizar/finalizar; subtasks; /tck no plugin squad-commands)
   │           [CC-08, 23/09]
+  │     └── 🔗 AXON — Automação & Integrações n8n (workflows n8n 24/7;
+  │           ponte agentes IA ↔ execução contínua; par com AJAX/ATLAS)
+  │           [CC-11, 24/09]
   ├── 👁️ ARGUS — Scrum Master & Processo
   │     ├── 🎙️ AVA — Triagem & Especificação
   │     ├── 📊 APOLLO — Data & BI
   │     └── 📈 ARIA — Monitor de Leads
+  ├── 📣 ARGON — Marketing & Growth (tráfego pago, conteúdo, portais,
+  │     │   SEO local; topo do funil, par com ARIA) [CC-11, 24/09]
+  ├── ⚖️ ATHENA — Jurídico & Documental (contratos, minutas, LGPD,
+  │     │   ZapSign; par com AEGIS) [CC-11, 24/09]
+  ├── ⚓ ANCHOR — Pós-venda & CS (NPS, renovação, indicação,
+  │     │   /area-cliente; par com AJAX/ARIA) [CC-11, 24/09]
   └── 🤖 ASIMOV — Criador de Agentes (sob o JARVIS)
   ```
 
@@ -189,8 +198,8 @@ Root: `/opt/data/ahut-ecosystem`
   - **AXIOM** orquestra o pipeline; **ATOM** (técnico) e **ARGUS** (processo) conduzem os especialistas → reportam ao AXIOM.
   - **AJAX** é perpendicular (especialista WhatsApp/broker/mídia), reporta ao ATOM.
   - **ATEM** (CC-08, 23/09) é especialista em gestão de chamados TCK, sob o AXIOM: dono do ciclo de vida do card no kanban `/tecnologia` (`technology_tickets`), executa os 4 gatilhos de validação do Comandante via Telegram (`/tck` no plugin `squad-commands` v1.2.0), gerencia `subtasks` e registra a timeline — sempre com confirmação antes de escrever.
-  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | FINISH-GATE=revisão visual pré-ship | ATEM=TCK,kanban,supabase,telegram,subtasks,gatilhos,confirmação.
-  - Skills versionadas em **`.agents/skills/`** (árvore viva, 26 SKILL.md principais + 15 agentes — ATEM via CC-08; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
+  - Habilidades-chave: JARVIS=orquestração,deploy,git,telegram,supabase,diagnóstico | AXIOM=topologias multi-agente,plano,loop dev↔QA,gates | ATOM=TS,Node,Supabase,FFmpeg,Baileys,PM2 | ADA=React18,TS,Tailwind,Recharts,MediaRecorder | ATLAS=Linux,LiteSpeed,nginx,PM2,pg_dump,SFTP,Docker | AURA=tsc,build,prova visual,cross-browser,critérios aceite | AEGIS=RLS,JWT,OWASP,SSH hardening,secrets | ARGUS=git log,kanban,Scrum | AVA=spec,payload JSON,VGV,prioridade | APOLLO=SQL analítico,BI,dashboards | ARIA=lead scoring,Realtime,conversão | AJAX=Baileys7,FFmpeg,OGG Opus,pipeline mídia,sessões | ASIMOV=criação de agentes | ARBITER=revisão visual pré-ship | ATEM=TCK,kanban,supabase,telegram,subtasks,gatilhos,confirmação | AXON=n8n,workflows,webhooks,credentials vault,automação 24/7 | ARGON=tráfego pago Meta/Google,conteúdo,SEO local,CAC/CPL | ATHENA=contratos,minutas,LGPD,ZapSign,checklist documental | ANCHOR=pós-venda,NPS,renovação,indicação,CS.
+  - Skills versionadas em **`.agents/skills/`** (árvore viva, 30 SKILL.md principais + 19 agentes — ATEM CC-08, ARGON/ATHENA/ANCHOR/AXON CC-11; `docs/0X_` = congelado) — **obrigatórias via AGENTS.md + tutor RAG antes de agir**.
 - **LOGIN = PROD (declaração do Comandante 24/09, aplicada):** "a gestão de login deve ser PROD se você habilitou DEV está errado" — frontend TESTE autentica contra o Supabase **PROD**; causa raiz do login quebrado no TESTE (bundle apontava DEV com anon keys 401 + conta do Comandante inexistente no DEV). Correção: `.env` PROD-pointed + rebuild + deploy `/teste/` (24/09). **TESTE = dados reais do PROD.**
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.

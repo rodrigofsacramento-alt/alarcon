@@ -342,5 +342,5 @@ After building UI:
 - [ ] Responsive: works at 320px, 768px, 1024px, 1440px
 - [ ] Loading, empty, error, success, and permission states handled when applicable
 - [ ] Follows the project's design system (spacing, colors, typography)
-- [ ] The rendered result passes a final UI-specific finish-gate review
+- [ ] The rendered result passes a final UI-specific ARBITER review
 - [ ] No accessibility warnings in dev tools or axe-core

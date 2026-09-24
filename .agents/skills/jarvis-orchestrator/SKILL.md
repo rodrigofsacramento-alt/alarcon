@@ -34,7 +34,7 @@ COMANDANTE (Rodrigo Sacramento) — decisão de negócio; aprova PROD (Gate 2)
     ▼
 Agentes executores — ATOM (Tech Lead: conduz ADA/ATLAS/AURA/AEGIS/AJAX na
 engenharia) · ARGUS (processo: AVA/APOLLO/ARIA) · ASIMOV (criador de agentes) ·
-FINISH-GATE (revisão visual pré-ship, subagente da ADA)
+ARBITER (revisão visual pré-ship, subagente da ADA)
 ```
 - **Antes de 16/05 não existia AXIOM** — o modelo antigo ("Jarvis escala e revisa tudo degrau a degrau") está **morto**.
 - **HOJE:** Comandante → JARVIS (revisor/gates) → AXIOM (orquestrador técnico) → agentes executores.
@@ -115,7 +115,7 @@ Não espere o comandante dizer "/go" — ele já disse uma vez que quer o fluxo 
         │    • npm run build
         │    • PROVA VISUAL real na tela (critério do Gate 1, Fluxo 5) — REGRA DURA:
         │      tarefa de código sem prova visual anexada = Gate 1 RECUSA. Sem exceção.
-        │    • Verifica critérios de aceite · UI ainda passa no FINISH-GATE (subagente da ADA)
+        │    • Verifica critérios de aceite · UI ainda passa no ARBITER (subagente da ADA)
         │
         ▼
     [6] ARGUS: captura de conhecimento de TODO o squad
@@ -195,7 +195,7 @@ Gate HITL permanente: **PROD só com aprovação do Comandante (Gate 2)**.
   - `JARVIS` (Chief/CEO), `AXIOM` (orquestrador técnico), `ATOM` (Dev), `ADA` (Front-End),
   - `ATLAS` (DevOps), `AURA` (QA), `AEGIS` (Security), `ARGUS` (Scrum), `AVA` (Triagem),
   - `APOLLO` (Data), `ARIA` (Leads), `AJAX` (WhatsApp), `ASIMOV` (Criador de Agentes),
-  - `FINISH-GATE` (revisão visual pré-ship)
+  - `ARBITER` (revisão visual pré-ship)
 - Nomes em maiúsculo, 4-5 letras, identidade tecnológica
 
 ### 🏢 Hierarquia de Agentes — Critérios de Posicionamento

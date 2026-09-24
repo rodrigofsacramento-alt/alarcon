@@ -1,5 +1,14 @@
 # 📌 PAINEL DE CONTROLE — SQUAD TECH AHUT (kanban TASK/TCK + eventos)
 
+## ✅ 24/09 — CC-11: 4 novos agentes (ARGON · ATHENA · ANCHOR · AXON/n8n) + mapa de componentes CC
+**Executor:** Claude Code (GLM-5.3) · ordem direta do Comandante (executar todas as fases).
+- **Levantamento (Fase 1):** gaps G1-G6 do RELATORIO_CAPACIDADE_SQUAD_REALESTATE_90.md mapeados → 3 sem dono + prioridade n8n do Comandante.
+- **Novos agentes (Fase 2, cultura A — SKILL.md própria):** **ARGON** (Marketing & Growth, gap G1 — SKILL.md já criada nesta data) · **ATHENA** (Jurídico & Documental, gap G2) · **ANCHOR** (Pós-venda/CS, gap G3) · **AXON** (Automação n8n — prioridade Comandante: agentes IA operando no n8n). Squad: 15 → **19**.
+- **Skills n8n instaladas de verdade (Fase 5):** via `npx claude-code-templates` (repo davila7) → `.claude/skills/`: `n8n-workflow-patterns`, `n8n-code-javascript`, `n8n-expression-syntax`, `n8n-mcp-tools-expert` — ativas nas sessões CC, referenciadas pela skill do AXON.
+- **Mapa de componentes CC (Fase 4):** acrescentado ao CATALOGO_CLAUDE_CODE_TEMPLATES.md — MCPs viáveis (supabase, github, playwright, n8n-mcp-tools, fetch), plugins/commands, settings/hooks (anti-segredo, changelog, allowlist), modes (plan, /loop). Inventário real: 0 MCP, 0 hooks hoje — instalação por fase.
+- **Fase 2 do plano n8n (pendente):** provisionar instância n8n na VPS (ATLAS) + 1º workflow piloto (gatilho TCK ou relatório semanal APOLLO).
+- Registrado: KB §7 organograma (19), `.agents/skills/README.md`, CLAUDE.md global.
+
 ## ✅ 24/09 — LOGIN TESTE = PROD (regra do Comandante) + CRONJOBS ativos e silenciosos
 
 **Contexto:** login no TESTE (`teste-ahut-ecosystem.apexfyhub.com.br`) falhava — causa raiz: bundle apontava o Supabase **DEV** (`xmsulduzvufdzkfktovk`), cujas anon keys retornam **401 Invalid API key**; e a conta `sacramento@apexfyhub.com.br` (Comandante) existe **somente** no auth PROD.
@@ -37,7 +46,7 @@
 ## ✅ 23/09 — CC-06/CC-07: FASE 0 + FASE 1 aplicadas (hierarquia corrigida, /go, R-11, R-12)
 **Executor:** Claude Code (GLM-5.3) · **Escopo:** só docs/skills/agents — app/src intocado, sem deploy.
 - **FASE 0:** segredos redigidos (commit `792176f`) + `.agents/docs/keys_ahut.py` = ponte para `/opt/data/scripts/keys_ahut.py` (600, fora do repo, gitignored) + KB §7 com UMA lei de atuação (08/09 Jhon Wick = [REVOGADA 23/09]).
-- **HIERARQUIA (declaração do Comandante 23/09):** Comandante → JARVIS (revisa o AXIOM nos Gates HITL 1/2/3) → AXIOM (orquestrador técnico, orquestra os executores) → ATOM/ADA/ATLAS/AURA/AEGIS/AJAX, ARGUS (processo), ASIMOV, FINISH-GATE = **14 agentes**.
+- **HIERARQUIA (declaração do Comandante 23/09):** Comandante → JARVIS (revisa o AXIOM nos Gates HITL 1/2/3) → AXIOM (orquestrador técnico, orquestra os executores) → ATOM/ADA/ATLAS/AURA/AEGIS/AJAX, ARGUS (processo), ASIMOV, ARBITER = **14 agentes**.
 - **/executar → /go** em todos os fluxos (jarvis, axiom, GUIA_COMANDANTE, plugin squad-commands, PAINEL); gates 1/2/3 inalterados. Plugin E-01 aplicado (v1.1.0) — **pendente: reinício do gateway Hermes em janela calma p/ carregar /go**.
 - **R-11:** prova visual real obrigatória em [5] QA, Gate 1, GUIA_COMANDANTE e SKILL AURA — REGRA DURA: tarefa de código sem prova visual anexada = Gate 1 RECUSA.
 - **R-12:** destinos únicos = KB §3 (`/ahut/` PROD · `/teste/` TESTE); `1.1_FRONTEND`/`01_FRONTEND`/`ahut-ecosystem-active`/pasta fantasma `/ahut-ecosystem/`/`dev/` = [REVOGADO 23/09 — destino morto].
