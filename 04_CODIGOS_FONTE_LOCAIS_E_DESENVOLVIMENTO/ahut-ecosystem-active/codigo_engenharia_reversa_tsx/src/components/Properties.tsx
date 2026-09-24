@@ -343,6 +343,20 @@ export default function Properties() {
   // PARCELADO: Total = Entrada + (Nº Parcelas × Valor da Parcela).
   // Qualquer combinação de 2 dos 4 valores preenche os demais automaticamente.
   // Moeda padronizada: todos os valores na mesma moeda (formData.currency).
+  // FORMATADOR MONETÁRIO — pontos de milhar enquanto digita (pt-BR: 90.000.000).
+  // Guarda o valor BRUTO (só dígitos) no estado; exibe formatado. Cálculo/banco não afetados.
+  const fmtMilhar = (raw: string) => {
+    const digits = (raw || '').replace(/\D/g, '');
+    if (!digits) return '';
+    return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  };
+
+  // Handler padronizado para inputs monetários: formata visualmente e delega ao motor de cálculo
+  const handleMoneyChange = (field: string, raw: string) => {
+    const digits = (raw || '').replace(/\D/g, '');
+    handleInputChange(field, digits);
+  };
+
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => {
       const updated = { ...prev, [field]: value };
@@ -1288,10 +1302,11 @@ export default function Properties() {
                       <span>Valor à Vista ({formData.currency}) *</span>
                     </label>
                     <input 
-                      type="number" 
-                      placeholder="Ex: 90000000" 
-                      value={formData.valorAVista}
-                      onChange={(e) => handleInputChange('valorAVista', e.target.value)}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Ex: 90.000.000"
+                      value={fmtMilhar(formData.valorAVista)}
+                      onChange={(e) => handleMoneyChange('valorAVista', e.target.value)}
                       className="w-full bg-slate-800 border border-emerald-500/40 rounded-xl px-4 py-2.5 text-sm text-emerald-300 outline-none focus:border-emerald-400 font-bold" 
                     />
                   </div>
@@ -1319,10 +1334,11 @@ export default function Properties() {
                       <span>Valor Total Parcelado ({formData.currency}) *</span>
                     </label>
                     <input 
-                      type="number" 
-                      placeholder="Ex: 120000000" 
-                      value={formData.valorTotalParcelado}
-                      onChange={(e) => handleInputChange('valorTotalParcelado', e.target.value)}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Ex: 120.000.000"
+                      value={fmtMilhar(formData.valorTotalParcelado)}
+                      onChange={(e) => handleMoneyChange('valorTotalParcelado', e.target.value)}
                       className="w-full bg-slate-800 border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-cyan-400 font-bold" 
                     />
                   </div>
@@ -1334,10 +1350,11 @@ export default function Properties() {
                       <span>Valor de Entrada do Financiamento ({formData.currency}) *</span>
                     </label>
                     <input 
-                      type="number" 
-                      placeholder="Ex: 20000000" 
-                      value={formData.valorEntradaFinanciamento}
-                      onChange={(e) => handleInputChange('valorEntradaFinanciamento', e.target.value)}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Ex: 20.000.000"
+                      value={fmtMilhar(formData.valorEntradaFinanciamento)}
+                      onChange={(e) => handleMoneyChange('valorEntradaFinanciamento', e.target.value)}
                       className="w-full bg-slate-800 border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-cyan-200 outline-none focus:border-cyan-400 font-bold" 
                     />
                     {formData.saldoFinanciado ? (
@@ -1376,10 +1393,11 @@ export default function Properties() {
                       </span>
                     </div>
                     <input 
-                      type="number" 
-                      placeholder="Calculado automaticamente..." 
-                      value={formData.valorParcelaMensal}
-                      onChange={(e) => handleInputChange('valorParcelaMensal', e.target.value)}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Calculado automaticamente..."
+                      value={fmtMilhar(formData.valorParcelaMensal)}
+                      onChange={(e) => handleMoneyChange('valorParcelaMensal', e.target.value)}
                       className="w-full bg-slate-900 border border-cyan-400/60 rounded-xl px-4 py-2.5 text-base text-cyan-300 outline-none focus:border-cyan-300 font-black" 
                     />
                     {formData.valorParcelaMensal && formData.numeroParcelas ? (
@@ -1446,10 +1464,11 @@ export default function Properties() {
                       </div>
                       <div className="w-2/3">
                         <input 
-                          type="number" 
-                          placeholder="Valor em Moeda" 
-                          value={formData.comissaoAVista}
-                          onChange={(e) => handleInputChange('comissaoAVista', e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="Valor em Moeda"
+                          value={fmtMilhar(formData.comissaoAVista)}
+                          onChange={(e) => handleMoneyChange('comissaoAVista', e.target.value)}
                           className="w-full bg-slate-800 border border-teal-500/40 rounded-xl px-4 py-2 text-sm text-white font-bold outline-none focus:border-teal-400" 
                         />
                       </div>
@@ -1525,10 +1544,11 @@ export default function Properties() {
                       </span>
                     </label>
                     <input 
-                      type="number" 
-                      placeholder="Calculado automaticamente..." 
-                      value={formData.valorAReceberPorParcela}
-                      onChange={(e) => handleInputChange('valorAReceberPorParcela', e.target.value)}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Calculado automaticamente..."
+                      value={fmtMilhar(formData.valorAReceberPorParcela)}
+                      onChange={(e) => handleMoneyChange('valorAReceberPorParcela', e.target.value)}
                       className="w-full bg-slate-900 border border-teal-400/60 rounded-xl px-4 py-2 text-sm text-teal-200 outline-none focus:border-teal-300 font-black" 
                     />
                     {formData.valorAReceberPorParcela ? (
