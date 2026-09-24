@@ -280,7 +280,7 @@ export default function Leads() {
                   <Users className="w-4 h-4" />
                   <h4 className="text-sm font-bold">Dados Pessoais</h4>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-slate-300">Nome Completo *</label>
                     <input required type="text" placeholder="Ex: Rodrigo Sacramento" value={newLead.name} onChange={(e) => setNewLead({ ...newLead, name: e.target.value })} className="w-full bg-white/5 border border-cyan-900/30 rounded-lg px-4 py-2 text-sm outline-none focus:ring-1 focus:ring-cyan-500" />

@@ -1101,7 +1101,7 @@ export default function Tecnologia() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-gray-400 font-medium block mb-1">Solicitante</label>
                   <select
@@ -1131,7 +1131,7 @@ export default function Tecnologia() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="text-gray-400 font-medium block mb-1">Módulo</label>
                   <select
@@ -1174,7 +1174,7 @@ export default function Tecnologia() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-gray-400 font-medium block mb-1">Coluna Inicial</label>
                   <select
@@ -1971,7 +1971,7 @@ function AiTicketIntakeModal({
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <div>
                       <span className="text-[10px] font-bold uppercase text-gray-500">Módulo Identificado</span>
                       <p className="font-medium text-sky-300 mt-0.5 bg-gray-900 p-2 rounded-lg border border-gray-800">

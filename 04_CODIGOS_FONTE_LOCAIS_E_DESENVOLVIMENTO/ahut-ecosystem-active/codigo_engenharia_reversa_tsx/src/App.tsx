@@ -5,7 +5,7 @@ import FinancialFiltersProvider from './contexts/FinancialFiltersContext';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { Sidebar, Header } from './components/Layout';
+import { Sidebar, Header, MobileMenuButton, MobileSidebarBackdrop } from './components/Layout';
 import { AnimatePresence, motion } from 'framer-motion';
 import NeuralBackground from './components/NeuralBackground';
 import { useResponsive } from './hooks/useResponsive';
@@ -51,24 +51,31 @@ const queryClient = new QueryClient({
 
 function AppLayout({ children, title, subtitle, dark, onOpenWhatsApp }: { children: React.ReactNode; title: string; subtitle?: string; dark?: boolean; onOpenWhatsApp?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useReminders();
   const useDark = dark !== false;
   const { isMobile } = useResponsive();
 
-  // Auto-collapse sidebar on mobile
-  useEffect(() => { if (isMobile) setCollapsed(true); }, [isMobile]);
+  // Auto-collapse sidebar on mobile (drawer fechado por padrão)
+  useEffect(() => { if (isMobile) { setCollapsed(true); setMobileMenuOpen(false); } }, [isMobile]);
 
   return (
     <div className={`flex min-h-screen relative ${useDark ? 'bg-transparent text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
       {useDark && <NeuralBackground />}
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} onOpenWhatsApp={onOpenWhatsApp} />
+      <Sidebar collapsed={collapsed || (isMobile && !mobileMenuOpen)} setCollapsed={setCollapsed} onOpenWhatsApp={onOpenWhatsApp} />
+      {isMobile && mobileMenuOpen && <MobileSidebarBackdrop onClick={() => setMobileMenuOpen(false)} />}
       <div className="flex-1 flex flex-col min-w-0 relative" style={{ zIndex: 1 }}>
-        <Header title={title} subtitle={subtitle} />
+        <Header
+          title={title}
+          subtitle={subtitle}
+          mobileMenuOpen={mobileMenuOpen}
+          onToggleMobileMenu={() => setMobileMenuOpen(o => !o)}
+        />
         <motion.main
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className={`p-6 flex-1 overflow-auto ${useDark ? 'bg-transparent' : ''}`}
+          className={`flex-1 overflow-auto p-3 sm:p-6 ${useDark ? 'bg-transparent' : ''}`}
         >
           {children}
         </motion.main>

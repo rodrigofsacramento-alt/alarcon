@@ -374,7 +374,7 @@ export function Configuracoes() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-white dark:text-slate-200 mb-3">Tema</h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       onClick={() => setAppearance(prev => ({ ...prev, theme: 'light' }))}
                       className={cn(

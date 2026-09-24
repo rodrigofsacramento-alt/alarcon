@@ -11,6 +11,7 @@ import {
   UserCircle,
   Settings,
   ChevronLeft,
+  Menu,
   Search,
   Plus,
   Bell,
@@ -27,6 +28,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { useAuth } from '../hooks/useAuth';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useResponsive } from '../hooks/useResponsive';
 import QubitsLogo from './QubitsLogo';
 
 function LanguageToggle() {
@@ -104,6 +106,7 @@ export function Sidebar({ collapsed, setCollapsed, onOpenWhatsApp }: SidebarProp
   const location = useLocation();
   const { profile } = useAuth();
   const { t } = useLanguage();
+  const { isMobile } = useResponsive();
   
   const filteredNavItems = navItems.filter(item => {
     if (item.id === 'financeiro' && profile?.role === 'manager') {
@@ -114,8 +117,9 @@ export function Sidebar({ collapsed, setCollapsed, onOpenWhatsApp }: SidebarProp
 
   return (
     <aside className={cn(
-      "flex flex-col transition-all duration-300 h-screen sticky top-0 z-20",
-      collapsed ? "w-20" : "w-64",
+      "flex flex-col transition-all duration-300 h-screen top-0 z-40",
+      isMobile ? "fixed left-0 shadow-[0_0_60px_rgba(0,0,0,0.6)]" : "sticky",
+      collapsed ? (isMobile ? "w-64 -translate-x-full" : "w-20") : "w-64",
       "bg-[#07090e]/85 backdrop-blur-2xl border-r border-white/[0.06] shadow-2xl"
     )}>
       {/* Brand Header */}
@@ -209,14 +213,43 @@ export function Sidebar({ collapsed, setCollapsed, onOpenWhatsApp }: SidebarProp
   );
 }
 
-export function Header({ title, subtitle }: { title: string; subtitle?: string }) {
+/** Overlay + trigger do drawer mobile */
+export function MobileSidebarBackdrop({ onClick }: { onClick: () => void }) {
+  return (
+    <div
+      onClick={onClick}
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
+      aria-label="Fechar menu"
+    />
+  );
+}
+
+export function MobileMenuButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="md:hidden p-2 text-slate-300 hover:text-white hover:bg-white/[0.06] rounded-xl transition-colors shrink-0"
+      aria-label="Abrir menu"
+    >
+      <Menu className="w-5 h-5" />
+    </button>
+  );
+}
+
+export function Header({ title, subtitle, mobileMenuOpen, onToggleMobileMenu }: { title: string; subtitle?: string; mobileMenuOpen?: boolean; onToggleMobileMenu?: () => void }) {
   const { t } = useLanguage();
+  const { isMobile } = useResponsive();
   
   return (
-    <header className="flex items-center justify-between px-6 py-4 bg-[#07090e]/70 backdrop-blur-2xl border-b border-white/[0.06] sticky top-0 z-10">
-      <div>
-        <h1 className="text-xl font-bold font-display text-white tracking-tight">{title}</h1>
-        {subtitle && <p className="text-xs text-slate-400 mt-0.5 font-light">{subtitle}</p>}
+    <header className="flex items-center justify-between gap-2 px-3 sm:px-6 py-3 bg-[#07090e]/70 backdrop-blur-2xl border-b border-white/[0.06] sticky top-0 z-30">
+      <div className="flex items-center gap-1.5 min-w-0 flex-1">
+        {isMobile && onToggleMobileMenu && (
+          <MobileMenuButton onClick={onToggleMobileMenu} />
+        )}
+        <div className="min-w-0">
+          <h1 className="text-base sm:text-xl font-bold font-display text-white tracking-tight truncate">{title}</h1>
+          {subtitle && <p className="hidden sm:block text-xs text-slate-400 mt-0.5 font-light truncate">{subtitle}</p>}
+        </div>
       </div>
 
       <div className="flex items-center gap-3">
@@ -234,7 +267,7 @@ export function Header({ title, subtitle }: { title: string; subtitle?: string }
         </div>
 
         {/* New Prospect Button */}
-        <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#00FFCC] to-[#00DF9A] hover:from-[#00FFCC] hover:to-[#00C988] text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-md shadow-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+        <button className="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#00FFCC] to-[#00DF9A] hover:from-[#00FFCC] hover:to-[#00C988] text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-md shadow-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] shrink-0">
           <Plus className="w-3.5 h-3.5" />
           <span>{t('lead.novo')}</span>
         </button>

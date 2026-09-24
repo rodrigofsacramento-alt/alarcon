@@ -295,7 +295,7 @@ export default function Gestao() {
                     <span className="text-xs font-bold text-slate-400 uppercase">Título</span>
                     <p className="font-bold text-white mt-1">{selectedTask.titulo}</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <span className="text-xs font-bold text-slate-400 uppercase">Origem</span>
                       <p className="text-sm text-slate-300 mt-1">{origemLabel[selectedTask.origem]}</p>

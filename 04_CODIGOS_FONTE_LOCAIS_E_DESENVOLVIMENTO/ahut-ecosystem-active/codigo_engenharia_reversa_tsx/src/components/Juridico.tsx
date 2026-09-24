@@ -362,7 +362,7 @@ export default function Juridico() {
                   />
                 </Field>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field label="Tipo" icon={<FileText className="h-4 w-4 text-cyan-500" />}>
                     <select
                       value={form.tipo}
@@ -575,7 +575,7 @@ export default function Juridico() {
                       <p className="font-semibold text-slate-200 mb-2 flex items-center gap-2"><Gavel className="h-4 w-4 text-cyan-500" /> Parecer Jurídico</p>
                       <p>{selectedProcess.observacoes || 'Nenhuma observação cadastrada para este processo.'}</p>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <InfoItem label="Cliente" value={selectedProcess.cliente} />
                       <InfoItem label="Comprador/Locatário" value={selectedProcess.compradorLocatario} />
                       <InfoItem label="Advogado Responsável" value={selectedProcess.advogadoResponsavel} />

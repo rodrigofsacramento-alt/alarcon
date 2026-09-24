@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 // 🟢 DEV ENVIRONMENT — Supabase DEV separado do cliente
 // Para testes sem afetar dados de produção
 const supabaseUrl = 'https://xmsulduzvufdzkfktovk.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.JWT_SUPABASE_REDIGIDO.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhtc3VsZHV6dnVmZHprZmt0b3ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzNTU1OTgsImV4cCI6MjEwMDkzMTU5OH0.TkfD8EKunyPKUFamym-OTUQIuBMUtgHnU_s2iixEHl0';
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 

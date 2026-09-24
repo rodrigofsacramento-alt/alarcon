@@ -170,7 +170,7 @@ export default function Corretores() {
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-6 border-t border-white/5 grid grid-cols-3 gap-4 divide-x divide-slate-100">
+                  <div className="mt-6 pt-6 border-t border-white/5 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:divide-x divide-slate-100">
                     <div className="text-center">
                       <div className="text-xl font-bold text-slate-200">{agent.leads_count || 0}</div>
                       <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wider mt-1">Leads</div>
