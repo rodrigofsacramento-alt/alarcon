@@ -533,8 +533,10 @@ export default function Properties() {
       valorAReceberPorParcela: Number(formData.valorAReceberPorParcela) || 0,
     };
 
-    // Salvar no Banco de Dados (Supabase) — mapeamento corrigido para o schema real de `properties`
-    const { error: dbError } = await supabase.from('properties').insert({
+    // Salvar no Banco de Dados (Supabase) e RECUPERAR o registro salvo (com id real) para
+    // renderizar o card a partir do banco — evita card fantasma/id inválido após o salvamento.
+    let savedRow: any = null;
+    const { data: savedData, error: dbError } = await supabase.from('properties').insert({
         code: newCode,
         title: newTitle,
         address: newLocation,
@@ -564,15 +566,58 @@ export default function Properties() {
         comissao_porcentagem: Number(formData.percentualComissaoAVista) || null,
         comissao_valor_total: Number(formData.comissaoAVista) || null,
         mes_a_receber: formData.mesesAReceber ? { descricao: formData.mesesAReceber, valor_por_parcela: Number(formData.valorAReceberPorParcela) || null } : null,
-    });
+    }).select().single();
+    savedRow = savedData ?? null;
+
     if (dbError) {
       console.error('Erro ao salvar imóvel no Supabase:', dbError);
-      setToastMessage(`⚠️ Card criado localmente, mas falhou ao salvar no banco: ${dbError.message}`);
-      setTimeout(() => setToastMessage(null), 6000);
+      setToastMessage(`❌ Falha ao salvar no banco: ${dbError.message}`);
+      setSaving(false);
+      setTimeout(() => setToastMessage(null), 7000);
+      return; // NÃO renderiza card fantasma quando o banco falha
     }
 
-    // RENDERIZAR CARD NOVO VINCULADO NO ESTADO DA APLICAÇÃO
-    setPropertyList(prev => [newItem, ...prev]);
+    // RENDERIZAR CARD NOVO — dados vindos do banco (id/valores reais)
+    const cardFromDb: PropertyItem = savedRow ? {
+      id: savedRow.id,
+      code: savedRow.code,
+      title: savedRow.title,
+      location: savedRow.address || savedRow.location || newLocation,
+      price: Number(savedRow.price || savedRow.preco_avista || savedRow.preco_parcelado) || 0,
+      status: (savedRow.status as PropertyItem['status']) || 'available',
+      type: savedRow.type || formData.type,
+      beds: Number(savedRow.bedrooms) || 0,
+      baths: Number(savedRow.bathrooms) || 0,
+      rooms: Number(savedRow.rooms) || 0,
+      area: Number(savedRow.area) || 0,
+      parking: Number(savedRow.parking) || 0,
+      image: savedRow.image_url || defaultImage,
+      desc: savedRow.description || newItem.desc,
+      priceType: (savedRow.price_type === 'À Vista' ? 'À Vista' : 'Parcelado') as PropertyItem['priceType'],
+      currency: (savedRow.currency || formData.currency) as PropertyItem['currency'],
+      cotacaoManual: 7800,
+      ownerName: savedRow.owner_name ?? undefined,
+      ownerPhone: savedRow.owner_phone ?? undefined,
+      empresa: undefined,
+      loteamento: savedRow.loteamento ?? undefined,
+      manzana: savedRow.quadra ?? undefined,
+      numeroDoLote: savedRow.lote ?? undefined,
+      metragensMetroQuadrado: Number(savedRow.area) || 0,
+      valorAVista: Number(savedRow.preco_avista) || 0,
+      valorTotalParcelado: Number(savedRow.preco_parcelado) || 0,
+      valorEntradaFinanciamento: Number(savedRow.entrada_valor) || 0,
+      saldoFinanciado: Number(formData.saldoFinanciado) || 0,
+      entradaGuaranis: Number(formData.entradaGuaranis) || 0,
+      numeroParcelas: Number(savedRow.num_parcelas) || 0,
+      valorParcelaMensal: Number(savedRow.valor_parcela) || 0,
+      percentualComissaoAVista: Number(savedRow.comissao_porcentagem) || 0,
+      comissaoAVista: Number(savedRow.comissao_valor_total) || 0,
+      percentualComissaoParcelado: Number(formData.percentualComissaoParcelado) || 0,
+      comissaoParcelado: Number(formData.comissaoParcelado) || 0,
+      mesesAReceber: savedRow.mes_a_receber?.descricao ?? undefined,
+      valorAReceberPorParcela: Number(savedRow.mes_a_receber?.valor_por_parcela) || 0,
+    } : newItem;
+    setPropertyList(prev => [cardFromDb, ...prev]);
 
     setSaving(false);
     setShowModal(false);
