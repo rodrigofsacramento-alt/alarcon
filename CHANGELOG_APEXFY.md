@@ -99,3 +99,9 @@
 - **O quê:** diretiva do Comandante (Telegram): toda a estrutura integrada com o banco PROD `ptochsyoyatsydfysacc`, NÃO o dev `xmsulduzvufdzkfktovk`. O `.env` já apontava PROD, mas o fallback hardcoded do client apontava DEV — se o `.env` não carregasse, o app cairia no DEV silenciosamente. Fallbacks de URL e anon key trocados para PROD + comentário de guarda.
 - **Verificação:** grep em `src/` = 0 refs DEV; build OK (18s); bundle `dist/` = 0 refs `xmsul...`, PROD presente.
 - **Agente:** John Wick/AXIOM (orq.) · **Status:** build OK, commit pendente abaixo. Deploy TESTE aguarda Gate 2 (ride junto com o próximo deploy).
+
+## 2026-09-25 — Propostas: campo Vendedor/Corretor lista só atendentes (não leads/atendimento)
+- **Módulo:** propostas — `src/components/ui/AsyncCombobox.tsx` (+ prop `filters`) · `src/components/propostas/CreateProposalModal.tsx` · `src/components/propostas/ProposalDetailModal.tsx`
+- **O quê:** chamado do Comandante (Telegram) — no cadastro de propostas, o campo Vendedor/Corretor mostrava todos os `profiles` sem filtro (incluindo registros de leads/atendimento). Fix: prop `filters` no AsyncCombobox (string/bool → `.eq`, array → `.in`, aplicado na busca e no load do valor pré-selecionado); nos 2 modais de proposta o campo agora filtra `role in (agent, admin, manager)` + `is_active = true` (mesma definição de atendente do `useAgents`).
+- **Verificação:** build OK (17s, exit 0); deploy TESTE OK (backup `index.html.bak_20260925_100935_predeploy`).
+- **Agente:** John Wick (orq. Comandante via Telegram) · **Status:** 🟢 APLICADO EM TESTE — aguarda validação visual → PROD.

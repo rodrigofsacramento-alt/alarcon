@@ -23,6 +23,8 @@ export interface AsyncComboboxProps {
   subtitleField?: string;
   /** Campo a usar na ordenação alfabética dos resultados (default: labelField) */
   orderBy?: string;
+  /** Filtros fixos aplicados à busca e ao load do valor (string → .eq, array → .in) */
+  filters?: Record<string, string | string[] | boolean>;
   /** UUID selecionado */
   value: string;
   /** Callback recebe o item completo (enviar item.id ao guardar) */
@@ -44,6 +46,7 @@ export function AsyncCombobox({
   labelField,
   subtitleField,
   orderBy,
+  filters,
   value,
   onChange,
   icon,
@@ -63,10 +66,11 @@ export function AsyncCombobox({
       return;
     }
     let active = true;
-    (supabase as any)
-      .from(table)
-      .select(selectFields)
-      .eq("id", value)
+    let db = (supabase as any).from(table).select(selectFields).eq("id", value);
+    for (const [col, val] of Object.entries(filters || {})) {
+      db = Array.isArray(val) ? db.in(col, val) : db.eq(col, val);
+    }
+    (db as any)
       .maybeSingle()
       .then(({ data }: { data: any }) => {
         if (active && data) setSelected(data as LookupItem);
@@ -81,6 +85,9 @@ export function AsyncCombobox({
     setLoading(true);
     try {
       let db = (supabase as any).from(table).select(selectFields);
+      for (const [col, val] of Object.entries(filters || {})) {
+        db = Array.isArray(val) ? db.in(col, val) : db.eq(col, val);
+      }
       if (q.trim()) {
         const or = searchFields.map((f) => `${f}.ilike.%${q}%`).join(",");
         db = db.or(or);

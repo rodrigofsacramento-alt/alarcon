@@ -207,6 +207,7 @@ export function ProposalDetailModal({ proposal, onClose, onSave, isSaving }: Pro
               <AsyncCombobox
                 placeholder="Buscar corretor..."
                 table="profiles"
+                filters={{ role: ["agent", "admin", "manager"], is_active: true }}
                 searchFields={["full_name", "email"]}
                 selectFields="id,full_name,email"
                 labelField="full_name"

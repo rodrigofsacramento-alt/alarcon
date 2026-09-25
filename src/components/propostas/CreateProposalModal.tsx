@@ -282,6 +282,7 @@ export function CreateProposalModal({ open, onOpenChange, onConfirm }: CreatePro
                   <Label className="text-white/70">Vendedor / Corretor</Label>
                   <AsyncCombobox
                     table="profiles"
+                    filters={{ role: ["agent", "admin", "manager"], is_active: true }}
                     searchFields={["full_name"]}
                     selectFields="id,full_name"
                     labelField="full_name"
