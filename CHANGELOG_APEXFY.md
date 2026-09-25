@@ -93,3 +93,9 @@
 - **O quê:** título do chamado editável inline (input + Enter/blur); descrição editável via lápis (textarea mono, aceita ###/>/listas); Módulo e Impacto editáveis por select; subtasks sempre visíveis para o Comandante (cria a 1ª direto, sem ovo-galinha) + renomear (clique no texto), alterar status (select), excluir (lixeira). Toda edição registra evento na timeline.
 - **Agente:** Jarvis/AXIOM (orq.) · **Status:** build OK (`Tecnologia-JUSBfFPT.js`), deploy TESTE OK, commit `a4e14db` (branch `remodel`).
 - **Gate pendente:** validação visual do Comandante no TESTE → depois deploy PROD `/ahut/`.
+
+## 2026-09-25 — Integração total com Supabase PROD (ptoch) — nunca DEV
+- **Módulo:** núcleo de dados — `src/lib/supabase.ts`
+- **O quê:** diretiva do Comandante (Telegram): toda a estrutura integrada com o banco PROD `ptochsyoyatsydfysacc`, NÃO o dev `xmsulduzvufdzkfktovk`. O `.env` já apontava PROD, mas o fallback hardcoded do client apontava DEV — se o `.env` não carregasse, o app cairia no DEV silenciosamente. Fallbacks de URL e anon key trocados para PROD + comentário de guarda.
+- **Verificação:** grep em `src/` = 0 refs DEV; build OK (18s); bundle `dist/` = 0 refs `xmsul...`, PROD presente.
+- **Agente:** John Wick/AXIOM (orq.) · **Status:** build OK, commit pendente abaixo. Deploy TESTE aguarda Gate 2 (ride junto com o próximo deploy).
