@@ -82,7 +82,7 @@ const PRIORITY_LABEL: Record<string, string> = {
 };
 
 const PRIORITY_COLOR: Record<string, string> = {
-  baixa: "bg-slate-100 text-slate-600",
+  baixa: "bg-muted text-muted-foreground",
   media: "bg-sky-100 text-sky-700",
   alta: "bg-orange-100 text-orange-700",
 };
@@ -591,7 +591,7 @@ export default function Tecnologia() {
                                   <div key={t.id} onClick={() => setSelectedTicket(t)} draggable={isComandante} onDragStart={(e) => onDragStartCard(e, t)} className={cn("rounded-lg border bg-card p-3 space-y-2 shadow-sm cursor-pointer hover:border-accent/60 hover:shadow-md transition-all group active:cursor-grabbing", dragTicketId === t.id && "opacity-40 border-dashed")}>
                                     <div className="flex items-start justify-between gap-2">
                                       <p className="text-[10px] font-mono text-muted-foreground">{t.code}</p>
-                                      <span className={cn("px-1.5 py-0.5 rounded-full text-[10px] font-medium", PRIORITY_COLOR[t.priority] || "bg-slate-100 text-slate-600")}>{PRIORITY_LABEL[t.priority] || t.priority}</span>
+                                      <span className={cn("px-1.5 py-0.5 rounded-full text-[10px] font-medium", PRIORITY_COLOR[t.priority] || "bg-muted text-muted-foreground")}>{PRIORITY_LABEL[t.priority] || t.priority}</span>
                                     </div>
                                     <h3 className="font-medium text-sm leading-snug line-clamp-2">{t.title}</h3>
                                     <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
@@ -995,7 +995,7 @@ export default function Tecnologia() {
                           s.status === "validada" ? "bg-emerald-100 text-emerald-700"
                           : s.status === "recusada" ? "bg-red-100 text-red-700"
                           : s.status === "em_andamento" ? "bg-sky-100 text-sky-700"
-                          : "bg-slate-100 text-slate-600",
+                          : "bg-muted text-muted-foreground",
                         )}>{SUBTASK_STATUS_LABEL[s.status] || s.status}</span>
                         )}
                         <div className="min-w-0 flex-1">

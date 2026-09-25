@@ -288,7 +288,7 @@ INSTRUÇÕES:
                   </div>
                   <button 
                     onClick={() => setShowChartData(!showChartData)} 
-                    className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg font-medium transition-colors border"
+                    className="text-xs bg-muted dark:bg-slate-800 text-muted-foreground dark:text-slate-300 hover:bg-muted dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg font-medium transition-colors border"
                   >
                     {showChartData ? "Ver Gráfico" : "Ver Tabela de Dados"}
                   </button>
@@ -482,7 +482,7 @@ INSTRUÇÕES:
                       <div className="font-medium">{new Date(selectedCommission.month_reference).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</div>
                     </div>
                   </div>
-                  <div className="border rounded-lg p-4 space-y-4 bg-slate-50/50 dark:bg-slate-900/10">
+                  <div className="border rounded-lg p-4 space-y-4 bg-muted/50 dark:bg-slate-900/10">
                     <h4 className="font-semibold text-sm border-b pb-2 text-foreground">
                       Valores Consolidados da Transação (Antes das Distribuições)
                     </h4>
@@ -512,7 +512,7 @@ INSTRUÇÕES:
                       <div className="flex justify-between py-1 border-b border-border/50 md:border-b-0 md:pl-4"><span className="text-muted-foreground">Data da Venda:</span><span className="font-bold text-foreground">{new Date(selectedCommission.created_at || selectedCommission.month_reference).toLocaleDateString('pt-BR')}</span></div>
                     </div>
                   </div>
-                  <div className="border rounded-lg p-4 space-y-4 bg-slate-50/50 dark:bg-slate-900/10">
+                  <div className="border rounded-lg p-4 space-y-4 bg-muted/50 dark:bg-slate-900/10">
                     <h4 className="font-semibold text-sm border-b pb-2 text-foreground">
                       Distribuição das Comissões (Valores Líquidos a Receber)
                     </h4>
@@ -615,7 +615,7 @@ INSTRUÇÕES:
               </div>
               <button onClick={() => setIsChatOpen(false)} className="text-slate-400 hover:text-white transition-colors"><X className="h-5 w-5" /></button>
             </div>
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 dark:bg-slate-950/20">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/50 dark:bg-slate-950/20">
               {messages.map((m, idx) => (
                 <div key={idx} className={cn("flex flex-col max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm shadow-sm border", m.role === "user" ? "ml-auto bg-accent text-white border-accent/20 rounded-tr-none" : "mr-auto bg-card text-foreground border-border rounded-tl-none")}>
                   <div className="whitespace-pre-line leading-relaxed">{m.content}</div>
@@ -626,7 +626,7 @@ INSTRUÇÕES:
               )}
             </div>
             <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }} className="p-3 bg-card border-t border-border/80 flex items-center gap-2">
-              <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Pergunte ao assistente da Hut..." className="flex-1 bg-slate-50 dark:bg-slate-900 border border-border rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-accent transition-colors placeholder:text-muted-foreground/60" disabled={isTyping} />
+              <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Pergunte ao assistente da Hut..." className="flex-1 bg-muted dark:bg-slate-900 border border-border rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-accent transition-colors placeholder:text-muted-foreground/60" disabled={isTyping} />
               <button type="submit" disabled={!inputValue.trim() || isTyping} className="h-9 w-9 rounded-xl bg-accent text-white flex items-center justify-center hover:bg-accent-hover disabled:opacity-50 transition-all shadow-sm shrink-0"><Send className="h-4 w-4" /></button>
             </form>
           </div>

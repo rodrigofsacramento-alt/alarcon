@@ -196,7 +196,7 @@ const getTagStyles = (tag: string) => {
   
   // Default dynamic colors
   const colors = [
-    'bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/30 dark:text-slate-400 dark:border-slate-800',
+    'bg-muted text-foreground border-border dark:bg-slate-900/30 dark:text-slate-400 dark:border-slate-800',
     'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-950/30 dark:text-indigo-400 dark:border-indigo-900/50',
     'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/30 dark:text-rose-400 dark:border-rose-900/50',
     'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-950/30 dark:text-cyan-400 dark:border-cyan-900/50',
@@ -268,7 +268,7 @@ const getLeadActionStyles = (action?: string | null) => {
     case 'retomar_ia':
       return 'border-cyan-200 bg-cyan-50 text-cyan-700';
     case 'ia_pausada':
-      return 'border-slate-200 bg-slate-50 text-slate-700';
+      return 'border-border bg-muted text-foreground';
     default:
       return 'border-emerald-200 bg-emerald-50 text-emerald-700';
   }

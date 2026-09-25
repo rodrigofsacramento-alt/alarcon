@@ -680,7 +680,7 @@ export default function Configuracoes() {
                             appearance.theme === "light" ? "border-accent bg-accent/5" : "border-border hover:border-muted-foreground"
                           )}
                         >
-                          <div className="h-12 w-12 mx-auto mb-2 rounded-lg bg-white border border-gray-200" />
+                          <div className="h-12 w-12 mx-auto mb-2 rounded-lg bg-white border border-border" />
                           <p className="text-sm font-medium text-foreground">Claro</p>
                         </button>
                         <button

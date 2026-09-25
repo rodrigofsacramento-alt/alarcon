@@ -129,7 +129,7 @@ export default function MarketingAssets() {
       case 'Institucional': return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'Imóvel': return 'bg-emerald-100 text-emerald-800 border-emerald-200';
       case 'Redes Sociais': return 'bg-pink-100 text-pink-800 border-pink-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      default: return 'bg-gray-100 text-foreground border-gray-200';
     }
   };
 

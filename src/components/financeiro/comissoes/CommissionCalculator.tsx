@@ -256,7 +256,7 @@ export function CommissionCalculator() {
           )}
 
           {/* Checklist de Validação de Teste Manual */}
-          <div className="p-4 bg-slate-50 dark:bg-slate-900 border rounded-lg space-y-3 mt-4">
+          <div className="p-4 bg-muted dark:bg-slate-900 border rounded-lg space-y-3 mt-4">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Checklist de Validação / Teste Manual
             </h4>
@@ -315,7 +315,7 @@ export function CommissionCalculator() {
         </CardFooter>
       </Card>
 
-      <Card className="bg-slate-50 dark:bg-slate-900/50 border-dashed">
+      <Card className="bg-muted dark:bg-slate-900/50 border-dashed">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calculator className="h-5 w-5 text-accent" />

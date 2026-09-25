@@ -51,7 +51,7 @@ export class ChunkErrorBoundary extends Component<Props, State> {
     // Enquanto aguarda o reload, mostra um fallback leve (sem tela branca).
     if (this.state.hasError && this.state.reloadAttempted) {
       return (
-        <div className="flex items-center justify-center min-h-screen" style={{ background: '#0d1526' }}>
+        <div className="flex items-center justify-center min-h-screen" style={{ background: '#05070a' }}>
           <div className="flex flex-col items-center gap-3">
             <div className="w-8 h-8 border-2 border-slate-600 border-t-orange-500 rounded-full animate-spin" />
             <span className="text-sm text-slate-400">Recarregando atualização…</span>

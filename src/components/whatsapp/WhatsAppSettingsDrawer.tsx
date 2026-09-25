@@ -88,8 +88,8 @@ function getStatusConfig(status: WhatsAppSession['status']) {
       return {
         label: 'WhatsApp da imobiliária desconectado',
         color: 'bg-slate-400',
-        textColor: 'text-slate-600',
-        bgColor: 'bg-slate-50',
+        textColor: 'text-muted-foreground',
+        bgColor: 'bg-muted',
         borderColor: 'border-slate-200',
         icon: Plug,
       };
@@ -194,7 +194,7 @@ export default function WhatsAppSettingsDrawer({ open, onOpenChange }: WhatsAppS
         ) : (
           <div className="space-y-6">
             {/* Identity Header */}
-            <div className="rounded-xl border bg-slate-50 border-slate-200 p-4">
+            <div className="rounded-xl border bg-muted border-slate-200 p-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Building2 className="h-5 w-5" />

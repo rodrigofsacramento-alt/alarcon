@@ -36,7 +36,7 @@ const pipelineStages = [
 ];
 
 const stageColors: Record<string, string> = {
-  "A Selecionar": "bg-slate-100 border-slate-300",
+  "A Selecionar": "bg-muted border-slate-300",
   "Contato Cadastrado": "bg-blue-50 border-blue-300",
   "Primeiro Atendimento / Qualificação": "bg-indigo-50 border-indigo-300",
   "Qualificado": "bg-cyan-50 border-cyan-300",
@@ -52,7 +52,7 @@ const stageColors: Record<string, string> = {
 };
 
 const stageBadgeColors: Record<string, string> = {
-  "A Selecionar": "bg-slate-100 text-slate-700",
+  "A Selecionar": "bg-muted text-foreground",
   "Contato Cadastrado": "bg-blue-100 text-blue-700",
   "Primeiro Atendimento / Qualificação": "bg-indigo-100 text-indigo-700",
   "Qualificado": "bg-cyan-100 text-cyan-700",
