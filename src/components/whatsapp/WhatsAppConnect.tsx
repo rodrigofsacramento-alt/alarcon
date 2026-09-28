@@ -86,22 +86,30 @@ export default function WhatsAppConnect() {
   }, [session?.status, connectingSince]);
 
   const handleConnect = () => {
+    // Blur antes da troca de branch: evita NotFoundError (removeChild) quando o botão
+    // focado é desmontado no mesmo commit que renderiza o estado "connecting".
+    const active = document.activeElement as HTMLElement | null;
+    if (active && typeof active.blur === 'function') active.blur();
     setConnectingSince(Date.now());
     setShowQr(true);
     const cleanPhone = pairingPhone.replace(/\D/g, '');
     startMutation.mutate(cleanPhone ? { phone_number: cleanPhone } : undefined, {
-      onSuccess: () => toast.info('Sessão iniciada. Escaneie o QR Code quando aparecer.'),
+      onSuccess: () => toast.info('Sessão iniciada. Aguarde o QR Code ou use o código de pareamento.'),
       onError: (err: any) => toast.error(err?.message || 'Erro ao iniciar sessão'),
     });
   };
 
   const handleShowExistingQr = () => {
+    const active = document.activeElement as HTMLElement | null;
+    if (active && typeof active.blur === 'function') active.blur();
     setShowQr(true);
   };
 
   const handleDisconnect = () => {
+    const active = document.activeElement as HTMLElement | null;
+    if (active && typeof active.blur === 'function') active.blur();
     setShowQr(false);
-    disconnectMutation.mutate(undefined, {
+    disconnectMutation.mutate({ session_name: session?.session_name || 'default' }, {
       onSuccess: () => toast.success('Sessão desconectada'),
       onError: (err: any) => toast.error(err?.message || 'Erro ao desconectar'),
     });
@@ -115,7 +123,7 @@ export default function WhatsAppConnect() {
     }
 
     try {
-      await disconnectMutation.mutateAsync();
+      await disconnectMutation.mutateAsync({ session_name: session?.session_name || 'default' });
       setConnectingSince(Date.now());
       await startMutation.mutateAsync({ phone_number: cleanPhone });
       toast.info('Gerando codigo de pareamento. Aguarde alguns segundos.');
@@ -167,8 +175,7 @@ export default function WhatsAppConnect() {
   }
 
   // Disconnected state
-  if (!session || session.status === 'disconnected' || (session.status === 'qr_ready' && !showQr)) {
-    const isReadyHidden = session?.status === 'qr_ready';
+  if (!session || session.status === 'disconnected') {
     return (
       <div className="mx-auto w-full max-w-6xl px-4 py-6 lg:px-8 lg:py-8">
         <div className="grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
@@ -252,7 +259,7 @@ export default function WhatsAppConnect() {
                   Opcional. Se o QR nao for lido no Android, informe o numero do celular e use o codigo exibido.
                 </p>
 
-                <Button className="mt-5 w-full gap-2" size="lg" onClick={isReadyHidden ? handleShowExistingQr : handleConnect} disabled={startMutation.isPending}>
+                <Button className="mt-5 w-full gap-2" size="lg" onClick={handleConnect} disabled={startMutation.isPending}>
                   {startMutation.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
@@ -302,7 +309,7 @@ export default function WhatsAppConnect() {
   }
 
   // QR Ready state
-  if (session.status === 'qr_ready' && (session.qr_code || session.pairing_code) && showQr) {
+  if (session.status === 'qr_ready' && (session.qr_code || session.pairing_code)) {
     return (
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center px-4 py-8 relative">
         <Button variant="ghost" size="icon" className="absolute right-4 top-4" onClick={handleDisconnect}>

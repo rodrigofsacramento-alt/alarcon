@@ -129,16 +129,32 @@ export default function WhatsAppSettingsDrawer({ open, onOpenChange }: WhatsAppS
   }, [session?.status, connectingSince]);
 
   const handleConnect = () => {
-    setConnectingSince(Date.now());
-    const cleanPhone = pairingPhone.replace(/\D/g, '');
-    startMutation.mutate(cleanPhone ? { phone_number: cleanPhone } : undefined, {
-      onSuccess: () => toast.info('Sessão iniciada. Escaneie o QR Code quando aparecer.'),
-      onError: (err: any) => toast.error(err?.message || 'Erro ao iniciar sessão'),
-    });
+    // Fecha o drawer e AGUARDA a animação de saída do Radix antes de mutar.
+    // Mutar imediatamente troca o branch da página de fundo enquanto o portal do Sheet
+    // ainda está desmontando (Presence/ANIMATION_OUT) → removeChild → NotFoundError.
+    const run = () => {
+      const active = document.activeElement as HTMLElement | null;
+      if (active && typeof active.blur === 'function') active.blur();
+      setConnectingSince(Date.now());
+      const cleanPhone = pairingPhone.replace(/\D/g, '');
+      startMutation.mutate(cleanPhone ? { phone_number: cleanPhone } : undefined, {
+        onSuccess: () => toast.info('Sessão iniciada. Escaneie o QR Code quando aparecer.'),
+        onError: (err: any) => toast.error(err?.message || 'Erro ao iniciar sessão'),
+      });
+    };
+    if (open && onOpenChange) {
+      onOpenChange(false);
+      setTimeout(run, 300);
+    } else {
+      run();
+    }
   };
 
   const handleDisconnect = () => {
-    disconnectMutation.mutate(undefined, {
+    if (open && onOpenChange) onOpenChange(false);
+    const active = document.activeElement as HTMLElement | null;
+    if (active && typeof active.blur === 'function') active.blur();
+    disconnectMutation.mutate({ session_name: session?.session_name || 'default' }, {
       onSuccess: () => toast.success('Sessão desconectada'),
       onError: (err: any) => toast.error(err?.message || 'Erro ao desconectar'),
     });

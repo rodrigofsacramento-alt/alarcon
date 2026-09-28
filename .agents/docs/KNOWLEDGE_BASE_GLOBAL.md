@@ -204,7 +204,8 @@ Root: `/opt/data/ahut-ecosystem`
 - **SINCRONIA Hermes ↔ Antigravity:** `CANAL_LIVE.md` + `PROTOCOLO_SINCRONIA_AGENTES.md` (aguardando confirmação de instruções A-E).
 - **Lixeira:** `move_profile_to_trash()`; restarts do broker deletam `creds.json`.
 - **Saneamento leads já executado** (não repetir). **Módulo financeiro** skin clara PROD vs DEV QUBITS.
-- **CI/anti-cache:** `build_anticache.mjs`, nomes únicos `app-{uuid}`, purge `curl .../purge.php`.
+- **CI/anti-cache:** `build_anticache.mjs`, nomes únicos `app-{uuid}`, purge `curl .../purge.php`
+- **BROKER WHATSAPP — NOVO FLUXO EVOLUTION (VIGENTE 28/09):** WhatsApp agora via **Evolution API v2.3.7** (VPS :8080, instância `wpp-alarcon`) → webhook → **evolution-bridge** (:3099, PM2) → PostgREST → CRM. Baileys (broker antigo) = LEGADO, parado. Arquitetura de referência completa (fluxo QR/pairing, connection.update, MESSAGES_UPSERT v2.3.7 `data` direto, pollOutbox, LID handling, SDR, env vars/deploy) → **`.agents/docs/ARQUITETURA_BROKER_EVOLUTION.md`** (ler antes de qualquer trabalho WhatsApp/broker).
 
 - **ACIONAMENTO DE AGENTES (Comandante, 24/09):** agentes rodando via **n8n dentro do aplicativo** = SOMENTE os de **acionamento por hook** (ex.: ticket de chamado de suporte; cada mudança de item para determinada **coluna/estágio do kanban** tem acionamento/próprio por estágio). Tudo que **não for acionamento hook** roda via **agente Hermes** ou **Claude Code** com **API OpenRouter** configurada. Nenhum agente não-hook sobe como workflow n8n autônomo.
 

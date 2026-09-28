@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
 export type WhatsAppSession = {
@@ -18,19 +19,56 @@ export type WhatsAppSession = {
 };
 
 export function useWhatsAppSession() {
-  return useQuery({
+  const qc = useQueryClient();
+  const query = useQuery({
     queryKey: ['whatsapp-session'],
     queryFn: async () => {
       const { data, error } = await (supabase as any)
         .from('whatsapp_sessions')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('updated_at', { ascending: false })
         .limit(1)
         .maybeSingle();
       if (error && error.code !== 'PGRST116') throw error;
       return (data ?? null) as WhatsAppSession | null;
     },
+    // Polling leve: a sessão muda fora do app (bridge gera QR, gateway cai/cai conexão).
+    // staleTime de 5min + refetchOnMount false escondia o QR gerado até 5min no mobile.
+    refetchInterval: (q) => {
+      const s: any = q.state.data;
+      return s && s.status === 'connected' ? 15000 : 3000;
+    },
   });
+
+  // PADRONIZAÇÃO: a tela deve refletir a conexão no INSTANTE em que o bridge
+  // muda o status no banco — sem esperar o próximo tick de polling.
+  // 1) Realtime: qualquer UPDATE em whatsapp_sessions dispara refetch imediato.
+  useEffect(() => {
+    // Nome único por instância: este hook é montado em vários lugares (Atendimento,
+    // WhatsAppConnect, drawer). Com nome fixo, a segunda chamada .channel() devolve o
+    // canal já inscrito e o .on() seguinte lança
+    // "cannot add postgres_changes callbacks ... after subscribe()".
+    const ch = (supabase as any)
+      .channel(`whatsapp-session-status-${crypto.randomUUID()}`)
+      .on('postgres_changes',
+        { event: '*', schema: 'public', table: 'whatsapp_sessions' },
+        () => { qc.invalidateQueries({ queryKey: ['whatsapp-session'] }); })
+      .subscribe();
+    return () => { try { (supabase as any).removeChannel(ch); } catch { /* noop */ } };
+  }, [qc]);
+
+  // 2) Refoco na aba/janela: refetch imediato (mobile costuma congelar timers).
+  useEffect(() => {
+    const onVis = () => { if (document.visibilityState === 'visible') qc.invalidateQueries({ queryKey: ['whatsapp-session'] }); };
+    window.addEventListener('visibilitychange', onVis);
+    window.addEventListener('focus', onVis);
+    return () => {
+      window.removeEventListener('visibilitychange', onVis);
+      window.removeEventListener('focus', onVis);
+    };
+  }, [qc]);
+
+  return query;
 }
 
 export function useStartWhatsAppSession() {
@@ -53,9 +91,9 @@ export function useStartWhatsAppSession() {
 export function useDisconnectWhatsAppSession() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ session_name }: { session_name?: string } = {}) => {
       const { data, error } = await (supabase as any).rpc('disconnect_whatsapp_session', {
-        p_session_name: 'default',
+        p_session_name: session_name || 'default',
       });
       if (error) throw error;
       return data as { success: boolean; message: string };
