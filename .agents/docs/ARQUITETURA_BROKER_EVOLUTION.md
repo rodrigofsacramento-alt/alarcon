@@ -145,6 +145,10 @@ Componentes: **Evolution API v2.3.7** (Docker no VPS, `localhost:8080`, header `
 ---
 
 ## Pontos de atenção (pitfalls)
+0. **PADRÃO PERMANENTE MULTI-TENANT (correção geral 28/09, commit 055c62e) — vale para TODO contato novo:**
+   - **Isolamento de provider**: coluna `whatsapp_sessions.provider` (default `'baileys'`); gateway Evolution = `provider='evolution'`. Todo broker Baileys carrega guard `if (session.provider === 'evolution') continue;` no poll — sem isso o poll global de outros tenants rouba msgs `pending` e marca `failed` sem tentativa (bug 'Isso e aonde', Jô Fátima).
+   - **Lado da bolha**: msg `fromMe` (celular oficial) → `messages.sender_id = conversations.agent_id` (fallback `whatsapp_sessions.user_id` do tenant) — NUNCA o profile do cliente (bug render à esquerda).
+   - Qualquer broker/gateway novo no VPS: aplicar ANTES de ativar (sessão nova nasce `baileys` por default — marcar provider certo).
 1. **`connection.update` chega em lowercase** — sempre normalizar evento antes de comparar.
 2. **Payload MESSAGES_UPSERT v2.3.7 = `data` direto** — código que espera `data.messages[]` recebe "upsert sem mensagens processáveis".
 3. **Sessões duplas** — toda lógica de status deve atualizar `default` + `evolution-bridge`; atualizar só uma deixa o app preso em `qr_ready`.

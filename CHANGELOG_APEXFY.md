@@ -117,3 +117,9 @@
 - **BUG B (outbound failed):** msg do sistema ('Isso e aonde', `26c4a182`) marcada `failed` em 370ms sem tentativa do bridge. Causa raiz: brokers Baileys de OUTROS tenants (`whatsapp-broker`/crmahut, `indavent-whatsapp-broker`, `rodrigo.whatsapp-broker-dev`) fazem poll global de `whatsapp_messages` pending+from_me (sem filtro de tenant), acham a sessão 'connected' e tentam enviar via o PRÓPRIO Baileys → exceção → `failed` (roubavam a msg do bridge). Fix: coluna `whatsapp_sessions.provider` (default 'baileys'), sessão bridge marcada `provider='evolution'`, e patch nos 3 brokers: `if (session.provider === 'evolution') continue;`. Bridge redeployado (envio imediato) + pm2 restart dos 4 processos.
 - **Verificação:** msg `26c4a182` resetada p/ pending → enviada em 3s pelo bridge (log `outbox enviada 26c4a182 → 5511947478473`, status `sent`, eco SEND_MESSAGE deduped). QA visual TESTE (apexfyhub.com.br/testealarcon): 'Oiii', 'Que lindo mamis', 'Isso e aonde' todas `justify-end` (direita/verde) com avatar RS.
 - **Agente:** Hermes (subagent TASK — fluxo /executar) · **Status:** 🟢 APLICADO E VALIDADO (TESTE, dados reais).
+
+## 2026-09-28 — Correção geral multi-tenant WhatsApp (padrão permanente)
+- Módulo: Broker WhatsApp (evolution-bridge + brokers Baileys VPS)
+- Arquivos: bridge.js (sender fromMe → agent_id), backend-broker/indavent/rodrigo-dev (guard provider), whatsapp_sessions.provider (coluna nova)
+- Agente: Jarvis (deleg_0f367bd9 + consolidado)
+- Status: ✅ Bugs Jô Fátima corrigidos: (1) msg do celular oficial com lado errado (sender=cliente) → agora sender=staff; (2) outbound 'failed' sem tentativa → poll global de outros brokers roubava msg; guard provider='evolution' em todos os brokers. Padrão registrado no KB §7 e ARQUITETURA_BROKER_EVOLUTION.md pitfall 0. Reenvio 'Isso e aonde' entregue (status sent, id 3EB0CE7046D90738ADDDEE).
