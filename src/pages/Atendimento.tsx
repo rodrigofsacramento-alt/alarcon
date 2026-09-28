@@ -550,6 +550,13 @@ class AtendimentoErrorBoundary extends React.Component<{children: React.ReactNod
   }
   render() {
     if (this.state.hasError) {
+      const msg = String(this.state.error?.message || this.state.error || '');
+      // NotFoundError de removeChild é transitório (tradutor/extensão mexendo no DOM,
+      // ou nó focado desmontado numa troca de branch). Re-render limpo resolve —
+      // não derruba a página para tela branca.
+      if (msg.includes('NotFoundError') || msg.includes('can not be found here') || msg.includes('removeChild')) {
+        return this.props.children;
+      }
       return (
         <div style={{ padding: 40, color: '#990000', background: '#ffebee', height: '100vh', width: '100vw', overflow: 'auto' }}>
           <h1 style={{ fontSize: 24, fontWeight: 'bold' }}>TELA BRANCA - RELATÓRIO DE ERRO</h1>
@@ -2043,15 +2050,15 @@ function AtendimentoContent() {
                 onClick={() => setIsAddContactOpen(true)}
               >
                 <UserPlus className="h-4 w-4" />
-                Adicionar Contato
+                <span className="hidden sm:inline">Adicionar Contato</span>
               </Button>
-              <Button variant="outline" className="gap-2" onClick={() => setIsImportModalOpen(true)}>
+              <Button variant="outline" className="gap-2 px-2 sm:px-4" onClick={() => setIsImportModalOpen(true)}>
                 <Upload className="h-4 w-4" />
-                Importar
+                <span className="hidden sm:inline">Importar</span>
               </Button>
-              <Button variant="cta" className="gap-2" onClick={() => setIsCreateOpen(true)}>
+              <Button variant="cta" className="gap-2 px-2 sm:px-4" onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4" />
-                Novo Atendimento
+                <span className="hidden sm:inline">Novo Atendimento</span>
               </Button>
             </div>
           }
@@ -2121,10 +2128,10 @@ function AtendimentoContent() {
                     variant={activeTab === "meus" ? "cta" : "ghost"}
                     size="sm"
                     onClick={() => setActiveTab("meus")}
-                    className="min-w-0 text-xs relative px-2 gap-1"
+                    className="min-w-0 text-xs relative px-2 gap-1 overflow-hidden"
                   >
                     <Inbox className="h-3 w-3 shrink-0" />
-                    Meus
+                    <span className="truncate">Meus</span>
                     {(() => {
                       const n = conversations.filter((c) => 
                         c.status !== 'deleted' && 
@@ -2145,20 +2152,20 @@ function AtendimentoContent() {
                       variant={activeTab === "equipe" ? "cta" : "ghost"}
                       size="sm"
                       onClick={() => setActiveTab("equipe")}
-                      className="min-w-0 text-xs px-2 gap-1"
+                      className="min-w-0 text-xs px-2 gap-1 overflow-hidden"
                     >
                       <Users className="h-3 w-3 shrink-0" />
-                      Equipe
+                      <span className="truncate">Equipe</span>
                     </Button>
                   )}
                   <Button
                     variant={activeTab === "grupos" ? "cta" : "ghost"}
                     size="sm"
                     onClick={() => setActiveTab("grupos")}
-                    className="min-w-0 text-xs relative px-2 gap-1"
+                    className="min-w-0 text-xs relative px-2 gap-1 overflow-hidden"
                   >
                     <Users className="h-3 w-3 shrink-0" />
-                    Grupos
+                    <span className="truncate">Grupos</span>
                     {(() => {
                       const n = conversations.filter((c) => {
                         const isG = (c.whatsapp_contact && c.whatsapp_contact[0]?.is_group) || (c.client as any)?.is_group;
@@ -2173,10 +2180,10 @@ function AtendimentoContent() {
                     variant={activeTab === "nao-lidas" ? "cta" : "ghost"}
                     size="sm"
                     onClick={() => setActiveTab("nao-lidas")}
-                    className="min-w-0 text-xs relative px-2 gap-1"
+                    className="min-w-0 text-xs relative px-2 gap-1 overflow-hidden"
                   >
                     <Zap className="h-3 w-3 shrink-0" />
-                    Não lidas
+                    <span className="truncate">Não lidas</span>
                     {(() => {
                       const n = conversations.filter((c) =>
                         c.status !== 'deleted' &&
@@ -2196,10 +2203,10 @@ function AtendimentoContent() {
                       variant={activeTab === "nao-direcionados" ? "cta" : "ghost"}
                       size="sm"
                       onClick={() => setActiveTab("nao-direcionados")}
-                      className="min-w-0 text-xs relative px-2 gap-1"
+                      className="min-w-0 text-xs relative px-2 gap-1 overflow-hidden"
                     >
                       <UserPlus className="h-3 w-3 shrink-0" />
-                      Não direc.
+                      <span className="truncate">Não direc.</span>
                       {(() => {
                         const n = conversations.filter((c) =>
                           c.status !== 'deleted' &&
@@ -3215,14 +3222,27 @@ function AtendimentoContent() {
               )}
             </div>
 
-            {/* Contact Info Panel */}
+            {/* Contact Info Panel — mobile: drawer quase fullscreen; desktop: painel lateral parcial */}
             {selectedConv && contactPanelOpen && (
-              <div className="hidden xl:block w-[280px] border-l border-border bg-card overflow-y-auto">
+              <>
+                {/* Backdrop mobile */}
+                <div
+                  className="fixed inset-0 z-40 bg-black/50 xl:hidden"
+                  onClick={() => setContactPanelOpen(false)}
+                />
+                <div className="fixed inset-0 z-50 mx-auto flex w-full flex-col overflow-y-auto bg-card shadow-2xl sm:inset-x-4 sm:inset-y-16 sm:max-w-md sm:rounded-2xl sm:border sm:border-border xl:static xl:inset-auto xl:z-auto xl:mx-0 xl:w-[320px] xl:max-w-none xl:flex-none xl:rounded-none xl:border xl:border-t-0 xl:border-l-border xl:shadow-none border-l border-border">
                 {((selectedConv.whatsapp_contact && selectedConv.whatsapp_contact[0]?.is_group) || (selectedConv.client as any)?.is_group) ? (
                   <GroupDetailsPanel conversation={selectedConv} onSelectParticipant={handleSelectParticipantPrivateChat} />
                 ) : (
                   <div className="p-6">
                     {/* Client Header */}
+                    <button
+                      onClick={() => setContactPanelOpen(false)}
+                      className="absolute right-3 top-3 rounded-full bg-muted/80 p-2 text-muted-foreground hover:bg-muted xl:hidden"
+                      aria-label="Fechar dados do contato"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
                   <div className="text-center mb-6">
                     <Avatar className="h-20 w-20 mx-auto mb-3">
                       {selectedConv.client?.avatar_url ? (
@@ -3713,7 +3733,8 @@ function AtendimentoContent() {
                   </div>
                 </div>
                 )}
-              </div>
+                </div>
+              </>
             )}
           </div>
           )}
