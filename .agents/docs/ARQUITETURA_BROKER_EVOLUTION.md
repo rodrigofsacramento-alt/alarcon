@@ -83,9 +83,11 @@ Componentes: **Evolution API v2.3.7** (Docker no VPS, `localhost:8080`, header `
 
 ### b.5 Outbound — `pollOutbox` (loop de 3s)
 - Poll `whatsapp_messages` `status='pending' AND from_me=true AND whatsapp_session_id=<bridge>` (ordem `created_at.asc`, limite 50).
-- Para cada: `POST /message/sendText/wpp-alarcon` body `{number, text}` → sucesso: `status='sent'` + `whatsapp_message_id` da resposta (`d.key.id`); erro: `status='failed'`.
-- ⚠️ Formato v2.3.7 correto do sendText: `{ "number": "...", "textMessage": { "text": "..." } }` (o bridge atual envia `text` solto — funcional no gateway, mas o formato oficial é `textMessage`).
+- **Texto** (`media_url` NULL): `POST /message/sendText/wpp-alarcon` body oficial v2.3.7 `{number, textMessage:{text}}` (com fallback legado `{number, text}` se 4xx) → sucesso: `status='sent'` + `whatsapp_message_id` (`d.key.id`); erro: `status='failed'`.
+- **Mídia** (`media_url` preenchido — PADRONIZADO 29/09): baixa o arquivo da `media_url` (storage `chat-attachments/{conv}/{uuid}.{ext}`) → `POST /message/sendMedia/wpp-alarcon` multipart com fields `number`, `mediatype` (image/video/audio/document derivado do mime), `mimetype`, `fileName` (document), `caption` (content se não começar com `[`; se começar com `[`, caption = linhas após label+nome+URL) e o binário no campo `file` → mesmo PATCH de sucesso/falha.
+- **Frontend (fluxo padronizado 29/09):** composer (Atendimento `uploadAndSendFile`) faz upload no storage → RPC `send_whatsapp_message` com `p_media_url/mime/fileName/size` → outbox com `media_*` preenchidos + `content = "[Imagem|Video|Audio|Arquivo] nome\nURL"`; texto segue igual. RPC `send_whatsapp_message` (overload por conversa) agora prefere sessão `provider='evolution'` e grava os campos `media_*`.
 - O app nunca chama a Evolution direto: escreve na outbox (`whatsapp_messages.pending`) e o bridge entrega.
+- QA E2E 29/09 (conversa 'Teste' 5511988304895): texto, imagem e vídeo enviados pelo app → todos `status='sent'` com `whatsapp_message_id` real da Evolution (log `outbox enviada` texto/imagem/vídeo).
 
 ---
 

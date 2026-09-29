@@ -1379,12 +1379,22 @@ function AtendimentoContent() {
       const isImage = file.type.startsWith('image/');
       const isVideo = file.type.startsWith('video/');
       const isAudio = file.type.startsWith('audio/');
-      
-      const label = isImage ? '[Imagem]' : isVideo ? '[Video]' : isAudio ? '[Audio]' : '[Arquivo]';
 
+      const label = isImage ? '[Imagem]' : isVideo ? '[Video]' : isAudio ? '[Audio]' : '[Arquivo]';
+      const messageType = isImage ? 'image' as const : isVideo ? 'video' as const : isAudio ? 'audio' as const : 'document' as const;
+
+      // Fluxo padronizado de mídia (29/09): o arquivo já está no storage
+      // (chat-attachments/{conv}/{uuid}.{ext}) e a outbox recebe os campos media_*
+      // preenchidos — o bridge baixa a URL e envia via POST /message/sendMedia
+      // (multipart: number, mediatype, mimetype, fileName, caption?, file).
       await sendWhatsAppMutation.mutateAsync({
         conversationId: selectedConv.id,
         content: `${label} ${file.name}\n${urlData.publicUrl}`,
+        messageType,
+        mediaUrl: urlData.publicUrl,
+        mediaMimeType: file.type || 'application/octet-stream',
+        mediaFileName: file.name,
+        mediaSize: file.size,
       });
 
       toast({ title: "Arquivo enviado!", description: `${file.name} enviado com sucesso.` });

@@ -156,10 +156,34 @@ export function useWhatsAppMessages(remoteJid?: string) {
 export function useSendWhatsAppMessage() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async ({ conversationId, content }: { conversationId: string; content: string }) => {
+    // Padronização outbound (29/09): texto segue pela outbox (bridge sendText);
+    // mídia passa mediaUrl/mime/fileName/size preenchidos — o RPC grava os campos
+    // media_* na whatsapp_messages (outbox) e o bridge envia via sendMedia da Evolution.
+    mutationFn: async ({
+      conversationId,
+      content,
+      messageType = 'text',
+      mediaUrl = null,
+      mediaMimeType = null,
+      mediaFileName = null,
+      mediaSize = null,
+    }: {
+      conversationId: string;
+      content: string;
+      messageType?: 'text' | 'image' | 'video' | 'audio' | 'document';
+      mediaUrl?: string | null;
+      mediaMimeType?: string | null;
+      mediaFileName?: string | null;
+      mediaSize?: number | null;
+    }) => {
       const { data, error } = await (supabase as any).rpc('send_whatsapp_message', {
         p_conversation_id: conversationId,
         p_content: content,
+        p_message_type: messageType,
+        p_media_url: mediaUrl,
+        p_media_mime_type: mediaMimeType,
+        p_media_file_name: mediaFileName,
+        p_media_size: mediaSize,
       });
       if (error) throw error;
       if (data && data.success === false) throw new Error(data.error || 'Erro ao enviar WhatsApp');
