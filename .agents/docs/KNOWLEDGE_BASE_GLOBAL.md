@@ -133,6 +133,13 @@ Root: `/opt/data/ahut-ecosystem`
 ### RLS tenancy
 - RLS filtra por tenant; **NULL = invisível Atendimento**. Tenant Ahut = `fa440b34-...-4d229e427`.
 
+### Imóveis — Loteadores/Proprietários + Loteamentos (29/09/2026)
+- Tabelas novas (ptoch PROD, estrutura em `sql/20260929_loteadores_loteamentos.sql`): **`loteadores`** (nome, tipo pessoa/empresa, telefone, whatsapp, documento CPF/CNPJ, observações) e **`loteamentos`** (nome, cidade, estado, disponibilidade bool, valor_minimo, valor_maximo, FK `loteador_id`).
+- Ambas: `tenant_id` + trigger `auto_set_tenant_id` + RLS completa (select/insert/update/delete = `tenant_id = get_my_tenant_id()` + service_role) + trigger `lote_touch_updated_at`.
+- Vínculo: `properties.loteamento_id` / `properties.loteador_id` (FK on delete set null, índices). Imóveis vinculáveis por UI **só quando type = `land` ou `lote`** (novo tipo `lote` + aba "Lotes" em Imoveis.tsx).
+- UI: header Imóveis → botões "Loteadores/Proprietários" e "Loteamentos" (CRUD em modais, hooks em `use-loteadores.ts`). Ficha do loteamento lista imóveis vinculados com **deeplink** `navigate('/imoveis?property={id}')` (mesmo padrão da seleção por query existente no módulo).
+- **Pitfall:** todo componente novo precisa importar `Select` etc. de `@/components/ui/select` — `tsc -p tsconfig.app.json` reporta, mas `npm run build` (esbuild) NÃO checa tipos e quebra em tela preta no deploy.
+
 ---
 
 ## 🎨 5. PADRÃO DE UI / DESIGN (decisões aprovadas — NÃO reexplicar)

@@ -10,6 +10,26 @@ import { toast } from "@/hooks/use-toast";
 import { PropertyDetailModal } from "@/components/imoveis/PropertyDetailModal";
 import { CreatePropertyModal, type PropertyFormData } from "@/components/imoveis/CreatePropertyModal";
 import { PropertyPortalsModal } from "@/components/imoveis/PropertyPortalsModal";
+import { LoteadoresModal } from "@/components/imoveis/LoteadoresModal";
+import { LoteamentosModal } from "@/components/imoveis/LoteamentosModal";
+import { useLoteamentos } from "@/hooks/use-loteadores";
+import { useLoteadores } from "@/hooks/use-loteadores";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useUpdateProperty } from "@/hooks/use-properties";
 import { downloadXmlFeed } from "@/lib/xml-feed";
 import {
   Plus,
@@ -31,6 +51,8 @@ import {
   AlertTriangle,
   Globe,
   FileText,
+  Users,
+  Map,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -74,7 +96,7 @@ const defaultImages: Record<string, string> = {
   land: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop",
 };
 
-const tabs = ["Todos", "Residencial", "Comercial", "Terrenos"];
+const tabs = ["Todos", "Residencial", "Comercial", "Terrenos", "Lotes"];
 
 export default function Imoveis() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -85,6 +107,11 @@ export default function Imoveis() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isPortalsOpen, setIsPortalsOpen] = useState(false);
+  const [isLoteadoresOpen, setIsLoteadoresOpen] = useState(false);
+  const [isLoteamentosOpen, setIsLoteamentosOpen] = useState(false);
+  const [linkTarget, setLinkTarget] = useState<Property | null>(null);
+  const [linkLoteamento, setLinkLoteamento] = useState("");
+  const [linkLoteador, setLinkLoteador] = useState("");
   const [portalsProperty, setPortalsProperty] = useState<Property | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Property | null>(null);
 
@@ -93,6 +120,10 @@ export default function Imoveis() {
   const { data: properties = [], isLoading } = useProperties({ type: activeTab });
   const createPropertyMutation = useCreateProperty();
   const deletePropertyMutation = useDeleteProperty();
+  const updatePropertyMutation = useUpdateProperty();
+  const { data: loteamentosList = [] } = useLoteamentos();
+  const { data: loteadoresList = [] } = useLoteadores();
+  const loteamentoNome = (id?: string | null) => loteamentosList.find((lt) => lt.id === id)?.nome || null;
 
   // Deeplink: autoabre el inmueble al llegar /imoveis?property={id} o state.selectedPropertyId
   useEffect(() => {
@@ -136,6 +167,28 @@ export default function Imoveis() {
     setIsDetailOpen(true);
   };
 
+  const handleOpenLink = (property: Property, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLinkTarget(property);
+    setLinkLoteamento((property as any).loteamento_id || "");
+    setLinkLoteador((property as any).loteador_id || "");
+  };
+
+  const handleConfirmLink = async () => {
+    if (!linkTarget) return;
+    try {
+      await updatePropertyMutation.mutateAsync({
+        id: linkTarget.id,
+        loteamento_id: linkLoteamento || null,
+        loteador_id: linkLoteador || null,
+      } as any);
+      toast({ title: "Vínculo salvo", description: `${linkTarget.title} atualizado com loteamento/loteador.` });
+      setLinkTarget(null);
+    } catch (err: any) {
+      toast({ title: "Erro ao vincular", description: err?.message || "Tente novamente.", variant: "destructive" });
+    }
+  };
+
   const handleCreateProperty = (formData: PropertyFormData) => {
     const autoCode = formData.code?.trim() || `IMV-${Date.now().toString(36).toUpperCase()}`;
     createPropertyMutation.mutate(
@@ -162,7 +215,9 @@ export default function Imoveis() {
         image_url: formData.image_url || (formData.images?.[0]) || null,
         images: formData.images?.length ? formData.images : null,
         created_by: user?.id,
-      },
+        loteamento_id: formData.loteamento_id || null,
+        loteador_id: formData.loteador_id || null,
+      } as any,
       {
         onSuccess: () => {
           toast({ title: "Imóvel Cadastrado", description: `${formData.title} (${autoCode}) cadastrado com sucesso.` });
@@ -216,6 +271,14 @@ export default function Imoveis() {
               <Button variant="outline" className="gap-2" onClick={() => downloadXmlFeed(properties)}>
                 <FileText className="h-4 w-4" />
                 XML Feed
+              </Button>
+              <Button variant="outline" className="gap-2" onClick={() => setIsLoteadoresOpen(true)}>
+                <Users className="h-4 w-4" />
+                Loteadores/Proprietários
+              </Button>
+              <Button variant="outline" className="gap-2" onClick={() => setIsLoteamentosOpen(true)}>
+                <Map className="h-4 w-4" />
+                Loteamentos
               </Button>
               <Button variant="cta" className="gap-2" onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4" />
@@ -324,6 +387,12 @@ export default function Imoveis() {
                         <Pencil className="h-4 w-4 mr-2" />
                         Editar
                       </DropdownMenuItem>
+                      {property.type === "land" || property.type === "lote" ? (
+                        <DropdownMenuItem onClick={(e) => handleOpenLink(property, e)}>
+                          <Map className="h-4 w-4 mr-2" />
+                          Vincular Loteamento
+                        </DropdownMenuItem>
+                      ) : null}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={(e) => {
@@ -357,6 +426,12 @@ export default function Imoveis() {
                     <MapPin className="h-3 w-3" />
                     {property.address || property.location}
                   </p>
+                  {loteamentoNome((property as any).loteamento_id) && (
+                    <Badge className="mt-2 bg-accent/10 text-accent border border-accent/20">
+                      <Map className="h-3 w-3 mr-1" />
+                      {loteamentoNome((property as any).loteamento_id)}
+                    </Badge>
+                  )}
 
                   {/* Description */}
                   {property.description && (
@@ -443,6 +518,62 @@ export default function Imoveis() {
         open={isPortalsOpen}
         onOpenChange={setIsPortalsOpen}
       />
+
+      {/* Loteadores/Proprietários Modal */}
+      <LoteadoresModal
+        open={isLoteadoresOpen}
+        onOpenChange={setIsLoteadoresOpen}
+      />
+
+      {/* Loteamentos Modal */}
+      <LoteamentosModal
+        open={isLoteamentosOpen}
+        onOpenChange={setIsLoteamentosOpen}
+      />
+
+      {/* Vincular Loteamento/Loteador Dialog */}
+      <Dialog open={!!linkTarget} onOpenChange={(open) => { if (!open) setLinkTarget(null); }}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Vincular a Loteamento / Loteador</DialogTitle>
+            <DialogDescription>
+              {linkTarget?.title} — apenas terrenos e lotes podem ser vinculados.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label>Loteamento</Label>
+              <Select value={linkLoteamento || "none"} onValueChange={(v) => setLinkLoteamento(v === "none" ? "" : v)}>
+                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Nenhum</SelectItem>
+                  {loteamentosList.map((lt) => (
+                    <SelectItem key={lt.id} value={lt.id}>{lt.nome}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>Loteador / Proprietário</Label>
+              <Select value={linkLoteador || "none"} onValueChange={(v) => setLinkLoteador(v === "none" ? "" : v)}>
+                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Nenhum</SelectItem>
+                  {loteadoresList.map((l) => (
+                    <SelectItem key={l.id} value={l.id}>{l.nome}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setLinkTarget(null)}>Cancelar</Button>
+              <Button variant="cta" onClick={handleConfirmLink} disabled={updatePropertyMutation.isPending}>
+                {updatePropertyMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Salvar Vínculo"}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}>

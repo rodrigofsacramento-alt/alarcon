@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ImageUploader } from "@/components/imoveis/ImageUploader";
+import { useLoteamentos, useLoteadores } from "@/hooks/use-loteadores";
 
 export interface PropertyFormData {
   title: string;
@@ -41,6 +42,8 @@ export interface PropertyFormData {
   owner_phone: string;
   image_url: string;
   images: string[];
+  loteamento_id: string;
+  loteador_id: string;
 }
 
 interface CreatePropertyModalProps {
@@ -71,10 +74,15 @@ const initialFormData: PropertyFormData = {
   owner_phone: "",
   image_url: "",
   images: [],
+  loteamento_id: "",
+  loteador_id: "",
 };
 
 export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePropertyModalProps) {
   const [formData, setFormData] = useState<PropertyFormData>(initialFormData);
+  const { data: loteamentos = [] } = useLoteamentos();
+  const { data: loteadores = [] } = useLoteadores();
+  const isTerrenoOuLote = formData.type === "land" || formData.type === "lote";
 
   const handleChange = (field: keyof PropertyFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -156,6 +164,7 @@ export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePro
                       <SelectItem value="residential">Residencial</SelectItem>
                       <SelectItem value="commercial">Comercial</SelectItem>
                       <SelectItem value="land">Terreno</SelectItem>
+                      <SelectItem value="lote">Lote</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -176,6 +185,42 @@ export function CreatePropertyModal({ open, onOpenChange, onConfirm }: CreatePro
               </div>
             </div>
           </div>
+
+          {/* Section: Vínculo Loteamento/Loteador (só terreno e lote) */}
+          {isTerrenoOuLote && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                <MapPin className="h-4 w-4 text-accent" />
+                <span>Vínculo Loteamento / Loteador</span>
+              </div>
+              <div className="bg-muted/30 rounded-xl p-4 border border-border/50 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Loteamento</Label>
+                  <Select value={formData.loteamento_id || "none"} onValueChange={(v) => handleChange("loteamento_id", v === "none" ? "" : v)}>
+                    <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">Nenhum</SelectItem>
+                      {loteamentos.map((lt) => (
+                        <SelectItem key={lt.id} value={lt.id}>{lt.nome}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Loteador / Proprietário</Label>
+                  <Select value={formData.loteador_id || "none"} onValueChange={(v) => handleChange("loteador_id", v === "none" ? "" : v)}>
+                    <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">Nenhum</SelectItem>
+                      {loteadores.map((l) => (
+                        <SelectItem key={l.id} value={l.id}>{l.nome}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Section: Preço e Localização */}
           <div className="space-y-4">

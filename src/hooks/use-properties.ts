@@ -33,6 +33,7 @@ export function useProperties(filters?: {
           'Residencial': 'residential',
           'Comercial': 'commercial',
           'Terrenos': 'land',
+          'Lotes': 'lote',
         };
         if (typeMap[filters.type]) {
           query = query.eq('type', typeMap[filters.type]);
