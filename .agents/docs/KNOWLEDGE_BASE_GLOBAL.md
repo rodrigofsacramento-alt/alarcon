@@ -229,3 +229,12 @@ Root: `/opt/data/ahut-ecosystem`
 ---
 
 *Fonte de verdade congelada (somente leitura): estado vivo em PROD/VPS. Este arquivo é o **índice**, nunca a fonte única — para detalhes, seguir os caminhos indicados em cada seção.*
+### §7.x — Deploy SPA em subdiretório (testealarcon) — REGRESSÃO 30/09 (pitfall)
+- **Sintoma:** 404/NotFound em TODAS as rotas de https://apexfyhub.com.br/testealarcon/ (deep links e navegação interna com basename ausente).
+- **Causa raiz:** `BrowserRouter` sem `basename` + `vite.config.ts` `base:'/'` — app vive em subdiretório (`/testealarcon/`), rotas nunca casavam.
+- **Fix canônico (3 camadas, SEMPRE juntas):**
+  1. `vite.config.ts`: `base: '/testealarcon/'` (assets com caminho absoluto correto).
+  2. `App.tsx`: `<BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>` (funciona em qualquer docroot futuro).
+  3. `.htaccess` NO DESTINO (`public_html/testealarcon/.htaccess`): RewriteEngine On / RewriteBase /testealarcon/ / RewriteCond !-f !-d / RewriteRule . /testealarcon/index.html [L] — SPA fallback p/ deep links (git: `public/.htaccess`).
+- **PITFALL:** QA visual pós-deploy é OBRIGATÓRIO — chunk lazy pode falhar fetch intermitentemente mesmo com curl 200 (LiteSpeed/cache); testar deep link com reload, não só a raiz.
+- **Validado 30/09:** build ok (index-BWWy7SLx.js), deep link 200 + render (root 91k chars), lista de contatos limpa (0 nomes '~', 0 phones 20d/LID 15d), 0 erros de console.
