@@ -1692,6 +1692,7 @@ function AtendimentoContent() {
           .from('profiles')
           .select('id')
           .eq('phone', formData.contact_phone)
+          .eq('tenant_id', currentTenantId)
           .maybeSingle();
         if (existingByPhone) clientId = existingByPhone.id;
       }
@@ -1703,6 +1704,7 @@ function AtendimentoContent() {
           .select('id')
           .eq('email', formData.contact_email)
           .eq('role', 'client')
+          .eq('tenant_id', currentTenantId)
           .maybeSingle();
         if (existingProfile) clientId = existingProfile.id;
       }
@@ -1828,6 +1830,7 @@ function AtendimentoContent() {
           .from('leads')
           .select('id')
           .eq('phone', cleanPhone)
+          .eq('tenant_id', currentTenantId)
           .maybeSingle();
 
         if (existingLead) {
