@@ -781,7 +781,15 @@ export type Database = {
           owner_phone: string | null
           parking: number | null
           price: number
-          price_type: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
+          price_type: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | 'AVISTA' | 'PARCELADO' | null
+          valor_a_vista: number | null
+          valor_total_parcelado: number | null
+          valor_entrada_financiamento: number | null
+          saldo_financiado: number | null
+          valor_parcela_mensal: number | null
+          admin_parcelado: boolean | null
+          admin_num_parcelas: number | null
+          admin_valor_parcela: number | null
           rooms: number | null
           status: string
           tenant_id: string | null
@@ -812,7 +820,15 @@ export type Database = {
           owner_phone?: string | null
           parking?: number | null
           price: number
-          price_type?: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
+          price_type: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | 'AVISTA' | 'PARCELADO' | null
+          valor_a_vista?: number | null
+          valor_total_parcelado?: number | null
+          valor_entrada_financiamento?: number | null
+          saldo_financiado?: number | null
+          valor_parcela_mensal?: number | null
+          admin_parcelado?: boolean | null
+          admin_num_parcelas?: number | null
+          admin_valor_parcela?: number | null
           rooms?: number | null
           status?: string
           tenant_id?: string | null
@@ -843,7 +859,15 @@ export type Database = {
           owner_phone?: string | null
           parking?: number | null
           price?: number
-          price_type?: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | null
+          price_type: 'FINAL' | 'MONTHLY' | 'DOWN_PAYMENT' | 'AVISTA' | 'PARCELADO' | null
+          valor_a_vista?: number | null
+          valor_total_parcelado?: number | null
+          valor_entrada_financiamento?: number | null
+          saldo_financiado?: number | null
+          valor_parcela_mensal?: number | null
+          admin_parcelado?: boolean | null
+          admin_num_parcelas?: number | null
+          admin_valor_parcela?: number | null
           rooms?: number | null
           status?: string
           tenant_id?: string | null

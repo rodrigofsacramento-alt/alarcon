@@ -217,6 +217,16 @@ export default function Imoveis() {
         created_by: user?.id,
         loteamento_id: formData.loteamento_id || null,
         loteador_id: formData.loteador_id || null,
+        // Bloco parcelado (motor de cálculo portado do QUBITS/AHUT)
+        price_type: (formData.price_type || "FINAL").toUpperCase(),
+        valor_a_vista: formData.valor_a_vista ? Number(formData.valor_a_vista) : null,
+        valor_total_parcelado: formData.valor_total_parcelado ? Number(formData.valor_total_parcelado) : null,
+        valor_entrada_financiamento: formData.valor_entrada_financiamento ? Number(formData.valor_entrada_financiamento) : null,
+        saldo_financiado: formData.saldo_financiado ? Number(formData.saldo_financiado) : null,
+        valor_parcela_mensal: formData.valor_parcela_mensal ? Number(formData.valor_parcela_mensal) : null,
+        admin_parcelado: formData.admin_parcelado || null,
+        admin_num_parcelas: formData.admin_num_parcelas ? Number(formData.admin_num_parcelas) : null,
+        admin_valor_parcela: formData.admin_valor_parcela ? Number(formData.admin_valor_parcela) : null,
       } as any,
       {
         onSuccess: () => {
