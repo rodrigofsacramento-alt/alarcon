@@ -116,27 +116,40 @@ export function useCreateLead() {
 
   return useMutation({
     mutationFn: async (lead: TablesInsert<'leads'>) => {
+      const payload: TablesInsert<'leads'> = {
+        ...lead,
+        name: lead.name.trim(),
+        email: lead.email?.trim() || null,
+        phone: lead.phone?.trim() || null,
+        stage: lead.stage?.trim() || 'Contato Cadastrado',
+        source: lead.source?.trim() || 'Outros',
+      };
+
       const { data, error } = await supabase
         .from('leads')
-        .insert(lead)
+        .insert(payload)
         .select('*, responsible:profiles!leads_responsible_id_fkey(*)')
         .single();
       if (error) throw error;
 
-      // Create timeline event
-      await supabase.from('lead_timeline').insert({
+      // Create timeline event without rolling back lead creation if timeline logging fails
+      const { error: timelineError } = await supabase.from('lead_timeline').insert({
         lead_id: data.id,
         type: 'lead_created',
         title: 'Lead Criado',
-        description: `Lead cadastrado via sistema. Origem: ${lead.source || 'N/A'}.`,
-        user_id: lead.created_by,
+        description: `Lead cadastrado via sistema. Origem: ${payload.source || 'N/A'}.`,
+        user_id: payload.created_by,
       });
+      if (timelineError) {
+        console.warn('Falha ao registrar timeline do lead:', timelineError.message);
+      }
 
       return data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['leads'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
+      queryClient.invalidateQueries({ queryKey: ['sidebar-badges'] });
     },
   });
 }

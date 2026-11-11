@@ -261,23 +261,34 @@ export default function Leads() {
     }
   };
 
-  const handleCreateLead = (formData: LeadFormData) => {
-    createLeadMutation.mutate({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      stage: formData.stage,
-      source: formData.source,
-      budget: formData.budget,
-      interest: formData.interest,
-      location: formData.propertyLocation,
-      notes: formData.history,
-      created_by: user?.id,
-    }, {
-      onSuccess: (data) => {
-        setSelectedLeadId(data.id);
-      },
-    });
+  const handleCreateLead = async (formData: LeadFormData) => {
+    try {
+      const data = await createLeadMutation.mutateAsync({
+        name: formData.name.trim(),
+        email: formData.email.trim() || null,
+        phone: formData.phone.trim() || null,
+        stage: formData.stage || "Contato Cadastrado",
+        source: formData.source || "Outros",
+        budget: formData.budget.trim() || null,
+        interest: formData.interest.trim() || null,
+        location: formData.propertyLocation.trim() || null,
+        notes: formData.history.trim() || null,
+        property_id: formData.propertyId || null,
+        created_by: user?.id,
+      });
+      setSelectedLeadId(data.id);
+      toast({
+        title: "Sucesso",
+        description: "Lead cadastrado com sucesso!",
+      });
+    } catch (err) {
+      toast({
+        variant: "destructive",
+        title: "Erro ao cadastrar lead",
+        description: err instanceof Error ? err.message : "Ocorreu um erro ao cadastrar o lead.",
+      });
+      throw err;
+    }
   };
 
   const assumirLead = (lead: typeof leads[number]) => {

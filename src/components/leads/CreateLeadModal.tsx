@@ -23,7 +23,7 @@ import type { Property } from "@/hooks/use-semantic-search";
 interface CreateLeadModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onConfirm: (leadData: LeadFormData) => void;
+  onConfirm: (leadData: LeadFormData) => Promise<void> | void;
   availableProperties?: Property[];
 }
 
@@ -43,15 +43,23 @@ export interface LeadFormData {
   sla: string;
 }
 
+const DEFAULT_STAGE = "Contato Cadastrado";
+const DEFAULT_SOURCE = "Outros";
+
 const stages = [
-  "Lead Cadastrado",
-  "Primeiro Atendimento",
-  "Follow-up",
-  "Agendamento de Visita",
-  "Visita Agendada",
+  "Contato Cadastrado",
+  "Primeiro Atendimento / Qualificação",
+  "Qualificado",
+  "Follow Up",
+  "Buscar Imóveis",
+  "Agendamento Visita/Reunião",
+  "Visita/Reunião Agendada",
+  "Match Pronto",
+  "Apresentar Imóveis",
   "Imóvel Escolhido",
-  "Em Aprovação de Correspondência",
   "Proposta Solicitada",
+  "Vendido",
+  "A Selecionar",
 ];
 
 const sources = [
@@ -63,30 +71,35 @@ const sources = [
   "Google Ads",
   "Site",
   "Indicação",
+  "WhatsApp",
   "Outros",
 ];
 
 const slaOptions = ["24h", "48h", "72h", "1 semana"];
 
-export function CreateLeadModal({ open, onOpenChange, onConfirm, availableProperties = [] }: CreateLeadModalProps) {
+function createInitialFormData(): LeadFormData {
   const now = new Date();
   const formattedDate = `${now.toLocaleDateString("pt-BR")} ${now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
-
-  const [formData, setFormData] = useState<LeadFormData>({
+  return {
     name: "",
     phone: "",
     email: "",
-    source: "",
+    source: DEFAULT_SOURCE,
     propertyCode: "",
     propertyLocation: "",
     propertyId: undefined,
     createdAt: formattedDate,
-    stage: "Lead Cadastrado",
+    stage: DEFAULT_STAGE,
     budget: "",
     history: "",
     interest: "",
     sla: "48h",
-  });
+  };
+}
+
+export function CreateLeadModal({ open, onOpenChange, onConfirm, availableProperties = [] }: CreateLeadModalProps) {
+  const [formData, setFormData] = useState<LeadFormData>(createInitialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field: keyof LeadFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -101,27 +114,21 @@ export function CreateLeadModal({ open, onOpenChange, onConfirm, availableProper
     }));
   };
 
-  const handleSubmit = () => {
-    onConfirm(formData);
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      source: "",
-      propertyCode: "",
-      propertyLocation: "",
-      propertyId: undefined,
-      createdAt: formattedDate,
-      stage: "Lead Cadastrado",
-      budget: "",
-      history: "",
-      interest: "",
-      sla: "48h",
-    });
-    onOpenChange(false);
-  };
+  const isValid = Boolean(formData.name.trim() && formData.phone.trim());
 
-  const isValid = formData.name && formData.phone && formData.email;
+  const handleSubmit = async () => {
+    if (!isValid || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await onConfirm(formData);
+      setFormData(createInitialFormData());
+      onOpenChange(false);
+    } catch {
+      // Error feedback is handled by the caller; keep modal open to preserve typed data.
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -174,7 +181,7 @@ export function CreateLeadModal({ open, onOpenChange, onConfirm, availableProper
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
@@ -356,11 +363,11 @@ export function CreateLeadModal({ open, onOpenChange, onConfirm, availableProper
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-card border-t border-border px-6 py-4 flex justify-end gap-3">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
             Cancelar
           </Button>
-          <Button variant="cta" onClick={handleSubmit} disabled={!isValid}>
-            Confirmar Cadastro
+          <Button variant="cta" onClick={handleSubmit} disabled={!isValid || isSubmitting}>
+            {isSubmitting ? "Salvando..." : "Confirmar Cadastro"}
           </Button>
         </div>
       </DialogContent>
